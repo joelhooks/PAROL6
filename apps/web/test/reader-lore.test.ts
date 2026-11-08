@@ -18,7 +18,7 @@ const loreShardCount = 8;
 
 const make = Effect.gen(function* readerLoreFixture() {
   const inputs = yield* prepareReaderSiteInputs;
-  const flags = yield* readerLoreFlagsFrom(inputs, "https://ratstack.sh");
+  const flags = yield* readerLoreFlagsFrom(inputs, "https://parol6.build");
 
   const pages = inputs.pages.filter(
     (page) => page.path === "/lore" || page.path.startsWith("/lore/")

@@ -54,7 +54,7 @@ it.effect.prop(
                 "/prompts/*",
               ],
             },
-            domain: { name: `${stage}.ratstack.sh`, zoneName: "ratstack.sh" },
+            domain: { name: `${stage}.parol6.build`, zoneName: "parol6.build" },
             workersDev: false,
           });
 

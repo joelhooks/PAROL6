@@ -88,7 +88,7 @@ const program = Command.runWith(root, { version: "0.1.0" })(
       ).pipe(Effect.andThen(Effect.fail(failure))),
   }),
   Effect.provide(
-    RollbackRunner.layer("https://ratstack.sh").pipe(
+    RollbackRunner.layer("https://parol6.build").pipe(
       Layer.merge(stateStoresLayer()),
       Layer.merge(lingeringWatchHost),
       Layer.provideMerge(
@@ -97,7 +97,7 @@ const program = Command.runWith(root, { version: "0.1.0" })(
             localLayer(
               "alchemy.run.ts",
               "../../.env.schema",
-              "https://ratstack.sh"
+              "https://parol6.build"
             )
           )
         )

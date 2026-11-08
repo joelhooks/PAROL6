@@ -138,8 +138,8 @@ it.effect(
               undefined,
               new Request(
                 surface === "http"
-                  ? "https://ratstack.sh/api/joinInterest"
-                  : "https://ratstack.sh/rpc",
+                  ? "https://parol6.build/api/joinInterest"
+                  : "https://parol6.build/rpc",
                 {
                   body: JSON.stringify(
                     surface === "http"
@@ -234,7 +234,7 @@ it.effect(
           Effect.promise(
             handler.bind(
               undefined,
-              new Request("https://ratstack.sh/mcp", {
+              new Request("https://parol6.build/mcp", {
                 body: JSON.stringify(body),
                 headers,
                 method: "POST",

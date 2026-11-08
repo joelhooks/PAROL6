@@ -41,7 +41,7 @@ const request = (
   html = false,
   query = `?extra=drop&t=${rawToken}&other=drop`
 ) => {
-  const url = `https://ratstack.sh${UNSUBSCRIBE_PATH}${query}`;
+  const url = `https://parol6.build${UNSUBSCRIBE_PATH}${query}`;
 
   const headers = {
     accept: html ? "text/html" : "*/*",
@@ -211,7 +211,7 @@ it.effect(
       const handler = yield* serve(client);
 
       const incoming = new Request(
-        `https://ratstack.sh${UNSUBSCRIBE_PATH}?t=${rawToken}`,
+        `https://parol6.build${UNSUBSCRIBE_PATH}?t=${rawToken}`,
         {
           body: bytes,
           method: "POST",
@@ -384,7 +384,7 @@ it.effect("HTTP tracing never records the private unsubscribe URL", () =>
 
     yield* call(
       handler,
-      new Request("https://ratstack.sh/nonexistent"),
+      new Request("https://parol6.build/nonexistent"),
       context
     );
     expect(spans.some((span) => span.kind === "server")).toBe(true);

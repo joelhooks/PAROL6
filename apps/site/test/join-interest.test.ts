@@ -143,8 +143,8 @@ it.effect(
 
         const request = new Request(
           surface === "http"
-            ? "https://ratstack.sh/api/joinInterest"
-            : "https://ratstack.sh/mcp",
+            ? "https://parol6.build/api/joinInterest"
+            : "https://parol6.build/mcp",
           {
             body: JSON.stringify(
               surface === "http"

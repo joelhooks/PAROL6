@@ -58,7 +58,7 @@ it.effect(
 
       expect(Object.keys(upstream)).toEqual(["Website"]);
       expect(compiled.resources.Mischief?.Props).toMatchObject({
-        domain: { name: "ratstack.sh", redirects: ["www.ratstack.sh"] },
+        domain: { name: "parol6.build", redirects: ["www.parol6.build"] },
       });
       expect(compiled.resources.Website?.Props).not.toHaveProperty("domain");
       expect(compiled.resources.Website?.Props).toMatchObject({

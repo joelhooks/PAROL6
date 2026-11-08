@@ -1,17 +1,17 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { accent } from "./tokens.stylex.js";
+import { accent, reader } from "./tokens.stylex.js";
 
 export const styles = stylex.create({
   brand: {
     alignItems: "center",
-    borderRadius: "6px",
+    borderRadius: reader.radius,
     color: "inherit",
     display: "flex",
-    gap: "10px",
+    gap: reader.spaceSmall,
     minHeight: "42px",
     overflow: "hidden",
-    padding: "5px 7px",
+    padding: reader.spaceTight,
     textDecoration: "none",
   },
   focus: {
@@ -22,11 +22,13 @@ export const styles = stylex.create({
   },
   header: {
     alignItems: "center",
-    borderBottom: "1px solid #ccd0da",
+    borderBottomColor: reader.rule,
+    borderBottomStyle: "solid",
+    borderBottomWidth: "1px",
     display: "flex",
     flexWrap: "wrap",
-    gap: "10px",
-    padding: "12px 0",
+    gap: reader.spaceSmall,
+    paddingBlock: reader.spaceSmall,
   },
   shell: {
     display: "flex",

@@ -10,13 +10,13 @@ export const workshopMcpRoutes = McpServer.toolkit(toolkit.toolkit).pipe(
   Layer.provide(toolkit.layer),
   Layer.provide(
     McpServer.layerHttp({
-      allowedOrigins: ["https://ratstack.sh"],
+      allowedOrigins: ["https://parol6.build"],
       description: "Published Tokenmaxx workshop resources",
       name: "sh.ratstack/workshop",
       path: "/tokenmaxx/mcp",
       protocols: [McpProtocol.v2026_07_28, McpProtocol.v2025_11_25],
       version: "1.0.0",
-      websiteUrl: "https://ratstack.sh/tokenmaxx",
+      websiteUrl: "https://parol6.build/tokenmaxx",
     })
   )
 );

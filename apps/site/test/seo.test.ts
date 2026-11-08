@@ -97,10 +97,10 @@ it.effect(
   "sitemap contains each canonical reader page and no discovery files",
   () =>
     Effect.sync(() => {
-      const xml = sitemapXml("https://ratstack.sh", catalog);
+      const xml = sitemapXml("https://parol6.build", catalog);
 
       const paths = [
-        ...xml.matchAll(/<loc>https:\/\/ratstack.sh(?<path>[^<]*)<\/loc>/gu),
+        ...xml.matchAll(/<loc>https:\/\/parol6.build(?<path>[^<]*)<\/loc>/gu),
       ].map((match) => match.groups?.path);
 
       expect(new Set(paths).size).toBe(paths.length);
@@ -113,7 +113,7 @@ it.effect(
         const entry = xml
           .split("<url>")
           .find((value) =>
-            value.includes(`<loc>https://ratstack.sh${page.routePath}</loc>`)
+            value.includes(`<loc>https://parol6.build${page.routePath}</loc>`)
           );
 
         const date = page.dateModified ?? page.datePublished;
@@ -190,7 +190,7 @@ it.prop(
       resources: catalog.resources.map((page) => ({ ...page, ...dates })),
     };
 
-    const xml = sitemapXml("https://ratstack.sh", dated);
+    const xml = sitemapXml("https://parol6.build", dated);
 
     for (const page of dated.resources.filter(
       (entry) => entry.routePath !== "/log.md"
@@ -198,7 +198,7 @@ it.prop(
       const entry = xml
         .split("<url>")
         .find((value) =>
-          value.includes(`<loc>https://ratstack.sh${page.routePath}</loc>`)
+          value.includes(`<loc>https://parol6.build${page.routePath}</loc>`)
         );
 
       expect(entry).toContain(`<lastmod>${modified}</lastmod>`);
@@ -221,7 +221,7 @@ it.prop(
 
     const html = structuredData({
       description: text,
-      origin: "https://ratstack.sh",
+      origin: "https://parol6.build",
       path: "/lore/example",
       title,
     });
@@ -279,7 +279,7 @@ it.effect(
         );
 
         expect(page?.documentHtml).not.toMatch(
-          /href="(?:https:\/\/ratstack.sh)?\/api\/execute"/u
+          /href="(?:https:\/\/parol6.build)?\/api\/execute"/u
         );
         expect(page?.documentHtml).toContain(
           "/llms.txt#run-code-one-program-instead-of-several-calls"

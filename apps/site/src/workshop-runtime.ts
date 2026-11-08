@@ -53,7 +53,7 @@ export const workshopRoutesFor = (router: LegacyMcpRouter) =>
           const request = yield* HttpServerRequest.HttpServerRequest;
 
           const isMcp =
-            new URL(request.url, "https://ratstack.sh").pathname ===
+            new URL(request.url, "https://parol6.build").pathname ===
             "/tokenmaxx/mcp";
 
           const modernMcp =

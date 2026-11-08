@@ -54,7 +54,7 @@ const backlinksView = <Message>(
       h.section(
         [h.Class("bibliography linked-from"), h.AriaLabelledBy("linked-from")],
         [
-          h.h2([h.Id("linked-from")], ["Linked from"]),
+          h.h2([h.Id("linked-from")], ["What links here"]),
           h.ol(
             [],
             backlinks.map((reference) =>

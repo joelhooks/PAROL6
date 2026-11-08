@@ -23,7 +23,7 @@ import { normalizedNodes } from "./reader-node-normalize.js";
 
 const make = Effect.gen(function* readerParityFixture() {
   const inputs = yield* prepareReaderSiteInputs;
-  const flags = yield* readerBodyFlags("https://ratstack.sh");
+  const flags = yield* readerBodyFlags("https://parol6.build");
 
   return { flags, inputs };
 });

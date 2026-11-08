@@ -114,7 +114,7 @@ const legacy = (
     headers.set("mcp-session-id", sessionId);
   }
 
-  return new Request("https://ratstack.sh/mcp", {
+  return new Request("https://parol6.build/mcp", {
     body: JSON.stringify({ jsonrpc: "2.0", ...body }),
     headers,
     method: "POST",
@@ -162,7 +162,7 @@ it.effect("gives each legacy MCP client its own session object", () =>
 
       const modern = yield* send(
         handler,
-        new Request("https://ratstack.sh/mcp", {
+        new Request("https://parol6.build/mcp", {
           body: JSON.stringify({
             id: "modern",
             jsonrpc: "2.0",

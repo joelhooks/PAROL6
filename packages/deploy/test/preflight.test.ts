@@ -23,7 +23,7 @@ it.effect.prop(
 
         if (request.url.includes("/zones?")) {
           name = "zone";
-          result = [{ id: "test-zone", name: "ratstack.sh" }];
+          result = [{ id: "test-zone", name: "parol6.build" }];
         } else if (request.url.includes("/rulesets?")) {
           name = "redirects";
           result = [{ id: "test-ruleset" }];

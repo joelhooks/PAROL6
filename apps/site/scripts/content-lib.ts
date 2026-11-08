@@ -1021,13 +1021,13 @@ export const loreLinkTargets = (
   const targets = new Set<string>();
 
   for (const href of contentLinkHrefs(
-    markdown.replaceAll("__RATSTACK_ORIGIN__", "https://ratstack.sh"),
+    markdown.replaceAll("__RATSTACK_ORIGIN__", "https://parol6.build"),
     false
   )) {
-    const target = new URL(href, "https://ratstack.sh");
+    const target = new URL(href, "https://parol6.build");
 
     if (
-      target.origin !== "https://ratstack.sh" ||
+      target.origin !== "https://parol6.build" ||
       !(
         target.pathname.startsWith("/lore/") ||
         target.pathname.startsWith("/systems/")
@@ -1292,7 +1292,7 @@ const linkHrefs = contentLinkHrefs;
 export const internalRouteForLink = (
   href: string,
   pageRoute: string,
-  origin = "https://ratstack.sh"
+  origin = "https://parol6.build"
 ): string | undefined => {
   try {
     const base = new URL(pageRoute, origin);

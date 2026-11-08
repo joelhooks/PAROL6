@@ -14,7 +14,7 @@ class PreviewSmokeError extends Schema.TaggedError<
 const argumentsSchema = Schema.Struct({
   commit: Schema.String.check(Schema.isPattern(/^[0-9a-f]{40}$/u)),
   origin: Schema.String.check(
-    Schema.isPattern(/^https:\/\/pr-[1-9][0-9]*\.ratstack\.sh$/u)
+    Schema.isPattern(/^https:\/\/pr-[1-9][0-9]*\.parol6\.build$/u)
   ),
 });
 

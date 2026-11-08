@@ -9,12 +9,15 @@ import { DetectedClipboardAccess } from "./model.js";
 export const Message = defineMessageUnion({
   ClickedCopy: { id: Schema.String },
   CompletedDetectClipboard: { access: DetectedClipboardAccess },
+  CompletedOpenSiteSearch: {},
   CompletedWaitBeforeCopyReset: { id: Schema.String },
   FailedCopyReaderText: { id: Schema.String },
   GotCafeMessage: { message: CafeMessage },
   GotDocsMessage: { message: DocsMessage },
   GotMotionMessage: { message: MotionDemoMessage },
+  SubmittedSiteSearch: {},
   SucceededCopyReaderText: { id: Schema.String },
+  UpdatedSiteSearch: { value: Schema.String },
 });
 
 export type ReaderMessage = typeof Message.Type;

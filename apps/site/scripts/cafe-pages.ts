@@ -47,7 +47,7 @@ const submissionSource = [
   "</HumanOnly>",
   "",
   "<AgentOnly>",
-  cafeSubmissionGuide("https://ratstack.sh"),
+  cafeSubmissionGuide("https://parol6.build"),
   "</AgentOnly>",
 ].join("\n\n");
 

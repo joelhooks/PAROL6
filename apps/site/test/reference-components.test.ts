@@ -117,8 +117,8 @@ it.effect(
       expect(texts.join("")).toContain("Page summary");
       expect(texts.join("")).toContain(context);
       expect(links).toEqual([
-        "https://ratstack.sh/lore/source",
-        "https://ratstack.sh/lore/source",
+        "https://parol6.build/lore/source",
+        "https://parol6.build/lore/source",
       ]);
     })
 );

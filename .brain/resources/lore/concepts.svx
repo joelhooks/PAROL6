@@ -1,0 +1,59 @@
+---
+title: "Concepts by milestone"
+description: "The mental models each milestone teaches, gathered from the milestone pages, with the glossary for single terms."
+plain: "One list per milestone of the ideas behind the build, each linking the milestone's own Concepts section."
+group: concept
+learn: false
+terms:
+  - "mental model"
+sources:
+  - url: https://www.4cid.org/
+    title: "Four-Component Instructional Design"
+    publisher: "4C/ID"
+    note: "Why each milestone separates the concepts from the how-to steps."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Steps, microsteps, gear ratios and open loop."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/
+    title: "Homing, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Homing as the only position reference."
+    accessed: "2026-11-07"
+---
+
+**Stub.** This page gathers the Concepts section of each milestone. Each milestone page explains its concepts with citations. Single terms live in the [glossary](/glossary).
+
+## M1. Bench it
+
+The robot system and its 10 ms packet cycle, steppers and drivers at 32 microsteps, why the E-stop is normally closed, and why the mains switch is the stop that still works. See [M1 concepts](/lore/m1-bench-it#concepts).
+
+## M2. One joint end to end
+
+Planetary gearbox ratio and step math, backlash, how an inductive sensor sees a steel screw head, couplers and threadlocker, and why the parts are printed in PETG. See [M2 concepts](/lore/m2-one-joint#concepts).
+
+## M3. The whole arm moves
+
+Joint numbering, limits and directions, kinematics, homing as the only position reference, and how an open-loop stepper loses steps. See [M3 concepts](/lore/m3-whole-arm#concepts).
+
+## M4. Pick and place
+
+The tool frame and the TCP, joint moves and Cartesian moves, what a repeatability of 0.1 mm means, and the 10 ms packet cycle. See [M4 concepts](/lore/m4-pick-and-place#concepts).
+
+## M5. Touch the skiff
+
+**Our design.** Coordinate frames and registration, Eurorack mechanics, and why compliance matters. See [M5 concepts](/lore/m5-touch-the-skiff#concepts).
+
+## M6. Patch a cable
+
+**Our design.** Peg-in-hole insertion, spiral-search and wiggle strategies, and detection without a force sensor. See [M6 concepts](/lore/m6-patch-a-cable#concepts).
+
+## M7. Play it
+
+**Our design.** Sequencing against a musical clock, MIDI and CV control, and handling failure mid-performance. See [M7 concepts](/lore/m7-play-it#concepts).
+
+## Terms
+
+- **mental model**: the why behind a step. Every milestone page gives its concepts their own section, apart from the how-to steps, following [four-component instructional design](https://www.4cid.org/).

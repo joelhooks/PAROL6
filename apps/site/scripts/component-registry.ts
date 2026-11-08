@@ -79,7 +79,7 @@ export const agentPointerText =
   "For agents: start with the agent guide. Every page is Markdown by default; add Accept: text/html for HTML.";
 
 export const agentPointerHtml =
-  'For agents: start with the <a href="https://ratstack.sh/llms.txt">agent guide</a>. Every page is Markdown by default; add <code>Accept: text/html</code> for HTML.';
+  'For agents: start with the <a href="https://parol6.build/llms.txt">agent guide</a>. Every page is Markdown by default; add <code>Accept: text/html</code> for HTML.';
 
 const pointerAgent = (): readonly RootContent[] => [
   {
@@ -90,7 +90,7 @@ const pointerAgent = (): readonly RootContent[] => [
           {
             children: [{ type: "text", value: "agent guide" }],
             type: "link",
-            url: "https://ratstack.sh/llms.txt",
+            url: "https://parol6.build/llms.txt",
           },
           { type: "text", value: ". Every page is Markdown by default; add " },
           { type: "inlineCode", value: "Accept: text/html" },
@@ -345,7 +345,7 @@ export const createComponentRegistry = (
 export const componentContext = (
   options: Partial<ComponentRenderContext> = {}
 ): ComponentRenderContext => ({
-  origin: options.origin ?? "https://ratstack.sh",
+  origin: options.origin ?? "https://parol6.build",
   pagePath: options.pagePath ?? "",
   renderCopyPrompt:
     options.renderCopyPrompt ??

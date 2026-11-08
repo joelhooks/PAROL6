@@ -14,7 +14,7 @@ export const observeRequestLog = <E, R>(
     yield* Effect.logInfo("HTTP request", {
       method: request.method,
       ms: finished - started,
-      path: new URL(request.url, "https://ratstack.sh").pathname,
+      path: new URL(request.url, "https://parol6.build").pathname,
       status: response.status,
     });
 

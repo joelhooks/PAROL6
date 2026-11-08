@@ -119,7 +119,7 @@ it.layer(ContentStore.layer.pipe(Layer.provide(nodeAssetsLayer)))((test) => {
           Effect.provideService(
             HttpServerRequest.HttpServerRequest,
             HttpServerRequest.fromWeb(
-              new Request(`https://ratstack.sh${path}`, {
+              new Request(`https://parol6.build${path}`, {
                 headers: { accept: "text/html" },
               })
             )

@@ -19,7 +19,7 @@ import { ReaderErrorTemplate } from "../src/server/reader-error-template.js";
 import { readerErrorFlags } from "../src/server/reader-error.js";
 import { normalizedNodes } from "./reader-node-normalize.js";
 
-const origin = "https://ratstack.sh";
+const origin = "https://parol6.build";
 
 const footerLinks = (html: string) =>
   [

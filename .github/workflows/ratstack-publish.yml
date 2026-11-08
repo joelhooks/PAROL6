@@ -13,6 +13,7 @@ concurrency:
 
 jobs:
   publish:
+    if: github.repository == 'joelhooks/rat-stack'
     runs-on: ubuntu-latest
     environment: npm
     permissions:

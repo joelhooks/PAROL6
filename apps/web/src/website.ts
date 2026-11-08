@@ -89,7 +89,7 @@ export class Website extends Cloudflare.Website.Foldkit<Website>()(
 
     return {
       ...tracedProps,
-      domain: { name: `${stage}.ratstack.sh`, zoneName: "ratstack.sh" },
+      domain: { name: `${stage}.parol6.build`, zoneName: "parol6.build" },
       env: { ...tracedProps.env, PREVIEW_COMMIT: commit },
       workersDev: false,
     };

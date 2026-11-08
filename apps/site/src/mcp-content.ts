@@ -57,7 +57,9 @@ export const mcpContent = Layer.unwrap(
         Effect.gen(function* registerOnRequest() {
           const request = yield* HttpServerRequest.HttpServerRequest;
 
-          if (new URL(request.url, "https://ratstack.sh").pathname === "/mcp") {
+          if (
+            new URL(request.url, "https://parol6.build").pathname === "/mcp"
+          ) {
             yield* registered;
           }
 

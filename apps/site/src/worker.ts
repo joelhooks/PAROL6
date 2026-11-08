@@ -483,7 +483,7 @@ export default class Mischief extends Cloudflare.Worker<Mischief>()(
       build: feedbackGatewayBuild,
       compatibility: { date: traces.enabled ? "2026-07-28" : "2026-05-28" },
       dev: { port: 1337 },
-      domain: { name: "ratstack.sh", redirects: ["www.ratstack.sh"] },
+      domain: { name: "parol6.build", redirects: ["www.parol6.build"] },
       env: { MISCHIEF_CONFIG_FINGERPRINT: mischiefConfigFingerprint },
       main: import.meta.url,
       observability: traceObservability(traces),

@@ -21,7 +21,7 @@ class ClipboardPage extends Context.Service<
     this,
     Effect.gen(function* prepareClipboardPage() {
       const flags = yield* Effect.flatMap(
-        readerHomeFlags("https://ratstack.sh"),
+        readerHomeFlags("https://parol6.build"),
         Schema.decodeUnknownEffect(ReaderFlags)
       );
 

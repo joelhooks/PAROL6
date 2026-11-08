@@ -8,13 +8,14 @@ if [[ $# -gt 3 || ! "$pr" =~ ^[1-9][0-9]*$ ]]; then
   printf '%s\n' 'Pass a positive PR number, followed by --plan or --yes.' >&2
   exit 2
 fi
-if [[ "${ALCHEMY_PROFILE:-}" != ratstack ]]; then
-  printf '%s\n' 'Set ALCHEMY_PROFILE=ratstack; preview uses profile authentication only.' >&2
+profile="${ALCHEMY_PROFILE:-}"
+if [[ ! "$profile" =~ ^[A-Za-z0-9_-]+$ ]]; then
+  printf '%s\n' 'Set ALCHEMY_PROFILE to the Alchemy profile that owns the parol6.build zone; preview uses profile authentication only.' >&2
   exit 2
 fi
 for key in CLOUDFLARE_API_TOKEN CLOUDFLARE_API_KEY CLOUDFLARE_EMAIL CLOUDFLARE_ACCOUNT_ID; do
   if [[ -n "${!key:-}" ]]; then
-    printf 'Unset %s; preview uses the ratstack profile.\n' "$key" >&2
+    printf 'Unset %s; preview uses the %s profile.\n' "$key" "$profile" >&2
     exit 2
   fi
 done
@@ -35,13 +36,13 @@ case "$operation" in
 esac
 
 export PREVIEW_COMMIT="$(git rev-parse HEAD)"
-export PREVIEW_ORIGIN="https://pr-$pr.ratstack.sh"
+export PREVIEW_ORIGIN="https://pr-$pr.parol6.build"
 printf 'Preview: pr-%s; commit: %s\n' "$pr" "$PREVIEW_COMMIT"
 pnpm --filter @rat-stack/infra exec -- alchemy "$operation" \
-  --config alchemy.preview.ts --stage "pr-$pr" --profile ratstack \
+  --config alchemy.preview.ts --stage "pr-$pr" --profile "$profile" \
   --env-file ../../packages/deploy/empty.env "${flags[@]}"
 
 if [[ "$operation" == deploy && "$mode" == --yes ]]; then
   pnpm --filter @rat-stack/site exec -- node scripts/preview-smoke.ts \
-    "https://pr-$pr.ratstack.sh" "$PREVIEW_COMMIT"
+    "https://pr-$pr.parol6.build" "$PREVIEW_COMMIT"
 fi

@@ -143,14 +143,14 @@ it.effect(
           const response = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request("https://ratstack.sh/", {
+              new Request("https://parol6.build/", {
                 headers: { accept, "user-agent": userAgent },
               })
             )
           );
 
           expect(yield* Effect.promise(response.text.bind(response))).toBe(
-            "ASSET MARKDOWN https://ratstack.sh"
+            "ASSET MARKDOWN https://parol6.build"
           );
           expect(response.headers.get("content-type")).toContain(
             "text/markdown"
@@ -170,7 +170,7 @@ it.effect(
           const response = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request(`https://ratstack.sh${path}`, {
+              new Request(`https://parol6.build${path}`, {
                 headers: { accept: "text/html" },
               })
             )
@@ -210,7 +210,9 @@ it.effect(
           const get = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request(`https://ratstack.sh${path}`, { headers: { accept } })
+              new Request(`https://parol6.build${path}`, {
+                headers: { accept },
+              })
             )
           );
 
@@ -221,7 +223,7 @@ it.effect(
             const conditional = yield* Effect.promise(
               handler.bind(
                 undefined,
-                new Request(`https://ratstack.sh${path}`, {
+                new Request(`https://parol6.build${path}`, {
                   headers: {
                     accept,
                     "if-none-match": get.headers.get("etag") ?? "",
@@ -238,7 +240,7 @@ it.effect(
           const head = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request(`https://ratstack.sh${path}`, {
+              new Request(`https://parol6.build${path}`, {
                 headers: { accept },
                 method: "HEAD",
               })
@@ -261,7 +263,7 @@ it.effect(
         const first = yield* Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/", {
+            new Request("https://parol6.build/", {
               headers: { accept: "text/markdown" },
             })
           )
@@ -272,7 +274,7 @@ it.effect(
         const conditional = yield* Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/", {
+            new Request("https://parol6.build/", {
               headers: {
                 accept: "text/markdown",
                 "if-none-match": first.headers.get("etag") ?? "",
@@ -292,7 +294,7 @@ it.effect(
         const head = yield* Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/", {
+            new Request("https://parol6.build/", {
               headers: { accept: "text/markdown" },
               method: "HEAD",
             })
@@ -305,11 +307,11 @@ it.effect(
         const before = calls.length;
 
         const md1 = yield* Effect.promise(
-          handler.bind(undefined, new Request("https://ratstack.sh/tokenmaxx"))
+          handler.bind(undefined, new Request("https://parol6.build/tokenmaxx"))
         );
 
         const md2 = yield* Effect.promise(
-          handler.bind(undefined, new Request("https://ratstack.sh/tokenmaxx"))
+          handler.bind(undefined, new Request("https://parol6.build/tokenmaxx"))
         );
 
         expect(yield* Effect.promise(md1.text.bind(md1))).not.toBe(
@@ -326,7 +328,7 @@ it.effect(
           "/index.html",
         ]) {
           const response = yield* Effect.promise(
-            handler.bind(undefined, new Request(`https://ratstack.sh${path}`))
+            handler.bind(undefined, new Request(`https://parol6.build${path}`))
           );
 
           expect(response.headers.get("x-ratstack-cache")).toBe(
@@ -365,7 +367,7 @@ it.effect(
         const discovery = yield* Effect.promise(() =>
           handler(
             new Request(
-              "https://ratstack.sh/.well-known/agent-skills/security-audit/SKILL.md"
+              "https://parol6.build/.well-known/agent-skills/security-audit/SKILL.md"
             )
           )
         );
@@ -386,7 +388,7 @@ it.effect(
           const path = `/skills/security-audit/${name}`;
 
           const response = yield* Effect.promise(() =>
-            handler(new Request(`https://ratstack.sh${path}`))
+            handler(new Request(`https://parol6.build${path}`))
           );
 
           expect(response.status, path).toBe(200);
@@ -416,7 +418,7 @@ it.effect("fails visibly without caching when the asset binding misses", () =>
           const response = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request(`https://ratstack.sh${path}`, {
+              new Request(`https://parol6.build${path}`, {
                 headers: {
                   accept: path.endsWith(".md") ? "text/html" : "text/markdown",
                   "if-none-match": "*",

@@ -13,7 +13,7 @@ export const privateHttpTracingLayer = Layer.effect(
     const previous = yield* HttpMiddleware.TracerDisabledWhen;
 
     return (request) => {
-      const url = new URL(request.url, "https://ratstack.sh");
+      const url = new URL(request.url, "https://parol6.build");
 
       return (
         previous(request) ||

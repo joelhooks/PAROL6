@@ -24,7 +24,7 @@ it.prop(
     const result = canonicalMarkdownLinks(
       input,
       "/resources/study.svx",
-      "https://ratstack.sh"
+      "https://parol6.build"
     );
 
     expect(result).toBe(
@@ -38,9 +38,9 @@ it.prop(
   {
     file: filename,
     origin: Schema.Literals([
-      "https://ratstack.sh",
+      "https://parol6.build",
       "https://example.test",
-      "//ratstack.sh",
+      "//parol6.build",
       "//example.test",
     ]),
   },
@@ -52,7 +52,7 @@ it.prop(
       canonicalMarkdownLinks(
         input,
         "/resources/study.svx",
-        "https://ratstack.sh"
+        "https://parol6.build"
       )
     ).toBe(input);
   }

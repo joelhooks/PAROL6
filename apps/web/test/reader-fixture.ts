@@ -8,7 +8,7 @@ export const promptFixture = {
   id: "start-prompt",
   label: "Copy the start prompt",
   showText: false,
-  text: "Read https://ratstack.sh/llms.txt and start a rat-stack project.",
+  text: "Read https://parol6.build/llms.txt and start a rat-stack project.",
 };
 
 export const readerFlagsFixture: ReaderPageFlags = {
@@ -24,7 +24,7 @@ export const readerFlagsFixture: ReaderPageFlags = {
   heading: "Rat Stack",
   motion: Option.none(),
   newsTitle: Option.none(),
-  origin: "https://ratstack.sh",
+  origin: "https://parol6.build",
   page: {
     generation: "0".repeat(64),
     metadata: {

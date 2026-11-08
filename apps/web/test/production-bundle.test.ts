@@ -70,7 +70,7 @@ const build = (nodeEnv: "development" | "production") => {
 
     expect(result.status, result.stderr).toBe(0);
     expect(readFileSync(path.join(outDir, "index.html"), "utf-8")).toMatch(
-      /<h1(?: [^>]*)?>PAROL6 build<\/h1>/u
+      /<h1(?: [^>]*)?>PAROL6 build wiki<\/h1>/u
     );
 
     const contentRoot = path.resolve(webRoot, "../site/dist/content");

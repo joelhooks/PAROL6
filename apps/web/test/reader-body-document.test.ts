@@ -18,7 +18,7 @@ import { ClipboardAccess } from "../src/client/reader/model.js";
 import { renderReaderNode } from "../src/features/reader-node.js";
 import { readerCopyControl } from "../src/features/reader.js";
 
-const prompts = readerCopyPrompts("https://ratstack.sh");
+const prompts = readerCopyPrompts("https://parol6.build");
 
 const text = Schema.String.check(
   Schema.isPattern(/^[\u0020-\u007E\n\t]{0,60}$/u)

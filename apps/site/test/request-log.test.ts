@@ -48,7 +48,7 @@ it.effect.prop(
       ({ logs, web }) =>
         Effect.gen(function* checkLogs() {
           const request = new Request(
-            `https://ratstack.sh/tokenmaxx/confirm?token=${secret}&q=${query}`
+            `https://parol6.build/tokenmaxx/confirm?token=${secret}&q=${query}`
           );
 
           yield* Effect.promise(

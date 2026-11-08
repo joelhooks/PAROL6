@@ -121,7 +121,7 @@ it.effect(
         Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/tokenmaxx/mcp", {
+            new Request("https://parol6.build/tokenmaxx/mcp", {
               body: JSON.stringify(body),
               headers,
               method: "POST",
@@ -195,7 +195,7 @@ it.effect(
       const http = yield* Effect.promise(
         handler.bind(
           undefined,
-          new Request("https://ratstack.sh/tokenmaxx/api/listExercises", {
+          new Request("https://parol6.build/tokenmaxx/api/listExercises", {
             body: "{}",
             headers: { "content-type": "application/json" },
             method: "POST",
@@ -218,7 +218,7 @@ it.effect(
 
       const rpc = yield* Effect.promise(() =>
         handler(
-          new Request("https://ratstack.sh/tokenmaxx/rpc", {
+          new Request("https://parol6.build/tokenmaxx/rpc", {
             body: JSON.stringify(
               RpcRequest.make({
                 headers: [],

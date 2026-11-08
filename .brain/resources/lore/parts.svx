@@ -1,0 +1,64 @@
+---
+title: "Parts by milestone"
+description: "What goes on the bench at each milestone, gathered from the milestone pages and the official bill of materials."
+plain: "One list per milestone of the parts it needs, each linking the milestone's own Parts section and the official pages."
+group: concept
+learn: false
+terms:
+  - "bill of materials"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/
+    title: "Bill of materials, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The official parts list for the whole arm."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf
+    title: "PAROL6 building instructions"
+    publisher: "Source Robotics"
+    note: "The per-assembly parts the wrist pages list, pages 21 to 23 and 97 to 98."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The motor and gearbox for each joint."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/
+    title: "End effectors, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The gripper choices for M4."
+    accessed: "2026-11-07"
+---
+
+**Stub.** This page gathers the Parts section of each milestone so the whole bench is on one page. The milestone pages hold the full lists and their citations; open them before buying or printing anything.
+
+## M1. Bench it
+
+The control board with six TMC5160 drivers, the GX16 power connector and its XT30 lead, the E-stop, one limit switch, one NEMA 17 motor loose on the bench, and a 24 V DC supply of at least 5 A. Full list: [M1 parts](/lore/m1-bench-it#parts).
+
+## M2. One joint end to end
+
+The printed wrist part, the EG 10:1 planetary gearbox, Stepper 1, Sensor 1, the AXK3552 thrust bearing, the shaft coupler and the M3 homing screw, plus an ST-Link and the programming adapter. Full list: [M2 parts](/lore/m2-one-joint#parts).
+
+## M3. The whole arm moves
+
+Everything else in the official [bill of materials](https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/): the two EG 20:1 gearboxes, the remaining motors, the belts, bearings and couplers, and the remaining limit switches and inductive sensors. Full list: [M3 parts](/lore/m3-whole-arm#parts).
+
+## M4. Pick and place
+
+One gripper, chosen at the start of the milestone from the official [end effectors](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/), or a printed gripper of our own design. Full list: [M4 parts](/lore/m4-pick-and-place#parts).
+
+## M5. Touch the skiff
+
+**Our design.** The skiff, a rigid shared base plate, and a knob-turning end effector. Full list: [M5 parts](/lore/m5-touch-the-skiff#parts).
+
+## M6. Patch a cable
+
+**Our design.** A cable-holding gripper, patch cables, and a cable rack or nest. Full list: [M6 parts](/lore/m6-patch-a-cable#parts).
+
+## M7. Play it
+
+**Our design.** The M5 and M6 rig, a clock source, and a sequencer script on the PC. Full list: [M7 parts](/lore/m7-play-it#parts).
+
+## Terms
+
+- **bill of materials**: the official parts list for the arm, in sections for screws and nuts, gearboxes, motors, belts, pulleys, shaft couplers, bearings and electronics, with quantities and buying links for most items ([Bill of materials](https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/)).

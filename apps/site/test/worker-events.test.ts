@@ -111,9 +111,9 @@ const fetchThrough = (capture?: RequestCapture) =>
           context: {},
           env: workerEnvironment,
           input: new Request(
-            "https://ratstack.sh/not-a-route?utm_source=x&token=secret",
+            "https://parol6.build/not-a-route?utm_source=x&token=secret",
             {
-              headers: { accept: "text/html", host: "ratstack.sh" },
+              headers: { accept: "text/html", host: "parol6.build" },
             }
           ),
           kind: "Cloudflare.Workers.WorkerEvent",

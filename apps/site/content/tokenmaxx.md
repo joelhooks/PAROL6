@@ -10,10 +10,10 @@ Free, by application.
 
 [Schedule](/tokenmaxx/schedule) · [Prep](/tokenmaxx/prep) · [Exercises](/tokenmaxx/exercises) · [Links](/tokenmaxx/links)
 
-For workshop tools, connect your agent to [the workshop MCP server](https://ratstack.sh/tokenmaxx/mcp). Application submissions still use the main site's `joinInterest` capability.
+For workshop tools, connect your agent to [the workshop MCP server](https://parol6.build/tokenmaxx/mcp). Application submissions still use the main site's `joinInterest` capability.
 
 <HumanOnly>
-- Read the [workshop page](https://ratstack.sh/tokenmaxx) with your agent.
+- Read the [workshop page](https://parol6.build/tokenmaxx) with your agent.
 - Answer five questions about your work, availability, and whether you prefer one session or two. You can skip any answer.
 - Edit the card and approve it before your agent sends anything.
 </HumanOnly>
@@ -95,7 +95,7 @@ The page ticket is:
 __INTAKE_PAGE_TICKET__
 ```
 
-Use that ticket in the approved payload. If it is still a placeholder or empty, do not submit; read the agent view of https://ratstack.sh/tokenmaxx again for a ticket.
+Use that ticket in the approved payload. If it is still a placeholder or empty, do not submit; read the agent view of https://parol6.build/tokenmaxx again for a ticket.
 
 The name and x placeholders below are optional. Replace them with approved values or remove their keys when skipped.
 
@@ -126,8 +126,8 @@ If they approve scheduling answers, add these keys to `answers`. Replace each pl
 
 Choose one surface and submit the approved payload once. Do not switch surfaces to retry a refusal or bypass a limit.
 
-- **MCP:** connect to https://ratstack.sh/mcp and call `joinInterest` with the approved JSON payload as its arguments.
-- **HTTP API:** POST the approved JSON payload to https://ratstack.sh/api/joinInterest with `Content-Type: application/json`.
+- **MCP:** connect to https://parol6.build/mcp and call `joinInterest` with the approved JSON payload as its arguments.
+- **HTTP API:** POST the approved JSON payload to https://parol6.build/api/joinInterest with `Content-Type: application/json`.
 - **CLI:** from a rat-stack checkout, run `rat-stack joinInterest` with the same approved fields; answers and consent are JSON flags.
 
 ```sh

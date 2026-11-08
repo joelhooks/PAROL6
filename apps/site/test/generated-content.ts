@@ -75,10 +75,10 @@ const documentFor = (route: string) => {
 };
 
 export const generatedReaderPage = (route: string) =>
-  renderStaticDocument("https://ratstack.sh", documentFor(route));
+  renderStaticDocument("https://parol6.build", documentFor(route));
 
 export const generatedTokenmaxxPage = renderStaticDocument(
-  "https://ratstack.sh",
+  "https://parol6.build",
   runtime.tokenmaxxDocumentHtml
 );
 

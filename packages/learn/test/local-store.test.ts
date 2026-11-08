@@ -12,7 +12,7 @@ const card: Card = {
   id: "lore.services",
   kind: "lore",
   prerequisites: [],
-  references: ["https://ratstack.sh/lore/services"],
+  references: ["https://parol6.build/lore/services"],
   routePath: "/lore/services",
   summary: "Services name application jobs.",
   terms: ["service"],

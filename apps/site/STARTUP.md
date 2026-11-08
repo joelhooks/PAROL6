@@ -18,7 +18,7 @@ Entry bytes and total JavaScript bytes remain logged measurements. Total JavaScr
 
 ## Isolated Workshop Worker
 
-The `Workshop` Worker serves only the six read-only workshop capabilities. Cloudflare zone routes claim `ratstack.sh/tokenmaxx/mcp*`, `ratstack.sh/tokenmaxx/rpc*`, `ratstack.sh/tokenmaxx/api/*` and `ratstack.sh/tokenmaxx/openapi.json`; routes take precedence over Mischief's custom domain. It binds public static assets only, with no secrets or production data stores. `apps/infra/alchemy.run.ts` declares it as a new resource beside Mischief. The desk reviews its infrastructure plan before deployment.
+The `Workshop` Worker serves only the six read-only workshop capabilities. Cloudflare zone routes claim `ratstack.sh/tokenmaxx/mcp*`, `ratstack.sh/tokenmaxx/rpc*`, `ratstack.sh/tokenmaxx/api/*` and `ratstack.sh/tokenmaxx/openapi.json`; routes take precedence over Mischief's custom domain. It binds public static assets only, with no secrets or production data stores. The PAROL6 stack in `apps/infra/alchemy.run.ts` no longer declares it, so those routes are not deployed on `parol6.build`.
 
 Workshop contracts live in `packages/core/src/workshop-contracts.ts`, separate from the main core contract catalog. The startup gate checks every module in Mischief's analysis, including dynamic-only modules, and refuses workshop imports. The prerendered workshop pages stay in the main site's assets. Workshop asset reads validate the generation and cache successful reads only.
 

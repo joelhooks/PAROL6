@@ -102,7 +102,7 @@ it.effect(
             const responseEffect: unknown = handler({
               context: {},
               env: workerEnvironment,
-              input: new Request(`https://ratstack.sh${path}`, {
+              input: new Request(`https://parol6.build${path}`, {
                 headers: { accept },
               }),
               kind: "Cloudflare.Workers.WorkerEvent",

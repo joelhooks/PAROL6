@@ -54,7 +54,7 @@ export interface InterestOptions {
 }
 
 const originOf = (request: HttpServerRequest.HttpServerRequest) =>
-  new URL(request.url, "https://ratstack.sh").origin;
+  new URL(request.url, "https://parol6.build").origin;
 
 const clientIpOf = (request: HttpServerRequest.HttpServerRequest) =>
   request.headers["cf-connecting-ip"];
@@ -77,7 +77,7 @@ const requestFor = (request: HttpServerRequest.HttpServerRequest) =>
     userAgent: userAgentOf(request),
   });
 
-const interestApi = toHttpApi("ratstack.sh-interest", interestCapabilities, {
+const interestApi = toHttpApi("parol6.build-interest", interestCapabilities, {
   prefix: "/api",
   provide: [
     {
@@ -131,7 +131,7 @@ const expiredLink = (origin: string) =>
 const confirmedPage = (origin: string) =>
   resultPage(origin, {
     heading: "You're confirmed",
-    link: { href: "/", label: "Return to ratstack.sh" },
+    link: { href: "/", label: "Return to parol6.build" },
     message: CONFIRM_ANSWER,
     status: 200,
   });
@@ -164,7 +164,7 @@ const toConfirmPageFromEmailLink = (
   Effect.succeed(
     HttpServerResponse.empty({
       headers: {
-        location: `/tokenmaxx/confirm${new URL(request.url, "https://ratstack.sh").search}`,
+        location: `/tokenmaxx/confirm${new URL(request.url, "https://parol6.build").search}`,
       },
       status: 308,
     })
@@ -224,7 +224,7 @@ export const interestRoutes = (options: InterestOptions) => {
         }
 
         const token =
-          new URL(request.url, "https://ratstack.sh").searchParams.get(
+          new URL(request.url, "https://parol6.build").searchParams.get(
             "token"
           ) ?? "";
 
@@ -293,7 +293,7 @@ export const interestRoutes = (options: InterestOptions) => {
               }),
               onSuccess: ({ message }) => ({
                 heading: "You're confirmed",
-                link: { href: "/", label: "Return to ratstack.sh" },
+                link: { href: "/", label: "Return to parol6.build" },
                 message,
                 status: 200,
               }),
@@ -304,7 +304,7 @@ export const interestRoutes = (options: InterestOptions) => {
 
         return yield* resultPage(originOf(request), {
           ...answered,
-          path: new URL(request.url, "https://ratstack.sh").pathname,
+          path: new URL(request.url, "https://parol6.build").pathname,
         });
       }).pipe(Effect.provideContext(options.services), Effect.orDie)
     ),
@@ -322,7 +322,7 @@ export const interestRoutes = (options: InterestOptions) => {
     HttpRouter.add("GET", "/operator/interest/applications", (request) =>
       guarded(request, () =>
         Effect.gen(function* readApplications() {
-          const params = new URL(request.url, "https://ratstack.sh")
+          const params = new URL(request.url, "https://parol6.build")
             .searchParams;
 
           const submissionId = params.get("submissionId");

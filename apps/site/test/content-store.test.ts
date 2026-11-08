@@ -313,7 +313,7 @@ it.effect(
       const response = yield* Effect.promise(
         respond.bind(
           undefined,
-          new Request("https://ratstack.sh/api/read", {
+          new Request("https://parol6.build/api/read", {
             body: JSON.stringify({ id }),
             headers: { "content-type": "application/json" },
             method: "POST",

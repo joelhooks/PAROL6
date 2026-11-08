@@ -1,5 +1,6 @@
 import { Effect, Schema } from "effect";
 import { Command } from "foldkit";
+import { load } from "foldkit/navigation";
 
 import { Message } from "./message.js";
 import { ClipboardAccess } from "./model.js";
@@ -43,4 +44,11 @@ export const WaitBeforeCopyReset = Command.define("WaitBeforeCopyReset", {
       Effect.as(Message.CompletedWaitBeforeCopyReset({ id }))
     ),
   messages: [Message.CompletedWaitBeforeCopyReset],
+});
+
+export const OpenSiteSearch = Command.define("OpenSiteSearch", {
+  args: { url: Schema.String },
+  execute: ({ url }) =>
+    load(url).pipe(Effect.as(Message.CompletedOpenSiteSearch())),
+  messages: [Message.CompletedOpenSiteSearch],
 });

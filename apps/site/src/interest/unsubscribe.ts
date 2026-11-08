@@ -67,7 +67,7 @@ const page = Effect.fnUntraced(function* page(
 
   return HttpServerResponse.text(
     renderStaticDocument(
-      new URL(request.url, "https://ratstack.sh").origin,
+      new URL(request.url, "https://parol6.build").origin,
       unsubscribeDocumentHtml
     )
       .replaceAll("__UNSUBSCRIBE_MESSAGE__", escapeAttribute(message))

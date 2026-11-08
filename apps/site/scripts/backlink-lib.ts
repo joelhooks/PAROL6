@@ -21,7 +21,7 @@ const escapeHtml = (value: string) =>
 
 const routeFor = (href: string) => {
   const route =
-    href.replace(/^https:\/\/ratstack\.sh(?=\/)/u, "").split(/[?#]/u)[0] ?? "";
+    href.replace(/^https:\/\/parol6\.build(?=\/)/u, "").split(/[?#]/u)[0] ?? "";
 
   return route.replace(/\.md$/u, "");
 };

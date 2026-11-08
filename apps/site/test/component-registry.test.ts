@@ -106,8 +106,8 @@ const pages = [
 const markdownPages = [
   ...pages,
   { routePath: "/auth.md", text: authMarkdown },
-  { routePath: "/llms-full.txt", text: llmsFullText("https://ratstack.sh") },
-  { routePath: "/llms.txt", text: llmsText("https://ratstack.sh") },
+  { routePath: "/llms-full.txt", text: llmsFullText("https://parol6.build") },
+  { routePath: "/llms.txt", text: llmsText("https://parol6.build") },
 ];
 
 it.effect.each(markdownPages)(
@@ -129,7 +129,7 @@ it.effect("agent page rendering refuses missing and duplicate pointers", () =>
     );
 
     const pointer =
-      "> For agents: start with the [agent guide](https://ratstack.sh/llms.txt). Every page is Markdown by default; add `Accept: text/html` for HTML.\n";
+      "> For agents: start with the [agent guide](https://parol6.build/llms.txt). Every page is Markdown by default; add `Accept: text/html` for HTML.\n";
 
     expect(rendered).toContain(pointer);
     expect(() => {

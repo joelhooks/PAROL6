@@ -1,4 +1,4 @@
-import { Button } from "@foldkit/ui";
+import { Button, Input } from "@foldkit/ui";
 import * as stylex from "@stylexjs/stylex";
 import { Array, Option } from "effect";
 import type { Document, Html, HtmlBuilder } from "foldkit/html";
@@ -24,11 +24,11 @@ import { readerReferences } from "./reader-references.js";
 import { readerStyles } from "./reader.stylex.js";
 import {
   agentGuideRouter,
+  changeLogRouter,
   glossaryRouter,
   homeRouter,
   isWithinSection,
   learnRouter,
-  lorePagePath,
   loreRouter,
   promptsRouter,
   searchRouter,
@@ -36,6 +36,14 @@ import {
   systemsRouter,
   tokenmaxxRouter,
 } from "./site-route.js";
+import {
+  tocEntries,
+  wikiBrand,
+  wikiBreadcrumb,
+  wikiMobileNav,
+  wikiSidebar,
+} from "./wiki-chrome.js";
+import { wikiStyles } from "./wiki.stylex.js";
 
 const copyStatusText = CopyStatus.match({
   Copied: () => "Copied ✓",
@@ -43,15 +51,6 @@ const copyStatusText = CopyStatus.match({
   Failed: () => "Copy failed. Select the text and copy it.",
   Idle: () => "",
 });
-
-const siteSections = [
-  [lorePagePath("milestones"), "milestones"],
-  [lorePagePath("videos"), "videos"],
-  [lorePagePath("sources"), "sources"],
-  [loreRouter(), "wiki"],
-  [glossaryRouter(), "glossary"],
-  [searchRouter(), "search"],
-] as const;
 
 const sectionIndexes: ReadonlySet<string> = new Set([
   homeRouter(),
@@ -205,38 +204,76 @@ const readerSnippet = (
     }
   );
 
-const siteHeader = (h: HtmlBuilder<ReaderMessage>) =>
-  h.header(
+const siteSearch = (model: ReaderModel, h: HtmlBuilder<ReaderMessage>) =>
+  h.div(
     [
-      h.Class(
-        stylex.props(readerStyles.bounded, readerStyles.header).className ?? ""
-      ),
+      h.Role("search"),
+      h.Class(stylex.props(wikiStyles.searchForm).className ?? ""),
     ],
+    [
+      h.label(
+        [h.For("wiki-search"), h.Class("visually-hidden")],
+        ["Search the wiki"]
+      ),
+      Input.view(
+        {
+          id: "wiki-search",
+          name: "q",
+          onInput: (value) => Message.UpdatedSiteSearch({ value }),
+          placeholder: "Search the wiki",
+          toView: ({ input }) =>
+            h.input([
+              ...input,
+              h.Class(stylex.props(wikiStyles.searchInput).className ?? ""),
+              h.Autocomplete("off"),
+              h.OnKeyDownPreventDefault((key) =>
+                key === "Enter"
+                  ? Option.some(Message.SubmittedSiteSearch())
+                  : Option.none()
+              ),
+            ]),
+          type: "search",
+          value: model.siteSearch,
+        },
+        h
+      ),
+      Button.view(
+        {
+          onClick: Message.SubmittedSiteSearch(),
+          toView: ({ button }) =>
+            h.button(
+              [
+                ...button,
+                h.Class(stylex.props(wikiStyles.searchButton).className ?? ""),
+              ],
+              ["Go"]
+            ),
+          type: "button",
+        },
+        h
+      ),
+    ]
+  );
+
+const siteHeader = (model: ReaderModel, h: HtmlBuilder<ReaderMessage>) =>
+  h.header(
+    [h.Class(stylex.props(wikiStyles.header).className ?? "")],
     [
       h.nav(
         [h.AriaLabel("Primary navigation"), h.Class("site-nav")],
         [
-          h.a(
-            [h.Class("brand"), h.Href(homeRouter())],
-            [h.strong([], ["🦾 PAROL6 build"])]
-          ),
-          h.div(
-            [h.Class("site-links")],
+          wikiBrand(homeRouter(), h),
+          h.span(
+            [h.Class(stylex.props(wikiStyles.headerLinks).className ?? "")],
             [
-              h.ul(
-                [],
-                siteSections.map(([href, name]) =>
-                  h.li([], [h.a([h.Href(href)], [name])])
-                )
-              ),
-              h.ul(
-                [],
-                [h.li([], [h.a([h.Href(agentGuideRouter())], ["agent guide"])])]
-              ),
+              h.a([h.Href(glossaryRouter())], ["glossary"]),
+              h.a([h.Href(changeLogRouter())], ["recent changes"]),
+              h.a([h.Href(agentGuideRouter())], ["agent guide"]),
             ]
           ),
         ]
       ),
+      siteSearch(model, h),
     ]
   );
 
@@ -253,7 +290,7 @@ const agentPointer = (model: ReaderModel, h: HtmlBuilder<ReaderMessage>) =>
     ]
   );
 
-const breadcrumbView = (
+const fallbackBreadcrumb = (
   model: ReaderModel,
   h: HtmlBuilder<ReaderMessage>
 ): readonly Html[] =>
@@ -275,6 +312,15 @@ const breadcrumbView = (
           ]
         ),
       ];
+
+const breadcrumbView = (
+  model: ReaderModel,
+  h: HtmlBuilder<ReaderMessage>
+): readonly Html[] =>
+  Option.match(wikiBreadcrumb(model.page.path, model.heading, h), {
+    onNone: () => fallbackBreadcrumb(model, h),
+    onSome: (breadcrumb) => [breadcrumb],
+  });
 
 const bodyView = (model: ReaderModel, h: HtmlBuilder<ReaderMessage>) => [
   ...Option.match(model.bodyNodes, {
@@ -372,29 +418,43 @@ const bibliographyView = (
 export const view = (
   model: ReaderModel,
   h: HtmlBuilder<ReaderMessage>
-): Document => ({
-  body: h.div(
-    [h.Class(stylex.props(readerStyles.shell).className ?? "")],
-    [
-      siteHeader(h),
-      h.main(
-        [h.DataAttribute("path", model.page.path)],
-        [
-          agentPointer(model, h),
-          ...Option.match(model.newsTitle, {
-            onNone: () => [],
-            onSome: (title) => [readerNewsCallout(title, h)],
-          }),
-          ...breadcrumbView(model, h),
-          ...bodyView(model, h),
-          ...bibliographyView(model, h),
-          ...readerReferences(model, h),
-        ]
-      ),
-      readerFooter(h, footerLinksPrompts(model.page)),
-    ]
-  ),
-  canonical: `${model.origin}${model.page.metadata.canonicalPath}`,
-  ogUrl: `${model.origin}${model.page.metadata.canonicalPath}`,
-  title: model.page.metadata.title,
-});
+): Document => {
+  const toc = Option.match(model.bodyNodes, {
+    onNone: () => [],
+    onSome: tocEntries,
+  });
+
+  return {
+    body: h.div(
+      [h.Class(stylex.props(readerStyles.shell).className ?? "")],
+      [
+        siteHeader(model, h),
+        wikiMobileNav(model.page.path, toc, h),
+        h.div(
+          [h.Class(stylex.props(wikiStyles.frame).className ?? "")],
+          [
+            wikiSidebar(model.page.path, toc, h),
+            h.main(
+              [h.DataAttribute("path", model.page.path)],
+              [
+                agentPointer(model, h),
+                ...Option.match(model.newsTitle, {
+                  onNone: () => [],
+                  onSome: (title) => [readerNewsCallout(title, h)],
+                }),
+                ...breadcrumbView(model, h),
+                ...bodyView(model, h),
+                ...bibliographyView(model, h),
+                ...readerReferences(model, h),
+              ]
+            ),
+          ]
+        ),
+        readerFooter(h, footerLinksPrompts(model.page)),
+      ]
+    ),
+    canonical: `${model.origin}${model.page.metadata.canonicalPath}`,
+    ogUrl: `${model.origin}${model.page.metadata.canonicalPath}`,
+    title: model.page.metadata.title,
+  };
+};

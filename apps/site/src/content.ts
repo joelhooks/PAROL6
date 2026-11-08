@@ -69,12 +69,12 @@ export const mcpProtocolVersions = [
 ] as const;
 
 export const mcpVersionText = (origin: string) =>
-  `ratstack.sh MCP supports protocol versions ${mcpProtocolVersions.join(", ")} at ${origin}/mcp.\nProtocol 2026-07-28 is stateless and has no initialize handshake; send the version header, Mcp-Method header, and params._meta shown in the worked tools/list request.\nOlder clients (2025-11-25 back to 2024-11-05) send initialize as usual and get a session of their own.\nSee ${origin}/llms.txt for the complete curl example.\n`;
+  `parol6.build MCP supports protocol versions ${mcpProtocolVersions.join(", ")} at ${origin}/mcp.\nProtocol 2026-07-28 is stateless and has no initialize handshake; send the version header, Mcp-Method header, and params._meta shown in the worked tools/list request.\nOlder clients (2025-11-25 back to 2024-11-05) send initialize as usual and get a session of their own.\nSee ${origin}/llms.txt for the complete curl example.\n`;
 
 export const llmsText = (
   origin: string,
   catalog: ContentCatalog
-) => `# ratstack.sh
+) => `# parol6.build
 
 Build an app and its cloud infrastructure in one TypeScript program.
 
@@ -207,7 +207,7 @@ User-agent: CCBot
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://ratstack.sh/sitemap.xml
+Sitemap: https://parol6.build/sitemap.xml
 `;
 
 export const agentSkillPath = (name: string) =>
@@ -365,7 +365,7 @@ export const ardManifest = (origin: string) => ({
   entries: [
     {
       displayName: "PAROL6 build MCP",
-      identifier: "urn:air:ratstack.sh:server:mcp",
+      identifier: "urn:air:parol6.build:server:mcp",
       representativeQueries: [
         "how do I add a capability",
         "show the rat-stack project law",
@@ -375,7 +375,7 @@ export const ardManifest = (origin: string) => ({
     },
     {
       displayName: "PAROL6 build A2A Agent",
-      identifier: "urn:air:ratstack.sh:agent:a2a",
+      identifier: "urn:air:parol6.build:agent:a2a",
       representativeQueries: [
         "answer a question about rat-stack",
         "where does rat-stack lifecycle state live",
@@ -386,7 +386,7 @@ export const ardManifest = (origin: string) => ({
   ],
   host: {
     displayName: "PAROL6 build",
-    identifier: "did:web:ratstack.sh",
+    identifier: "did:web:parol6.build",
   },
   specVersion: "1.0",
 });

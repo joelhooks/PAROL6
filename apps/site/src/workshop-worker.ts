@@ -27,12 +27,12 @@ export default class Workshop extends Cloudflare.Worker<Workshop>()(
       main: import.meta.url,
       observability: privateObservability,
       routes: [
-        { pattern: "ratstack.sh/tokenmaxx/mcp*", zoneName: "ratstack.sh" },
-        { pattern: "ratstack.sh/tokenmaxx/rpc*", zoneName: "ratstack.sh" },
-        { pattern: "ratstack.sh/tokenmaxx/api/*", zoneName: "ratstack.sh" },
+        { pattern: "parol6.build/tokenmaxx/mcp*", zoneName: "parol6.build" },
+        { pattern: "parol6.build/tokenmaxx/rpc*", zoneName: "parol6.build" },
+        { pattern: "parol6.build/tokenmaxx/api/*", zoneName: "parol6.build" },
         {
-          pattern: "ratstack.sh/tokenmaxx/openapi.json",
-          zoneName: "ratstack.sh",
+          pattern: "parol6.build/tokenmaxx/openapi.json",
+          zoneName: "parol6.build",
         },
       ],
       workersDev: false,

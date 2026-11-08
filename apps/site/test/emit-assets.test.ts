@@ -124,7 +124,7 @@ it.effect(
               const response = yield* Effect.promise(
                 handler.bind(
                   undefined,
-                  new Request(`https://ratstack.sh${page.route}`, {
+                  new Request(`https://parol6.build${page.route}`, {
                     headers: { accept: "text/markdown" },
                   }),
                   undefined
@@ -140,7 +140,7 @@ it.effect(
               expect(imageUrl, page.route).toBeDefined();
 
               const imagePath = new URL(
-                (imageUrl ?? "").replaceAll(originToken, "https://ratstack.sh")
+                (imageUrl ?? "").replaceAll(originToken, "https://parol6.build")
               ).pathname;
 
               expect(manifest.images, page.route).toContain(imagePath);
@@ -148,7 +148,7 @@ it.effect(
               expect(body).not.toMatch(svxLink);
               expect(response.status).toBe(200);
               expect(body).toBe(
-                expected.replaceAll(originToken, "https://ratstack.sh")
+                expected.replaceAll(originToken, "https://parol6.build")
               );
             }
 
@@ -160,7 +160,7 @@ it.effect(
                   handler.bind(
                     undefined,
                     new Request(
-                      `https://ratstack.sh${page.route}.svx?view=agent`,
+                      `https://parol6.build${page.route}.svx?view=agent`,
                       { method }
                     ),
                     undefined
@@ -177,7 +177,7 @@ it.effect(
             const missing = yield* Effect.promise(
               handler.bind(
                 undefined,
-                new Request("https://ratstack.sh/resources/missing.svx"),
+                new Request("https://parol6.build/resources/missing.svx"),
                 undefined
               )
             );
@@ -192,7 +192,7 @@ it.effect(
               const response = yield* Effect.promise(
                 handler.bind(
                   undefined,
-                  new Request(`https://ratstack.sh${image}`),
+                  new Request(`https://parol6.build${image}`),
                   undefined
                 )
               );
