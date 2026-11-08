@@ -1,14 +1,19 @@
-import { Option, Record } from "effect";
+import { Option, Record, String } from "effect";
 import { Update } from "foldkit";
 import { modifyFields } from "foldkit/struct";
 
 import { update as updateDocs } from "../../features/app.js";
+import { docsSearchRouter } from "../../features/route.js";
 import * as Cafe from "../cafe/index.js";
 import type { AppMessage as DocsMessage } from "../docs/message.js";
 import type { AppModel as DocsModel } from "../docs/model.js";
 import type { DocumentQueries } from "../docs/queries.js";
 import * as MotionDemo from "../motion/index.js";
-import { CopyReaderText, WaitBeforeCopyReset } from "./command.js";
+import {
+  CopyReaderText,
+  OpenSiteSearch,
+  WaitBeforeCopyReset,
+} from "./command.js";
 import { Message } from "./message.js";
 import type { ReaderMessage } from "./message.js";
 import {
@@ -78,6 +83,7 @@ export const update = (
       CompletedDetectClipboard: ({ access }) => ({
         model: modifyFields(model, { clipboardAccess: () => access }),
       }),
+      CompletedOpenSiteSearch: () => ({ model }),
       CompletedWaitBeforeCopyReset: ({ id }) => ({
         model: CopyStatus.guards.Copied(copyStatusOf(model, id))
           ? withCopyStatus(model, id, CopyStatus.Idle())
@@ -94,6 +100,20 @@ export const update = (
         foldDocs(model, docsMessage),
       GotMotionMessage: ({ message: motionMessage }) =>
         foldMotion(model, motionMessage),
+      SubmittedSiteSearch: () => {
+        const query = model.siteSearch.trim();
+
+        return String.isEmpty(query)
+          ? { model }
+          : {
+              commands: [
+                OpenSiteSearch({
+                  url: docsSearchRouter({ q: Option.some(query) }),
+                }),
+              ],
+              model,
+            };
+      },
       SucceededCopyReaderText: ({ id }) =>
         CopyStatus.guards.Copying(copyStatusOf(model, id))
           ? {
@@ -101,5 +121,8 @@ export const update = (
               model: withCopyStatus(model, id, CopyStatus.Copied()),
             }
           : { model },
+      UpdatedSiteSearch: ({ value }) => ({
+        model: modifyFields(model, { siteSearch: () => value }),
+      }),
     }
   );

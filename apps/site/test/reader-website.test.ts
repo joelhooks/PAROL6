@@ -83,7 +83,7 @@ const userAgentSchema = Schema.Literals([
 
 const serverRequest = (path: string, accept: string, userAgent = "") =>
   HttpServerRequest.fromWeb(
-    new Request(`https://ratstack.sh${path}`, {
+    new Request(`https://parol6.build${path}`, {
       headers: { accept, "user-agent": userAgent },
     })
   );
@@ -130,7 +130,7 @@ it.effect.prop(
   },
   ({ accept, method, path, userAgent }) =>
     Effect.gen(function* checkRouting() {
-      const url = new URL("https://ratstack.sh");
+      const url = new URL("https://parol6.build");
       url.pathname = path.startsWith("/") ? path : `/${path}`;
 
       const headers = { accept, "user-agent": userAgent };
@@ -232,7 +232,7 @@ it.effect(
         Effect.provideService(
           HttpServerRequest.HttpServerRequest,
           HttpServerRequest.fromWeb(
-            new Request("https://ratstack.sh/rpc", {
+            new Request("https://parol6.build/rpc", {
               body,
               headers: {
                 accept: "application/json",
@@ -284,7 +284,7 @@ it.effect(
         ["/assets/x.js", "*/*", []],
         ["/rpc", "application/json", []],
       ] as const) {
-        const request = new Request(`https://ratstack.sh${path}`, {
+        const request = new Request(`https://parol6.build${path}`, {
           headers: { accept },
         });
 

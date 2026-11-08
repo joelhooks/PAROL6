@@ -14,57 +14,37 @@ import {
 } from "foldkit/scene";
 import { fromString } from "foldkit/url";
 
-import { ReplaceUrl, SearchDocs } from "../src/client/docs/command.js";
+import { ReplaceUrl } from "../src/client/docs/command.js";
 import { Message } from "../src/client/docs/message.js";
 import { Message as ReaderMessage } from "../src/client/reader/message.js";
 import { update as readerUpdate } from "../src/client/reader/update.js";
 import { update, view } from "../src/features/app.js";
 import { view as readerView } from "../src/features/reader.js";
-import { docsHome, docsResult, searchPage } from "./docs-fixture.js";
+import { docsHome, searchPage } from "./docs-fixture.js";
 
-const searchBox = role("textbox", { name: "Search the docs" });
+const searchBox = role("textbox", { name: "Search query" });
 
 const searchButton = role("button", { name: "Search" });
 
 const arrivedAt = (path: string) =>
   ReaderMessage.GotDocsMessage({
     message: Message.ChangedUrl({
-      url: Option.getOrThrow(fromString(`https://ratstack.sh${path}`)),
+      url: Option.getOrThrow(fromString(`https://parol6.build${path}`)),
     }),
   });
 
-it("accessible search controls hide old results during loading and retain the latest result after a stale failure", () => {
+it("a search with no matching page says so and links nothing", () => {
   scene(
     { update, view },
     given(docsHome),
-    type(searchBox, "first query"),
+    type(searchBox, "flux capacitor"),
     click(searchButton),
+    Command.expectExact(ReplaceUrl({ url: "/search?q=flux+capacitor" })),
     Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-    Command.resolve(
-      SearchDocs,
-      Message.SucceededSearch({
-        generation: 1,
-        result: docsResult("Older result"),
-      })
-    ),
-    expect(role("link", { name: "Older result" })).toExist(),
-    type(searchBox, "second query"),
-    click(searchButton),
-    Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-    expect(text("Searching the docs…")).toExist(),
-    expect(role("link", { name: "Older result" })).toBeAbsent(),
-    Command.resolve(
-      SearchDocs,
-      Message.SucceededSearch({
-        generation: 2,
-        result: docsResult("Latest result"),
-      })
-    ),
-    Subscription.emit(Message.FailedSearch({ generation: 1 })),
-    expect(role("alert")).toBeAbsent(),
-    expect(role("link", { name: "Latest result" })).toExist(),
-    expect(role("link", { name: "Older result" })).toBeAbsent(),
-    Command.expectNone()
+    expect(text("0 results")).toExist(),
+    expect(
+      role("link", { name: "M1. Bench it: power, one motor, a safe stop" })
+    ).toBeAbsent()
   );
 });
 
@@ -72,82 +52,24 @@ it("the /search page preloads ?q=, searches again on Enter, puts the query in th
   scene(
     { update: readerUpdate, view: readerView },
     given(searchPage),
-    expect(role("link", { name: "search" })).toHaveAttr("href", "/search"),
-    expect(role("heading", { name: "Search the docs" })).toExist(),
+    expect(role("heading", { name: "Search the wiki" })).toExist(),
     expect(text("Matches appear here.")).toExist(),
-    Subscription.emit(arrivedAt("/search?q=cartridge")),
-    Command.expectExact(SearchDocs({ generation: 1, query: "cartridge" })),
-    expect(searchBox).toHaveValue("cartridge"),
-    expect(text("Searching the docs…")).toExist(),
-    Command.resolve(
-      SearchDocs,
-      Message.SucceededSearch({
-        generation: 1,
-        result: docsResult("cartridges"),
-      })
-    ),
+    Subscription.emit(arrivedAt("/search?q=homing")),
+    Command.expectNone(),
+    expect(searchBox).toHaveValue("homing"),
     expect(text("1 result")).toExist(),
-    expect(role("link", { name: "cartridges" })).toHaveAttr(
+    expect(role("link", { name: "M3. The whole arm moves" })).toHaveAttr(
       "href",
-      "/lore/cartridges"
+      "/lore/m3-whole-arm"
     ),
-    type(searchBox, " capability "),
+    type(searchBox, " tmc5160 "),
     keydown(searchBox, "Enter"),
-    Command.expectExact(
-      SearchDocs({ generation: 2, query: "capability" }),
-      ReplaceUrl({ url: "/search?q=capability" })
-    ),
+    Command.expectExact(ReplaceUrl({ url: "/search?q=tmc5160" })),
     Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-    Command.resolve(
-      SearchDocs,
-      Message.SucceededSearch({
-        generation: 2,
-        result: docsResult("one-capability-every-surface"),
-      })
-    ),
-    expect(role("link", { name: "one-capability-every-surface" })).toHaveAttr(
-      "href",
-      "/lore/one-capability-every-surface"
-    ),
-    Command.expectNone()
-  );
-});
-
-it("on /search, a stale search result that lands after a newer query is ignored", () => {
-  scene(
-    { update: readerUpdate, view: readerView },
-    given(searchPage),
-    type(searchBox, "older"),
-    click(searchButton),
-    Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-    Command.resolve(
-      SearchDocs,
-      Message.SucceededSearch({
-        generation: 1,
-        result: docsResult("Older result"),
-      })
-    ),
-    type(searchBox, "newer"),
-    click(searchButton),
-    Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-    Command.resolve(
-      SearchDocs,
-      Message.SucceededSearch({
-        generation: 2,
-        result: docsResult("Newer result"),
-      })
-    ),
-    Subscription.emit(
-      ReaderMessage.GotDocsMessage({
-        message: Message.SucceededSearch({
-          generation: 1,
-          result: docsResult("Older result"),
-        }),
-      })
-    ),
-    expect(role("link", { name: "Newer result" })).toExist(),
-    expect(role("link", { name: "Older result" })).toBeAbsent(),
-    expect(searchBox).toHaveValue("newer"),
+    expect(
+      role("link", { name: "M1. Bench it: power, one motor, a safe stop" })
+    ).toHaveAttr("href", "/lore/m1-bench-it"),
+    expect(role("link", { name: "M3. The whole arm moves" })).toBeAbsent(),
     Command.expectNone()
   );
 });

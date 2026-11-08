@@ -88,11 +88,11 @@ it.effect(
       );
 
       const handler = Effect.succeed(HttpServerResponse.text("done"));
-      const normal = "https://ratstack.sh/normal?utm_source=mail";
+      const normal = "https://parol6.build/normal?utm_source=mail";
 
       yield* makeRequestEffect(
         new Request(normal, {
-          headers: { host: "ratstack.sh", "x-forwarded-proto": "https" },
+          headers: { host: "parol6.build", "x-forwarded-proto": "https" },
         }),
         handler
       ).pipe(Effect.provideContext(services));
@@ -122,7 +122,7 @@ it.effect(
         "/normal?user_code=ABCD1234",
       ]) {
         const response = yield* makeRequestEffect(
-          new Request(`https://ratstack.sh${target}`),
+          new Request(`https://parol6.build${target}`),
           handler
         ).pipe(Effect.provideContext(services));
 

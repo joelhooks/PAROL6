@@ -1,6 +1,6 @@
-# ratstack.sh auth.md
+# parol6.build auth.md
 
-You do not need an account or token to read public content on ratstack.sh.
+You do not need an account or token to read public content on parol6.build.
 
 ## Public access
 

@@ -69,8 +69,8 @@ export const copyPrompts = {
     showText: true,
     text: [
       "Turn on rat-stack learn mode for me.",
-      `1. Connect to the rat-stack MCP server at https://ratstack.sh/mcp. Use ${learnDeckContract.name} and ${learnCardContract.name} to read the public concept deck.`,
-      "2. Read https://ratstack.sh/skills/learn and follow it in this session only. Do not install skills or write them to any skills folder.",
+      `1. Connect to the rat-stack MCP server at https://parol6.build/mcp. Use ${learnDeckContract.name} and ${learnCardContract.name} to read the public concept deck.`,
+      "2. Read https://parol6.build/skills/learn and follow it in this session only. Do not install skills or write them to any skills folder.",
       `3. Keep my progress and display preferences local in ~/.rat-learn/. Use the local ${learnNextContract.name}, ${learnRecordContract.name}, ${learnPreferencesContract.name} and ${learnSetPreferencesContract.name} tools from a fresh rat-stack clone, as the skill says. Never pull over my uncommitted changes.`,
       "4. Never send my code, file paths, names, repository names, or prompts.",
       "5. Then show me the first concept right away. When I later say learn mode on or next concept, show the next one. Keep questions off unless I turn them on. Stop when I say learn mode off.",
@@ -88,7 +88,7 @@ export const copyPrompts = {
     label: "Copy prompt",
     showText: false,
     text: [
-      "Read https://ratstack.sh/tokenmaxx as markdown.",
+      "Read https://parol6.build/tokenmaxx as markdown.",
       "Draft my application for the workshop from what you know about me and my work.",
       "Make the case for whether I fit, push me on anything vague, then show me what you'll send.",
     ].join("\n"),
@@ -101,7 +101,7 @@ export const copyPrompts = {
       `Check my setup for the "${tokenmaxxTitle}" session.`,
       "1. Check that Docker is running (Docker Desktop or OrbStack).",
       "2. Create a private repo from the joelhooks/rat-stack template and clone it: gh repo create my-factory --private --template joelhooks/rat-stack",
-      "3. Read https://ratstack.sh/llms.txt",
+      "3. Read https://parol6.build/llms.txt",
       "4. Tell me what is missing.",
     ].join("\n"),
   },
@@ -110,6 +110,6 @@ export const copyPrompts = {
     label: "Copy",
     showLabel: true,
     showText: false,
-    text: "Read https://ratstack.sh/.well-known/agent-skills/index.json. Pick the skill that fits my task, fetch its SKILL.md, and follow it in this session only. Do not install it or write it to any skills folder.",
+    text: "Read https://parol6.build/.well-known/agent-skills/index.json. Pick the skill that fits my task, fetch its SKILL.md, and follow it in this session only. Do not install it or write it to any skills folder.",
   },
 } satisfies Record<string, CopyPromptSpec>;

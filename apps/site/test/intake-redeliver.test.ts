@@ -66,7 +66,7 @@ it.effect.prop(
       const response = yield* Effect.promise(() =>
         handler(
           new Request(
-            "https://ratstack.sh/operator/interest/applications/redeliver",
+            "https://parol6.build/operator/interest/applications/redeliver",
             {
               body: JSON.stringify({
                 submissionIds: valid ? ["synthetic-first"] : 42,

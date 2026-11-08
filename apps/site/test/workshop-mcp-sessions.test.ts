@@ -75,7 +75,7 @@ const request = (
     headers.set("mcp-session-id", session);
   }
 
-  return new Request("https://ratstack.sh/tokenmaxx/mcp", {
+  return new Request("https://parol6.build/tokenmaxx/mcp", {
     body: JSON.stringify({ jsonrpc: "2.0", ...body }),
     headers,
     method: "POST",

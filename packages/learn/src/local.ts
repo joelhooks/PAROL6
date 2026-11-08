@@ -21,7 +21,7 @@ export { localLearnerProgressLayer } from "./local-store.js";
 
 const remoteDeck = Effect.gen(function* remoteDeck() {
   const origin = yield* Config.String("RAT_LEARN_ORIGIN").pipe(
-    Config.withDefault("https://ratstack.sh")
+    Config.withDefault("https://parol6.build")
   );
 
   const http = yield* HttpClient.HttpClient;

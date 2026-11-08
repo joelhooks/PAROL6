@@ -362,7 +362,7 @@ it.effect(
 
       for (const token of [undefined, "wrong", "synthetic-operator"]) {
         const request = new Request(
-          "https://ratstack.sh/operator/interest/applications",
+          "https://parol6.build/operator/interest/applications",
           {
             headers:
               token === undefined ? {} : { authorization: `Bearer ${token}` },
@@ -394,7 +394,7 @@ it.effect(
         const response = yield* call(
           handler,
           new Request(
-            "https://ratstack.sh/operator/interest/applications/erase",
+            "https://parol6.build/operator/interest/applications/erase",
             {
               body: JSON.stringify({ submissionIds: 42 }),
               headers:
@@ -421,7 +421,7 @@ it.effect(
         const response = yield* call(
           handler,
           new Request(
-            "https://ratstack.sh/operator/interest/applications/erase",
+            "https://parol6.build/operator/interest/applications/erase",
             {
               body,
               headers: { authorization: "Bearer synthetic-operator" },
@@ -436,7 +436,7 @@ it.effect(
       const historical = yield* call(
         handler,
         new Request(
-          "https://ratstack.sh/operator/interest/applications?submissionId=legacy-browser-submission",
+          "https://parol6.build/operator/interest/applications?submissionId=legacy-browser-submission",
           { headers: { authorization: "Bearer synthetic-operator" } }
         )
       );
@@ -451,7 +451,7 @@ it.effect(
       const partial = yield* call(
         handler,
         new Request(
-          "https://ratstack.sh/operator/interest/applications/erase",
+          "https://parol6.build/operator/interest/applications/erase",
           {
             body: JSON.stringify({ submissionIds: ["synthetic-submission"] }),
             headers: { authorization: "Bearer synthetic-operator" },
@@ -475,7 +475,7 @@ it.effect(
         const erased = yield* call(
           handler,
           new Request(
-            "https://ratstack.sh/operator/interest/applications/erase",
+            "https://parol6.build/operator/interest/applications/erase",
             {
               body: JSON.stringify({
                 submissionIds: ["synthetic-submission", "synthetic-submission"],
@@ -497,7 +497,7 @@ it.effect(
         const after = yield* call(
           handler,
           new Request(
-            "https://ratstack.sh/operator/interest/applications?submissionId=synthetic-submission",
+            "https://parol6.build/operator/interest/applications?submissionId=synthetic-submission",
             {
               headers: { authorization: "Bearer synthetic-operator" },
             }
@@ -524,7 +524,7 @@ it.effect(
 
       const corrupted = yield* call(
         handler,
-        new Request("https://ratstack.sh/operator/interest/applications", {
+        new Request("https://parol6.build/operator/interest/applications", {
           headers: { authorization: "Bearer synthetic-operator" },
         })
       );
@@ -562,14 +562,14 @@ it.effect("disables the route when no operator token is configured", () =>
 
     const response = yield* call(
       handler,
-      new Request("https://ratstack.sh/operator/interest/applications")
+      new Request("https://parol6.build/operator/interest/applications")
     );
 
     expect(response.status).toBe(404);
 
     const erased = yield* call(
       handler,
-      new Request("https://ratstack.sh/operator/interest/applications/erase", {
+      new Request("https://parol6.build/operator/interest/applications/erase", {
         body: JSON.stringify({ submissionIds: ["synthetic-submission"] }),
         method: "POST",
       })

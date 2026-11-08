@@ -180,12 +180,12 @@ export const preflightPermissions = Effect.fn("preflightPermissions")(
         ).pipe(HttpClientRequest.setHeaders(credentialHeaders(credential)))
       );
 
-    const zonesResponse = yield* get("/zones?name=ratstack.sh&per_page=50");
+    const zonesResponse = yield* get("/zones?name=parol6.build&per_page=50");
 
     const zones =
       yield* HttpClientResponse.schemaBodyJson(ZoneList)(zonesResponse);
 
-    const zone = zones.result.find((item) => item.name === "ratstack.sh");
+    const zone = zones.result.find((item) => item.name === "parol6.build");
 
     if (zonesResponse.status !== 200 || !zones.success || zone === undefined) {
       return yield* stepError("preflight", "zone-read-refused");

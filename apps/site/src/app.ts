@@ -105,7 +105,7 @@ const json = (body: Schema.Json, contentType = "application/json") =>
   });
 
 const originOf = (request: HttpServerRequest.HttpServerRequest) =>
-  new URL(request.url, "https://ratstack.sh").origin;
+  new URL(request.url, "https://parol6.build").origin;
 
 const pathQuery = (pathname: string) => {
   const segments = pathname.split("/").filter((segment) => segment !== "");
@@ -138,7 +138,7 @@ const errorResponse = (
       );
 
 const searchNotFound = (request: HttpServerRequest.HttpServerRequest) => {
-  const { pathname } = new URL(request.url, "https://ratstack.sh");
+  const { pathname } = new URL(request.url, "https://parol6.build");
   const query = pathQuery(pathname);
 
   return search.handler({ limit: 3, query }).pipe(
@@ -325,10 +325,10 @@ const unavailableResponse = (request: HttpServerRequest.HttpServerRequest) =>
     {
       code: 503,
       message: "Static content is unavailable. Retry shortly.",
-      path: new URL(request.url, "https://ratstack.sh").pathname,
+      path: new URL(request.url, "https://parol6.build").pathname,
       title: "Service unavailable",
     },
-    !new URL(request.url, "https://ratstack.sh").pathname.endsWith(".md") &&
+    !new URL(request.url, "https://parol6.build").pathname.endsWith(".md") &&
       acceptsHtml(request)
   ).pipe(
     Effect.map(
@@ -347,7 +347,7 @@ const assetRoutes = (
     (httpEffect) =>
       Effect.gen(function* serveStaticAsset() {
         const request = yield* HttpServerRequest.HttpServerRequest;
-        const path = new URL(request.url, "https://ratstack.sh").pathname;
+        const path = new URL(request.url, "https://parol6.build").pathname;
 
         if (
           (request.method !== "GET" && request.method !== "HEAD") ||
@@ -364,7 +364,7 @@ const assetRoutes = (
             path.endsWith(".svx") &&
             catalog.pageRoutes.includes(path.slice(0, -4))
           ) {
-            const query = new URL(request.url, "https://ratstack.sh").search;
+            const query = new URL(request.url, "https://parol6.build").search;
 
             return HttpServerResponse.empty({
               headers: { location: `${path.slice(0, -4)}${query}` },
@@ -401,7 +401,7 @@ const staticCacheKey = (
   request: HttpServerRequest.HttpServerRequest,
   representation: string
 ) => {
-  const url = new URL(request.url, "https://ratstack.sh");
+  const url = new URL(request.url, "https://parol6.build");
   url.hash = "";
   url.search = "";
   url.searchParams.set("__ratstack_content", staticContentVersion);
@@ -415,7 +415,7 @@ const staticCaching = (cache: StaticResponseCache) =>
     (httpEffect) =>
       Effect.gen(function* cacheStaticResponse() {
         const request = yield* HttpServerRequest.HttpServerRequest;
-        const path = new URL(request.url, "https://ratstack.sh").pathname;
+        const path = new URL(request.url, "https://parol6.build").pathname;
 
         if (
           request.method !== "GET" ||
@@ -485,13 +485,13 @@ const RateLimited = Schema.String.annotate({
   identifier: "RateLimited",
 }).pipe(HttpApiSchema.asText({ contentType: "text/plain" }));
 
-export const apiProjection = toHttpApi("ratstack.sh", capabilities, {
+export const apiProjection = toHttpApi("parol6.build", capabilities, {
   errors: [RateLimited],
   prefix: "/api",
 });
 
 const authenticatedApiProjection = toHttpApi(
-  "ratstack.sh",
+  "parol6.build",
   authenticatedCapabilities,
   {
     errors: [RateLimited],
@@ -562,7 +562,7 @@ const noVerifyResponse = (request: HttpServerRequest.HttpServerRequest) =>
     code: 403,
     details: NoVerifyDetails.make({}),
     message: "The rat looks disappointed.",
-    path: new URL(request.url, "https://ratstack.sh").pathname,
+    path: new URL(request.url, "https://parol6.build").pathname,
     title: "Forbidden",
   });
 
@@ -719,7 +719,7 @@ const contentRoutes = () =>
               Effect.flatMap((catalog) => {
                 const { pathname } = new URL(
                   request.url,
-                  "https://ratstack.sh"
+                  "https://parol6.build"
                 );
 
                 const skill = catalog.resources.find(
@@ -742,7 +742,7 @@ const contentRoutes = () =>
           HttpRouter.add("GET", path, (request) => noVerifyResponse(request))
         ),
         HttpRouter.add("GET", "/*", (request) => {
-          const { pathname } = new URL(request.url, "https://ratstack.sh");
+          const { pathname } = new URL(request.url, "https://parol6.build");
 
           return machinePath(pathname)
             ? Effect.succeed(
@@ -822,7 +822,7 @@ interface McpRequestRouting {
 
 const routingOf = (request: HttpServerRequest.HttpServerRequest) =>
   Effect.gen(function* routeRequest() {
-    const path = new URL(request.url, "https://ratstack.sh").pathname;
+    const path = new URL(request.url, "https://parol6.build").pathname;
     const isMcp = path === "/mcp";
 
     const modernMcp =
@@ -975,7 +975,7 @@ const linkHeaders = (store: ContentStore["Service"]) =>
       Effect.gen(function* addDiscoveryHeaders() {
         const request = yield* HttpServerRequest.HttpServerRequest;
         const response = yield* httpEffect;
-        const pagePath = new URL(request.url, "https://ratstack.sh").pathname;
+        const pagePath = new URL(request.url, "https://parol6.build").pathname;
 
         return HttpServerResponse.setHeader(
           response,
@@ -1022,7 +1022,7 @@ export const errorPages = HttpRouter.middleware(
   (httpEffect) =>
     Effect.gen(function* renderRequestError() {
       const request = yield* HttpServerRequest.HttpServerRequest;
-      const { pathname } = new URL(request.url, "https://ratstack.sh");
+      const { pathname } = new URL(request.url, "https://parol6.build");
       const machine = machinePath(pathname) || acceptsJson(request);
 
       const response = yield* httpEffect.pipe(
@@ -1090,7 +1090,7 @@ const securityHeadersMiddleware = HttpRouter.middleware(
       ),
       HttpEffect.withPreResponseHandler((request, response) =>
         Effect.succeed(
-          new URL(request.url, "https://ratstack.sh").pathname.startsWith(
+          new URL(request.url, "https://parol6.build").pathname.startsWith(
             "/tokenmaxx/"
           )
             ? HttpServerResponse.setHeader(response, "x-robots-tag", "noindex")

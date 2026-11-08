@@ -40,7 +40,7 @@ const rpc = (
     headers.set("mcp-session-id", sessionId);
   }
 
-  return new Request("https://ratstack.sh/mcp", {
+  return new Request("https://parol6.build/mcp", {
     body: JSON.stringify({ jsonrpc: "2.0", ...body }),
     headers,
     method: "POST",

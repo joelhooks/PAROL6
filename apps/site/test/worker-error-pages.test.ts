@@ -119,8 +119,8 @@ const requestThroughWorker = (
     const responseEffect: unknown = handler({
       context: {},
       env: workerEnvironment,
-      input: new Request(`https://ratstack.sh${path}`, {
-        headers: { accept, host: "ratstack.sh" },
+      input: new Request(`https://parol6.build${path}`, {
+        headers: { accept, host: "parol6.build" },
       }),
       kind: "Cloudflare.Workers.WorkerEvent",
       type: "fetch",

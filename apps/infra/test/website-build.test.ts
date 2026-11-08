@@ -39,7 +39,7 @@ const hooks = registerHooks({ resolve(specifier, context, next) {
 const { default: worker } = await import(payload.entry);
 const responses = [];
 for (const path of payload.paths) {
-  const response = await worker.fetch(new Request("https://pr-40.ratstack.sh" + path), bindings);
+  const response = await worker.fetch(new Request("https://pr-40.parol6.build" + path), bindings);
   responses.push({ path, status: response.status, commit: response.headers.get("x-preview-commit"), noindex: response.headers.get("x-robots-tag"), text: await response.text() });
 }
 hooks.deregister();
@@ -225,7 +225,7 @@ it.layer(NodeServices.layer)((test) => {
             `${page?.origin}${page?.page.metadata.canonicalPath}`
           );
 
-          if (page?.origin === "https://ratstack.sh") {
+          if (page?.origin === "https://parol6.build") {
             expect(proof.robots).not.toBe("noindex");
 
             const headerPath = path.join(result.clientDirectory, "_headers");

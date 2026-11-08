@@ -90,7 +90,7 @@ const responseBody = (response: Response) =>
 const getView = (handler: WebHandler, path: string, accept = "text/html") =>
   call(
     handler,
-    new Request(`https://ratstack.sh${path}`, { headers: { accept } })
+    new Request(`https://parol6.build${path}`, { headers: { accept } })
   );
 
 it.effect(
@@ -106,7 +106,7 @@ it.effect(
           ]) {
             const response = yield* call(
               handler,
-              new Request(`https://ratstack.sh${path}`, {
+              new Request(`https://parol6.build${path}`, {
                 body: payload,
                 headers: { "content-type": "application/json" },
                 method: "POST",
@@ -120,7 +120,7 @@ it.effect(
             const problem = yield* responseBody(response);
             expect(problem).toContain("joinInterest");
             expect(problem).toContain(
-              "https://ratstack.sh/tokenmaxx#interested"
+              "https://parol6.build/tokenmaxx#interested"
             );
           }
         }
@@ -235,13 +235,13 @@ it.effect(
         expect(executeProjection.declarations).not.toContain(
           "registerInterest"
         );
-        expect(llmsText("https://ratstack.sh")).not.toContain(
+        expect(llmsText("https://parol6.build")).not.toContain(
           "registerInterest"
         );
         expect(
-          agentNextActions("https://ratstack.sh", tokenmaxxTitle)
+          agentNextActions("https://parol6.build", tokenmaxxTitle)
         ).not.toContain("registerInterest");
-        expect(llmsText("https://ratstack.sh")).not.toContain(
+        expect(llmsText("https://parol6.build")).not.toContain(
           "browser submission"
         );
 
@@ -254,7 +254,7 @@ it.effect(
 
         const list = yield* call(
           handler,
-          new Request("https://ratstack.sh/mcp", {
+          new Request("https://parol6.build/mcp", {
             body: JSON.stringify({
               id: 1,
               jsonrpc: "2.0",
@@ -294,7 +294,7 @@ it.effect("keeps confirmation routes and email-link redirects available", () =>
       for (const method of ["GET", "POST"]) {
         const redirect = yield* call(
           handler,
-          new Request("https://ratstack.sh/confirm?token=test", { method })
+          new Request("https://parol6.build/confirm?token=test", { method })
         );
 
         expect(redirect.status).toBe(308);
@@ -304,7 +304,7 @@ it.effect("keeps confirmation routes and email-link redirects available", () =>
 
         const response = yield* call(
           handler,
-          new Request("https://ratstack.sh/tokenmaxx/confirm?token=test", {
+          new Request("https://parol6.build/tokenmaxx/confirm?token=test", {
             body: method === "POST" ? "token=test" : null,
             headers: { "content-type": "application/x-www-form-urlencoded" },
             method,
@@ -350,7 +350,7 @@ it.effect(
 
             const confirmed = yield* call(
               handler,
-              new Request("https://ratstack.sh/tokenmaxx/confirm", {
+              new Request("https://parol6.build/tokenmaxx/confirm", {
                 body: "token=test",
                 headers: {
                   "content-type": "application/x-www-form-urlencoded",
@@ -376,8 +376,8 @@ it.effect(
     withInterest((handler) =>
       Effect.gen(function* workshopDiscovery() {
         expect(publicPaths).toContain("/tokenmaxx");
-        expect(sitemapXml("https://ratstack.sh")).toContain(
-          "<loc>https://ratstack.sh/tokenmaxx</loc>"
+        expect(sitemapXml("https://parol6.build")).toContain(
+          "<loc>https://parol6.build/tokenmaxx</loc>"
         );
 
         const screenshot = yield* getView(
@@ -410,7 +410,7 @@ const requestFixture = Layer.mergeAll(
   Layer.succeed(InterestGate, { allow: () => Effect.succeed(true) }),
   Layer.succeed(InterestRequest, {
     ip: "203.0.113.7",
-    origin: "https://ratstack.sh",
+    origin: "https://parol6.build",
     userAgent: "test-agent",
   })
 );
@@ -480,7 +480,7 @@ const seedPending = (
       expiresAt: outcome.record.expiresAt ?? 0,
     });
 
-    return `https://ratstack.sh/tokenmaxx/confirm?token=${encodeURIComponent(token)}`;
+    return `https://parol6.build/tokenmaxx/confirm?token=${encodeURIComponent(token)}`;
   }).pipe(Effect.provideContext(services));
 
 const seedCapture = (services: LiveInterestServices, address: string) =>
@@ -498,7 +498,7 @@ const form = (
   fields: Readonly<Record<string, string>>,
   ip = "203.0.113.7"
 ) =>
-  new Request(`https://ratstack.sh${path}`, {
+  new Request(`https://parol6.build${path}`, {
     body: new URLSearchParams(fields).toString(),
     headers: {
       "cf-connecting-ip": ip,
@@ -519,12 +519,12 @@ const visible = (html: string) =>
 const capturing = { mode: "capture" } as const;
 
 const operatorGet = (path: string, bearer = operatorToken) =>
-  new Request(`https://ratstack.sh${path}`, {
+  new Request(`https://parol6.build${path}`, {
     headers: { authorization: `Bearer ${bearer}` },
   });
 
 const operatorPost = (path: string, body: Schema.Json) =>
-  new Request(`https://ratstack.sh${path}`, {
+  new Request(`https://parol6.build${path}`, {
     body: JSON.stringify(body),
     headers: {
       authorization: `Bearer ${operatorToken}`,
@@ -562,7 +562,7 @@ const confirmFake = (
 const pageStates = [
   {
     heading: "<h1>You're confirmed</h1>",
-    link: '<a href="/">Return to ratstack.sh</a>',
+    link: '<a href="/">Return to parol6.build</a>',
     state: "confirmed",
     status: 200,
   },
@@ -583,14 +583,14 @@ const pageStates = [
 const tokenmaxxPage = (handler: WebHandler, accept: string) =>
   call(
     handler,
-    new Request("https://ratstack.sh/tokenmaxx", { headers: { accept } })
+    new Request("https://parol6.build/tokenmaxx", { headers: { accept } })
   );
 
 const setupPromptLines = [
   `Check my setup for the "${tokenmaxxTitle}" session.`,
   "1. Check that Docker is running (Docker Desktop or OrbStack).",
   "2. Create a private repo from the joelhooks/rat-stack template and clone it: gh repo create my-factory --private --template joelhooks/rat-stack",
-  "3. Read https://ratstack.sh/llms.txt",
+  "3. Read https://parol6.build/llms.txt",
   "4. Tell me what is missing.",
 ];
 
@@ -620,11 +620,11 @@ it.effect(
   () =>
     Effect.sync(() => {
       expect(publicPaths).toContain("/tokenmaxx");
-      expect(sitemapXml("https://ratstack.sh")).toContain(
-        "<loc>https://ratstack.sh/tokenmaxx</loc>"
+      expect(sitemapXml("https://parol6.build")).toContain(
+        "<loc>https://parol6.build/tokenmaxx</loc>"
       );
-      expect(llmsText("https://ratstack.sh")).toContain(
-        "https://ratstack.sh/tokenmaxx#interested"
+      expect(llmsText("https://parol6.build")).toContain(
+        "https://parol6.build/tokenmaxx#interested"
       );
       expect(
         searchContent("loops never stop shipping workshop").map(
@@ -644,7 +644,7 @@ it.effect("indexes the workshop pathname and hides only its subpaths", () =>
       ]) {
         const response = yield* call(
           handler,
-          new Request(`https://ratstack.sh${path}`, {
+          new Request(`https://parol6.build${path}`, {
             headers: { accept: "text/markdown" },
           })
         );
@@ -663,7 +663,7 @@ it.effect("indexes the workshop pathname and hides only its subpaths", () =>
       ]) {
         const response = yield* call(
           handler,
-          new Request(`https://ratstack.sh${path}`)
+          new Request(`https://parol6.build${path}`)
         );
 
         expect(response.headers.get("x-robots-tag"), path).toBe("noindex");
@@ -679,7 +679,7 @@ it.effect(
       Effect.gen(function* servesMarkdown() {
         const response = yield* call(
           handler,
-          new Request("https://ratstack.sh/tokenmaxx", {
+          new Request("https://parol6.build/tokenmaxx", {
             headers: { accept: "text/markdown" },
           })
         );
@@ -706,7 +706,7 @@ it.effect("serves the credited screenshot", () =>
     Effect.gen(function* servesImage() {
       const response = yield* call(
         handler,
-        new Request("https://ratstack.sh/tokenmaxx/four-comma-club.jpg")
+        new Request("https://parol6.build/tokenmaxx/four-comma-club.jpg")
       );
 
       const bytes = new Uint8Array(
@@ -730,7 +730,7 @@ it.effect(
         const operator = (bearer: string) =>
           call(
             handler,
-            new Request("https://ratstack.sh/operator/interest", {
+            new Request("https://parol6.build/operator/interest", {
               headers: { authorization: `Bearer ${bearer}` },
             })
           );
@@ -800,12 +800,12 @@ it.effect(
     Effect.gen(function* operatorRead() {
       const off = yield* withLiveInterest(
         (handler) =>
-          call(handler, new Request("https://ratstack.sh/operator/interest")),
+          call(handler, new Request("https://parol6.build/operator/interest")),
         { operator: false }
       );
 
       const closed = yield* withLiveInterest((handler) =>
-        call(handler, new Request("https://ratstack.sh/operator/interest"))
+        call(handler, new Request("https://parol6.build/operator/interest"))
       );
 
       expect([off.status, closed.status]).toEqual([404, 401]);
@@ -871,7 +871,7 @@ it.effect("renders the four confirm pages with the approved copy", () =>
       expect(confirmed).toContain(
         "<p>You'll get one email when the date is set, and that's it.</p>"
       );
-      expect(confirmed).toContain('<a href="/">Return to ratstack.sh</a>');
+      expect(confirmed).toContain('<a href="/">Return to parol6.build</a>');
 
       const expiredToken = yield* InterestTokens.use((tokens) =>
         tokens.sign({ address: "reader@example.com", expiresAt: -1 })
@@ -880,7 +880,7 @@ it.effect("renders the four confirm pages with the approved copy", () =>
       const expiredGet = yield* call(
         handler,
         new Request(
-          `https://ratstack.sh/tokenmaxx/confirm?token=${encodeURIComponent(expiredToken)}`
+          `https://parol6.build/tokenmaxx/confirm?token=${encodeURIComponent(expiredToken)}`
         )
       );
 
@@ -905,7 +905,7 @@ it.effect("renders the four confirm pages with the approved copy", () =>
       for (const response of [
         yield* call(
           handler,
-          new Request("https://ratstack.sh/tokenmaxx/confirm?token=garbage")
+          new Request("https://parol6.build/tokenmaxx/confirm?token=garbage")
         ),
         yield* call(handler, form("/tokenmaxx/confirm", { token: "garbage" })),
       ]) {
@@ -941,7 +941,7 @@ it.effect(
             yield* call(
               handler,
               new Request(
-                `https://ratstack.sh/tokenmaxx/confirm?token=${encodeURIComponent(token)}`
+                `https://parol6.build/tokenmaxx/confirm?token=${encodeURIComponent(token)}`
               )
             ),
             yield* call(handler, form("/tokenmaxx/confirm", { token })),
@@ -975,11 +975,11 @@ it.effect("keeps the capture export and delete behind the operator token", () =>
           )).status,
           (yield* call(
             handler,
-            new Request("https://ratstack.sh/operator/interest/captures")
+            new Request("https://parol6.build/operator/interest/captures")
           )).status,
           (yield* call(
             handler,
-            new Request("https://ratstack.sh/operator/interest/delete", {
+            new Request("https://parol6.build/operator/interest/delete", {
               body: JSON.stringify({ addresses: ["a@example.com"] }),
               headers: { "content-type": "application/json" },
               method: "POST",
@@ -1068,7 +1068,7 @@ it.effect("sends the email's /confirm link to the confirm page", () =>
     (handler) =>
       Effect.gen(function* redirects() {
         for (const request of [
-          new Request("https://ratstack.sh/confirm?token=a%2Bb"),
+          new Request("https://parol6.build/confirm?token=a%2Bb"),
           form("/confirm", { token: "t" }),
         ]) {
           const response = yield* call(handler, request);
@@ -1078,7 +1078,7 @@ it.effect("sends the email's /confirm link to the confirm page", () =>
 
         const get = yield* call(
           handler,
-          new Request("https://ratstack.sh/confirm?token=a%2Bb")
+          new Request("https://parol6.build/confirm?token=a%2Bb")
         );
 
         expect(get.headers.get("location")).toBe(
@@ -1098,7 +1098,7 @@ it.effect("renders each confirm page from drovr's token state", () =>
             yield* text(
               yield* call(
                 handler,
-                new Request("https://ratstack.sh/tokenmaxx/confirm?token=t")
+                new Request("https://parol6.build/tokenmaxx/confirm?token=t")
               )
             )
           );
@@ -1118,7 +1118,7 @@ it.effect("renders each confirm page from drovr's token state", () =>
           Effect.gen(function* renders() {
             const get = yield* call(
               handler,
-              new Request("https://ratstack.sh/tokenmaxx/confirm?token=t")
+              new Request("https://parol6.build/tokenmaxx/confirm?token=t")
             );
 
             const post = yield* call(
@@ -1151,7 +1151,7 @@ it.effect(
         Effect.gen(function* unconfigured() {
           const response = yield* call(
             handler,
-            new Request("https://ratstack.sh/tokenmaxx/confirm?token=t")
+            new Request("https://parol6.build/tokenmaxx/confirm?token=t")
           );
 
           expect(response.status).toBe(410);
@@ -1188,7 +1188,7 @@ it.effect("GET reads the token state and never confirms; POST confirms", () =>
         Effect.gen(function* getThenPost() {
           yield* call(
             handler,
-            new Request("https://ratstack.sh/tokenmaxx/confirm?token=abc")
+            new Request("https://parol6.build/tokenmaxx/confirm?token=abc")
           );
 
           expect(reads).toEqual(["abc"]);
@@ -1262,7 +1262,7 @@ it.effect("offers a labeled prompt for a consent-first agent application", () =>
       expect(html).toContain("Make the case for whether I fit");
       expect(html).not.toContain("Do not inspect my machine");
       expect(html).toMatch(
-        /<a href="https:\/\/ratstack\.sh\/tokenmaxx"[^>]*>workshop page<\/a>/u
+        /<a href="https:\/\/parol6\.build\/tokenmaxx"[^>]*>workshop page<\/a>/u
       );
       expect(html).toContain(
         "Answer five questions about your work, availability,"
@@ -1345,8 +1345,8 @@ it.effect(
           "after any edit, ask for approval again.",
           "If contact permission is not true, do not submit.",
           "Confirmation is not a seat.",
-          "https://ratstack.sh/mcp",
-          "https://ratstack.sh/api/joinInterest",
+          "https://parol6.build/mcp",
+          "https://parol6.build/api/joinInterest",
           "rat-stack joinInterest",
           '"consent": { "contact": true, "share": false }',
         ]) {

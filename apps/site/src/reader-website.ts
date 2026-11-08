@@ -105,7 +105,7 @@ export const withReaderWebsite =
   ) =>
     Effect.gen(function* routeReaderWebsite() {
       const request = yield* HttpServerRequest.HttpServerRequest;
-      const { pathname } = new URL(request.originalUrl, "https://ratstack.sh");
+      const { pathname } = new URL(request.originalUrl, "https://parol6.build");
 
       const target = readerWebsiteTarget(
         pathname,

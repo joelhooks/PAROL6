@@ -38,7 +38,7 @@ class PreparedReaderPages extends Context.Service<
         Effect.provideService(
           ConfigProvider.ConfigProvider,
           ConfigProvider.fromUnknown({
-            PREVIEW_ORIGIN: "https://pr-999.ratstack.sh",
+            PREVIEW_ORIGIN: "https://pr-999.parol6.build",
           })
         )
       );
@@ -93,7 +93,7 @@ const assertMetadata = Effect.fn("assertReaderAssetMetadata")(
 
 const assertProductionPayloads = (pages: readonly ReaderPageFlags[]) => {
   for (const page of pages) {
-    expect(page.origin).toBe("https://ratstack.sh");
+    expect(page.origin).toBe("https://parol6.build");
 
     const payloads = [
       ...page.copyPrompts.map((prompt) => prompt.text),
@@ -102,7 +102,7 @@ const assertProductionPayloads = (pages: readonly ReaderPageFlags[]) => {
     ];
 
     for (const payload of payloads) {
-      expect(payload).not.toMatch(/https:\/\/pr-\d+\.ratstack\.sh/u);
+      expect(payload).not.toMatch(/https:\/\/pr-\d+\.parol6\.build/u);
       expect(payload).not.toContain("__RATSTACK_ORIGIN__");
     }
   }
@@ -110,11 +110,11 @@ const assertProductionPayloads = (pages: readonly ReaderPageFlags[]) => {
   const home = pages.find((page) => page.page.path === "/");
   expect(
     home?.copyPrompts.find((prompt) => prompt.id === "mcp")?.text
-  ).toContain("https://ratstack.sh/mcp");
+  ).toContain("https://parol6.build/mcp");
   expect(
     home?.codeFences.find((fence) => fence.value.includes("claude mcp add"))
       ?.value
-  ).toContain("https://ratstack.sh/mcp");
+  ).toContain("https://parol6.build/mcp");
 };
 
 it.layer(PreparedReaderPages.layer)((test) => {
@@ -217,7 +217,7 @@ it.layer(PreparedReaderPages.layer)((test) => {
         );
 
         const commit = preview.seed.toString(16).padStart(40, "0");
-        const origin = `https://pr-${preview.number}.ratstack.sh`;
+        const origin = `https://pr-${preview.number}.parol6.build`;
         const headerPath = path.join(client, "_headers");
 
         yield* writeStage(origin, "noindex");
@@ -252,7 +252,7 @@ it.layer(PreparedReaderPages.layer)((test) => {
           );
         }
 
-        yield* writeStage("https://ratstack.sh");
+        yield* writeStage("https://parol6.build");
         yield* finalizeReader(root, client).pipe(
           Effect.provideService(
             ConfigProvider.ConfigProvider,
@@ -270,7 +270,7 @@ it.layer(PreparedReaderPages.layer)((test) => {
         for (const page of pages) {
           yield* assertMetadata(
             outputPath(page.page.path),
-            `https://ratstack.sh${page.page.path}`,
+            `https://parol6.build${page.page.path}`,
             page.page.metadata.robots
           );
         }

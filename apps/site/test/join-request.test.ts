@@ -55,7 +55,7 @@ it.effect.prop(
 
       yield* Effect.addFinalizer(() => Effect.promise(dispose));
 
-      const request = new Request("https://ratstack.sh/gate", {
+      const request = new Request("https://parol6.build/gate", {
         headers: validIp ? { "cf-connecting-ip": "203.0.113.17" } : {},
       });
 

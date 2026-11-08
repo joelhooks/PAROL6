@@ -42,6 +42,12 @@ These rat-stack product surfaces still build and are still served by URL. The wi
 
 Each cut needs its own packet: about 60 files touch CAFE, 70 touch tokenmaxx and 40 touch the Workshop Worker, with tests that pin their behaviour.
 
-## Before any deploy
+## Wiki shell
 
-`apps/infra/alchemy.run.ts` still declares the `RatStack` stack with the `ratstack.sh` zone, its DNS and mail records, the workshop mail route and the Workshop Worker routes. It uses the `alchemy-state-store-ratstack-state-store` state store. A deploy with the `ratstack` profile would manage the live ratstack.sh resources. The first PAROL6 deploy needs its own domain, Alchemy profile and Cloudflare account, its own stack name and state store, and those ratstack.sh resources removed from the Stack.
+The reader is a wiki: a sidebar tree, a breadcrumb trail, an "On this page" list built from each page's h2 and h3 headings, a "Last updated" line with the source count, and a "What links here" section. `apps/web/src/features/wiki-nav.ts` owns the tree; the content build and the Foldkit reader both read it, so the static breadcrumb and the reader's breadcrumb match. Search runs in the browser over the lore text in the built `_content/search.json`, which the `/search` page carries in its flags. The reader's content security policy keeps `form-action 'none'`, so the header search box is a Foldkit input, not a form.
+
+Every colour, type size, spacing step and radius in the wiki styles comes from the rat-stack tokens: `apps/web/src/features/tokens.stylex.ts` for StyleX and the `:root` block of `apps/site/src/rat.css` for the static stylesheet. The two must hold the same values.
+
+## Deploy target
+
+The site's origin is `https://parol6.build`. `apps/infra/alchemy.run.ts` declares the `PAROL6` stack with its own state store, `alchemy-state-store-parol6-state-store`. It adopts the `parol6.build` zone and its DNSSEC, and deploys the Website, Mischief on `parol6.build` and `www.parol6.build`, and the turbo cache. The ratstack.sh DNS-AID, mail and Workshop resources are gone from the stack. The `ratstack` Alchemy profile's account owns the zone. `.github/workflows/ratstack-publish.yml` publishes only from `joelhooks/rat-stack`.

@@ -44,7 +44,7 @@ it.layer(NodeServices.layer)((test) => {
         for (const route of routes) {
           const response = yield* Effect.promise(() =>
             worker.fetch(
-              new Request(`https://ratstack.sh${route}`, {
+              new Request(`https://parol6.build${route}`, {
                 headers: { accept: "text/html" },
               })
             )

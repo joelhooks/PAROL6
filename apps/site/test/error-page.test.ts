@@ -18,7 +18,7 @@ it("escapes an XSS path in the shared error document", () => {
       path,
       title: "Not found",
     },
-    "https://ratstack.sh",
+    "https://parol6.build",
     true
   );
 
@@ -45,7 +45,7 @@ it.effect("serves a framed 404 and next actions in both representations", () =>
           const response = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request("https://ratstack.sh/nope-xyz", {
+              new Request("https://parol6.build/nope-xyz", {
                 headers: { accept },
               }),
               undefined
@@ -81,7 +81,7 @@ it.effect("serves a framed 404 and next actions in both representations", () =>
         const response = yield* Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/api/nope-xyz", {
+            new Request("https://parol6.build/api/nope-xyz", {
               headers: { accept: "application/json" },
             }),
             undefined
@@ -143,7 +143,7 @@ it.effect(
             const response = yield* Effect.promise(
               handler.bind(
                 undefined,
-                new Request(`https://ratstack.sh${path}`, {
+                new Request(`https://parol6.build${path}`, {
                   headers: { accept: "text/html" },
                 }),
                 undefined
@@ -168,7 +168,7 @@ it.effect(
             const response = yield* Effect.promise(
               handler.bind(
                 undefined,
-                new Request(`https://ratstack.sh${path}`, {
+                new Request(`https://parol6.build${path}`, {
                   headers: { accept: "text/html" },
                 }),
                 undefined

@@ -25,7 +25,7 @@ it.effect(
   () =>
     Effect.gen(function* systemsSkillsParity() {
       const inputs = yield* prepareReaderSiteInputs;
-      const flags = yield* readerSystemsSkillsFlags("https://ratstack.sh");
+      const flags = yield* readerSystemsSkillsFlags("https://parol6.build");
 
       const expected = inputs.pages.filter((page) =>
         isSystemsSkillsRoute(page.path)
@@ -89,7 +89,7 @@ it.effect("Reader routing preserves same-generation agent Markdown bytes", () =>
   Effect.gen(function* sameGenerationMarkdown() {
     const fs = yield* FileSystem.FileSystem;
     const { directory, manifest } = yield* readerAssetInputs;
-    const flags = yield* readerSystemsSkillsFlags("https://ratstack.sh");
+    const flags = yield* readerSystemsSkillsFlags("https://parol6.build");
 
     const pages = manifest.pages.filter((page) =>
       isSystemsSkillsRoute(page.route)
@@ -104,7 +104,7 @@ it.effect("Reader routing preserves same-generation agent Markdown bytes", () =>
 
       const markdown = asset.replaceAll(
         "__RATSTACK_ORIGIN__",
-        "https://ratstack.sh"
+        "https://parol6.build"
       );
 
       const fallback = Effect.succeed(
@@ -118,7 +118,7 @@ it.effect("Reader routing preserves same-generation agent Markdown bytes", () =>
 
       for (const accept of ["*/*", "text/markdown"]) {
         const request = HttpServerRequest.fromWeb(
-          new Request(`https://ratstack.sh${page.route}`, {
+          new Request(`https://parol6.build${page.route}`, {
             headers: { accept },
           })
         );

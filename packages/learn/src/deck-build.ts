@@ -241,7 +241,7 @@ export const deriveDeck = (
       prerequisites,
       references:
         page.sources.length === 0 && page.kind === "skill"
-          ? [`https://ratstack.sh${page.routePath}`]
+          ? [`https://parol6.build${page.routePath}`]
           : page.sources,
       routePath: page.routePath,
       summary,

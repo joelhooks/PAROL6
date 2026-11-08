@@ -19,7 +19,7 @@ const htmlText = (value: string) =>
 it.effect("every seed profile renders as prerendered HTML", () =>
   Effect.gen(function* renderProfiles() {
     const inputs = yield* prepareReaderSiteInputs;
-    const flags = yield* readerBodyFlags("https://ratstack.sh");
+    const flags = yield* readerBodyFlags("https://parol6.build");
 
     expect(inputs.cafe.people.map((person) => person.id)).toEqual(
       expect.arrayContaining([
@@ -55,7 +55,7 @@ it.effect("every seed profile renders as prerendered HTML", () =>
       }
     }
 
-    const index = (yield* readerCafeFlags("https://ratstack.sh")).find(
+    const index = (yield* readerCafeFlags("https://parol6.build")).find(
       (candidate) => candidate.page.path === "/all-stars"
     );
 

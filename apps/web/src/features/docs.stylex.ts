@@ -22,8 +22,8 @@ export const docsStyles = stylex.create({
     marginBlockEnd: reader.spaceSmall,
   },
   meta: {
-    color: "#5c5f77",
-    fontSize: "0.875em",
+    color: reader.inkMuted,
+    fontSize: reader.fontSizeSmall,
   },
   results: {
     listStyle: "none",

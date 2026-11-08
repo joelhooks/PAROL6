@@ -8,11 +8,11 @@ const retiredApplication = HttpServerResponse.jsonUnsafe(
       "Applications go through your agent. Read the workshop page and apply through joinInterest with a fresh page ticket.",
     next: {
       capability: "joinInterest",
-      href: "https://ratstack.sh/tokenmaxx#interested",
+      href: "https://parol6.build/tokenmaxx#interested",
     },
     status: 410,
     title: "Applications go through your agent",
-    type: "https://ratstack.sh/tokenmaxx#interested",
+    type: "https://parol6.build/tokenmaxx#interested",
   },
   {
     contentType: "application/problem+json",

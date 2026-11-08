@@ -21,6 +21,10 @@ export interface DocumentShell {
   readonly breadcrumbHref?: string;
   readonly breadcrumbLabel?: string;
   readonly breadcrumbName?: string;
+  readonly breadcrumbSection?: {
+    readonly href: string;
+    readonly label: string;
+  };
   readonly description: string;
   readonly discoveryLinks: readonly DiscoveryLink[];
   readonly newsCalloutHtml?: string;
@@ -108,7 +112,7 @@ export const renderDocumentShell = (shell: DocumentShell) => {
     shell.breadcrumbLabel !== "" &&
     shell.breadcrumbName !== undefined &&
     shell.breadcrumbName !== ""
-      ? `<nav aria-label="Breadcrumb" class="breadcrumb"><a href="${escapeHtmlAttribute(shell.breadcrumbHref)}">${escapeHtmlText(shell.breadcrumbLabel)}</a> / ${escapeHtmlText(shell.breadcrumbName)}</nav>`
+      ? `<nav aria-label="Breadcrumb" class="breadcrumb"><a href="${escapeHtmlAttribute(shell.breadcrumbHref)}">${escapeHtmlText(shell.breadcrumbLabel)}</a> / ${shell.breadcrumbSection === undefined ? "" : `<a href="${escapeHtmlAttribute(shell.breadcrumbSection.href)}">${escapeHtmlText(shell.breadcrumbSection.label)}</a> / `}${escapeHtmlText(shell.breadcrumbName)}</nav>`
       : "";
 
   const body = `${siteNavigation} <main data-path="${escapeHtmlAttribute(shell.path)}">${pointer} ${shell.newsCalloutHtml ?? ""} ${breadcrumb} ${shell.bodyHtml}</main> ${siteFooter}`;

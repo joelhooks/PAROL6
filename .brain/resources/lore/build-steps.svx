@@ -1,0 +1,75 @@
+---
+title: "Build steps by milestone"
+description: "The official how-to pages for each milestone, in build order, gathered from the milestone pages."
+plain: "One list per milestone of the official pages to open, in the order the build needs them."
+group: concept
+learn: false
+terms:
+  - "building instructions"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf
+    title: "PAROL6 building instructions"
+    publisher: "Source Robotics"
+    note: "The official assembly PDF, built from the wrist to the base, page 7."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/
+    title: "The test firmware, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The M1 bench commands."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/
+    title: "Firmware and first run, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "First power-on, direction fixes and homing."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/
+    title: "Python API, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The programming interface M4 to M7 build on."
+    accessed: "2026-11-07"
+---
+
+**Stub.** This page gathers the How-to section of each milestone. Each step opens the official page at the moment it is needed. The milestone pages say why each step matters and what the done check is.
+
+The official order is wrist to base, because every wire passes down through the robot ([building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=7), page 7).
+
+## M1. Bench it
+
+- [Stepper drivers](https://docs.source-robotics.com/PAROL-docs/1.1/board/05-stepper-drivers/): driver orientation and heatsinks.
+- [Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/) and [Connecting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/): supply polarity.
+- [The test firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/): `#IO`, `#LIMIT` and `#STOP`.
+
+More: [M1 how-to](/lore/m1-bench-it#how-to).
+
+## M2. One joint end to end
+
+- [Building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=20), pages 20 to 23 and 97 to 98.
+- Firmware upload with an ST-Link and the adapter ([Firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/08-firmware/)).
+- The direction check ([Firmware and first run](https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/), section 4) and [Jogging](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/jogging/).
+
+More: [M2 how-to](/lore/m2-one-joint#how-to).
+
+## M3. The whole arm moves
+
+- The building instructions, joint by joint.
+- The wiring diagram and "Test before you close the base" ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
+- First power-on, direction fixes and homing ([Firmware and first run](https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/)).
+- Witness marks and [Mastering](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/mastering/).
+
+More: [M3 how-to](/lore/m3-whole-arm#how-to).
+
+## M4. Pick and place
+
+- Gripper setup and the homing offset for the tool ([Homing](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/); [End effectors](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/)).
+- RBTscript programs ([Running programs](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/running-programs/)).
+- The [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/).
+
+More: [M4 how-to](/lore/m4-pick-and-place#how-to).
+
+## M5 to M7
+
+**Our design.** The official manual stops at pick-and-place. These steps are our own scripts on the [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/), written as completion tasks: [M5 how-to](/lore/m5-touch-the-skiff#how-to), [M6 how-to](/lore/m6-patch-a-cable#how-to) and [M7 how-to](/lore/m7-play-it#how-to).
+
+## Terms
+
+- **building instructions**: the official assembly PDF. It builds the robot from the wrist to the base, because every wire passes down through it ([building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=7), page 7).

@@ -132,7 +132,7 @@ it.effect(
         const response = yield* Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/tokenmaxx", {
+            new Request("https://parol6.build/tokenmaxx", {
               headers: { accept: "text/markdown" },
             }),
             Context.empty()
@@ -166,7 +166,7 @@ it.effect("worker-built routes retain the ticket service for requests", () =>
     const response = yield* Effect.promise(
       handler.bind(
         undefined,
-        new Request("https://ratstack.sh/tokenmaxx", {
+        new Request("https://parol6.build/tokenmaxx", {
           headers: { accept: "text/markdown" },
         }),
         Context.empty()
@@ -224,7 +224,7 @@ it.effect(
         const response = yield* Effect.promise(
           handler.bind(
             undefined,
-            new Request("https://ratstack.sh/tokenmaxx", {
+            new Request("https://parol6.build/tokenmaxx", {
               headers: { accept: "text/markdown" },
             }),
             Context.empty()
@@ -278,7 +278,9 @@ it.effect("the cache layer cannot read or write the tokenmaxx page", () =>
       const response = yield* Effect.promise(
         handler.bind(
           undefined,
-          new Request("https://ratstack.sh/tokenmaxx", { headers: { accept } }),
+          new Request("https://parol6.build/tokenmaxx", {
+            headers: { accept },
+          }),
           Context.empty()
         )
       );

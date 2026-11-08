@@ -7,16 +7,6 @@ import { fromString } from "foldkit/url";
 import { Message } from "./message.js";
 import { DocumentQueries } from "./queries.js";
 
-export const SearchDocs = Command.define("SearchDocs", {
-  args: { generation: Schema.Finite, query: Schema.String },
-  execute: ({ query, generation }) =>
-    DocumentQueries.use((queries) => queries.search(query)).pipe(
-      Effect.map((result) => Message.SucceededSearch({ generation, result })),
-      Effect.orElseSucceed(() => Message.FailedSearch({ generation }))
-    ),
-  messages: [Message.SucceededSearch, Message.FailedSearch],
-});
-
 export const ReadDoc = Command.define("ReadDoc", {
   args: { generation: Schema.Finite, id: Schema.String },
   execute: ({ id, generation }) =>

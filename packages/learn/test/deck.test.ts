@@ -75,7 +75,7 @@ it("accumulates independent defects across cards and resolves explicit page prer
 
   expect(valid.cards[1]?.prerequisites).toStrictEqual(["lore.layers"]);
   expect(valid.cards[1]?.references).toStrictEqual([
-    "https://ratstack.sh/skills/layers",
+    "https://parol6.build/skills/layers",
   ]);
   expect(valid.warnings.some((entry) => entry.id === "skill.layers")).toBe(
     true
@@ -149,7 +149,7 @@ it.prop(
       id: `lore.page-${index}`,
       learn: optedOut ? false : undefined,
       routePath: `/lore/page-${index}`,
-      sources: referenced ? ["https://ratstack.sh/lore"] : [],
+      sources: referenced ? ["https://parol6.build/lore"] : [],
     }));
 
     const kept = sources.filter((page) => page.learn === undefined);

@@ -66,7 +66,7 @@ export const linkedFromComponent = (
     }
 
     return [
-      heading("Linked from"),
+      heading("What links here"),
       {
         children: entries.map((entry) => ({
           children: [
@@ -99,7 +99,7 @@ export const linkedFromComponent = (
       ? []
       : [
           html(
-            `<section class="bibliography linked-from" aria-labelledby="linked-from"><h2 id="linked-from">Linked from</h2><ol>${entries.map((entry) => `<li><a href="${escapeHtml(entry.route)}">${escapeHtml(entry.title)}</a>. ${escapeHtml(entry.description)}${renderContext(entry.context)}</li>`).join("")}</ol></section>`
+            `<section class="bibliography linked-from" aria-labelledby="linked-from"><h2 id="linked-from">What links here</h2><ol>${entries.map((entry) => `<li><a href="${escapeHtml(entry.route)}">${escapeHtml(entry.title)}</a>. ${escapeHtml(entry.description)}${renderContext(entry.context)}</li>`).join("")}</ol></section>`
           ),
         ];
   },

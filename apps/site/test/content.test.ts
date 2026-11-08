@@ -771,7 +771,7 @@ it.layer(contentServices)("generated content", (test) => {
     Effect.sync(() => {
       const benchIt = loreSources.find((lore) => lore.slug === "m1-bench-it");
       const [match] = searchContent("TMC5160");
-      const llms = llmsText("https://ratstack.sh");
+      const llms = llmsText("https://parol6.build");
 
       expect(benchIt?.group).toBe("concept");
       expect(benchIt?.terms).toContain("TMC5160");
@@ -837,8 +837,8 @@ it.layer(contentServices)("generated content", (test) => {
 
         expect(glossaryIndexDocumentHtml).toContain('href="/lore/m1-bench-it"');
         expect(glossaryIndexMarkdown).toContain("# Glossary");
-        expect(llmsText("https://ratstack.sh")).toContain(
-          "https://ratstack.sh/glossary"
+        expect(llmsText("https://parol6.build")).toContain(
+          "https://parol6.build/glossary"
         );
       })
   );
@@ -968,7 +968,7 @@ it.layer(contentServices)("generated content", (test) => {
           ?.css ?? "";
 
       expect(stylesheet).toContain("ui-monospace");
-      expect(stylesheet).toContain("max-width: 80ch");
+      expect(stylesheet).toContain("max-width: var(--content-width)");
       expect(homeDocumentHtml).not.toContain('rel="stylesheet"');
     })
   );

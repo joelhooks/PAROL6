@@ -24,7 +24,7 @@ it.prop(
     title: Arbitrary.schema(text),
   },
   ({ description, number, title }) => {
-    const origin = `https://pr-${number}.ratstack.sh`;
+    const origin = `https://pr-${number}.parol6.build`;
 
     const metadata = {
       canonicalPath: "/lore/m1-bench-it",

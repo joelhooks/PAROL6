@@ -75,6 +75,7 @@ export const Model = Schema.Struct({
   ...ReaderFlags.fields,
   clipboardAccess: ClipboardAccess,
   copyStatuses: Schema.Record(Schema.String, CopyStatus),
+  siteSearch: Schema.String,
 });
 
 export type ReaderModel = typeof Model.Type;
@@ -83,6 +84,7 @@ export const initialModel = (flags: ReaderPageFlags): ReaderModel => ({
   ...flags,
   clipboardAccess: ClipboardAccess.Unknown(),
   copyStatuses: {},
+  siteSearch: "",
 });
 
 export const copyStatusOf = (

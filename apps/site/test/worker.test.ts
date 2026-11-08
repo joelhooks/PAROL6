@@ -477,16 +477,16 @@ it.effect(
           "text/markdown"
         );
         expect(markdownResponse.headers.get("link")).toBe(linkHeader);
-        expect(markdown).toBe(markdownDocument("https://ratstack.sh"));
+        expect(markdown).toBe(markdownDocument("https://parol6.build"));
         expect(markdown).toContain("public build wiki for [PAROL6]");
         expect(markdown.indexOf("## Start here")).toBeLessThan(
           markdown.indexOf("## For agents")
         );
         expect(markdown).toContain(
-          "Read https://ratstack.sh/llms.txt and use the PAROL6 build wiki as the\n"
+          "Read https://parol6.build/llms.txt and use the PAROL6 build wiki as the\n"
         );
         expect(markdown).toContain(
-          "claude mcp add --transport http parol6 https://ratstack.sh/mcp"
+          "claude mcp add --transport http parol6 https://parol6.build/mcp"
         );
         expect(markdown).toContain("## Source files");
         expect(markdown).toContain(
@@ -498,7 +498,9 @@ it.effect(
         expect(html).toContain(
           "<title>PAROL6 build: a robot arm, one milestone at a time</title>"
         );
-        expect(html).toContain('<h1 id="parol6-build">PAROL6 build</h1>');
+        expect(html).toContain(
+          '<h1 id="parol6-build-wiki">PAROL6 build wiki</h1>'
+        );
         expect(html.match(/<h1\b/gu)).toHaveLength(1);
         expect(html).toContain("<strong>🦾 PAROL6 build</strong>");
         expect(skillHtml).toContain("<strong>🦾 PAROL6 build</strong>");
@@ -518,7 +520,7 @@ it.effect(
         );
         expect(html).toContain('href="/apple-touch-icon.png"');
         expect(html).toMatch(/<style(?: id="[^"]+")?>/u);
-        expect(html).toMatch(/max-width:\s*80ch/u);
+        expect(html).toMatch(/max-width:\s*var\(--content-width\)/u);
         expect(html).toContain("ui-monospace");
         expect(html).toMatch(/pre\s*\{[^}]*overflow-x:\s*auto;/u);
         expect(html).toMatch(/figure pre[^{]*\{[^}]*font-size:\s*clamp\(/u);
@@ -526,7 +528,7 @@ it.effect(
         expect(html).not.toContain('rel="stylesheet"');
         expect(html).not.toContain("<img");
         expect(html).toMatch(
-          /<meta property="og:image" content="https:\/\/ratstack\.sh\/og\/[\w./-]+\.png\?v=[0-9a-f]+"/u
+          /<meta property="og:image" content="https:\/\/parol6\.build\/og\/[\w./-]+\.png\?v=[0-9a-f]+"/u
         );
         expect(html).toContain(
           '<meta property="og:site_name" content="PAROL6 build"'
@@ -731,7 +733,7 @@ it.effect(
         expect(llms).toContain("## Lore");
         expect(llms).toContain(`[${page.title}](${page.routePath})`);
         expect(llmsFull).toContain(page.bodyMarkdown);
-        expect(sitemap).toContain(`https://ratstack.sh${page.routePath}`);
+        expect(sitemap).toContain(`https://parol6.build${page.routePath}`);
 
         const searchResponse = yield* postMcp(
           handler,
@@ -875,7 +877,7 @@ it.effect(
         expect(page).toContain("<li>Directive:");
         expect(page).not.toMatch(/<table\b/u);
         expect(fullText).toContain(`# ${debt.routePath}`);
-        expect(llmsText("https://ratstack.sh")).toContain(
+        expect(llmsText("https://parol6.build")).toContain(
           `[Lint and type escape ledger (debt.md)](${debt.routePath})`
         );
         expect(publicPaths).toContain(debt.routePath);
@@ -1223,7 +1225,7 @@ it.effect(
         expect(plain.headers.get("content-type")).toContain("text/markdown");
         expect(markdown).toContain("[TMC5160](/lore/m1-bench-it) →");
         expect(markdown).toContain(
-          "> For agents: start with the [agent guide](https://ratstack.sh/llms.txt)."
+          "> For agents: start with the [agent guide](https://parol6.build/llms.txt)."
         );
         expect(html).toContain(
           '<link rel="alternate" type="text/markdown" href="/glossary"'
@@ -1322,7 +1324,7 @@ it.effect("serves agent indexes, cards, sitemap, and robots policy", () =>
       );
 
       const llmsBody = yield* Effect.promise(llms.text.bind(llms));
-      expect(llmsBody).toBe(llmsText("https://ratstack.sh"));
+      expect(llmsBody).toBe(llmsText("https://parol6.build"));
       expect(llmsBody).toContain("## Connect with MCP");
       expect(llmsBody).toContain("Protocol 2026-07-28 is stateless");
       expect(llmsBody).toContain("no `initialize` handshake");
@@ -1356,7 +1358,7 @@ it.effect("serves agent indexes, cards, sitemap, and robots policy", () =>
       const document =
         yield* Schema.decodeUnknownEffect(OpenApiDocument)(openapiBody);
 
-      expect(document.info.title).toBe("ratstack.sh");
+      expect(document.info.title).toBe("parol6.build");
       expect(JSON.stringify(openapiBody)).toContain('"lore"');
       expect(Object.keys(document.paths).toSorted()).toEqual([
         "/api/backlinks",
@@ -1413,13 +1415,13 @@ it.effect(
         expect(canonicalCard.headers.get("content-type")).toContain(
           "application/a2a+json"
         );
-        expect(canonicalBody).toEqual(a2aAgentCard("https://ratstack.sh"));
+        expect(canonicalBody).toEqual(a2aAgentCard("https://parol6.build"));
         expect(legacyBody).toEqual(canonicalBody);
         expect(card.supportedInterfaces).toEqual([
           {
             protocolBinding: "JSONRPC",
             protocolVersion: "1.0",
-            url: "https://ratstack.sh/a2a",
+            url: "https://parol6.build/a2a",
           },
         ]);
         expect(card.skills.map((skill) => skill.id)).toEqual([
@@ -1483,11 +1485,11 @@ it.effect("serves the ARD manifest and honest anonymous auth.md", () =>
       expect(ard.status).toBe(200);
       expect(ard.headers.get("content-type")).toContain("application/json");
       expect(ard.headers.get("access-control-allow-origin")).toBe("*");
-      expect(manifest).toEqual(ardManifest("https://ratstack.sh"));
+      expect(manifest).toEqual(ardManifest("https://parol6.build"));
       expect(manifest.entries).toHaveLength(2);
       expect(
         manifest.entries.every((entry) =>
-          entry.identifier.startsWith("urn:air:ratstack.sh:")
+          entry.identifier.startsWith("urn:air:parol6.build:")
         )
       ).toBe(true);
 
@@ -1775,11 +1777,11 @@ it.effect("explains the required MCP version in plain text", () =>
         )
       );
 
-      const expected = mcpVersionText("https://ratstack.sh");
+      const expected = mcpVersionText("https://parol6.build");
 
       expect(expected).toContain("no initialize handshake");
       expect(expected).toContain("get a session of their own");
-      expect(expected).toContain("https://ratstack.sh/llms.txt");
+      expect(expected).toContain("https://parol6.build/llms.txt");
       expect(getResponse.status).toBe(200);
       expect(getResponse.headers.get("content-type")).toContain("text/plain");
       expect(yield* Effect.promise(getResponse.text.bind(getResponse))).toBe(

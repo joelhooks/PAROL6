@@ -4,7 +4,7 @@ import { expect, it } from "vitest";
 import { acceptsHtml } from "../src/negotiation.js";
 
 const request = (headers: Record<string, string>) =>
-  HttpServerRequest.fromWeb(new Request("https://ratstack.sh/", { headers }));
+  HttpServerRequest.fromWeb(new Request("https://parol6.build/", { headers }));
 
 it("chooses HTML for browsers and preview crawlers and Markdown for agents", () => {
   for (const [headers, html] of [

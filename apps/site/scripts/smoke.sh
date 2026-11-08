@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-base_url="${RATSTACK_BASE_URL:-https://ratstack.sh}"
+base_url="${RATSTACK_BASE_URL:-https://parol6.build}"
 base_url="${base_url%/}"
 tmp_dir="$(mktemp -d)"
 trap 'rm -rf "$tmp_dir"' EXIT

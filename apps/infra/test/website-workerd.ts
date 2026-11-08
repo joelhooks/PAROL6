@@ -30,7 +30,7 @@ export default {
     );
     await Effect.runPromise(Effect.scoped(Effect.gen(function* () {
       const client = yield* RpcClient.make(toRpcGroup([searchContract, readContract]).group).pipe(
-        Effect.provide(RpcClient.layerProtocolHttp({url: "https://pr-40.ratstack.sh/rpc"}).pipe(
+        Effect.provide(RpcClient.layerProtocolHttp({url: "https://pr-40.parol6.build/rpc"}).pipe(
           Layer.provide(RpcSerialization.layerJson),
           Layer.provide(Layer.succeed(HttpClient.HttpClient, httpClient))
         ))

@@ -134,7 +134,7 @@ it.effect(
 
 it.effect("published counts and reference lists agree with the graph", () =>
   Effect.sync(() => {
-    const origin = "https://ratstack.sh";
+    const origin = "https://parol6.build";
 
     for (const page of [...loreSources, ...skillSources, ...lawSources]) {
       const incoming = new Set(

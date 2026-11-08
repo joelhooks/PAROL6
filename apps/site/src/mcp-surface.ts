@@ -27,7 +27,7 @@ const mcpTransport = (
   protocols: typeof modernMcpProtocols | typeof legacyMcpProtocols
 ) =>
   McpServer.layerHttp({
-    allowedOrigins: ["https://ratstack.sh", "http://localhost:1337"],
+    allowedOrigins: ["https://parol6.build", "http://localhost:1337"],
     description:
       "Search, read, and traverse the rat-stack source corpus and lore graph",
     instructions:
@@ -36,7 +36,7 @@ const mcpTransport = (
     path: "/mcp",
     protocols,
     version: "0.2.0",
-    websiteUrl: "https://ratstack.sh/",
+    websiteUrl: "https://parol6.build/",
   }).pipe(Layer.provide(privateMcpTracingLayer));
 
 export const mcpLayer = (

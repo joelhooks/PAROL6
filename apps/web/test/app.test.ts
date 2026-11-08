@@ -6,7 +6,7 @@ import * as Scene from "foldkit/scene";
 import * as Story from "foldkit/story";
 import { fromString } from "foldkit/url";
 
-import { ReadDoc, ReplaceUrl, SearchDocs } from "../src/client/docs/command.js";
+import { ReadDoc, ReplaceUrl } from "../src/client/docs/command.js";
 import { Message } from "../src/client/docs/message.js";
 import { Model, ReadState, SearchState } from "../src/client/docs/model.js";
 import { init, update, view } from "../src/features/app.js";
@@ -14,6 +14,16 @@ import { AppRoute } from "../src/features/route.js";
 
 const home = Model.make({
   generation: 0,
+  index: [
+    {
+      description:
+        "A shared contract exposes the same behavior on every surface.",
+      routePath: "/lore/one-capability-every-surface",
+      terms: ["capability"],
+      text: "Define one contract. Project every surface.",
+      title: "One capability, every surface",
+    },
+  ],
   query: "capability",
   read: ReadState.Idle(),
   route: AppRoute.Search({ q: Option.none() }),
@@ -30,11 +40,6 @@ const document = {
   text: "Define one contract. Project every surface.",
   title: "One capability, every surface",
 } satisfies typeof ReadOutput.Type;
-
-const result = {
-  matches: [{ ...document, excerpt: document.text, score: 1 }],
-  total: 1,
-};
 
 const url = (path: string) =>
   Option.getOrThrow(fromString(`https://example.test${path}`));
@@ -77,19 +82,12 @@ describe("document browser", () => {
   it("search input submits a trimmed query and renders linked results", () => {
     search(
       Scene.type(
-        Scene.role("textbox", { name: "Search the docs" }),
+        Scene.role("textbox", { name: "Search query" }),
         " capability "
       ),
       Scene.click(Scene.role("button", { name: "Search" })),
-      Scene.Command.expectExact(
-        SearchDocs({ generation: 1, query: "capability" }),
-        ReplaceUrl({ url: "/search?q=capability" })
-      ),
+      Scene.Command.expectExact(ReplaceUrl({ url: "/search?q=capability" })),
       Scene.Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-      Scene.Command.resolve(
-        SearchDocs,
-        Message.SucceededSearch({ generation: 1, result })
-      ),
       Scene.expect(Scene.text("1 result")).toExist(),
       Scene.expect(Scene.role("link", { name: document.title })).toHaveAttr(
         "href",
@@ -117,20 +115,6 @@ describe("document browser", () => {
       Scene.expect(Scene.role("link", { name: "← Back to search" })).toHaveAttr(
         "href",
         "/search"
-      )
-    );
-  });
-
-  it("failed search renders an alert instead of results", () => {
-    search(
-      Scene.click(Scene.role("button", { name: "Search" })),
-      Scene.Command.resolve(ReplaceUrl, Message.CompletedNavigate()),
-      Scene.Command.resolve(
-        SearchDocs,
-        Message.FailedSearch({ generation: 1 })
-      ),
-      Scene.expect(Scene.role("alert")).toHaveText(
-        "Search failed. Try again in a moment."
       )
     );
   });

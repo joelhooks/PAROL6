@@ -49,7 +49,7 @@ const makePrivateAuth = () =>
       FeedbackIdentity.layer.pipe(
         Layer.provideMerge(
           d1AuthLayer({
-            baseURL: "https://ratstack.sh",
+            baseURL: "https://parol6.build",
             id: "LearnFeedback",
             secret: yield* secret.text,
           })

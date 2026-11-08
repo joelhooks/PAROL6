@@ -47,8 +47,8 @@ const readerPages = Effect.gen(function* readerPages() {
   }
 
   const origin = Option.isSome(previewCommit)
-    ? Option.getOrElse(previewOrigin, () => "https://ratstack.sh")
-    : "https://ratstack.sh";
+    ? Option.getOrElse(previewOrigin, () => "https://parol6.build")
+    : "https://parol6.build";
 
   const parsedOrigin = yield* Effect.try({
     catch: (cause) =>
@@ -64,11 +64,11 @@ const readerPages = Effect.gen(function* readerPages() {
     parsedOrigin.protocol !== "https:" ||
     parsedOrigin.origin !== origin ||
     (Option.isSome(previewCommit) &&
-      !/^https:\/\/pr-[1-9]\d*\.ratstack\.sh$/u.test(origin))
+      !/^https:\/\/pr-[1-9]\d*\.parol6\.build$/u.test(origin))
   ) {
     return yield* Effect.die(
       new Error(
-        "Reader origin is invalid; use https://pr-<number>.ratstack.sh for a preview"
+        "Reader origin is invalid; use https://pr-<number>.parol6.build for a preview"
       )
     );
   }
@@ -237,7 +237,7 @@ export const finalizeReader = Effect.fn("reader.finalize")(
       if (
         !pages.every(
           (page) =>
-            /^https:\/\/pr-[1-9]\d*\.ratstack\.sh$/u.test(page.origin) &&
+            /^https:\/\/pr-[1-9]\d*\.parol6\.build$/u.test(page.origin) &&
             page.page.metadata.robots === "noindex"
         )
       ) {

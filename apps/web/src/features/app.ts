@@ -1,6 +1,6 @@
 import { Button, Input } from "@foldkit/ui";
 import * as stylex from "@stylexjs/stylex";
-import { Option, Schema } from "effect";
+import { Option } from "effect";
 import { Submodel } from "foldkit";
 import type { Update } from "foldkit";
 import type { Html, HtmlBuilder } from "foldkit/html";
@@ -14,13 +14,13 @@ import {
   ReadDoc,
   ReadLocation,
   ReplaceUrl,
-  SearchDocs,
 } from "../client/docs/command.js";
 import { Message } from "../client/docs/message.js";
 import type { AppMessage } from "../client/docs/message.js";
 import { initialModel, ReadState, SearchState } from "../client/docs/model.js";
 import type { AppModel } from "../client/docs/model.js";
 import type { DocumentQueries } from "../client/docs/queries.js";
+import { searchWiki } from "../client/docs/wiki-search.js";
 import { resultCount, searchCopy } from "./docs-copy.js";
 import { docsStyles } from "./docs.stylex.js";
 import { AppRoute, docsSearchRouter, parseRoute } from "./route.js";
@@ -32,14 +32,11 @@ type DocsReturn = Update.Return<AppModel, AppMessage, DocumentQueries>;
 const className = (style: stylex.StyleXStyles) =>
   stylex.props(style).className ?? "";
 
-const searchFor = (model: AppModel, query: string): DocsReturn => {
-  const generation = model.generation + 1;
-
-  return {
-    commands: [SearchDocs({ generation, query })],
-    model: { ...model, generation, query, search: SearchState.Loading() },
-  };
-};
+const searchFor = (model: AppModel, query: string): AppModel => ({
+  ...model,
+  query,
+  search: SearchState.Loaded({ query, result: searchWiki(model.index, query) }),
+});
 
 const enterRoute = (model: AppModel, route: AppRouteState): DocsReturn => {
   const next = {
@@ -47,9 +44,7 @@ const enterRoute = (model: AppModel, route: AppRouteState): DocsReturn => {
     generation: model.generation + 1,
     read: ReadState.Idle(),
     route,
-    search: Schema.is(SearchState.Loading)(model.search)
-      ? SearchState.Idle()
-      : model.search,
+    search: model.search,
   };
 
   return AppRoute.match<DocsReturn>(route, {
@@ -72,15 +67,13 @@ const enterRoute = (model: AppModel, route: AppRouteState): DocsReturn => {
     Search: ({ q }) => {
       const query = Option.getOrElse(q, () => "").trim();
 
-      return query.length === 0
-        ? { model: next }
-        : searchFor({ ...next, generation: model.generation }, query);
+      return { model: query.length === 0 ? next : searchFor(next, query) };
     },
   });
 };
 
-export const init = (url: Url): DocsReturn =>
-  enterRoute(initialModel, parseRoute(url));
+export const init = (url: Url, model: AppModel = initialModel): DocsReturn =>
+  enterRoute(model, parseRoute(url));
 
 export const boot: DocsReturn = {
   commands: [ReadLocation()],
@@ -109,12 +102,6 @@ export const update = (model: AppModel, message: AppMessage): DocsReturn =>
           ? { ...model, read: ReadState.Failed({ message: error, notFound }) }
           : model,
     }),
-    FailedSearch: ({ generation }) => ({
-      model:
-        generation === model.generation
-          ? { ...model, search: SearchState.Failed() }
-          : model,
-    }),
     SubmittedSearch: () => {
       const query = model.query.trim();
 
@@ -122,14 +109,11 @@ export const update = (model: AppModel, message: AppMessage): DocsReturn =>
         return { model };
       }
 
-      const searched = searchFor(model, query);
-
       return {
         commands: [
-          ...(searched.commands ?? []),
           ReplaceUrl({ url: docsSearchRouter({ q: Option.some(query) }) }),
         ],
-        model: searched.model,
+        model: searchFor(model, query),
       };
     },
     SucceededRead: ({ generation, document }) => ({
@@ -138,19 +122,11 @@ export const update = (model: AppModel, message: AppMessage): DocsReturn =>
           ? { ...model, read: ReadState.Loaded({ document }) }
           : model,
     }),
-    SucceededSearch: ({ generation, result }) => ({
-      model:
-        generation === model.generation
-          ? { ...model, search: SearchState.Loaded({ result }) }
-          : model,
-    }),
     UpdatedQuery: ({ value }) => ({ model: { ...model, query: value } }),
   });
 
 const searchResults = (model: AppModel, h: HtmlBuilder<AppMessage>): Html =>
   SearchState.match<Html>(model.search, {
-    Failed: () =>
-      h.p([h.Role("alert")], ["Search failed. Try again in a moment."]),
     Idle: () => h.p([], ["Matches appear here."]),
     Loaded: ({ result }) =>
       h.div(
@@ -161,13 +137,10 @@ const searchResults = (model: AppModel, h: HtmlBuilder<AppMessage>): Html =>
             [h.Class(className(docsStyles.results))],
             result.matches.map((match) =>
               h.li(
-                [h.Key(match.id), h.Class(className(docsStyles.match))],
+                [h.Key(match.routePath), h.Class(className(docsStyles.match))],
                 [
                   h.h2([], [h.a([h.Href(match.routePath)], [match.title])]),
-                  h.p(
-                    [h.Class(className(docsStyles.meta))],
-                    [`${match.kind} · ${match.routePath}`]
-                  ),
+                  h.p([h.Class(className(docsStyles.meta))], [match.routePath]),
                   h.p([], [match.description]),
                   h.p([], [match.excerpt]),
                 ]
@@ -176,7 +149,6 @@ const searchResults = (model: AppModel, h: HtmlBuilder<AppMessage>): Html =>
           ),
         ]
       ),
-    Loading: () => h.p([], ["Searching the docs…"]),
   });
 
 const searchView = (model: AppModel, h: HtmlBuilder<AppMessage>): Html =>
@@ -197,14 +169,14 @@ const searchView = (model: AppModel, h: HtmlBuilder<AppMessage>): Html =>
         [
           h.label(
             [h.For("docs-query"), h.Class("visually-hidden")],
-            [searchCopy.heading]
+            [searchCopy.queryLabel]
           ),
           Input.view(
             {
               id: "docs-query",
               name: "q",
               onInput: (value) => Message.UpdatedQuery({ value }),
-              placeholder: "Try ‘capability’ or ‘Effect’",
+              placeholder: "Try ‘homing’ or ‘TMC5160’",
               toView: ({ input }) =>
                 h.input([
                   ...input,
@@ -232,11 +204,7 @@ const searchView = (model: AppModel, h: HtmlBuilder<AppMessage>): Html =>
         ]
       ),
       h.section(
-        [
-          h.AriaLabel("Matches"),
-          h.AriaLive("polite"),
-          h.AriaBusy(Schema.is(SearchState.Loading)(model.search)),
-        ],
+        [h.AriaLabel("Matches"), h.AriaLive("polite")],
         [searchResults(model, h)]
       ),
     ]

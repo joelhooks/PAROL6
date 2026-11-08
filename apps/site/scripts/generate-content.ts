@@ -40,6 +40,7 @@ import {
   newsCopy,
 } from "../../web/src/features/cafe/copy.ts";
 import { searchCopy } from "../../web/src/features/docs-copy.ts";
+import { wikiHome, wikiTrailFor } from "../../web/src/features/wiki-nav.ts";
 import { agentNextActions } from "../src/agent-guide.ts";
 import {
   ContentResourceSchema,
@@ -242,6 +243,10 @@ interface DocumentProps {
   readonly breadcrumbHref?: string;
   readonly breadcrumbLabel?: string;
   readonly breadcrumbName?: string;
+  readonly breadcrumbSection?: {
+    readonly href: string;
+    readonly label: string;
+  };
   readonly contentDates?: ReturnType<typeof contentDates>;
   readonly description: string;
   readonly ogImageUrl: string;
@@ -1189,7 +1194,7 @@ const program = Effect.gen(function* generateContent() {
   const searchPageText = [
     `# ${searchCopy.heading}`,
     "",
-    `${searchCopy.intro} Add a query to the URL to open its matches, for example \`/search?q=cartridge\`.`,
+    `${searchCopy.intro} Add a query to the URL to open its matches, for example \`/search?q=homing\`.`,
     "",
     "Search runs in the browser. Agents and scripts call the same capabilities directly:",
     "",
@@ -1886,6 +1891,11 @@ const program = Effect.gen(function* generateContent() {
       heading: "Videos",
       matches: (slug: string) => slug === "videos" || slug.startsWith("video-"),
     },
+    {
+      heading: "Build reference",
+      matches: (slug: string) =>
+        slug === "build-steps" || slug === "parts" || slug === "concepts",
+    },
     { heading: "Reference", matches: () => true },
   ] as const;
 
@@ -1933,24 +1943,112 @@ const program = Effect.gen(function* generateContent() {
       })
       .join("\n\n");
 
-  const homeMarkdownSource = `# PAROL6 build
+  const milestoneRows = [
+    [
+      "m1-bench-it",
+      "M1. Bench it",
+      "Power the board, turn one motor, stop it safely",
+      "Official docs",
+    ],
+    [
+      "m2-one-joint",
+      "M2. One joint end to end",
+      "Build the wrist and measure a commanded move of joint 6",
+      "Official docs",
+    ],
+    [
+      "m3-whole-arm",
+      "M3. The whole arm moves",
+      "Build the rest of the arm, then home, jog and check the witness marks",
+      "Official docs",
+    ],
+    [
+      "m4-pick-and-place",
+      "M4. Pick and place",
+      "Fit a gripper and measure a repeated loop",
+      "Official docs",
+    ],
+    [
+      "m5-touch-the-skiff",
+      "M5. Touch the skiff",
+      "Register the skiff, turn a knob, press a button",
+      "Our design",
+    ],
+    [
+      "m6-patch-a-cable",
+      "M6. Patch a cable",
+      "Insert a patch cable and verify it",
+      "Our design",
+    ],
+    [
+      "m7-play-it",
+      "M7. Play it",
+      "Perform a short written piece",
+      "Our design",
+    ],
+  ] as const;
 
-This is Joel's public build wiki for [PAROL6](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm), an open-source six-axis desktop robot arm from Source Robotics. Joel builds it himself, from a bare control board to an arm that patches cables and turns knobs on a Eurorack skiff. It is written for Joel first, and for anyone building a PAROL6 who wants each step explained, sourced and filmed. Every build fact links to the [official manual](https://docs.source-robotics.com/PAROL-docs/1.1/), and each milestone ends in one video.
+  const milestoneStatusTable = milestoneRows
+    .map(
+      ([slug, title, task, basis], index) =>
+        `- **[${title}](${originToken}/lore/${slug})**: ${task}. ${basis}. Video [planned](${originToken}/lore/video-m${index + 1}).`
+    )
+    .join("\n");
 
-The [milestones](${originToken}/lore/milestones) follow [four-component instructional design](https://www.4cid.org/), the model behind *Ten Steps to Complex Learning*. Each milestone is a whole task: a smaller, complete version of the final job, from the first safe power-on to a short performance. Inside a milestone, the concepts explain why, the official how-to pages are opened at the step that needs them, short drills build the hand skills, and a done check on camera proves the step.
+  const recentChangesList = loreTexts
+    .flatMap((lore) => {
+      const change = lastChanges.get(lore.sourcePath);
+
+      return change === undefined ? [] : [{ change, lore }];
+    })
+    .toSorted(
+      (left, right) =>
+        right.change.date.localeCompare(left.change.date) ||
+        left.lore.title.localeCompare(right.lore.title)
+    )
+    .slice(0, 8)
+    .map(
+      ({ change, lore }) =>
+        `- ${change.date}: [${lore.title}](${originToken}${lore.routePath}), in [${change.short}](${repoUrl}/commit/${change.hash})`
+    )
+    .join("\n");
+
+  const homeMarkdownSource = `# PAROL6 build wiki
+
+Joel's public build wiki for [PAROL6](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm), an open-source six-axis desktop robot arm from Source Robotics. The build runs from a bare control board to an arm that patches cables and turns knobs on a Eurorack skiff. Every build fact links to the [official manual](https://docs.source-robotics.com/PAROL-docs/1.1/).
 
 ## Start here
 
-- [The milestones](${originToken}/lore/milestones): seven stages, M1 to M7.
-- [M1. Bench it](${originToken}/lore/m1-bench-it): power, one motor turning, and a safe stop.
-- [Glossary](${originToken}/glossary): the terms M1 to M3 need, each sourced to an official page.
-- [Sources and licences](${originToken}/lore/sources): the official manual and repository.
-- [Milestone videos](${originToken}/lore/videos): one per milestone, all planned.
+1. [How milestones work](${originToken}/lore/milestones): seven whole tasks, M1 to M7, each with a done check on camera and a video.
+2. [M1. Bench it](${originToken}/lore/m1-bench-it): the first milestone, power, one motor and a safe stop.
+3. [Glossary](${originToken}/glossary): the build's terms, each sourced to an official page.
+4. [Search](${originToken}/search) every page of the wiki.
+
+## Milestone status
+
+Each milestone ends in a done check filmed for its video. No milestone video is recorded yet.
+
+${milestoneStatusTable}
+
+## Browse the wiki
+
+- [Build steps](${originToken}/lore/build-steps): the official how-to pages, milestone by milestone.
+- [Parts](${originToken}/lore/parts): what goes on the bench at each milestone.
+- [Concepts](${originToken}/lore/concepts): the ideas behind each milestone.
+- [Milestone videos](${originToken}/lore/videos): one per milestone.
 - [The skiff target](${originToken}/lore/skiff-target): the synth the arm plays from M5 on.
+- [Sources and licences](${originToken}/lore/sources): the official manual and repository.
+- [All pages](${originToken}/lore).
+
+## Recent changes
+
+${recentChangesList}
+
+The [change log](${originToken}/log) lists every change to the files served here.
 
 ## Honesty markers
 
-**needs_source** marks a claim the official sources do not cover yet. **Our design** marks milestones 5 to 7, which go past the official manual. Both stay visible until a source or a measurement settles them.
+**needs_source** marks a claim the official sources do not cover yet. **Our design** marks milestones 5 to 7, which go past the official manual. **Stub** marks a page that gathers other pages and holds no facts of its own yet. All three stay visible until a source or a measurement settles them.
 
 ## Licences
 
@@ -2058,7 +2156,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
   const authMarkdown = renderAgentPage(
     yield* readText("apps/site/content/auth.md"),
     "/auth.md",
-    "ratstack.sh auth.md"
+    "parol6.build auth.md"
   );
 
   const tokenmaxxImageJpegBase64 = Buffer.from(
@@ -2210,7 +2308,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
   );
 
   const llmsSourceMarkdown = [
-    "# ratstack.sh",
+    "# parol6.build",
     "",
     "Build an app and its cloud infrastructure in one TypeScript program.",
     "",
@@ -2341,7 +2439,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
           discoveryLinks: markdownDiscoveryLinks("/"),
           newsCalloutHtml,
           ogImageUrl: "",
-          origin: "https://ratstack.sh",
+          origin: "https://parol6.build",
           path: "/",
           stylesheet: "",
           title: "",
@@ -2353,7 +2451,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: "ratstack-home.md",
       text: `${homeMarkdownSource}\n${homeMarkdownTemplate}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     },
     {
@@ -2361,7 +2459,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: "ratstack-skills.md",
       text: `${skillIndexSourceMarkdown}\n${skillIndexMarkdown}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     },
     {
@@ -2369,7 +2467,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: "ratstack-lore.md",
       text: `${loreIndexSourceMarkdown}\n${loreIndexMarkdown}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     },
     {
@@ -2377,7 +2475,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: "ratstack-systems.md",
       text: systemsIndexSourceMarkdown.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     },
     ...lawBodies.map(({ spec }) => ({
@@ -2385,7 +2483,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: spec.sourcePath,
       text: `${spec.rawText}\n${spec.text}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     })),
     ...skillBodies.map(({ skill }) => ({
@@ -2393,7 +2491,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: skill.sourcePath,
       text: `${skill.rawText}\n${skill.text}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     })),
     ...loreBodies.map(({ lore }) => ({
@@ -2401,7 +2499,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: lore.sourcePath,
       text: `${lore.rawText}\n${lore.text}\n${lore.sources.map((source) => `<a href="${escapeHtml(source)}">`).join("\n")}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     })),
     {
@@ -2409,7 +2507,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: "no-verify.md",
       text: `${noVerifyMarkdown}\n${noVerifyAgentMarkdown}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     },
     {
@@ -2417,7 +2515,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       sourcePath: "ratstack-llms.md",
       text: `${llmsSourceMarkdown}\n${llmsLoreLinks}`.replaceAll(
         originToken,
-        "https://ratstack.sh"
+        "https://parol6.build"
       ),
     },
   ];
@@ -2591,7 +2689,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
         routePath: page.routePath,
         text: page.text,
         title: titles.get(page.routePath) ?? page.routePath,
-        url: `https://ratstack.sh${page.routePath}`,
+        url: `https://parol6.build${page.routePath}`,
         wovenLinks: page.wovenLinks,
       };
 
@@ -2622,7 +2720,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
       routePath: "/llms-full.txt",
       text: "",
       title: titles.get("/llms-full.txt") ?? "Full agent guide",
-      url: "https://ratstack.sh/llms-full.txt",
+      url: "https://parol6.build/llms-full.txt",
     },
   ];
 
@@ -2641,7 +2739,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
 
   const homeMetadata = {
     description:
-      "The reference for building an app and its cloud as one typed program, with Effect, Alchemy, and a fence that raises the floor.",
+      "Joel's build wiki for the PAROL6 desktop robot arm: seven milestones from a bare control board to an arm that plays a Eurorack skiff, each sourced to the official manual.",
     path: "/",
     title: "PAROL6 build: a robot arm, one milestone at a time",
   } as const;
@@ -2777,8 +2875,8 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
     loreGraphSnapshot.edges
       .filter((edge) => edge.kind === "link")
       .map((edge) => ({
-        from: edge.from.url.slice("https://ratstack.sh".length),
-        to: edge.to.url.slice("https://ratstack.sh".length),
+        from: edge.from.url.slice("https://parol6.build".length),
+        to: edge.to.url.slice("https://parol6.build".length),
       }))
   );
 
@@ -2858,8 +2956,26 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
     skill,
   }));
 
+  const pageMetaHtml = (sourcePath: string, sourceCount: number) => {
+    const change = lastChanges.get(sourcePath);
+
+    const parts = [
+      ...(change === undefined
+        ? []
+        : [
+            `Last updated <time datetime="${change.date}">${change.date}</time>`,
+          ]),
+      sourceCount === 0
+        ? "No sources cited yet"
+        : `<a href="#sources">${sourceCount} ${sourceCount === 1 ? "source" : "sources"}</a>`,
+      '<a href="#linked-from">What links here</a>',
+    ];
+
+    return `<p class="page-meta">${parts.join(" · ")}</p>`;
+  };
+
   const loreBodiesWithFooters = loreBodies.map(({ bodyHtml, lore }) => ({
-    bodyHtml: `${bodyHtml}${pageFooterHtml(lore.routePath, lore.sourcePath)}`,
+    bodyHtml: `${pageMetaHtml(lore.sourcePath, lore.bibliography.length)}${bodyHtml}${pageFooterHtml(lore.routePath, lore.sourcePath)}`,
     lore,
   }));
 
@@ -3034,7 +3150,7 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
     {
       description: tagline,
       routePath: "/",
-      title: "ratstack.sh",
+      title: "parol6.build",
     },
     {
       description: noVerifyMetadata.description,
@@ -3194,8 +3310,26 @@ The [PAROL6 milestones](/lore/milestones) are the build itself.
         const documentHtml = yield* makeDocument(
           bodyHtml,
           {
-            breadcrumbHref: sectionOf(lore.group).href,
-            breadcrumbLabel: sectionOf(lore.group).label,
+            ...Option.match(wikiTrailFor(lore.routePath), {
+              onNone: () => ({
+                breadcrumbHref: sectionOf(lore.group).href,
+                breadcrumbLabel: sectionOf(lore.group).label,
+              }),
+              onSome: ({ section }) =>
+                section.href === lore.routePath
+                  ? {
+                      breadcrumbHref: wikiHome.href,
+                      breadcrumbLabel: wikiHome.label,
+                    }
+                  : {
+                      breadcrumbHref: wikiHome.href,
+                      breadcrumbLabel: wikiHome.label,
+                      breadcrumbSection: {
+                        href: section.href,
+                        label: section.title,
+                      },
+                    },
+            }),
             breadcrumbName: lore.title,
             contentDates: contentDates(lore.rawText, lore.sourcePath),
             description: lore.description,

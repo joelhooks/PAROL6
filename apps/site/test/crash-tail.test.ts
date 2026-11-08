@@ -19,7 +19,7 @@ const trace = {
     request: {
       headers: { "cf-connecting-ip": "203.0.113.7", cookie: "private-cookie" },
       method: "GET",
-      url: "https://ratstack.sh/sitemap.xml?private=private-query",
+      url: "https://parol6.build/sitemap.xml?private=private-query",
     },
   },
   eventTimestamp: 1_791_428_520_000,

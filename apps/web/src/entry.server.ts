@@ -40,7 +40,9 @@ const previewHeaders = Effect.fn("reader.previewHeaders")(
   function* previewHeaders(request: Request) {
     const headers = new Headers();
 
-    if (/^pr-[1-9][0-9]*\.ratstack\.sh$/u.test(new URL(request.url).hostname)) {
+    if (
+      /^pr-[1-9][0-9]*\.parol6\.build$/u.test(new URL(request.url).hostname)
+    ) {
       const bindings = yield* WebsiteBindings;
       const commit = yield* bindings.previewCommit;
 
