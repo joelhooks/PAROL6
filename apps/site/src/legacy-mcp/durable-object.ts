@@ -1,0 +1,51 @@
+import * as Cloudflare from "@alchemy.run/cloudflare";
+import { Flags } from "@rat-stack/core/flags";
+import * as Effect from "effect/Effect";
+import * as Layer from "effect/Layer";
+
+import { liveFlagsLayer } from "../flags.js";
+import { layerWorkerLoader, sandboxLimits } from "../sandbox-loader.js";
+import type { WorkerLoaderBinding } from "../sandbox-worker-loader.js";
+import { workerAssetsLayer } from "../worker-content.js";
+import { legacySessionFetch } from "./session.js";
+import type { StoredSession } from "./session.js";
+
+const SESSION_KEY = "session";
+
+const loadLegacyMcpRuntime = Effect.promise(() => import("./runtime.js"));
+
+export default class LegacyMcp extends Cloudflare.DurableObject<LegacyMcp>()(
+  "LegacyMcp",
+  Effect.gen(function* makeLegacyMcp() {
+    const environment = yield* Cloudflare.WorkerEnvironment;
+
+    // SAFETY: the object shares its Worker's environment. The Worker declares this binding; the object only reads it. This is the one boundary cast.
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- the object shares its Worker's environment, which Alchemy types as a dictionary.
+    const bindings = environment as {
+      readonly CODE_SANDBOX: WorkerLoaderBinding;
+    };
+
+    const state = yield* Cloudflare.DurableObjectState;
+
+    const flags = yield* Flags.pipe(Effect.provide(liveFlagsLayer));
+
+    const { legacyMcpRuntime } = yield* loadLegacyMcpRuntime;
+
+    const forward = yield* legacyMcpRuntime(
+      Layer.merge(
+        layerWorkerLoader(bindings.CODE_SANDBOX, sandboxLimits),
+        workerAssetsLayer
+      ),
+      flags
+    );
+
+    // @effect-diagnostics-next-line returnEffectInGen:off -- Alchemy's DurableObject contract returns the per-instance Effect.
+    return legacySessionFetch({
+      forward,
+      storage: {
+        load: state.storage.get<StoredSession>(SESSION_KEY),
+        save: (stored) => state.storage.put(SESSION_KEY, stored),
+      },
+    });
+  })
+) {}

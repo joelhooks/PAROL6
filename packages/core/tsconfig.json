@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "allowedUnstableApis": [
+          "@effect/platform-node-shared/NodeCrypto",
+          "@effect/platform-node/NodeServices",
+          "@effect/vitest",
+          "effect/Arbitrary",
+          "effect/FileSystem",
+          "effect/Path",
+          "effect/crypto/Digest",
+          "effect/crypto/SecureRandom",
+          "effect/http/HttpClient",
+          "effect/http/HttpClientResponse",
+          "effect/http/HttpServerRequest",
+          "effect/http/HttpServerResponse",
+          "effect/observability/OtlpSerialization",
+          "effect/observability/OtlpTracer",
+          "effect/process/ChildProcess",
+          "effect/process/ChildProcessSpawner"
+        ]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

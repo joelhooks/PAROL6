@@ -1,0 +1,67 @@
+---
+title: Tokenmaxx workshop pipe
+status: active
+---
+
+# Tokenmaxx workshop pipe
+
+## Source of truth
+
+`.brain/data/tokenmaxx/workshop.json` owns the runs, ordered prep, links and `starterPublic`. Joel owns publication decisions. The sibling `schedule.json`, `prep.json` and `links.json` preserve supplied values and order as import receipts, not parallel editable stores. The desk identified the original source as `tmx 96b919f`. The links receipt and canonical links now use `tmx 85f347b`: nine links, adding the Alchemy Domain repository path and docs URL, still draft. Formatting may change whitespace, not values.
+
+The schedule is public even though its original input says draft. The desk confirmed both runs and their times. Prep and links remain drafts. Public answers say `not-yet-published`, and their pages say “Coming soon.”
+
+## Exercise import and publication
+
+Run `pnpm tokenmaxx:sync <starter path>` from the repository root. It reads `exercises/NN-section/NN.N-name/explainer/readme.md` and writes `.brain/resources/tokenmaxx/exercises/<id>.svx`. A new exercise starts as draft. Resync preserves existing frontmatter, including publication status, while replacing the body. Invalid existing frontmatter fails rather than silently losing its status.
+
+The section drops its numeric prefix: `01-awakes` becomes `awakes`. Use a schedule block id as the section to associate exercises with that block. Exercise ids retain their directory names.
+
+Publish an exercise only after review. Flip `prep.status` and `links.status` in `workshop.json` separately. Starter prep items and links use `needs: starterPublic` and stay hidden until `starterPublic` is true. Links also require `public: true`. The two prohibited repository names never become links.
+
+## Isolated runtime
+
+The desk chose an isolated Workshop Worker after the shared Worker exceeded its startup ceiling. `packages/core/src/workshop-contracts.ts` owns its six read-only contracts, exported through `@rat-stack/core/workshop-contracts`. `WorkshopDirectory` supplies their data. The Workshop Worker has public static assets and its own `WorkshopLegacyMcp` session namespace. It has no secrets or access to the main site's data stores.
+
+Cloudflare zone routes send `/tokenmaxx/mcp`, `/tokenmaxx/rpc`, `/tokenmaxx/api/*` and `/tokenmaxx/openapi.json` to Workshop. They take precedence over Mischief's custom domain. The main MCP and RPC catalogs do not expose workshop contracts. The startup gate rejects workshop modules anywhere in Mischief's static or dynamic graph.
+
+Workshop loads `/_content/workshop.json` on demand, validates its generation, and caches only completed reads. Source validation and publication filtering happen before emission. The content build calls the same capabilities to prerender schedule, prep, links, exercise index and published exercise pages on the main site.
+
+The `/tokenmaxx` page and agent guide discover `https://ratstack.sh/tokenmaxx/mcp`. Applications still use the main site's `joinInterest`. The interest form is unchanged. Its Markdown source now comes from a generation-checked public asset before the existing fresh-ticket substitution, so workshop copy does not grow Mischief's startup code.
+
+`currentExercise` takes a run's ISO date and reads Effect Clock. Blocks include their start and exclude their end. Breaks return their block with no exercises. Outside a block, the answer includes the next block start in that run, or null after the run. An unknown run returns not-running with no next start.
+
+## MCP session isolation
+
+The 2025-11-25 flow must survive a change of Worker isolate. Effect 4.1.2 does not offer a sessionless mode for that protocol: `McpProtocol.ts:220` declares it Stateful, `internal/mcpRuntime.ts:573–583` always registers an HTTP session and returns its id, and `McpServer.ts:2705` rejects Stateful protocols in the request-scoped layer. The newer 2026-07-28 flow remains stateless.
+
+`legacy-mcp/routing.ts` owns session selection and forwarding for both endpoints. `legacy-mcp/session.ts` owns replay and the shared Durable Object fetch adapter. Main `/mcp` keeps its existing namespace and behavior. Workshop routes older sessions to `WorkshopLegacyMcp`, never the main toolkit.
+
+Each object stores one initialization body and the allowlisted `accept`, `content-type` and `mcp-protocol-version` headers. The object is the sole writer. Its runtime session id is a derived in-memory copy, rebuilt by replaying initialize and initialized after eviction. It stores no tool arguments or results. Effect also tracks negotiated client capabilities, client info, logging level, resource subscriptions and list-change revision per session (`internal/mcpStatefulRuntime.ts:23–46`). The six read-only tools do not need those mutable features; the protocol runtime still requires the session registration.
+
+Both the front Worker and object use `workshop-mcp-loader.ts` to load `workshop-mcp-runtime.ts` dynamically. HTTP, RPC and OpenAPI retain their original constructors. The lazy MCP sub-router gets its own memo map and the enclosing runtime's scope, so the first request neither registers routes in the parent router nor binds the cache to a request scope. The object's forwarding factory uses `HttpEffect.toWebHandler`, which owns the request scope through completion of a streaming body. The property uses that same production factory.
+
+The deterministic reproduction creates a new runtime after initialize. The next initialized notification returns 404 instead of 202 on the original routes. `workshop-mcp-sessions.test.ts` generates call histories, gives every request a fresh front runtime, and rebuilds the object's runtime from its stored initialization on every forwarded request. It exercises all six tools, modern cold-isolate calls and draft refusal. Dropping session routing makes that property fail at the same notification. A temporary comparison against the original route composition found identical statuses, headers and body bytes for all six HTTP responses, all six RPC responses and OpenAPI.
+
+The first DO wiring measured 900,024 startup bytes, 38,772 above the 861,252 baseline. The bundle analysis includes Alchemy's Durable Object bridge, state, storage, alarm storage and transaction context: 44,423 source bytes before bundling, not a claim about rendered byte attribution. Moving MCP behind the shared loader brought startup below the unchanged 870,000 ceiling. No ceiling was raised.
+
+| Worker | Baseline startup bytes | After startup bytes | Ceiling | After total JavaScript |
+| --- | ---: | ---: | ---: | ---: |
+| Workshop | 861,252 | 731,416 | 870,000 | 903,802 |
+| Mischief | 1,098,871 | 1,098,995 | 1,114,000 | 1,382,500 |
+
+The MCP dynamic entry is 171,356 bytes. The bundle graph identifies it as a dynamic entry, lists only a dynamic incoming edge, and excludes it from the measured startup set. Complete JavaScript remains below the 2,500,000-byte warning threshold. These are bundle measurements, not a deployed startup CPU or routing result.
+
+Expected infrastructure delta: create the `WorkshopLegacyMcp` namespace and binding hosted by Workshop, update Workshop's bundle and migration, and update Mischief's bundle for the shared seam refactor. No resource deletion or replacement is intended. A real plan and deployed cross-isolate probe remain the deploying desk's checks.
+
+Reproduction recipe: build workspace dependencies with `TURBO_CONCURRENCY=2 pnpm turbo run build`; run `pnpm --filter @rat-stack/site exec vitest run test/workshop-mcp-sessions.test.ts test/workshop-worker.test.ts test/legacy-mcp-session.test.ts test/legacy-mcp-routing.test.ts`; measure with `pnpm --filter @rat-stack/site startup:check`; finish with `TURBO_CONCURRENCY=2 pnpm turbo run check test build`.
+
+## Evidence and startup
+
+Fully built main at `ae24f6a` measured 1,113,993 Mischief startup bytes. The shared workshop implementation measured 1,118,745 bytes; lazy handlers reduced that to 1,118,313, still over budget. Isolation plus asset-backed Tokenmaxx Markdown measures 1,100,181. LearnFeedbackAuth stays unchanged at 1,515,481. The complete Workshop Worker, including the shared request-metadata privacy policy, measures 862,284, so its initial shrink-only ceiling is 870,000, the next 10,000-byte boundary. Details live in `apps/site/STARTUP.md`.
+
+The clock property generates blocks, breaks and gaps, then probes every boundary and generated instants through the capability and TestClock. An inclusive-end mutation failed on the first generated run and shrank to a one-second block. Correct code passes.
+
+Publication tests place a draft canary in exercise text, prep and links. They check page sources, assets and capability answers. Sync tests verify draft defaults, body replacement and preservation of published status. The Workshop seam initializes MCP and calls `listExercises` against the production routes and asset adapter: a published exercise returns, the draft is absent, and reading its id fails. The same seam exercises HTTP and RPC.
+
+Run `pnpm turbo run check test build --concurrency=4`. Commit implementation as the bot, refresh `pnpm git-snapshot`, then commit the snapshot separately. The desk runs the infrastructure plan before any deployment; this lane does not plan or deploy.

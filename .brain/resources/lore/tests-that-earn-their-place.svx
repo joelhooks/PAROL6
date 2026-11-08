@@ -1,0 +1,140 @@
+---
+title: "Tests prove behavior through supplied services"
+description: "Supply services through Layers, choose properties or models for domain rules, and reject tests that cannot detect broken behavior."
+plain: "Test only behavior that lacks proof, and state the expected answer without reusing the code under test."
+diagram: |-
+  it.effect(...)
+    │ returns an Effect
+    ▼
+  Effect.provide(layer)
+    │ runs the real code
+    ▼
+  expect(...).toBe(110)
+    fixed answer, not a rerun
+group: idea
+terms:
+  - "tests that earn their place"
+  - "tautological tests"
+prerequisites: ["lore.configuration-is-a-dependency","lore.dependency-injection-is-the-reason-to-choose-effect"]
+sources:
+  - url: https://github.com/Effect-TS/effect/blob/67ba4e46a11ccda0b6761578bfd22c04ae00167d/packages/vitest/src/index.ts
+    title: "Effect contributors. 2026. Effect Vitest integration."
+    publisher: "Effect-TS"
+    note: "it.effect, it.layer, it.prop, and effectful properties expose Effect-aware test execution."
+    accessed: "2026-10-06"
+  - url: https://github.com/Effect-TS/effect/blob/67ba4e46a11ccda0b6761578bfd22c04ae00167d/ai-docs/src/09_testing/10_effect-tests.ts
+    title: "Effect contributors. 2026. Writing Effect tests."
+    publisher: "Effect-TS"
+    note: "TestClock controls Effect time, and effect properties can use Schema-based inputs."
+    accessed: "2026-10-06"
+  - url: https://github.com/Effect-TS/effect/blob/67ba4e46a11ccda0b6761578bfd22c04ae00167d/packages/vitest/test/isolation.test.ts
+    title: "Effect contributors. 2026. Layer isolation tests."
+    publisher: "Effect-TS"
+    note: "Separate it.layer blocks construct isolated service state. A shared block is not a per-test reset."
+    accessed: "2026-10-06"
+  - url: https://github.com/Effect-TS/effect/blob/67ba4e46a11ccda0b6761578bfd22c04ae00167d/packages/effect/src/Arbitrary.ts
+    title: "Effect contributors. 2026. Arbitrary. Effect 4.0.0."
+    publisher: "Effect-TS"
+    note: "Schema-derived generators, generated command arrays, and shrinking support properties and history models."
+    accessed: "2026-10-06"
+  - url: https://github.com/joelhooks/rat-stack/tree/f1e24f7ee9f9b5f4a06574cb8c1646de001e4a3f/packages/core/test
+    title: "rat-stack contributors. 2026. Core behavior tests."
+    publisher: "rat-stack"
+    note: "An independent name-validation property and generated inspection histories exercise domain behavior."
+    accessed: "2026-10-06"
+  - url: https://github.com/joelhooks/rat-stack/blob/65e9465f38092e24486392f22c08f45d61230c20/AGENTS.md
+    title: "rat-stack contributors. 2026. Agent instructions."
+    publisher: "rat-stack"
+    note: "Testing policy rejects tautologies and change detectors, prefers properties/models, and requires planted violations for new properties."
+    accessed: "2026-10-06"
+  - url: https://github.com/kitlangton/effect-solutions/blob/09f82e6c5c928e7232cd32daf04d7c6a830b63f7/packages/website/docs/08-testing.md
+    title: "Langton, Kit. 2026. Testing. Effect Solutions."
+    publisher: "Kit Langton"
+    note: "Topic framing for Effect-aware tests and replaceable services; the property/model standard is rat-stack's policy."
+    accessed: "2026-10-06"
+---
+
+A service is a named interface. A Layer describes how to build a service and supply its dependencies.
+A Scope owns cleanup. A capability is a named action; a projection converts it into an interface.
+
+Name the behavior that lacks proof before adding a test.
+Supply test services through Layers, return an Effect, and let `@effect/vitest` own its execution.
+
+## Test behavior independently of the implementation
+
+A test that repeats the implementation cannot detect the same mistake in both places.
+A snapshot that only records a changed file does not prove a domain rule.
+If the existing suite already covers the reported behavior, fix the cause without adding a duplicate test.
+
+Our projection tests execute the produced CLI command, HTTP route, MCP tool, RPC call, or sandbox call.
+They check results and declared failures. Returning a projection object does not establish correct behavior.
+
+## Run an Effect through supplied services
+
+`it.effect` runs the Effect returned by the test. `it.layer` supplies services and their dependencies to a block of tests.
+The file-inspection integration test uses real platform services and a scoped temporary file:
+
+```ts repo=rat-stack path=packages/core/test/file-inspector.test.ts at=65e9465f38092e24486392f22c08f45d61230c20 lines=5,24-34
+```
+
+Share a Layer when tests need a common expensive resource.
+Do not assume its mutable state resets between tests in the same block.
+Use fresh construction or explicit reset when the behavior needs isolation.
+
+`TestClock` controls Effect time for sleeps and retries. Use it instead of waiting for wall-clock delays in a behavior test.
+Use `it.live` for an integration test that needs live runtime services.
+
+## Choose the smallest proof that fits the rule
+
+- **One interface between components**: An integration example with supplied services
+- **A rule over many inputs**: `it.prop` or `it.effect.prop`
+- **State that depends on earlier actions**: A model checked after generated commands
+- **UI behaviour, timers, and races**: A [Foldkit Scene](/lore/ui-behaviour-is-a-scene)
+
+Generated inputs do not create the assertion. The test still needs an independent statement of correct behavior.
+
+`Arbitrary.schema` derives input generators from Schema.
+Pure properties use `it.prop`; properties returning Effects use `it.effect.prop`.
+The core suite generates names and checks that validation trims them before applying the length rule.
+
+## Keep the assertion independent
+
+The name-validation property checks the length rule after trimming each generated string:
+
+```ts repo=rat-stack path=packages/core/test/join-identity.test.ts at=f1e24f7ee9f9b5f4a06574cb8c1646de001e4a3f lines=101-120
+```
+
+The assertion does not call `ApplicantName` to decide whether a name is valid.
+It states the accepted length directly and checks the trimmed result.
+
+When the sensitive-query test was first written, deleting `token` from the filter did not fail a test that reused that filter.
+An independent sensitive-key property closed the gap.
+[Property-based testing](/lore/property-based-testing) records that planted violation and the smaller counterexample.
+
+## Generate histories when order matters
+
+The inspection lifecycle keeps its first terminal outcome after later commands.
+The model generates action sequences and checks each step:
+
+```ts repo=rat-stack path=packages/core/test/inspect-machine.model.test.ts at=f1e24f7ee9f9b5f4a06574cb8c1646de001e4a3f lines=23-25,214-219
+```
+
+[Model-based testing](/lore/model-based-testing) explains how to check the system against a model after each step.
+[Agents explore, tests remember](/lore/agents-explore-tests-remember) explains how exploration can expose a behavior gap worth making repeatable.
+
+## Common wrong approach
+
+Plant a violation in the behavior it claims to protect. Observe failure, then restore the implementation and observe success.
+
+Do not rewrite the test's expected result to match a broken implementation.
+Keep the counterexample or missing assertion that explains the behavior gap.
+
+## Effect idiom and house rule
+
+- Effect-aware tests supply runtime services, own scopes, and support controlled time.
+- In rat-stack, no manual Effect runtime in tests. Prefer properties and models; prove new properties with planted violations.
+- Live-provider behavior needs separate proof for each cartridge.
+
+See also: [properties](/lore/property-based-testing), [models](/lore/model-based-testing), [scenes](/lore/ui-behaviour-is-a-scene), [exploration](/lore/agents-explore-tests-remember), and [the fence](/lore/the-fence).
+
+Read [why dependency injection matters](/lore/dependency-injection-is-the-reason-to-choose-effect).

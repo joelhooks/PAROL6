@@ -1,0 +1,623 @@
+import { watchActor } from "@rat-stack/capability/actor-watch";
+import type { Verdict } from "@rat-stack/check-harness";
+import {
+  createEffectActor,
+  createEffectLogic,
+  join,
+  setupEffect,
+} from "@xstate/effect";
+import {
+  Clock,
+  Effect,
+  Option,
+  Result,
+  Schedule,
+  Schema,
+  Stream,
+} from "effect";
+import * as HttpClient from "effect/http/HttpClient";
+import * as HttpClientRequest from "effect/http/HttpClientRequest";
+import { types } from "xstate";
+
+export const WatchObservationSchema = Schema.Struct({
+  accept: Schema.String,
+  body: Schema.String,
+  cfRay: Schema.optional(Schema.String),
+  content: Schema.Boolean,
+  incidentId: Schema.optional(Schema.String),
+  observedAt: Schema.Natural,
+  route: Schema.String,
+  status: Schema.Natural,
+});
+
+export type WatchObservation = typeof WatchObservationSchema.Type;
+
+export const WatchEvidenceSchema = Schema.Struct({
+  cycles: Schema.Natural,
+  observations: Schema.Array(WatchObservationSchema),
+  routes: Schema.Array(Schema.String),
+  transportFailure: Schema.optional(
+    Schema.Literals([
+      "persistent-transport-failure",
+      "cycle-unreachable",
+      "transport-blip-ratio",
+    ])
+  ),
+  transportStreaks: Schema.optional(
+    Schema.Record(Schema.String, Schema.Natural)
+  ),
+  unreachableStreak: Schema.optional(Schema.Natural),
+});
+
+export type WatchEvidence = typeof WatchEvidenceSchema.Type;
+
+export class WatchFailed extends Schema.TaggedError<
+  WatchFailed,
+  { readonly brand: unique symbol }
+>()("WatchFailed", {
+  evidence: WatchEvidenceSchema,
+  reason: Schema.Literals([
+    "non-200-or-incomplete-watch",
+    "sitemap-listed-no-routes",
+    "route-coverage-incomplete",
+    "persistent-transport-failure",
+    "cycle-unreachable",
+    "transport-blip-ratio",
+  ]),
+}) {}
+
+export const failureBodyBytes = 4096;
+
+const isUnprintable = (codePoint: number) =>
+  (codePoint < 0x20 && codePoint !== 0x09 && codePoint !== 0x0a) ||
+  (codePoint >= 0x7f && codePoint <= 0x9f);
+
+export const printableBody = (bytes: Uint8Array) =>
+  Array.from(new TextDecoder().decode(bytes), (character) => {
+    const codePoint = character.codePointAt(0) ?? 0;
+
+    return isUnprintable(codePoint)
+      ? `\\u${codePoint.toString(16).padStart(4, "0")}`
+      : character;
+  }).join("");
+
+export const transportFailureCycles = 2;
+
+export const transportBlipRatioLimit = 0.05;
+
+type TransportFailureReason = NonNullable<WatchEvidence["transportFailure"]>;
+
+interface WatchObservationBudget {
+  readonly intervalMs: number;
+  readonly observed: number;
+  readonly probesPerCycle: number;
+  readonly remainingMs: number;
+}
+
+export const maxWatchObservations = ({
+  intervalMs,
+  observed,
+  probesPerCycle,
+  remainingMs,
+}: WatchObservationBudget) => {
+  if (remainingMs <= 0) {
+    return observed;
+  }
+
+  if (intervalMs === 0) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const remainingCycles = Math.max(0, Math.ceil(remainingMs / intervalMs) - 1);
+
+  return observed + remainingCycles * probesPerCycle;
+};
+
+const transportRatioFailure = (
+  observations: readonly WatchObservation[],
+  maxObservations: number
+): TransportFailureReason | undefined => {
+  const transportBlips = observations.filter((row) => row.status === 0).length;
+
+  return transportBlips > maxObservations * transportBlipRatioLimit
+    ? "transport-blip-ratio"
+    : undefined;
+};
+
+const transportCycleFailure = (
+  unreachableStreak: number,
+  transportStreaks: Readonly<Record<string, number>>
+): TransportFailureReason | undefined => {
+  if (unreachableStreak >= transportFailureCycles) {
+    return "cycle-unreachable";
+  }
+
+  if (
+    Object.values(transportStreaks).some(
+      (streak) => streak >= transportFailureCycles
+    )
+  ) {
+    return "persistent-transport-failure";
+  }
+
+  return undefined;
+};
+
+export const nextWatchEvidence = (
+  previous: WatchEvidence,
+  observations: readonly WatchObservation[],
+  maxObservations?: number
+): WatchEvidence => {
+  const transportStreaks = Object.fromEntries(
+    [
+      ...new Set(
+        observations.flatMap((row) => (row.status === 0 ? [row.route] : []))
+      ),
+    ].map((route) => [route, (previous.transportStreaks?.[route] ?? 0) + 1])
+  );
+
+  const unreachableStreak =
+    observations.length > 0 && observations.every((row) => row.status === 0)
+      ? (previous.unreachableStreak ?? 0) + 1
+      : 0;
+
+  const allObservations = [...previous.observations, ...observations];
+
+  const transportFailure =
+    previous.transportFailure ??
+    transportCycleFailure(unreachableStreak, transportStreaks) ??
+    (maxObservations === undefined
+      ? undefined
+      : transportRatioFailure(allObservations, maxObservations));
+
+  return {
+    ...previous,
+    cycles: previous.cycles + 1,
+    observations: allObservations,
+    transportFailure,
+    transportStreaks,
+    unreachableStreak,
+  };
+};
+
+export const watchFailureReason = (evidence: WatchEvidence) => {
+  if (
+    evidence.observations.some((row) => row.status !== 0 && row.status !== 200)
+  ) {
+    return "non-200-or-incomplete-watch";
+  }
+
+  return evidence.transportFailure;
+};
+
+export const watchCompletionFailureReason = (evidence: WatchEvidence) =>
+  watchFailureReason(evidence) ??
+  transportRatioFailure(evidence.observations, evidence.observations.length);
+
+export const fixedWatchRoutes = [
+  { content: true, route: "/" },
+  { content: true, route: "/llms.txt" },
+  { content: true, route: "/sitemap.xml" },
+  { content: true, route: "/auth.md" },
+  { content: true, route: "/lore/effect-basics" },
+  { content: false, route: "/.well-known/mcp.json" },
+] as const;
+
+export const sweepSlice = (
+  routes: readonly string[],
+  cycle: number,
+  sweepCycles: number
+): readonly string[] => {
+  if (routes.length === 0) {
+    return [];
+  }
+
+  const size = Math.ceil(routes.length / sweepCycles);
+  const start = (cycle * size) % routes.length;
+
+  return [...routes, ...routes].slice(
+    start,
+    start + Math.min(size, routes.length)
+  );
+};
+
+export const sitemapRoutes = (
+  baseUrl: string,
+  sitemap: string
+): readonly string[] => {
+  const { origin } = new URL(baseUrl);
+  const fixed = new Set<string>(fixedWatchRoutes.map((row) => row.route));
+  const routes = new Set<string>();
+
+  for (const match of sitemap.matchAll(/<loc>\s*(?<loc>[^<\s]+)\s*<\/loc>/gu)) {
+    const loc = match.groups?.loc;
+    const url = loc === undefined ? undefined : URL.parse(loc);
+
+    if (url !== undefined && url !== null && url.origin === origin) {
+      const route = `${url.pathname}${url.search}`;
+
+      if (!fixed.has(route)) {
+        routes.add(route);
+      }
+    }
+  }
+
+  return [...routes];
+};
+
+const WatchInputSchema = Schema.Struct({
+  baseUrl: Schema.String,
+  deadline: Schema.Natural,
+  intervalMs: Schema.Natural,
+  sweepCycles: Schema.Int.check(Schema.isGreaterThan(0)),
+});
+
+type WatchInput = typeof WatchInputSchema.Type;
+
+const WatchCycleInputSchema = Schema.Struct({
+  ...WatchInputSchema.fields,
+  routes: Schema.Array(Schema.String),
+});
+
+type WatchCycleInput = typeof WatchCycleInputSchema.Type;
+
+interface WatchContext {
+  readonly evidence: WatchEvidence;
+  readonly input: WatchInput;
+}
+
+interface WatchRequest {
+  readonly accept: string;
+  readonly content: boolean;
+  readonly route: string;
+}
+
+export const probeTimeoutMs = 15_000;
+
+const probeRoute = Effect.fn("probeRoute")(function* probeRoute(
+  baseUrl: string,
+  request: WatchRequest
+) {
+  const client = yield* HttpClient.HttpClient;
+  const observedAt = yield* Clock.currentTimeMillis;
+  const separator = request.route.includes("?") ? "&" : "?";
+
+  return yield* Effect.gen(function* readResponse() {
+    const response = yield* client
+      .execute(
+        HttpClientRequest.get(
+          `${baseUrl.replace(/\/$/u, "")}${request.route}${separator}__rat_watch=${observedAt}`
+        ).pipe(HttpClientRequest.setHeader("accept", request.accept))
+      )
+      .pipe(
+        Effect.timeout(probeTimeoutMs),
+        Effect.retry({ schedule: Schedule.exponential(250), times: 2 })
+      );
+
+    const body =
+      response.status === 200
+        ? ""
+        : yield* response.stream.pipe(
+            Stream.flatMap((chunk) => Stream.fromIterable(chunk)),
+            Stream.take(failureBodyBytes),
+            Stream.runCollect,
+            Effect.map((bytes) => printableBody(new Uint8Array(bytes))),
+            Effect.timeout(probeTimeoutMs),
+            Effect.orElseSucceed(() => "body-read-unavailable")
+          );
+
+    const observation = {
+      ...request,
+      body,
+      cfRay: response.headers["cf-ray"],
+      incidentId: response.headers["x-incident-id"],
+      observedAt,
+      status: response.status,
+    } satisfies WatchObservation;
+
+    return { observation, response };
+  }).pipe(
+    Effect.map(({ observation, response }) => ({
+      observation,
+      response: Option.some(response),
+    })),
+    Effect.orElseSucceed(() => ({
+      observation: {
+        ...request,
+        body: "transport-or-body-read-unavailable",
+        observedAt,
+        status: 0,
+      } satisfies WatchObservation,
+      response: Option.none(),
+    }))
+  );
+});
+
+const logFailures = (observations: readonly WatchObservation[]) =>
+  Effect.forEach(
+    observations.filter((row) => row.status !== 200),
+    (observation) =>
+      Effect.logWarning("deploy-watch-first-class-evidence", observation),
+    { discard: true }
+  );
+
+export const discoverWatchRoutes = Effect.fn("discoverWatchRoutes")(
+  function* discoverWatchRoutes(input: WatchInput) {
+    const { observation, response } = yield* probeRoute(input.baseUrl, {
+      accept: "application/xml",
+      content: true,
+      route: "/sitemap.xml",
+    });
+
+    yield* logFailures([observation]);
+
+    if (Option.isNone(response) || observation.status !== 200) {
+      return { observation, routes: [] };
+    }
+
+    const sitemap = yield* response.value.text.pipe(
+      Effect.timeout(probeTimeoutMs),
+      Effect.orElseSucceed(() => "")
+    );
+
+    return { observation, routes: sitemapRoutes(input.baseUrl, sitemap) };
+  },
+  Effect.scoped
+);
+
+export const observeWatchCycle = Effect.fn("observeWatchCycle")(
+  function* observeWatchCycle(input: WatchCycleInput) {
+    const now = yield* Clock.currentTimeMillis;
+
+    if (now >= input.deadline) {
+      return {
+        completedAt: now,
+        finished: true,
+        observations: [],
+        requestCount: 0,
+      };
+    }
+
+    const routes = [
+      ...fixedWatchRoutes,
+      ...input.routes.map((route) => ({ content: true, route })),
+    ];
+
+    const requests = routes.flatMap((route) =>
+      ["*/*", "text/html"].map((accept) => ({ ...route, accept }))
+    );
+
+    const observations = yield* Effect.forEach(
+      requests,
+      (request) =>
+        probeRoute(input.baseUrl, request).pipe(
+          Effect.map((probe) => probe.observation)
+        ),
+      { concurrency: 12 }
+    );
+
+    yield* logFailures(observations);
+
+    return {
+      completedAt: yield* Clock.currentTimeMillis,
+      finished: false,
+      observations,
+      requestCount: requests.length,
+    };
+  },
+  Effect.scoped
+);
+
+const discover = createEffectLogic({
+  effect: ({ input }) => discoverWatchRoutes(input),
+  schemas: { input: WatchInputSchema },
+});
+
+const observe = createEffectLogic({
+  effect: ({ input }) => observeWatchCycle(input),
+  schemas: { input: WatchCycleInputSchema },
+});
+
+const wait = createEffectLogic({
+  effect: ({ input }) =>
+    Effect.gen(function* waitForCycle() {
+      const remaining = Math.max(
+        0,
+        input.deadline - (yield* Clock.currentTimeMillis)
+      );
+
+      yield* Effect.void.pipe(
+        Effect.repeat({
+          schedule: Schedule.spaced(Math.min(input.intervalMs, remaining)),
+          times: 1,
+        })
+      );
+    }),
+  schemas: { input: WatchInputSchema },
+});
+
+export const watchMachine = setupEffect({
+  actors: { discover, observe, wait },
+  schemas: { context: types<WatchContext>(), input: WatchInputSchema },
+}).createMachine({
+  context: ({ input }) => ({
+    evidence: { cycles: 0, observations: [], routes: [] },
+    input,
+  }),
+  initial: "discovering",
+  output: ({ context }) => context.evidence,
+  states: {
+    completed: { type: "final" },
+    discovering: {
+      invoke: {
+        input: ({ context }) => context.input,
+        onDone: ({ context, event }) => ({
+          context: {
+            evidence: {
+              ...context.evidence,
+              observations: [event.output.observation],
+              routes: event.output.routes,
+            },
+          },
+          target: "observing",
+        }),
+        src: "discover",
+      },
+    },
+    failed: { type: "final" },
+    observing: {
+      invoke: {
+        input: ({ context }) => ({
+          ...context.input,
+          routes: sweepSlice(
+            context.evidence.routes,
+            context.evidence.cycles,
+            context.input.sweepCycles
+          ),
+        }),
+        onDone: ({ context, event }) => {
+          const maxObservations = maxWatchObservations({
+            intervalMs: context.input.intervalMs,
+            observed:
+              context.evidence.observations.length +
+              event.output.observations.length,
+            probesPerCycle: event.output.requestCount,
+            remainingMs: context.input.deadline - event.output.completedAt,
+          });
+
+          const evidence = event.output.finished
+            ? context.evidence
+            : nextWatchEvidence(
+                context.evidence,
+                event.output.observations,
+                maxObservations
+              );
+
+          let target = event.output.finished ? "completed" : "waiting";
+
+          if (watchFailureReason(evidence) !== undefined) {
+            target = "failed";
+          }
+
+          return { context: { evidence }, target };
+        },
+        src: "observe",
+      },
+    },
+    waiting: {
+      invoke: {
+        input: ({ context }) => context.input,
+        onDone: { target: "observing" },
+        src: "wait",
+      },
+    },
+  },
+});
+
+export const watchDefaults = { durationMs: 600_000, intervalMs: 10_000 };
+
+export const watchDeployment = Effect.fn("watchDeployment")(
+  function* watchDeployment(
+    baseUrl: string,
+    durationMs?: number,
+    intervalMs?: number
+  ) {
+    const now = yield* Clock.currentTimeMillis;
+    const duration = durationMs ?? watchDefaults.durationMs;
+    const interval = intervalMs ?? watchDefaults.intervalMs;
+
+    const actor = yield* createEffectActor(watchMachine, {
+      input: {
+        baseUrl,
+        deadline: now + duration,
+        intervalMs: interval,
+        sweepCycles: Math.max(
+          1,
+          Math.floor(duration / Math.max(1, interval) / 3)
+        ),
+      },
+    });
+
+    yield* watchActor("watchMachine", actor);
+
+    // @effect-diagnostics-next-line anyUnknownInErrorContext:off -- Unexpected watch actor failures remain defects rather than a passing observation.
+    const evidence = yield* join(actor).pipe(
+      Effect.orDie,
+      Effect.flatMap(Schema.decodeUnknownEffect(WatchEvidenceSchema)),
+      Effect.orDie
+    );
+
+    const failureReason = watchCompletionFailureReason(evidence);
+
+    if (evidence.cycles === 0 || failureReason !== undefined) {
+      return yield* new WatchFailed({
+        evidence,
+        reason: failureReason ?? "non-200-or-incomplete-watch",
+      });
+    }
+
+    if (evidence.routes.length === 0) {
+      return yield* new WatchFailed({
+        evidence,
+        reason: "sitemap-listed-no-routes",
+      });
+    }
+
+    const observed = new Set(
+      evidence.observations
+        .filter((row) => row.status !== 0)
+        .map((row) => row.route)
+    );
+
+    if (evidence.routes.some((route) => !observed.has(route))) {
+      return yield* new WatchFailed({
+        evidence,
+        reason: "route-coverage-incomplete",
+      });
+    }
+
+    return evidence;
+  },
+  Effect.scoped
+);
+
+export const watchVerdict = Effect.fn("watchVerdict")(function* watchVerdict(
+  baseUrl: string
+) {
+  const result = yield* watchDeployment(baseUrl).pipe(Effect.result);
+
+  const evidence = Result.isSuccess(result)
+    ? result.success
+    : result.failure.evidence;
+
+  const failed = Result.isFailure(result);
+
+  const rejected = evidence.observations.flatMap((row, index) =>
+    row.status === 200 ? [] : [{ index, row }]
+  );
+
+  return {
+    check: "post-deploy-watch",
+    control: 1,
+    counts: {
+      cycles: evidence.cycles,
+      nonOk: rejected.filter(({ row }) => row.status !== 0).length,
+      observed: evidence.observations.length,
+      routes: evidence.routes.length,
+      transportBlips: rejected.filter(({ row }) => row.status === 0).length,
+    },
+    observedAt: yield* Clock.currentTimeMillis,
+    provenance: rejected.map(({ index, row }) => ({
+      fetchedAt: row.observedAt,
+      id: `watch:${index}`,
+      source: `${baseUrl}${row.route}`,
+      status: JSON.stringify(row),
+    })),
+    reason: failed
+      ? `WatchFailed:${result.failure.reason}`
+      : "bounded-watch-confirmed",
+    ...(failed
+      ? { exitCode: 2, outcome: "failed", status: "red" }
+      : { exitCode: 0, outcome: "passed", status: "green" }),
+  } satisfies Verdict;
+});

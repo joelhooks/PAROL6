@@ -1,0 +1,146 @@
+{
+  "name": "@rat-stack/core",
+  "version": "0.1.0",
+  "private": true,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./tokenmaxx-workshop": {
+      "types": "./src/tokenmaxx-workshop.ts",
+      "import": "./dist/tokenmaxx-workshop.js",
+      "default": "./dist/tokenmaxx-workshop.js"
+    },
+    "./workshop-contracts": {
+      "types": "./src/workshop-contracts.ts",
+      "import": "./dist/workshop-contracts.js",
+      "default": "./dist/workshop-contracts.js"
+    },
+    "./workshop-directory": {
+      "types": "./src/workshop-directory.ts",
+      "import": "./dist/workshop-directory.js",
+      "default": "./dist/workshop-directory.js"
+    },
+    "./cafe-people": {
+      "types": "./src/cafe-people.ts",
+      "import": "./dist/cafe-people.js",
+      "default": "./dist/cafe-people.js"
+    },
+    "./cafe-directory": {
+      "types": "./src/cafe-directory.ts",
+      "import": "./dist/cafe-directory.js",
+      "default": "./dist/cafe-directory.js"
+    },
+    "./prompts": {
+      "types": "./src/prompts.ts",
+      "import": "./dist/prompts.js",
+      "default": "./dist/prompts.js"
+    },
+    "./flags": {
+      "types": "./src/flags.ts",
+      "import": "./dist/flags.js",
+      "default": "./dist/flags.js"
+    },
+    "./flag-ledger-engine": {
+      "types": "./src/flag-ledger-engine.ts",
+      "import": "./dist/flag-ledger-engine.js",
+      "default": "./dist/flag-ledger-engine.js"
+    },
+    "./flag-control": {
+      "types": "./src/flag-control.ts",
+      "import": "./dist/flag-control.js",
+      "default": "./dist/flag-control.js"
+    },
+    "./flag-write-capabilities": {
+      "types": "./src/flag-write-capabilities.ts",
+      "import": "./dist/flag-write-capabilities.js",
+      "default": "./dist/flag-write-capabilities.js"
+    },
+    "./flag-capabilities": {
+      "types": "./src/flag-capabilities.ts",
+      "import": "./dist/flag-capabilities.js",
+      "default": "./dist/flag-capabilities.js"
+    },
+    "./learn": {
+      "types": "./src/learn.ts",
+      "import": "./dist/learn.js",
+      "default": "./dist/learn.js"
+    },
+    "./contracts": {
+      "types": "./src/contracts.ts",
+      "import": "./dist/contracts.js",
+      "default": "./dist/contracts.js"
+    },
+    "./intake": {
+      "types": "./src/intake.ts",
+      "import": "./dist/intake.js",
+      "default": "./dist/intake.js"
+    },
+    "./join-interest": {
+      "types": "./src/join-interest.ts",
+      "import": "./dist/join-interest.js",
+      "default": "./dist/join-interest.js"
+    },
+    "./event-sink": {
+      "types": "./src/event-sink.ts",
+      "import": "./dist/event-sink.js",
+      "default": "./dist/event-sink.js"
+    },
+    "./events-off": {
+      "types": "./src/events-off.ts",
+      "import": "./dist/events-off.js",
+      "default": "./dist/events-off.js"
+    },
+    "./request-capture": {
+      "types": "./src/request-capture.ts",
+      "import": "./dist/request-capture.js",
+      "default": "./dist/request-capture.js"
+    },
+    "./web-crypto": {
+      "types": "./src/web-crypto.ts",
+      "import": "./dist/web-crypto.js",
+      "default": "./dist/web-crypto.js"
+    },
+    "./request-geo": {
+      "types": "./src/request-geo.ts",
+      "import": "./dist/request-geo.js",
+      "default": "./dist/request-geo.js"
+    },
+    "./interest": {
+      "types": "./src/interest.ts",
+      "import": "./dist/interest.js",
+      "default": "./dist/interest.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict --type-check",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "typecheck:fast": "tsrs --noEmit -p tsconfig.json",
+    "typecheck:parity": "vitest run --config vitest.parity.config.ts",
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json",
+    "check": "pnpm run typecheck",
+    "pretest": "pnpm run --silent build"
+  },
+  "dependencies": {
+    "@effect/platform-node": "4.1.2",
+    "@rat-stack/capability": "workspace:*",
+    "@xstate/effect": "1.0.0-beta.0",
+    "effect": "4.1.2",
+    "xstate": "6.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@effect/vitest": "4.1.2",
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

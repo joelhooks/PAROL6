@@ -1,0 +1,53 @@
+{
+  "name": "@rat-stack/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#backend": {
+      "development": "./src/dev/backend.ts"
+    },
+    "#devtools-overlay": {
+      "development": "./src/dev/client/entry.ts",
+      "default": "./src/client/no-devtools.ts"
+    }
+  },
+  "scripts": {
+    "predev": "pnpm --filter @rat-stack/site generate",
+    "dev": "portless rat-stack vite dev",
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict --type-check",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "typecheck:fast": "tsrs --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "build": "vite build",
+    "check": "pnpm run typecheck"
+  },
+  "dependencies": {
+    "@alchemy.run/cloudflare": "2.0.0-beta.85",
+    "@effect/platform-browser": "4.1.2",
+    "@foldkit/ui": "0.170.0",
+    "@rat-stack/auth": "workspace:*",
+    "@rat-stack/capability": "workspace:*",
+    "@rat-stack/core": "workspace:*",
+    "@rat-stack/devtools": "workspace:*",
+    "@rat-stack/motion": "workspace:*",
+    "@rat-stack/site": "workspace:*",
+    "@stylexjs/stylex": "0.19.1",
+    "alchemy": "2.0.0-beta.85",
+    "effect": "4.1.2",
+    "foldkit": "0.170.0"
+  },
+  "devDependencies": {
+    "@effect/platform-node": "4.1.2",
+    "@effect/vitest": "4.1.2",
+    "@foldkit/devtools": "0.170.0",
+    "@foldkit/markdown": "0.15.0",
+    "@foldkit/vite-plugin": "0.29.0",
+    "@stylexjs/unplugin": "0.19.1",
+    "@types/node": "24.19.2",
+    "jsdom": "30.1.3",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  }
+}

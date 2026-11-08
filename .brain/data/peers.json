@@ -1,0 +1,2610 @@
+[
+  {
+    "repo": "alchemy-run/alchemy",
+    "tier": "S",
+    "reason": "Upstream infrastructure reference; the study cites its RPC and Better Auth patterns.",
+    "versions": {
+      "effect": "4.0.5 (workspace override; catalog ^4.0.5)",
+      "alchemy": "2.0.0-beta.84 (workspace package)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "9f185a395aad8db1f5f03d0655719eae17d93714",
+    "sources": [
+      {
+        "label": "workspace catalog and overrides",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "Alchemy package version",
+        "path": "packages/alchemy/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "MapleTechLabs/maple",
+    "tier": "A",
+    "reason": "Active Oct 27; studied scoped Drizzle, Worker tests, and vendor boundaries.",
+    "versions": {
+      "effect": "4.0.6",
+      "alchemy": "2.0.0-beta.84",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "7edfccb17c3f524f9d793e0a11893fcf0535737e",
+    "sources": [
+      {
+        "label": "root catalogs",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "pingdotgg/t3code",
+    "tier": "A",
+    "reason": "Active Oct 27; studied PlanetScale and Hyperdrive resource wiring.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.80",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[effect-4-reference-projects](effect-4-reference-projects), [same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "278fdce1af7eb821c34ee416c441952df250ac63",
+    "sources": [
+      {
+        "label": "Effect catalog",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "relay infra manifest",
+        "path": "infra/relay/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "smithersai/smithers",
+    "tier": "A",
+    "reason": "Active Oct 27; studied its SQLite-backed D1 test adapter.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.82",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "037e827c7ae4c211be70d3f8c6d1c770025017bd",
+    "sources": [
+      {
+        "label": "root Effect pin",
+        "path": "package.json"
+      },
+      {
+        "label": "infra manifest",
+        "path": "packages/smithers/build/infra/package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "851-labs/tokenmaxxing",
+    "tier": "B",
+    "reason": "Shared Effect and Alchemy catalog pins warrant tailing; no study recorded yet.",
+    "versions": {
+      "effect": "4.0.0-rc.117",
+      "alchemy": "2.0.0-beta.79",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "32aa8c0a41be933603ad5a51f64a5d217aed7694",
+    "sources": [
+      {
+        "label": "root catalogs",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "yielded-dev/agent",
+    "tier": "B",
+    "reason": "Shared Effect and Alchemy catalog pins warrant tailing; no study recorded yet.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.80",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "f6483e6aba6a7c06f146fa656a23e59c1d511b43",
+    "sources": [
+      {
+        "label": "root catalog",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "danieljvdm/effect-cf",
+    "tier": "B",
+    "reason": "Effect packages and Alchemy pipeline tooling warrant tailing; no study recorded yet.",
+    "versions": {
+      "effect": "4.0.6 (locked from ^4.0.6); tooling 4.0.6",
+      "alchemy": "2.0.0-beta.72 (pipeline tooling)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "5fad778640c7175ccf5a569721eb674dfd0ffe4b",
+    "sources": [
+      {
+        "label": "root catalog range",
+        "path": "package.json"
+      },
+      {
+        "label": "locked Effect 4.0.0",
+        "path": "bun.lock"
+      },
+      {
+        "label": "pipeline tooling pins",
+        "path": "scripts/bundle-pipelines/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "Heilonng23/openheard",
+    "tier": "B",
+    "reason": "Its infra package declares both shared lines; no study recorded yet.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "2.0.0-beta.75",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "43768281ebf2b27c44fb91f950f9498e69f3c827",
+    "sources": [
+      {
+        "label": "infra manifest",
+        "path": "packages/infra/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "irfndi/prism-liquidity-agent",
+    "tier": "B",
+    "reason": "Effect and Cloudflare Alchemy manifests warrant tailing; no study recorded yet.",
+    "versions": {
+      "effect": "Root 4.0.0-rc.111; Cloudflare 4.0.0-beta.105; infra 4.0.0-beta.102",
+      "alchemy": "2.0.0-beta.64",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "c9271436931b0ba220bb92d2f2f6eb1f9fbfd64f",
+    "sources": [
+      {
+        "label": "root",
+        "path": "package.json"
+      },
+      {
+        "label": "Cloudflare",
+        "path": "cloudflare/package.json"
+      },
+      {
+        "label": "infra",
+        "path": "cloudflare/infra/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "plannotator/artifact-server",
+    "tier": "B",
+    "reason": "Its Cloudflare deploy package shares Effect and Alchemy; no study recorded yet.",
+    "versions": {
+      "effect": "4.0.0-rc.115",
+      "alchemy": "2.0.0-beta.79",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "5af28ac3e52228e7f1781270ead712148fb583cc",
+    "sources": [
+      {
+        "label": "root",
+        "path": "package.json"
+      },
+      {
+        "label": "Cloudflare deploy",
+        "path": "deploy/cloudflare/package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "yehudacohen/typekro",
+    "tier": "B",
+    "reason": "Its root manifest declares both shared lines; no study recorded yet.",
+    "versions": {
+      "effect": "4.0.0-rc.110",
+      "alchemy": "2.0.0-beta.74",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "Not yet studied",
+    "branch": "master",
+    "commit": "c93e43da652ccda4203c807f4cd8328273b681ce",
+    "sources": [
+      {
+        "label": "root manifest",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "cameronapak/dotflowy",
+    "tier": "C",
+    "reason": "Screened: Better Auth but no Alchemy integration useful to the studied lane.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.12",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "38a29f3ba1279becc107b8091b4f3c94b33a8383",
+    "sources": [
+      {
+        "label": "root manifest",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "Dhravya/radish",
+    "tier": "C",
+    "reason": "Symbol-screened without a relevant client or resource pattern in the recorded study.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "2.0.0-beta.77 (locked from ^2.0.0-beta.77)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "98768e8124ca24ec3f76211daa45290392f6eefa",
+    "sources": [
+      {
+        "label": "root range and pin",
+        "path": "package.json"
+      },
+      {
+        "label": "locked Alchemy beta.77",
+        "path": "bun.lock"
+      }
+    ]
+  },
+  {
+    "repo": "dmmulroy/overseer",
+    "tier": "C",
+    "reason": "Symbol-screened without a relevant client or resource pattern in the recorded study.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "2.0.0-beta.76",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "9810d13bb930144ba92a00bc99401fcb886cb8e7",
+    "sources": [
+      {
+        "label": "root manifest",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "branch": "main",
+    "checked": "2026-10-27",
+    "commit": "4bd8c58c4c644ad43df573c156ecdf8bddedd04d",
+    "firstSeen": "2026-10-01",
+    "reason": "New discovery: its Cloudflare example shares Effect and Alchemy catalogs; not yet studied.",
+    "repo": "humanlayer/fold",
+    "sources": [
+      {
+        "label": "root catalog",
+        "path": "package.json"
+      },
+      {
+        "label": "Cloudflare example",
+        "path": "examples/alchemy-cloudflare/package.json"
+      }
+    ],
+    "studied": "Not yet studied",
+    "tier": "B",
+    "versions": {
+      "alchemy": "2.0.0-beta.80",
+      "effect": "4.0.0",
+      "xstate": "—",
+      "xstateEffect": "—"
+    }
+  },
+  {
+    "repo": "BleedingDev/dx-feature-tracker",
+    "tier": "B",
+    "reason": "Rat-stack-derived cost tracker pins Effect 4, XState 6 and the Effect actor bridge; worth tailing its CLI/MCP seam.",
+    "versions": {
+      "effect": "4.0.0-rc.117",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.59",
+      "xstateEffect": "0.1.0-alpha.2"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "c9c91fc159f77cab19869e24afc590923c73c166",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "statelyai/agent",
+    "tier": "B",
+    "reason": "XState 6 agent control-flow and typed request boundary are relevant; no adoption or focused study recorded.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-beta.0 (development and peer pin)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-11-06",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "next",
+    "commit": "cd6148c01d45a547bed9df5b7601e8a871f9a412",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "readme.md",
+        "path": "readme.md"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "statelyai/schema",
+    "tier": "B",
+    "reason": "Statechart schema conversion on XState 6 is a relevant typed-machine seam; not yet studied.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.25",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "f08e45a242548425e9d2a5a58b868729ee5c9e20",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      }
+    ]
+  },
+  {
+    "repo": "davidkpiano/rivet-xstate",
+    "tier": "B",
+    "reason": "XState 6 pure transitions inside persisted Rivet actors are a relevant durability seam; not yet studied.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.21",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "ee63b77248c99f2cd77a1323516f9d900c4f17cc",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "restatedev/xstate-transitions",
+    "tier": "B",
+    "reason": "XState 6 pure transitions as Restate virtual objects are a relevant replay/durability seam; not yet studied.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.48 (workspace catalog)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "359a47ca8c82deae14f1ef3178469d7a81d6fc53",
+    "sources": [
+      {
+        "label": "packages/xstate-transitions/package.json",
+        "path": "packages/xstate-transitions/package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "julia-script/graph-engineering",
+    "tier": "B",
+    "reason": "Effect 4 CLI and XState 6 runtime for durable engineering workflows share our lifecycle seam; not yet studied.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.50",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "0748374f7816725543b33eff8ba2f808e58b5a25",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/runtime/package.json",
+        "path": "packages/runtime/package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "SandroMaglione/mai-macros",
+    "tier": "B",
+    "reason": "Application-owned machines package pins Effect 4 and XState 6; vendored .repos mirrors are excluded.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.18",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "d2f53266d88d9dd235f8171cfdfbbdede8597739",
+    "sources": [
+      {
+        "label": "apps/mobile/package.json",
+        "path": "apps/mobile/package.json"
+      },
+      {
+        "label": "packages/machines/package.json",
+        "path": "packages/machines/package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "Ernxst/veyor",
+    "tier": "B",
+    "reason": "Typed software-factory workflows share Effect 4 and XState 6 in core; worth tailing, not yet studied.",
+    "versions": {
+      "effect": "4.0.0-beta.103",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.27",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "d547e3f8286b09c9f0464e25c18f0ebee22f1868",
+    "sources": [
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      },
+      {
+        "label": "bun.lock",
+        "path": "bun.lock"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/expanded-cinema",
+    "tier": "B",
+    "reason": "Active melt-01 app pins Effect 4 and XState 6, with Alchemy infra; archived experiment pins are excluded.",
+    "versions": {
+      "effect": "4.0.2",
+      "alchemy": "2.0.0-beta.81",
+      "xstate": "6.0.0-alpha.53",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "dde1941d5cf6617bc6d05145b176d4a0acc32864",
+    "sources": [
+      {
+        "label": "apps/melt-01/package.json",
+        "path": "apps/melt-01/package.json"
+      },
+      {
+        "label": "packages/infra/package.json",
+        "path": "packages/infra/package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "OzakIOne/vitesakuga",
+    "tier": "B",
+    "reason": "TanStack application shares Effect 4, Alchemy 2 and locked XState 6; worth tailing, not yet studied.",
+    "versions": {
+      "effect": "4.0.4",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.65 (locked from ^6.0.0-alpha.65)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Not yet studied",
+    "branch": "master",
+    "commit": "1b422a6441fc9ef8d6d89ccd0a498561c44f9c18",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "oscarmarina/blockquote-web-components",
+    "tier": "C",
+    "reason": "Screened: Web Component controller pins XState 6, but no Effect or server lifecycle seam in inspected manifests.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.65 (locked from ^6.0.0-alpha.65)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Manifest/README screening only",
+    "branch": "main",
+    "commit": "3de41e7a416380c42f6079678b648f9e4ebc5ae0",
+    "sources": [
+      {
+        "label": "packages/controllers/blockquote-controller-xstate/package.json",
+        "path": "packages/controllers/blockquote-controller-xstate/package.json"
+      },
+      {
+        "label": "package-lock.json",
+        "path": "package-lock.json"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "SMILEY4/strategy-game",
+    "tier": "C",
+    "reason": "Screened: browser strategy-game UI pins XState 6; no Effect integration in its webapp manifest.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.49 (locked from ^6.0.0-alpha.49)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Manifest/README screening only",
+    "branch": "develop",
+    "commit": "6df0f9e86a1794b19a85cbe47d2a8a32e3d42409",
+    "sources": [
+      {
+        "label": "webapp/package.json",
+        "path": "webapp/package.json"
+      },
+      {
+        "label": "webapp/package-lock.json",
+        "path": "webapp/package-lock.json"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      }
+    ]
+  },
+  {
+    "repo": "monaxovdulov/tutu-diff-hackaton",
+    "tier": "C",
+    "reason": "Screened: travel-demo UI uses XState 6, but no Effect lifecycle integration in its project manifest.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.40",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-01",
+    "studied": "Manifest/README screening only",
+    "branch": "main",
+    "commit": "62da1ea88a08327f9d0277eb422b10cc44c6eb57",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "README.md",
+        "path": "README.md"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "beep-effect/beep-effect",
+    "tier": "A",
+    "reason": "Active Nov 6; scoped inspector and model-test bridge studied. Catalogs match our Effect and Alchemy pins but retain XState and bridge alphas.",
+    "versions": {
+      "effect": "4.1.2 (catalog)",
+      "alchemy": "2.0.0-beta.85 (catalog)",
+      "xstate": "6.0.0-alpha.73 (catalog)",
+      "xstateEffect": "1.0.0-alpha.12 (catalog)"
+    },
+    "checked": "2026-11-06",
+    "firstSeen": "2026-10-02",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "ff3970ddf0c0848d65830d60af080ad903ed4b6a",
+    "sources": [
+      {
+        "label": "stable Effect and XState catalogs",
+        "path": "package.json"
+      },
+      {
+        "label": "XState driver catalog consumers",
+        "path": "packages/drivers/xstate/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "foldkit/foldkit",
+    "tier": "S",
+    "reason": "UI upstream. Exact Effect peers set the upgrade boundary; devtools shapes and lint ideas already inform our implementation.",
+    "versions": {
+      "effect": "4.0.0 (exact UI and plugin peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "b702a5efbb74bebc056b798b414ddb923a82fbd5",
+    "sources": [
+      {
+        "label": "checked packages/foldkit/package.json",
+        "path": "packages/foldkit/package.json"
+      },
+      {
+        "label": "checked packages/vite-plugin-foldkit/package.json",
+        "path": "packages/vite-plugin-foldkit/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "just-be-dev/cafe-stack",
+    "tier": "S",
+    "reason": "Adopted lifetime guidance, UI tests, and tracing patterns. Provenance records the source snapshot and author license confirmation.",
+    "versions": {
+      "effect": "4.0.4",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-08",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "b1f4451b2ca191048e10cda717f4c31175ad6dc6",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "jonbeckman/solstatus",
+    "tier": "C",
+    "reason": "Screened Website, D1, and auth shapes. Newer pins do not add a stronger pattern than the upstream study.",
+    "versions": {
+      "effect": "4.0.6",
+      "alchemy": "2.0.0-beta.84",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "master",
+    "commit": "1cd47901393001f9da8b3be783bb5e824a6939a5",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "yielded-dev/auth",
+    "tier": "B",
+    "reason": "Composable Effect authentication and Alchemy tooling share the stack lines. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5 (catalog); auth peer ^4.0.3",
+      "alchemy": "2.0.0-beta.80",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "1dd5bbe219733a0f09614c2e3b2520f62bdb421f",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked packages/auth/package.json",
+        "path": "packages/auth/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "Consensys/c0",
+    "tier": "B",
+    "reason": "Cloudflare agent deployment shares Effect and Alchemy. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.100",
+      "alchemy": "2.0.0-beta.67",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "master",
+    "commit": "e7a18101f646b72a4008e6da2a1a507afc8b93d3",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked packages/infra/package.json",
+        "path": "packages/infra/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "krl-gr/upcomputer",
+    "tier": "B",
+    "reason": "Its coding-agent control plane uses an Effect catalog and Alchemy relay. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5 (catalog)",
+      "alchemy": "2.0.0-beta.80",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "7b0a57a4316cc6af0cba4a88b4fa69cee34c02ac",
+    "sources": [
+      {
+        "label": "checked pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "checked infra/relay/package.json",
+        "path": "infra/relay/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "imaimai17468/imaimai-front-templete",
+    "tier": "C",
+    "reason": "Current Effect and Alchemy pins in a frontend template. No closer lifecycle or cartridge pattern identified.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "2.0.0-beta.81",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "befd4d21c2fbf5319dea87beb5ad294ed89e8d31",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "samyakkkk/flow",
+    "tier": "B",
+    "reason": "Agent tooling shares an Effect catalog and Alchemy relay. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.103 (catalog)",
+      "alchemy": "2.0.0-beta.65",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "5d7e942fe32438c09ac3dd137961f4b122e7115f",
+    "sources": [
+      {
+        "label": "checked pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "checked infra/relay/package.json",
+        "path": "infra/relay/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "13kparkin/Pivot",
+    "tier": "C",
+    "reason": "Screened PlanetScale and Hyperdrive wiring. The T3Code study remains the clearer reference for that seam.",
+    "versions": {
+      "effect": "4.0.0-beta.103 (catalog)",
+      "alchemy": "2.0.0-beta.65",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "1887824d1f96ea6b601fffbc283b836967d32a5c",
+    "sources": [
+      {
+        "label": "checked pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "checked infra/relay/package.json",
+        "path": "infra/relay/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "pinebasedev/svelteflare",
+    "tier": "B",
+    "reason": "SvelteKit and Cloudflare tooling shares Effect and Alchemy. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-rc.117",
+      "alchemy": "2.0.0-beta.79",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "a7c56be8e1ea84b37229842191ef935941a96af6",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "every-app/open-seo",
+    "tier": "C",
+    "reason": "Studied auth and database selection. Runtime provider switching remains a rejected pattern for our cartridge boundary.",
+    "versions": {
+      "effect": "4.0.0-beta.93",
+      "alchemy": "2.0.0-beta.61",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "99d9a49c8cb742d54eddd64d09efbc5302f6db89",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "MapleTechLabs/hazel",
+    "tier": "A",
+    "reason": "Active Oct 15; studied Foldkit catalogs and lockfile. Effect 4.0.4 still differs from Foldkit's exact Effect 4.0.0 peers.",
+    "versions": {
+      "effect": "4.0.4 (catalog)",
+      "alchemy": "2.0.0-beta.80 (catalog)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "4fb8080d3c5ae4704ffb37b200f9ff188a0ef865",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked apps/web-foldkit/package.json",
+        "path": "apps/web-foldkit/package.json"
+      },
+      {
+        "label": "checked bun.lock",
+        "path": "bun.lock"
+      }
+    ]
+  },
+  {
+    "repo": "zonko-ai/harbor-sdk",
+    "tier": "E",
+    "reason": "Last commit June 5. Earlier symbol screening found no relevant client or resource pattern for this upgrade.",
+    "versions": {
+      "effect": "4.0.0-beta.66 (tooling catalog); 4.0.0-beta.70 (SDK peer)",
+      "alchemy": "2.0.0-beta.44",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "c832f374480e3b6ff66b1b4158a7513b69861e45",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked packages/sdk/package.json",
+        "path": "packages/sdk/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "elianiva/elianiva.com",
+    "tier": "C",
+    "reason": "Screened its Website stack. The upstream example remains the stronger resource reference despite newer pins.",
+    "versions": {
+      "effect": "4.0.4",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "master",
+    "commit": "a3c6d1c404d8372c81787d281b93af7a4b2154ec",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "deathbyknowledge/gsv",
+    "tier": "B",
+    "reason": "Distributed personal-computer deployment shares Effect and Alchemy. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "49317ad2388c44eb1f774d209217a48f44c3c4cd",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked deployment/package.json",
+        "path": "deployment/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "chr33s/bye",
+    "tier": "B",
+    "reason": "Effect email and calendar packages deploy with Alchemy on Cloudflare. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.2",
+      "alchemy": "2.0.0-beta.81",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "a543bd4b6cdbc263baf095e0299aa0822ed1d346",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "instructa/planr",
+    "tier": "C",
+    "reason": "Earlier symbol screening found no relevant client or resource pattern. Its site deployment keeps older Effect and Alchemy pins.",
+    "versions": {
+      "effect": "4.0.0-beta.98",
+      "alchemy": "2.0.0-beta.63",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-09-23",
+    "studied": "[same-version-repos](same-version-repos)",
+    "branch": "main",
+    "commit": "e27e913ebe19e1106033cff2354535189fb2a883",
+    "sources": [
+      {
+        "label": "checked site/deploy/package.json",
+        "path": "site/deploy/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "pkishorez/monorepo",
+    "tier": "B",
+    "reason": "The current catalog keeps Effect and Alchemy but removes XState and its bridge. The web platform remains relevant; no focused study yet.",
+    "versions": {
+      "effect": "4.0.6 (catalog); platform peer ^4.0.0",
+      "alchemy": "2.0.0-beta.84 (catalog and platform peer)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "b05ad32c969f6f369b364f72eb50b9c42ae26eb0",
+    "sources": [
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "platforms/web-platform/package.json",
+        "path": "platforms/web-platform/package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "Manzanita-Research/frontier-lab-tycoon",
+    "tier": "B",
+    "reason": "A browser tycoon game combines Effect, XState, and the bridge. No focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-rc.118",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.62",
+      "xstateEffect": "0.1.0-alpha.5"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "e121e117b8dab874b044482499e77d2c58d5c2b6",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked packages/flt-mod-cli/package.json",
+        "path": "packages/flt-mod-cli/package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "taucad/tau",
+    "tier": "B",
+    "reason": "The CAD platform uses a shared XState 6 catalog across host and agent packages. No focused pattern study yet.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.59 (catalog)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "132e121e84c02bc9b8c6406e7e7942f7ebced758",
+    "sources": [
+      {
+        "label": "checked pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "statelyai/jevspresso",
+    "tier": "B",
+    "reason": "A public espresso-machine project builds on XState 6. No focused pattern study yet.",
+    "versions": {
+      "effect": "—",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.70 (root pin); ^6.0.0-alpha.70 (library peer)",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-09",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "324b2d4d66d5d702dbf6d27d8b9dd64334c26bdf",
+    "sources": [
+      {
+        "label": "checked package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "checked packages/jev/package.json",
+        "path": "packages/jev/package.json"
+      },
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "sybil-solutions/local-studio",
+    "tier": "B",
+    "reason": "Shared Effect and Alchemy relay pins; no runtime study recorded yet.",
+    "versions": {
+      "effect": "4.0.0-rc.115 (catalog and patched lock)",
+      "alchemy": "2.0.0-beta.79 (patched lock)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-18",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "f65c8af78582f741b62546c93d7c66439f0cd5b1",
+    "sources": [
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "Hebilicious/heb-stack",
+    "tier": "B",
+    "reason": "Studied re-entry and retry in its check machine; older fromEffect API requires migration before reuse.",
+    "versions": {
+      "effect": "4.0.0 (catalog)",
+      "alchemy": "2.0.0-beta.81 (catalog)",
+      "xstate": "6.0.0-alpha.63 (catalog)",
+      "xstateEffect": "0.1.0-alpha.6 (catalog)"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-18",
+    "studied": "[same-version-repos](same-version-repos#xstate-refresh)",
+    "branch": "main",
+    "commit": "e897cc46773367548582ba58a452e25aeaf32aa7",
+    "sources": [
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "packages/primes/package.json",
+        "path": "packages/primes/package.json"
+      },
+      {
+        "label": "packages/primes/src/check-machine.ts",
+        "path": "packages/primes/src/check-machine.ts"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "gjermundgaraba/clankerbox",
+    "tier": "B",
+    "reason": "Rechecked declared createEffectLogic lifecycle actors on bridge alpha.9; generation fencing is relevant, with no adoption here.",
+    "versions": {
+      "effect": "4.0.6 (catalog)",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.70 (catalog)",
+      "xstateEffect": "1.0.0-alpha.9 (catalog)"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-18",
+    "studied": "[same-version-repos](same-version-repos#xstate-refresh)",
+    "branch": "main",
+    "commit": "8fc3aca289e3d507e2fe4271f032a59f190bc5b4",
+    "sources": [
+      {
+        "label": "pnpm-workspace.yaml",
+        "path": "pnpm-workspace.yaml"
+      },
+      {
+        "label": "packages/host/package.json",
+        "path": "packages/host/package.json"
+      },
+      {
+        "label": "packages/host/src/lifecycle.ts",
+        "path": "packages/host/src/lifecycle.ts"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "mshubitidze/pi-cf",
+    "tier": "B",
+    "reason": "Own application manifest and lock share all four families; vendored repos excluded from version evidence.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "2.0.0-beta.81",
+      "xstate": "6.0.0-alpha.65",
+      "xstateEffect": "0.1.0-alpha.7"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-18",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "9f53b6ef87ffdb2debe0e2c2548597e78f736221",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "bun.lock",
+        "path": "bun.lock"
+      }
+    ]
+  },
+  {
+    "repo": "journeyWorker/lute",
+    "tier": "B",
+    "reason": "Studied pure player interaction statechart; useful XState seam, not an Effect actor migration example.",
+    "versions": {
+      "effect": "4.0.2 (player development and peer pin)",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.65",
+      "xstateEffect": "0.1.0-alpha.7"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-18",
+    "studied": "[same-version-repos](same-version-repos#xstate-refresh)",
+    "branch": "main",
+    "commit": "596d19c551e268a0c75d1a6be841ba46a9535ff3",
+    "sources": [
+      {
+        "label": "packages/player/package.json",
+        "path": "packages/player/package.json"
+      },
+      {
+        "label": "packages/player/src/machine/playerMachine.ts",
+        "path": "packages/player/src/machine/playerMachine.ts"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "nexmoe/DayBee",
+    "tier": "B",
+    "reason": "Its web app declares an Effect-native Alchemy asset Worker. Worth following; no new lifecycle pattern adopted.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-20",
+    "studied": "[same-version-repos](same-version-repos#alpha-70-gardener)",
+    "branch": "main",
+    "commit": "8ff28dc916ae73fb1fb746e938e13ee256f868eb",
+    "sources": [
+      {
+        "label": "apps/web/package.json",
+        "path": "apps/web/package.json"
+      },
+      {
+        "label": "apps/web/alchemy.run.ts",
+        "path": "apps/web/alchemy.run.ts"
+      },
+      {
+        "label": "bun.lock",
+        "path": "bun.lock"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "opennookorg/betterwispr",
+    "tier": "B",
+    "reason": "Its frontend infra connects an Effect-native Alchemy server Worker and Vite website. Worth following; no new lifecycle pattern adopted.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "2.0.0-beta.80",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-20",
+    "studied": "[same-version-repos](same-version-repos#alpha-70-gardener)",
+    "branch": "main",
+    "commit": "304335a073a98f7439e5f7b4fbc2c31b810b807e",
+    "sources": [
+      {
+        "label": "betterwispr-frontend/packages/infra/package.json",
+        "path": "betterwispr-frontend/packages/infra/package.json"
+      },
+      {
+        "label": "betterwispr-frontend/packages/infra/alchemy.run.ts",
+        "path": "betterwispr-frontend/packages/infra/alchemy.run.ts"
+      }
+    ]
+  },
+  {
+    "repo": "AltimateAI/altimate-code",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.74 (catalog); 4.0.0-beta.74 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "011b742b1352b513b7fa6de35a6b60950530b62c",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      },
+      {
+        "label": "packages/http-recorder/package.json",
+        "path": "packages/http-recorder/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "ChindanaiNaKub/olmo",
+    "tier": "B",
+    "reason": "Template-derived game packages add application behavior on Effect, Alchemy and the XState bridge; not yet studied.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "bd5c7dd5622e5b7c083f421ac6a25b761f9b7206",
+    "sources": [
+      {
+        "label": "apps/cli/package.json",
+        "path": "apps/cli/package.json"
+      },
+      {
+        "label": "apps/infra/package.json",
+        "path": "apps/infra/package.json"
+      },
+      {
+        "label": "packages/auth/package.json",
+        "path": "packages/auth/package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "EkagraAgarwal/BanyanCode",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.74 (catalog); 4.0.0-beta.74 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "ede86c6bc608534eba035df8cfc02bbb47556203",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/console/core/package.json",
+        "path": "packages/console/core/package.json"
+      },
+      {
+        "label": "packages/http-recorder/package.json",
+        "path": "packages/http-recorder/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "ItsWendell/palot",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.1; ^4.0.0 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "b5f8adcd63384d807ea5f0a0163b8b4b916aa439",
+    "sources": [
+      {
+        "label": "apps/desktop/package.json",
+        "path": "apps/desktop/package.json"
+      },
+      {
+        "label": "packages/opencode-voice-coordinator/package.json",
+        "path": "packages/opencode-voice-coordinator/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "Kilo-Org/kilocode",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "1180b803a1840ae396b70937ef17d409b5a17acf",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/client/package.json",
+        "path": "packages/client/package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "LeXwDeX/GraphAgent",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "eaa3582678361198db65008a2213754bbde4af79",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/client/package.json",
+        "path": "packages/client/package.json"
+      },
+      {
+        "label": "packages/console/core/package.json",
+        "path": "packages/console/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "SeeRay11/OpenFlow",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "dev",
+    "commit": "0723cacdcc3c04f4bf3b3c0e147ff2c872daff83",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/client/package.json",
+        "path": "packages/client/package.json"
+      },
+      {
+        "label": "packages/console/core/package.json",
+        "path": "packages/console/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "TeamWarp/effect-mq",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-rc.111 (catalog); >=4.0.0-rc <5 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "b5898fbae56fe926c28768a5a8ff9ad74f1e57a0",
+    "sources": [
+      {
+        "label": "examples/tour/package.json",
+        "path": "examples/tour/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/effect-mq/package.json",
+        "path": "packages/effect-mq/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "ai4nucleome/BioMaster",
+    "tier": "E",
+    "reason": "Last default-branch commit July 14; inspected manifests expose an older Effect/Drizzle tree with no current pattern identified.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "v2.0-alpha1",
+    "commit": "6f98a63aa1823304403475b1929424ccf9d4ec46",
+    "sources": [
+      {
+        "label": "BioMaster/package.json",
+        "path": "BioMaster/package.json"
+      },
+      {
+        "label": "BioMaster/packages/client/package.json",
+        "path": "BioMaster/packages/client/package.json"
+      },
+      {
+        "label": "BioMaster/packages/console/core/package.json",
+        "path": "BioMaster/packages/console/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "anomalyco/opencode",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.1 (catalog)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "dev",
+    "commit": "54dcd345660ec9416d69fdc89da236b0f82be62e",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "browser-use/browsercode",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "b200643fe0eb93ce5a3aadd4bb21cb6cceb2ed04",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/client/package.json",
+        "path": "packages/client/package.json"
+      },
+      {
+        "label": "packages/console/core/package.json",
+        "path": "packages/console/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "cill-i-am/durable-pi",
+    "tier": "A",
+    "reason": "Active Nov 4; studied local preparation cancellation and deadlines, plus its documented durable boundary. Current manifest retains XState alpha.71 and bridge alpha.10.",
+    "versions": {
+      "effect": "4.1.1",
+      "alchemy": "2.0.0-beta.84",
+      "xstate": "6.0.0-alpha.71",
+      "xstateEffect": "1.0.0-alpha.10"
+    },
+    "checked": "2026-11-06",
+    "firstSeen": "2026-10-27",
+    "studied": "[same-version-repos](same-version-repos#weekly-peers-oct-27)",
+    "branch": "main",
+    "commit": "2b29c599e5b0683f605ac088a8727ba86f10c59c",
+    "sources": [
+      {
+        "label": "docs/decisions/xstate-effect-state-machines.md",
+        "path": "docs/decisions/xstate-effect-state-machines.md"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "tests/lifecycle/preparation.machine.ts",
+        "path": "tests/lifecycle/preparation.machine.ts"
+      }
+    ]
+  },
+  {
+    "repo": "cill-i-am/skills",
+    "tier": "B",
+    "reason": "Current teaching examples declare Effect, Alchemy and the XState bridge; useful to screen, with no application study yet.",
+    "versions": {
+      "effect": "4.0.0; 4.0.2",
+      "alchemy": "2.0.0-beta.81",
+      "xstate": "6.0.0-alpha.64",
+      "xstateEffect": "0.1.0-alpha.6"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "d2771ad28fd6f2bd1d5eb859af0763e2c6d73237",
+    "sources": [
+      {
+        "label": "skills/infrastructure/alchemy/assets/examples/drizzle-monorepo/packages/notes/package.json",
+        "path": "skills/infrastructure/alchemy/assets/examples/drizzle-monorepo/packages/notes/package.json"
+      },
+      {
+        "label": "skills/infrastructure/alchemy/assets/examples/package.json",
+        "path": "skills/infrastructure/alchemy/assets/examples/package.json"
+      },
+      {
+        "label": "skills/stack/effect-v4/examples/package.json",
+        "path": "skills/stack/effect-v4/examples/package.json"
+      },
+      {
+        "label": "skills/stack/xstate-effect/examples/package.json",
+        "path": "skills/stack/xstate-effect/examples/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "cyberful/cyberful-public",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.66 (catalog)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "ec598a6d48580f997cdd00766692493df7390e16",
+    "sources": [
+      {
+        "label": "cyberful/package.json",
+        "path": "cyberful/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "deepagent-ltd/deepagent-code",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.74 (catalog); 4.0.0-beta.74 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "dev",
+    "commit": "87403bac1d4245b1388d18d66e94cefaa1aef591",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      },
+      {
+        "label": "packages/http-recorder/package.json",
+        "path": "packages/http-recorder/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/alchemy-celld",
+    "tier": "B",
+    "reason": "Effect and Alchemy declarations share our stack families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.1; ^4.0.0 (peer)",
+      "alchemy": "2.0.0-beta.81; >=2.0.0-beta.81 <2.0.0-beta.84 (peer)",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "3fa30903a4c5d73032839a304c05b815f6797abe",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/lockjaw",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.65",
+      "xstateEffect": "0.1.0-alpha.7"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "00b51935f77e6d8a75e6917f7a6c856ef57cdd1a",
+    "sources": [
+      {
+        "label": "deploy/celld/package.json",
+        "path": "deploy/celld/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/mischief",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5; 4.0.1",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "c311d376edb9e6d368cbbed37c5d5f70161c4bfc",
+    "sources": [
+      {
+        "label": "apps/cli/package.json",
+        "path": "apps/cli/package.json"
+      },
+      {
+        "label": "apps/infra/package.json",
+        "path": "apps/infra/package.json"
+      },
+      {
+        "label": "apps/model-bridge/package.json",
+        "path": "apps/model-bridge/package.json"
+      },
+      {
+        "label": "apps/worker/bundle/package.json",
+        "path": "apps/worker/bundle/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/peons",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "9270d853eb8249e550708ff1745478bc14693e7c",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/piper",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.81",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "b76efbccf83e1bd37a7fc93f9f4de8878d30d788",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/worker/package.json",
+        "path": "packages/worker/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/potion-calendar",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.69",
+      "xstateEffect": "1.0.0-alpha.8"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "ecc15e370d94aa76f2d82dc6373ebd303a8ea898",
+    "sources": [
+      {
+        "label": "apps/desktop/package.json",
+        "path": "apps/desktop/package.json"
+      },
+      {
+        "label": "apps/infra/package.json",
+        "path": "apps/infra/package.json"
+      },
+      {
+        "label": "packages/database/package.json",
+        "path": "packages/database/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/rat-king",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "6ecb8f272bd761f0357fa099dfc67ccf2ee025a7",
+    "sources": [
+      {
+        "label": "apps/billing-ingress/package.json",
+        "path": "apps/billing-ingress/package.json"
+      },
+      {
+        "label": "apps/claude-sidecar/package.json",
+        "path": "apps/claude-sidecar/package.json"
+      },
+      {
+        "label": "apps/ratking-sh/package.json",
+        "path": "apps/ratking-sh/package.json"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "joelhooks/uncomplect",
+    "tier": "B",
+    "reason": "Effect-backed XState application lifecycles share our actor seam; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "0fe520c71a2a9fb5db1b2ffcf76d93abf27eba44",
+    "sources": [
+      {
+        "label": "apps/infra/package.json",
+        "path": "apps/infra/package.json"
+      },
+      {
+        "label": "packages/deploy/package.json",
+        "path": "packages/deploy/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "letstri/permix",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0 (locked from ^4.0.0); >=3 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "8d4f4575bb9a648b078786cfb00e0bc81f8319e4",
+    "sources": [
+      {
+        "label": "docs/package.json",
+        "path": "docs/package.json"
+      },
+      {
+        "label": "permix/package.json",
+        "path": "permix/package.json"
+      },
+      {
+        "label": "pnpm-lock.yaml",
+        "path": "pnpm-lock.yaml"
+      }
+    ]
+  },
+  {
+    "repo": "longsurf-ai/endo",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "bd7ec037f63d52766af5c80c82b8e185dd8b5380",
+    "sources": [
+      {
+        "label": "app/package.json",
+        "path": "app/package.json"
+      },
+      {
+        "label": "server/package.json",
+        "path": "server/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "longsurf-ai/openchart",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-rc.112",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "41cb846cb6fdc28b40f8c44557283527e5599d1f",
+    "sources": [
+      {
+        "label": "app/package.json",
+        "path": "app/package.json"
+      },
+      {
+        "label": "server/package.json",
+        "path": "server/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "masrurimz/omp-agent-mesh",
+    "tier": "A",
+    "reason": "Active Oct 26; studied declared session actors and synced/unsynced publication states on our three runtime pins.",
+    "versions": {
+      "effect": "4.0.6",
+      "alchemy": "—",
+      "xstate": "6.0.0-alpha.70",
+      "xstateEffect": "1.0.0-alpha.9"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "[same-version-repos](same-version-repos#weekly-peers-oct-27)",
+    "branch": "main",
+    "commit": "9729284b8cc62b6d397da349d332ae5f993d3cbe",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "src/lifecycle/session-machine.ts",
+        "path": "src/lifecycle/session-machine.ts"
+      }
+    ]
+  },
+  {
+    "repo": "nicotsx/zerobyte",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.5 (locked from ^4.0.5)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "b3d6cc271d32309e7fa27227e874266700665dde",
+    "sources": [
+      {
+        "label": "apps/agent/package.json",
+        "path": "apps/agent/package.json"
+      },
+      {
+        "label": "bun.lock",
+        "path": "bun.lock"
+      },
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "repo": "opsydyn/ceirean",
+    "tier": "A",
+    "reason": "Active Oct 24; studied worker readiness, authorization and reconciliation states. Its older bridge requires migration before reuse.",
+    "versions": {
+      "effect": "4.0.5",
+      "alchemy": "2.0.0-beta.83",
+      "xstate": "6.0.0-alpha.64",
+      "xstateEffect": "0.1.0-alpha.6"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "[same-version-repos](same-version-repos#weekly-peers-oct-27)",
+    "branch": "main",
+    "commit": "9a83e0c498589c10f8577efc07abdb10d0a19f3a",
+    "sources": [
+      {
+        "label": "apps/github-ingress/package.json",
+        "path": "apps/github-ingress/package.json"
+      },
+      {
+        "label": "packages/engine/package.json",
+        "path": "packages/engine/package.json"
+      },
+      {
+        "label": "packages/engine/src/worker-lifecycle.ts",
+        "path": "packages/engine/src/worker-lifecycle.ts"
+      },
+      {
+        "label": "packages/infrastructure/package.json",
+        "path": "packages/infrastructure/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "s0ld13rr/pentestcode",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "63e379c5ced8d34bdd904a388dc6e5a547907ec1",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/client/package.json",
+        "path": "packages/client/package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "shobcoder/shob",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0-beta.83 (catalog); 4.0.0-beta.83 (peer)",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "14831ba66b9cfaffb71cbaeb092ab3a11d8268b3",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      },
+      {
+        "label": "packages/core/package.json",
+        "path": "packages/core/package.json"
+      },
+      {
+        "label": "packages/http-recorder/package.json",
+        "path": "packages/http-recorder/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "sigle/sigle",
+    "tier": "B",
+    "reason": "Effect and Drizzle declarations share two dependency families; no focused pattern study yet.",
+    "versions": {
+      "effect": "4.0.0",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "31767a4d8f16e8448f88c3ff9b3d68efb47541c8",
+    "sources": [
+      {
+        "label": "apps/server-v2/package.json",
+        "path": "apps/server-v2/package.json"
+      }
+    ]
+  },
+  {
+    "repo": "zhe-qi/clhoria-template",
+    "tier": "C",
+    "reason": "Screened frontend template manifest; Effect and Drizzle pins add no relevant lifecycle or cartridge pattern for this pass.",
+    "versions": {
+      "effect": "4.0.0-beta.83",
+      "alchemy": "—",
+      "xstate": "—",
+      "xstateEffect": "—"
+    },
+    "checked": "2026-10-27",
+    "firstSeen": "2026-10-27",
+    "studied": "Not yet studied",
+    "branch": "main",
+    "commit": "589f13ef6b294b3ed74646e3595ade644a6dcb47",
+    "sources": [
+      {
+        "label": "package.json",
+        "path": "package.json"
+      }
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "name": "@rat-stack/infra",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict --type-check",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "typecheck:fast": "tsrs --noEmit -p tsconfig.json",
+    "check": "pnpm run typecheck",
+    "test": "vitest run",
+    "plan": "alchemy plan",
+    "deploy": "alchemy deploy",
+    "destroy": "alchemy destroy",
+    "predev": "pnpm --filter @rat-stack/site generate",
+    "dev": "alchemy dev",
+    "logs": "alchemy logs"
+  },
+  "dependencies": {
+    "@alchemy.run/cloudflare": "2.0.0-beta.85",
+    "@alchemy.run/drizzle": "2.0.0-beta.85",
+    "@effect/platform-node": "4.1.2",
+    "@rat-stack/site": "workspace:*",
+    "@rat-stack/turbo-cache": "workspace:*",
+    "alchemy": "2.0.0-beta.85",
+    "effect": "4.1.2"
+  },
+  "devDependencies": {
+    "@effect/vitest": "4.1.2",
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "name": "@rat-stack/learn",
+  "version": "0.1.0",
+  "private": true,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./learner": {
+      "types": "./src/learner.ts",
+      "import": "./dist/learner.js",
+      "default": "./dist/learner.js"
+    },
+    "./capabilities": {
+      "types": "./src/capabilities.ts",
+      "import": "./dist/capabilities.js",
+      "default": "./dist/capabilities.js"
+    },
+    "./feedback-capabilities": {
+      "types": "./src/feedback-capabilities.ts",
+      "import": "./dist/feedback-capabilities.js",
+      "default": "./dist/feedback-capabilities.js"
+    },
+    "./feedback-author": {
+      "types": "./src/feedback-author.ts",
+      "import": "./dist/feedback-author.js",
+      "default": "./dist/feedback-author.js"
+    },
+    "./feedback": {
+      "types": "./src/feedback.ts",
+      "import": "./dist/feedback.js",
+      "default": "./dist/feedback.js"
+    },
+    "./local": {
+      "types": "./src/local.ts",
+      "import": "./dist/local.js",
+      "default": "./dist/local.js"
+    },
+    "./build": {
+      "types": "./src/deck-build.ts",
+      "import": "./src/deck-build.ts",
+      "default": "./src/deck-build.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict --type-check",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "typecheck:fast": "tsrs --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json",
+    "check": "pnpm run typecheck",
+    "pretest": "pnpm run --silent build"
+  },
+  "dependencies": {
+    "@rat-stack/capability": "workspace:*",
+    "@rat-stack/core": "workspace:*",
+    "@xstate/effect": "1.0.0-beta.0",
+    "effect": "4.1.2",
+    "xstate": "6.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@effect/platform-node": "4.1.2",
+    "@effect/vitest": "4.1.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "allowedUnstableApis": [
+          "@effect/vitest",
+          "effect/Arbitrary",
+          "effect/crypto/Digest",
+          "effect/crypto/SecureRandom",
+          "effect/http/HttpServerRequest",
+          "effect/http/HttpServerResponse"
+        ]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}
