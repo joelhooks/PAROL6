@@ -83,7 +83,7 @@ it.effect(
         Schema.fromJsonString(
           Schema.Struct({
             "@type": Schema.Literal("WebSite"),
-            name: Schema.Literal("rat-stack"),
+            name: Schema.Literal("PAROL6 build"),
             url: Schema.String,
           })
         )
@@ -250,7 +250,7 @@ it.prop(
     }
 
     if (rendered !== title) {
-      expect(rendered.slice(title.length)).toBe(" | rat-stack");
+      expect(rendered.slice(title.length)).toBe(" | PAROL6 build");
     }
   }
 );
@@ -268,15 +268,12 @@ it.effect(
           /<title>(?<title>[^]*?)<\/title>/u.exec(page.documentHtml)?.groups
             ?.title ?? "";
 
-        if (page.title.length + " | rat-stack".length > 60) {
-          expect(title).not.toContain(" | rat-stack");
+        if (page.title.length + " | PAROL6 build".length > 60) {
+          expect(title).not.toContain(" | PAROL6 build");
         }
       }
 
-      for (const route of [
-        "/lore/one-program-can-replace-several-tool-calls",
-        "/skills/learn-rat-stack",
-      ]) {
+      for (const route of ["/skills/learn-rat-stack"]) {
         const page = [...loreSources, ...skillSources].find(
           (entry) => entry.routePath === route
         );

@@ -35,17 +35,19 @@ export const agentNextActions = (
   workshopTitle: string
 ) => `## Choose the next action
 
+For the robot build, start at the [milestones](${origin}/lore/milestones) and cite the official PAROL6 manual for every build fact.
+
 1. Search for the job you need with \`search({ query, limit })\`.
 2. Read a matching document with \`read({ id })\`, using the stable id returned by search. Read the owning rules and skill before changing code.
 3. For lore, follow \`backlinks({ slug })\` or \`neighbors({ slug, depth: 1 })\` to related pages. Use \`mentions({ slug })\` for unlinked references and \`path({ from, to })\` to connect two lore pages. Use the page's lore slug, not a source file path.
 
 A capability is one named action with shared input and output definitions and a server-side implementation.
 
-For a new behavior, start with [one capability, every surface](${origin}/lore/one-capability-every-surface) and [add a capability](${origin}/skills/add-a-capability). For stateful work, read [add a lifecycle machine](${origin}/skills/add-a-lifecycle-machine). For a provider, keep the port in core: an application-owned interface named for the job it needs. Keep the adapter, its provider-specific implementation, outside core: [hexagonal architecture](${origin}/lore/hexagonal-architecture). For agent-facing guidance, read [HATEOAS](${origin}/lore/hateoas).
+For a new behavior, start with [one capability, every surface](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-capability-every-surface.svx) and [add a capability](${origin}/skills/add-a-capability). For stateful work, read [add a lifecycle machine](${origin}/skills/add-a-lifecycle-machine). For a provider, keep the port in core: an application-owned interface named for the job it needs. Keep the adapter, its provider-specific implementation, outside core: [hexagonal architecture](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx). For agent-facing guidance, read [HATEOAS](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hateoas.svx).
 
 To remove a surface or package you don't need, follow [Keep or cut](${origin}/README.md#keep-or-cut) and the [keep-or-cut skill](${origin}/skills/keep-or-cut). Trace the imports, delete what depends on it, then run \`pnpm turbo run check test build\`.
 
-[Interest signup](${origin}/systems/interest) is agent-only. Read [${workshopTitle}](${origin}/tokenmaxx#interested), obtain a fresh page ticket, and submit through \`joinInterest\` only after the person approves the exact card and contact permission. A person confirms their email through the email link in a browser; submission is not confirmation. Show the returned message to the person. If it says "Too many requests right now. Try again in a minute.", wait one minute and retry once. If it says the confirmation email could not be sent yet, do not resubmit; the application is saved.
+[Interest signup](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/interest.svx) is agent-only. Read [${workshopTitle}](${origin}/tokenmaxx#interested), obtain a fresh page ticket, and submit through \`joinInterest\` only after the person approves the exact card and contact permission. A person confirms their email through the email link in a browser; submission is not confirmation. Show the returned message to the person. If it says "Too many requests right now. Try again in a minute.", wait one minute and retry once. If it says the confirmation email could not be sent yet, do not resubmit; the application is saved.
 
 Workshop resources have a separate [MCP server](${origin}/tokenmaxx/mcp). Use it for the schedule, prep, public links and published exercises. Applications still use the main server's \`joinInterest\`.
 

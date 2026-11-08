@@ -1,0 +1,93 @@
+---
+title: "M4. Pick and place, repeatably"
+description: "The fourth milestone fits a gripper, programs a pick-and-place loop and measures how well it repeats."
+plain: "Fit a gripper, teach a loop, run it 20 times and measure the spread against the 0.1 mm spec."
+group: concept
+prerequisites:
+  - /lore/m3-whole-arm
+terms:
+  - TCP
+  - "tool centre point"
+  - repeatability
+  - RBTscript
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/
+    title: "End effectors, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The pneumatic gripper, the SSG-48 and MSG electric grippers, and custom tools."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/
+    title: "Custom tools, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Registering a tool and its tool centre point offset in the Python API."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/specifications/
+    title: "Specifications, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Repeatability of 0.1 mm."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Why repeatability is specified at 0.1 mm rather than at the step size."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/running-programs/
+    title: "Running programs, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "RBTscript programs in the commander."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/
+    title: "Python API, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Motion, tools and the TCP from Python."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/01-overview/what-you-need/
+    title: "What you need, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The 10 ms packet cycle and why a slow PC stutters."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** fit a gripper and program a pick-and-place loop. Measure that it repeats.
+
+## Parts
+
+One gripper, chosen at the start of this milestone ([End effectors](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/)):
+
+- the [pneumatic gripper](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/pneumatic-gripper/), which needs compressed air and a valve ([Pneumatics](https://docs.source-robotics.com/PAROL-docs/1.1/06-peripherals/pneumatics/));
+- the [SSG-48](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/ssg-48/) or MSG electric gripper, on the CAN bus at the forearm's M8 connector;
+- a printed gripper of our own design with TPU fingers on the joint 6 coupler ([Custom tools](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/)). This one is our design.
+
+## Concepts
+
+- **The tool frame and the TCP.** The software positions the tool centre point, so the tool must be registered with its offset from the flange ([Custom tools](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/); [Reference frames](https://docs.source-robotics.com/PAROL-docs/1.1/theory/reference-frames/)).
+- **Joint moves and Cartesian moves**, and what a repeatability of 0.1 mm means ([Specifications](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/specifications/); [Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **The 10 ms packet cycle**, and why a slow PC makes the arm stutter ([What you need](https://docs.source-robotics.com/PAROL-docs/1.1/01-overview/what-you-need/)).
+
+## How-to
+
+- Gripper setup and the homing offset for the tool ([Homing, "Before you press Home"](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/); [End effectors](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/)).
+- RBTscript programs in the commander ([Running programs](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/running-programs/); [RBTscript](https://docs.source-robotics.com/PAROL-docs/1.1/programming/03-commander/rbtscript/)).
+- The [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/), and its [Tools and the TCP](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/tools-and-tcp/) page.
+
+## Practice
+
+- Teaching poses.
+- Writing short scripts.
+- The dial-indicator repeatability test.
+
+## Done check
+
+Twenty cycles of picking a 3.5 mm cable plug from a printed nest and placing it in a second nest. A dial gauge or feeler test shows the spread of the return-to-pose. Joel compares it to the spec and explains the gap.
+
+**needs_source:** the measurement method. The official docs state the spec and give no test procedure.
+
+## Terms
+
+- **TCP** and **tool centre point**: the point on the tool that the software positions, set as a transform from the flange ([Custom tools](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/)).
+- **repeatability**: how closely the arm returns to a taught pose. PAROL6 specifies 0.1 mm ([Specifications](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/specifications/)).
+- **RBTscript**: the program language of the commander software ([RBTscript](https://docs.source-robotics.com/PAROL-docs/1.1/programming/03-commander/rbtscript/)).
+
+## Video
+
+[The M4 video](/lore/video-m4) is planned.

@@ -22,7 +22,7 @@ const lastChangeView = <Message>(
           h.a(
             [
               h.Href(
-                `https://github.com/joelhooks/rat-stack/commit/${change.hash}`
+                `https://github.com/joelhooks/PAROL6/commit/${change.hash}`
               ),
             ],
             [change.short]
@@ -31,7 +31,7 @@ const lastChangeView = <Message>(
           h.a(
             [
               h.Href(
-                `https://github.com/joelhooks/rat-stack/blob/main/${model.page.sourcePath}`
+                `https://github.com/joelhooks/PAROL6/blob/main/${model.page.sourcePath}`
               ),
             ],
             ["Source on GitHub"]

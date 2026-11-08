@@ -1,0 +1,35 @@
+---
+title: "M4 video: Pick and place"
+description: "The video for milestone 4 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m4-pick-and-place
+terms:
+  - "M4 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M4. Pick and place](/lore/m4-pick-and-place) once it is published.
+
+## Plan
+
+**Working title:** My robot can pick things up now (and how repeatable is 0.1 mm really?)
+
+Beats:
+
+1. Choosing the gripper.
+2. The TCP explainer.
+3. The first program.
+4. A 20-cycle timelapse.
+5. The measurement.
+6. The result.
+
+**Teaches:** Frames, programming, and accuracy against repeatability.
+
+## Terms
+
+- **M4 video**: the published video for milestone 4.

@@ -14,7 +14,6 @@ export const SiteRoute = Route.defineRouteUnion({
   Lore: {},
   News: {},
   NewsFeed: {},
-  Peers: {},
   Prompts: {},
   Search: {},
   Skills: {},
@@ -41,6 +40,8 @@ export const loreRouter = pipe(
   Route.mapTo(SiteRoute.Lore)
 );
 
+export const lorePagePath = (slug: string) => `${loreRouter()}/${slug}`;
+
 export const promptsRouter = pipe(
   Route.literal("prompts"),
   Route.mapTo(SiteRoute.Prompts)
@@ -64,12 +65,6 @@ export const tokenmaxxRouter = pipe(
 export const changeLogRouter = pipe(
   Route.literal("log"),
   Route.mapTo(SiteRoute.ChangeLog)
-);
-
-export const peersRouter = pipe(
-  Route.literal("resources"),
-  Route.slash(Route.literal("peers")),
-  Route.mapTo(SiteRoute.Peers)
 );
 
 export const agentGuideRouter = pipe(

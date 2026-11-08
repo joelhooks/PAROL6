@@ -10,4 +10,4 @@ Name the behavior gap before adding a test. Prefer properties and generated hist
 
 **Held by:** `add-a-lifecycle-machine`, step 5; `gardener`, step 4; review for mutation evidence.
 
-Use [tests through supplied services](/lore/tests-that-earn-their-place) to choose a seam test, property, or generated history.
+Use [tests through supplied services](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/tests-that-earn-their-place.svx) to choose a seam test, property, or generated history.

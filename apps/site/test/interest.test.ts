@@ -693,12 +693,12 @@ it.effect(
     )
 );
 
-it("keeps the only rat in the nav brand on the workshop page", () => {
+it("keeps the PAROL6 brand as the only nav brand on the workshop page", () => {
   const html = generatedTokenmaxxPage;
   const body = html.slice(html.indexOf("<body"));
 
-  expect(body.match(/🐀/gu)).toHaveLength(1);
-  expect(body).toContain("<strong>🐀 Rat Stack</strong>");
+  expect(body.match(/<a class="brand"/gu)).toHaveLength(1);
+  expect(body).toContain("<strong>🦾 PAROL6 build</strong>");
 });
 
 it.effect("serves the credited screenshot", () =>
@@ -1288,12 +1288,15 @@ it.effect(
           yield* tokenmaxxPage(handler, "text/markdown")
         );
 
+        const upstreamLore =
+          "https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore";
+
         for (const link of [
           "/llms.txt",
-          "/lore/lauren-tan",
-          "/lore/poteto-lauren-tan-2500-prs-dune",
-          "/lore/lauren-tan-skills",
-          "/lore/matt-pocock-skills",
+          `${upstreamLore}/lauren-tan.svx`,
+          `${upstreamLore}/poteto-lauren-tan-2500-prs-dune.svx`,
+          `${upstreamLore}/lauren-tan-skills.svx`,
+          `${upstreamLore}/matt-pocock-skills.svx`,
         ]) {
           expect(markdown).toContain(`](${link})`);
         }

@@ -1,0 +1,34 @@
+---
+title: "M5 video: Touch the skiff"
+description: "The video for milestone 5 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m5-touch-the-skiff
+terms:
+  - "M5 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M5. Touch the skiff](/lore/m5-touch-the-skiff) once it is published.
+
+## Plan
+
+**Working title:** Teaching a robot where my synth is.
+
+Beats:
+
+1. Why frames matter.
+2. The three-point touch-off.
+3. The first knob turn, heard as sound.
+
+**Shots:** A top-down shot to show alignment; an oscilloscope for the CV.
+
+**Teaches:** Frames, registration and compliance.
+
+## Terms
+
+- **M5 video**: the published video for milestone 5.

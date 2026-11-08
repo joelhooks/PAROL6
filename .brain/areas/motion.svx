@@ -51,7 +51,7 @@ The spring takes fixed steps of 1/120 s. It carries the leftover time to the nex
 
 ```
 
-The Foldkit [adapter](/lore/hexagonal-architecture), `@rat-stack/motion/foldkit`, keeps a clock and the named tweens and springs in the Model. A frame is a `TickedFrame` Message. `Motion.advance` steps every spring and moves the clock. The view samples each tween at the clock time.
+The Foldkit [adapter](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx), `@rat-stack/motion/foldkit`, keeps a clock and the named tweens and springs in the Model. A frame is a `TickedFrame` Message. `Motion.advance` steps every spring and moves the clock. The view samples each tween at the clock time.
 
 ```ts repo=rat-stack path=packages/motion/src/foldkit.ts at=5fa5df1543b8122a678722d5465ae65fc8a4bf2d lines=186-202 title="Frames run only while something moves, and the reduced-motion preference arrives as a Message"
 

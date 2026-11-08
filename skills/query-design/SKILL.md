@@ -39,7 +39,7 @@ Consider an illustrative scan of about 9k threads:
 - Paged and batched reads: 2 round trips × 93 pages × about 100 ms ≈ 20 seconds.
 - These are planning inputs. Measure RTT where the caller runs before choosing its budget.
 
-A [capability](/systems/capabilities) call has a constant round-trip budget, independent of result size. State that number and bound its result. A scan costs O(pages), never O(rows). Count transaction control statements and any final empty-page probe too.
+A [capability](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) call has a constant round-trip budget, independent of result size. State that number and bound its result. A scan costs O(pages), never O(rows). Count transaction control statements and any final empty-page probe too.
 
 Done means the store implementation matches a written query plan, and checks detect violations of its statement and access-path budgets.
 
@@ -67,7 +67,7 @@ Measure table sizes and inspect existing indexes. Keep credentials and row conte
 5. **Keep transactions short.** Name the atomic writes or consistent reads that require one. Never wrap an entire scan in a transaction. Keep external I/O outside the transaction.
 6. **State a concurrency bound.** Start production scans with serial pages over one connection. Measure before adding parallelism. Explain the load budget and why more concurrent work helps.
 7. **Show progress on long runs.** Emit phase, completed pages, counts, and elapsed time to stderr. Use counts-only output. Set a measured stall deadline and return a typed failure with phase and completed count.
-8. **Use a store boundary.** A [port](/lore/hexagonal-architecture) declares the operations that callers need. An [adapter](/lore/hexagonal-architecture) implements those operations for a provider. A [Layer](/lore/layers-make-dependencies-explicit) builds services and supplies their construction dependencies. Follow [add-a-store](/skills/add-a-store) for job-shaped operations and adapter Layers. Keep SQL, Drizzle, connection pools, and driver calls inside the adapter. Callers depend on the port.
+8. **Use a store boundary.** A [port](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx) declares the operations that callers need. An [adapter](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx) implements those operations for a provider. A [Layer](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/layers-make-dependencies-explicit.svx) builds services and supplies their construction dependencies. Follow [add-a-store](/skills/add-a-store) for job-shaped operations and adapter Layers. Keep SQL, Drizzle, connection pools, and driver calls inside the adapter. Callers depend on the port.
 
 A result limit bounds returned rows. EXPLAIN evidence must also prove the scanned-work budget. For tenant-scoped MySQL stores, lead the supporting index with the tenant key and preserve that filter throughout paging.
 

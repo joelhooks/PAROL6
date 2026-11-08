@@ -164,7 +164,7 @@ it.effect(
 
         for (const [path, expected, canonical] of [
           ["/index.md", "/index.md", "/"],
-          ["/lore/cartridges.md", "/lore/cartridges.md", "/lore/cartridges"],
+          ["/lore/m1-bench-it.md", "/lore/m1-bench-it.md", "/lore/m1-bench-it"],
           ["/AGENTS.md", "/AGENTS.md.md", "/AGENTS.md"],
         ]) {
           const response = yield* Effect.promise(
@@ -197,15 +197,10 @@ it.effect(
           "public, max-age=14400, s-maxage=31536000, stale-while-revalidate=86400";
 
         for (const [path, accept, policy] of [
-          ["/lore/cartridges", "text/markdown", standard],
+          ["/lore/m1-bench-it", "text/markdown", standard],
           ["/og/home.png", "image/png", standard],
           [
             "/tokenmaxx/four-comma-club.jpg",
-            "image/jpeg",
-            "public, max-age=86400",
-          ],
-          [
-            "/lore/cartridges/snes-sfam-cartridges.jpg",
             "image/jpeg",
             "public, max-age=86400",
           ],
@@ -413,8 +408,8 @@ it.effect("fails visibly without caching when the asset binding misses", () =>
       Effect.gen(function* unavailableStaticContent() {
         for (const path of [
           "/",
-          "/lore/cartridges",
-          "/lore/cartridges.md",
+          "/lore/m1-bench-it",
+          "/lore/m1-bench-it.md",
           "/og/home.png",
           "/favicon.ico",
         ]) {

@@ -18,17 +18,27 @@ const learnNames = localLearnCapabilities.map(
   (capability) => capability.contract.name
 );
 
-const decodePack = Schema.decodeUnknownSync(
+const decodePackJson = Schema.decodeUnknownSync(
   Schema.fromJsonString(
-    Schema.Tuple([
-      Schema.Struct({
-        files: Schema.Array(Schema.Struct({ path: Schema.String })),
-        name: Schema.String,
-        version: Schema.String,
-      }),
+    Schema.Union([
+      Schema.Array(Schema.Unknown),
+      Schema.Record(Schema.String, Schema.Unknown),
     ])
   )
 );
+
+const decodePackEntries = Schema.decodeUnknownSync(
+  Schema.Tuple([
+    Schema.Struct({
+      files: Schema.Array(Schema.Struct({ path: Schema.String })),
+      name: Schema.String,
+      version: Schema.String,
+    }),
+  ])
+);
+
+const decodePack = (stdout: string) =>
+  decodePackEntries(Object.values(decodePackJson(stdout)));
 
 const decodeJsonRpcResponse = Schema.decodeUnknownSync(
   Schema.fromJsonString(

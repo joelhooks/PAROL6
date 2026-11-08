@@ -20,7 +20,7 @@ A read scope is the partition for a flag value and its evidence.
 
 A flag selects behavior through a declared ladder. Each climb needs evidence from the current rung and its exact read scope.
 
-Read [Flags climb on evidence](/lore/flags-climb-on-evidence) and [Feature flags](/systems/flags) first.
+Read [Flags climb on evidence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/flags-climb-on-evidence.svx) and [Feature flags](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/flags.svx) first.
 
 ## 1. Decide whether a flag fits
 
@@ -36,7 +36,7 @@ Use `defineFlag` in core or the child's declaration module.
 
 Declare:
 
-- A stable name and JSON-encoded [value schema](/lore/schemas-define-the-boundary).
+- A stable name and JSON-encoded [value schema](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/schemas-define-the-boundary.svx).
 - The safe `default`, `owner`, `purpose`, and literal `removeBy` date.
 - A nonempty `rungs` tuple. Put the default value first.
 - A unique name and value for each rung.
@@ -65,19 +65,19 @@ A schema mismatch returns `FlagScopeMismatch` with a `repair` field. Readers, ev
 
 ## 4. Compose authority and storage
 
-Mount `flip_feature_flag`, `record_flag_evidence`, and `read_flag_ledger` only on the child's [operator surface](/lore/one-schema-three-surfaces). Public readers and the sandbox remain read-only.
+Mount `flip_feature_flag`, `record_flag_evidence`, and `read_flag_ledger` only on the child's [operator surface](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-schema-three-surfaces.svx). Public readers and the sandbox remain read-only.
 
 Authenticate operator requests in the child's composition before dispatch. Keep token authentication outside `Approval`, because `off` bypasses approval.
 
-Provide the [capability](/systems/capabilities) `Approval` [service](/lore/services-capture-dependencies) at composition. It authorizes the requested role, target, scope, and quoted `approvalRef`. A role field or token name does not grant authority. Climbs above agent need a nonempty approval quote as well as approval.
+Provide the [capability](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) `Approval` [service](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/services-capture-dependencies.svx) at composition. It authorizes the requested role, target, scope, and quoted `approvalRef`. A role field or token name does not grant authority. Climbs above agent need a nonempty approval quote as well as approval.
 
-`flip_feature_flag` calls `implement`'s approval gate for climbs. For `off`, its audited [handler](/systems/capabilities) supplies an always-granted approval implementation. Test this path with a service that denies every other call.
+`flip_feature_flag` calls `implement`'s approval gate for climbs. For `off`, its audited [handler](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) supplies an always-granted approval implementation. Test this path with a service that denies every other call.
 
 Use `cloudflareFlagControlLayer()` from `@rat-stack/flags/cloudflare` for the default ledger. For a child catalog, pass the definition returned by `defineFlagLedger(registry, deployOnly)`. Each flag and scope routes to its own Durable Object. The normal `cloudflareFlagsLayer` reads KV and never calls a Durable Object.
 
 A projection is a copy derived from a committed value.
 
-The DO commits the authoritative value, receipt, and dirty projection marker in one storage transaction. An alarm projects committed values to KV. Failed projections retain their markers. Cloudflare retries a failed alarm six times, starting with two seconds of backoff. After the final failed retry, the [adapter](/lore/hexagonal-architecture) schedules a fresh window at the next exponential backoff step. The operator can also call the internal `redrive` method after recovery. A successful flip means committed, not globally visible.
+The DO commits the authoritative value, receipt, and dirty projection marker in one storage transaction. An alarm projects committed values to KV. Failed projections retain their markers. Cloudflare retries a failed alarm six times, starting with two seconds of backoff. After the final failed retry, the [adapter](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx) schedules a fresh window at the next exponential backoff step. The operator can also call the internal `redrive` method after recovery. A successful flip means committed, not globally visible.
 
 `kvFlagControlLayer(registry, kv)` refuses authoritative flips and evidence writes with `FlagAtomicityRequired` by default. Reads and attempt journals remain available. A composition can accept the weaker guarantee with the typed option `{ authoritativeWrites: "accept-non-atomic-unserialized" }`. Pass it as the third argument. This permits non-atomic writes without cross-isolate serialization; it does not make them safe for competing writers. The memory adapter supplies the same domain behavior for tests.
 

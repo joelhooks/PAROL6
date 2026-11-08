@@ -22,7 +22,7 @@ For workshop tools, connect your agent to [the workshop MCP server](https://rats
 Next actions for an agent helping a person with this page:
 
 - Read [llms.txt](/llms.txt) for the rat-stack agent guide.
-- Read about the person this session honors: [Lauren Tan](/lore/lauren-tan), [her Dune talk](/lore/poteto-lauren-tan-2500-prs-dune), and [her skills](/lore/lauren-tan-skills). Also see [Matt Pocock's skills](/lore/matt-pocock-skills).
+- Read about the person this session honors: [Lauren Tan](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/lauren-tan.svx), [her Dune talk](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/poteto-lauren-tan-2500-prs-dune.svx), and [her skills](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/lauren-tan-skills.svx). Also see [Matt Pocock's skills](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/matt-pocock-skills.svx).
 - If they separately ask for setup help, follow "Before you come" below.
 - To apply, follow the conversation and submission steps below.
 
@@ -154,7 +154,7 @@ The [first workshop](https://youtu.be/uC6slhCTXlA) built one loop: an agent work
 - Loops that wake themselves, wait on real conditions, and keep going across restarts.
 - Durable agent plans on Pi Durable: work runs as a graph, and finished steps never run twice.
 - Judges that check work before it lands.
-- Self-improvement: mistakes on the shipped path become [fences](/lore/the-fence). Stale fences get deleted.
+- Self-improvement: mistakes on the shipped path become [fences](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx). Stale fences get deleted.
 
 The factory needs something to build, so each of us builds a personal cloud inside a Linux container. It's the McGuffin. It also happens to be a place your loops could live afterward.
 
@@ -186,11 +186,11 @@ What each reference piece is for, from the table above and its repo. The person 
 - [Pi](https://github.com/earendil-works/pi-mono): the agent harness. Joel's breadboard: the interactive prototyping and R&D layer. Repo: "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI".
 - [Pi Durable](https://github.com/earendil-works/pi/tree/main/packages/durable): Earendil's experimental package, shipped with Pi 1.0. Its README: "A durable agent harness. Conversations, model turns, tool calls, and your own state are committed to storage before anything is shown." Joel has been exploring it on celld.
 - [pi-until](https://github.com/joelhooks/pi-until): time, meaning watches and recurring wake-ups. Repo: "Session-scoped shell-condition watches that wake Pi when work is ready."
-- [rat-stack](https://github.com/joelhooks/rat-stack): the floor, meaning Effect, Alchemy, and the fence. Read [the fence](/lore/the-fence). Repo: "Agentic TypeScript scaffold: Effect 4, XState 6 + @xstate/effect, Alchemy infra, varlock config, and a fence that makes cheating uncomfortable".
+- [rat-stack](https://github.com/joelhooks/rat-stack): the floor, meaning Effect, Alchemy, and the fence. Read [the fence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx). Repo: "Agentic TypeScript scaffold: Effect 4, XState 6 + @xstate/effect, Alchemy infra, varlock config, and a fence that makes cheating uncomfortable".
 - [mischief](https://github.com/joelhooks/mischief): durable agent plans. Repo: "Durable agent plans: dynamic XState machines stored as data, run in Durable Objects, talking over Rat King." (It is built to run in Durable Objects; today a run executes from the CLI.) Its README says: "Early, and dogfooded daily. Today a run executes from the CLI with a file store … a run survives kills mid-step without redoing finished work. Agent turns run on Pi Durable against a real model, judges gate work, and mail goes out and comes back over Rat King, exactly once across crashes." A plan is a graph of agent work stored as data; stop it, crash it, or pause it and it resumes where it was and never re-runs a finished step.
 - [rat-king](https://github.com/joelhooks/rat-king): the network the plans talk over. Repo: "👑 Rat King: an encrypted, AT Protocol agent network. Pure rat-stack: Effect + Alchemy, deploys to Cloudflare and celld."
-- [Matt Pocock's skills](/lore/matt-pocock-skills): skills to combine and fork.
-- [Lauren Tan's skills](/lore/lauren-tan-skills): memory, orchestration, and verification skills.
+- [Matt Pocock's skills](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/matt-pocock-skills.svx): skills to combine and fork.
+- [Lauren Tan's skills](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/lauren-tan-skills.svx): memory, orchestration, and verification skills.
 
 If the person wants a name for their own rig, help them find one. Ask what their agents actually do together, then name that. Don't reuse the rat. A borrowed metaphor says nothing about how someone works, and the one they reach for is a useful signal on its own: a swarm, one supervisor directing many, or a kitchen with a head chef are three different models of the same problem. Brigade, crew, pack, hive, rookery, warren and orchestra are all unclaimed. </AgentOnly>
 

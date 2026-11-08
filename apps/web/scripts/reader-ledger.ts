@@ -132,16 +132,7 @@ const program = Effect.gen(function* emitReaderLedger() {
 
   const ledger = yield* Schema.decodeUnknownEffect(ReaderRouteLedger)({
     anchorAdditions: [],
-    deliberateChanges: [
-      {
-        location: "/lore/services-capture-dependencies",
-        path: "/lore/services-capture-dependencies/",
-        previewStatus: 307,
-        productionStatus: 404,
-        reason:
-          "Desk accepts the trailing-slash redirect to the bare canonical as an improvement; real-edge qualification at cef413e confirms the bare route returns 200 without Location.",
-      },
-    ],
+    deliberateChanges: [],
     generation: inputs.generation,
     routes: Array.sort(
       [...routes, ...errorRoutes],

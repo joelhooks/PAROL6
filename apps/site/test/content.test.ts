@@ -1,7 +1,6 @@
 import { NodeCrypto, NodeServices } from "@effect/platform-node";
 import { expect, it } from "@effect/vitest";
 import { parseCodeRequest, sourceLines } from "@rat-stack/code-snippets";
-import { CafeNewsItem, sortCafeNewsNewest } from "@rat-stack/core/contracts";
 import { Effect, FileSystem, Layer, Path, Schema, Stream } from "effect";
 import { ChildProcess, ChildProcessSpawner } from "effect/process";
 import { DomUtils, parseDocument } from "htmlparser2";
@@ -65,86 +64,55 @@ import {
   tokenmaxxMarkdown,
 } from "./generated-content.js";
 
-it.effect("links promoted pages to the newest CAFE news headline", () =>
-  Effect.gen(function* newestNewsPointer() {
-    const fs = yield* FileSystem.FileSystem;
+it.effect(
+  "keeps the wiki pages free of links to the parked CAFE surfaces",
+  () =>
+    Effect.sync(() => {
+      const pages = [
+        homeDocumentHtml,
+        loreIndexDocumentHtml,
+        systemsIndexDocumentHtml,
+        skillIndexDocumentHtml,
+        ...loreSources.map((page) => page.documentHtml),
+        ...skillSources.map((page) => page.documentHtml),
+      ];
 
-    const news = yield* Schema.decodeEffect(
-      Schema.fromJsonString(Schema.Array(CafeNewsItem))
-    )(
-      yield* fs.readFileString(
-        new URL("../../../.brain/data/cafe/news.json", import.meta.url).pathname
-      )
-    );
+      for (const page of pages) {
+        const document = parseDocument(page);
 
-    const newest = sortCafeNewsNewest(news).at(0);
-    expect(newest).toBeDefined();
+        expect(
+          DomUtils.getElementsByTagName("aside", document.children).filter(
+            (element) => element.attribs.class === "news-callout"
+          )
+        ).toHaveLength(0);
 
-    const pages = [
-      homeDocumentHtml,
-      loreIndexDocumentHtml,
-      systemsIndexDocumentHtml,
-      skillIndexDocumentHtml,
-      ...loreSources.map((page) => page.documentHtml),
-      ...skillSources.map((page) => page.documentHtml),
-    ];
+        const nav = DomUtils.getElementsByTagName(
+          "nav",
+          document.children
+        ).find(
+          (element) => element.attribs["aria-label"] === "Primary navigation"
+        );
 
-    for (const page of pages) {
-      const document = parseDocument(page);
+        const navTargets = DomUtils.getElementsByTagName(
+          "a",
+          nav?.children ?? []
+        ).map((link) => link.attribs.href);
 
-      const callouts = DomUtils.getElementsByTagName(
-        "aside",
-        document.children
-      ).filter((element) => element.attribs.class === "news-callout");
+        expect(navTargets).toContain("/lore/milestones");
+        expect(navTargets).not.toContain("/news");
+        expect(navTargets).not.toContain("/all-stars");
+      }
 
-      expect(callouts).toHaveLength(1);
-
-      const links = DomUtils.getElementsByTagName(
-        "a",
-        callouts.flatMap((element) => element.children)
-      );
-
-      expect(
-        links.map((link) => ({
-          href: link.attribs.href,
-          title: DomUtils.textContent(link),
-        }))
-      ).toStrictEqual([{ href: "/news", title: newest?.title }]);
-      expect(page.indexOf('<aside class="news-callout"')).toBeLessThan(
-        page.search(/<h1\b/u)
-      );
-
-      const nav = DomUtils.getElementsByTagName("nav", document.children).find(
-        (element) => element.attribs["aria-label"] === "Primary navigation"
-      );
-
-      expect(
-        DomUtils.getElementsByTagName("a", nav?.children ?? []).map((link) => ({
-          href: link.attribs.href,
-          title: DomUtils.textContent(link),
-        }))
-      ).toEqual(
-        expect.arrayContaining([
-          { href: "/news", title: "news" },
-          { href: "/all-stars", title: "all stars" },
-        ])
-      );
-    }
-
-    const agentPages = [
-      homeMarkdownTemplate,
-      loreIndexMarkdown,
-      skillIndexMarkdown,
-      ...loreSources.map((page) => page.text),
-      ...skillSources.map((page) => page.text),
-    ];
-
-    for (const page of agentPages) {
-      expect(page).toContain(`New on /news: [${newest?.title}](/news).`);
-      expect(page).not.toContain("<aside");
-      expect(page).not.toContain("Free workshop:");
-    }
-  }).pipe(Effect.provide(NodeServices.layer))
+      for (const markdown of [
+        homeMarkdownTemplate,
+        loreIndexMarkdown,
+        skillIndexMarkdown,
+        ...loreSources.map((source) => source.text),
+        ...skillSources.map((source) => source.text),
+      ]) {
+        expect(markdown).not.toContain("New on /news:");
+      }
+    })
 );
 
 it.effect("keeps news chrome off the workshop and confirmation flow", () =>
@@ -612,12 +580,12 @@ it.layer(contentServices)("generated content", (test) => {
     () =>
       Effect.sync(() => {
         for (const slug of [
-          "cartridges",
-          "analytics",
-          "capabilities",
-          "fence",
-          "database",
-          "auth",
+          "milestones",
+          "m1-bench-it",
+          "m2-one-joint",
+          "m3-whole-arm",
+          "sources",
+          "videos",
         ]) {
           const page = loreSources.find((entry) => entry.slug === slug);
 
@@ -801,17 +769,14 @@ it.layer(contentServices)("generated content", (test) => {
 
   test.effect("groups lore in agent output and searches declared terms", () =>
     Effect.sync(() => {
-      const cartridge = loreSources.find((lore) => lore.slug === "cartridges");
-      const [match] = searchContent("cartridge test");
+      const benchIt = loreSources.find((lore) => lore.slug === "m1-bench-it");
+      const [match] = searchContent("TMC5160");
       const llms = llmsText("https://ratstack.sh");
 
-      expect(cartridge?.group).toBe("idea");
-      expect(cartridge?.terms).toContain("cartridge test");
-      expect(match?.routePath).toBe("/lore/cartridges");
-      expect(llms).toContain("### Idea");
+      expect(benchIt?.group).toBe("concept");
+      expect(benchIt?.terms).toContain("TMC5160");
+      expect(match?.routePath).toBe("/lore/m1-bench-it");
       expect(llms).toContain("### Concept");
-      expect(llms).toContain("### Source");
-      expect(llms).toContain("### Person");
       expect(llms).toContain("## Lore on this page");
     })
   );
@@ -870,9 +835,7 @@ it.layer(contentServices)("generated content", (test) => {
           }).toThrow(ContentBuildError);
         }
 
-        expect(glossaryIndexDocumentHtml).toContain(
-          'href="/lore/hexagonal-architecture"'
-        );
+        expect(glossaryIndexDocumentHtml).toContain('href="/lore/m1-bench-it"');
         expect(glossaryIndexMarkdown).toContain("# Glossary");
         expect(llmsText("https://ratstack.sh")).toContain(
           "https://ratstack.sh/glossary"
@@ -940,11 +903,11 @@ it.layer(contentServices)("generated content", (test) => {
 
   test.effect("shows non-lore sources in lore backlinks", () =>
     Effect.sync(() => {
-      const fence = loreSources.find((lore) => lore.slug === "the-fence");
+      const milestones = loreSources.find((lore) => lore.slug === "milestones");
 
-      expect(fence?.documentHtml).toContain('id="linked-from"');
-      expect(fence?.documentHtml).toContain(
-        '<a href="/VISION.md">Purpose and boundaries of rat-stack (VISION.md)</a>'
+      expect(milestones?.documentHtml).toContain('id="linked-from"');
+      expect(milestones?.documentHtml).toContain(
+        '<a href="/VISION.md">Purpose of the PAROL6 build wiki (VISION.md)</a>'
       );
       expect(homeDocumentHtml).toContain('href="/lore/');
     })
@@ -952,11 +915,14 @@ it.layer(contentServices)("generated content", (test) => {
 
   test.effect("uses Shiki for code and leaves text diagrams uncoloured", () =>
     Effect.sync(() => {
-      expect(homeDocumentHtml).toContain('class="shiki catppuccin-latte"');
-      expect(homeDocumentHtml).toMatch(
+      const agents = lawSources.find((page) => page.routePath === "/AGENTS.md");
+      const milestones = loreSources.find((lore) => lore.slug === "milestones");
+
+      expect(agents?.documentHtml).toContain('class="shiki catppuccin-latte"');
+      expect(milestones?.documentHtml).toMatch(
         /<figure role="img"[^>]*>\s*<pre><code>/u
       );
-      expect(homeDocumentHtml).not.toMatch(
+      expect(milestones?.documentHtml).not.toMatch(
         /<figure role="img"[^>]*>\s*<pre[^>]*style=/u
       );
     })
@@ -1009,9 +975,9 @@ it.layer(contentServices)("generated content", (test) => {
 
   test.effect("keeps the line breaks in a text diagram", () =>
     Effect.sync(() => {
-      const figures = homeDocumentHtml.match(
-        /<figure role="img"[\s\S]*?<\/figure>/gu
-      );
+      const figures = loreSources
+        .find((lore) => lore.slug === "milestones")
+        ?.documentHtml.match(/<figure role="img"[\s\S]*?<\/figure>/gu);
 
       expect(figures?.length).toBeGreaterThan(0);
 

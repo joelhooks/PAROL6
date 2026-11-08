@@ -18,19 +18,19 @@ diagram: |-
 
 # Durability
 
-**Effect is not BEAM.** Durability lives in storage. [Effect](/lore/effect-basics) runs each [fiber](/lore/concurrent-work-needs-an-owner) as a concurrent computation in one JavaScript runtime, not as an isolated process. Effect 4.0.0 has no OTP restart supervisor. Its structured fiber ownership is useful, but it does not rebuild lost state.
+**Effect is not BEAM.** Durability lives in storage. [Effect](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/effect-basics.svx) runs each [fiber](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/concurrent-work-needs-an-owner.svx) as a concurrent computation in one JavaScript runtime, not as an isolated process. Effect 4.0.0 has no OTP restart supervisor. Its structured fiber ownership is useful, but it does not rebuild lost state.
 
 > Remember from chapters 8 and 9 that processes lose their state on termination.
 
 Saša Jurić, _Elixir in Action_, Other Use Cases for ETS ([B2]). Even OTP restart needs a separate state-recovery decision.
 
-A slow provider must not become our outage. Each pattern below uses an Effect primitive at a real seam. Each one has a [fence](/lore/the-fence) that fails on a planted copy of the bug. The public page is [/systems/durability](/systems/durability).
+A slow provider must not become our outage. Each pattern below uses an Effect primitive at a real seam. Each one has a [fence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx) that fails on a planted copy of the bug. The public page is [/systems/durability](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/durability.svx).
 
 ## When to use it
 
 Load this skill before you change any of these:
 
-- a database connection, socket, or provider SDK that a [handler](/systems/capabilities) reuses;
+- a database connection, socket, or provider SDK that a [handler](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) reuses;
 - a provider call that starts from a request;
 - work that must survive the request, the isolate, or a deploy;
 - a timeout or a retry;
@@ -80,7 +80,7 @@ The references hold the detail:
 
 ## Read the actual boundary
 
-Read the project's instructions, the pinned versions, the [service](/lore/services-capture-dependencies), the storage [adapter](/lore/hexagonal-architecture), the acknowledgement path, and the restoration tests. Check Effect APIs against the installed source. The mappings here are our reading of Effect, not the book authors' advice about Effect.
+Read the project's instructions, the pinned versions, the [service](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/services-capture-dependencies.svx), the storage [adapter](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx), the acknowledgement path, and the restoration tests. Check Effect APIs against the installed source. The mappings here are our reading of Effect, not the book authors' advice about Effect.
 
 For each accepted operation, name:
 
@@ -204,7 +204,7 @@ Keep one recovery authority for each operation. When an existing Durable Object 
 
 ## Check the uncomfortable boundaries
 
-Use the guarantee the [contract](/systems/capabilities) promises, not a generic claim of exactly-once execution.
+Use the guarantee the [contract](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) promises, not a generic claim of exactly-once execution.
 
 - **Accepted, not yet started**: Kill the worker. The accepted identity stays discoverable in the durable store.
 - **Remote effect succeeded, local result missing**: Retry the same identity. Show receiver deduplication or reconciliation. If neither exists, record the outcome as uncertain.
@@ -218,18 +218,18 @@ These are proposed checks derived from the cited failure modes. Passing an in-me
 
 ## Lore
 
-The [durability index](/lore/durability) gives the reading order. Start with these pages:
+The [durability index](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/durability.svx) gives the reading order. Start with these pages:
 
-- [Effect is not BEAM](/lore/effect-is-not-beam): fibers share one runtime and lose state with it.
-- [Durable work needs storage](/lore/durable-work-needs-storage): accepted intent must live outside memory.
-- [Request lifetime is not durability](/lore/request-lifetime-is-not-durability): `waitUntil` work needs a durable marker and redrive.
-- [Timeouts bound waiting](/lore/timeouts-bound-waiting): a timeout stops the wait. The remote action may still finish.
-- [Retry needs idempotent effects](/lore/retry-needs-idempotency) and [retry load needs a budget](/lore/retry-load-needs-a-budget).
-- [Backpressure reaches the producer](/lore/backpressure-reaches-the-producer) and [bulkheads isolate capacity](/lore/bulkheads-isolate-capacity).
-- [Failures keep their meaning](/lore/failures-keep-their-meaning): retry, refuse, and escalate by failure kind.
-- [Recovery needs model tests](/lore/recovery-needs-model-tests): generate crash and retry sequences.
+- [Effect is not BEAM](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/effect-is-not-beam.svx): fibers share one runtime and lose state with it.
+- [Durable work needs storage](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/durable-work-needs-storage.svx): accepted intent must live outside memory.
+- [Request lifetime is not durability](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/request-lifetime-is-not-durability.svx): `waitUntil` work needs a durable marker and redrive.
+- [Timeouts bound waiting](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/timeouts-bound-waiting.svx): a timeout stops the wait. The remote action may still finish.
+- [Retry needs idempotent effects](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/retry-needs-idempotency.svx) and [retry load needs a budget](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/retry-load-needs-a-budget.svx).
+- [Backpressure reaches the producer](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/backpressure-reaches-the-producer.svx) and [bulkheads isolate capacity](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/bulkheads-isolate-capacity.svx).
+- [Failures keep their meaning](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/failures-keep-their-meaning.svx): retry, refuse, and escalate by failure kind.
+- [Recovery needs model tests](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/recovery-needs-model-tests.svx): generate crash and retry sequences.
 
-The [durability bibliography](/lore/durability-bibliography) lists the books and quotes behind these pages.
+The [durability bibliography](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/durability-bibliography.svx) lists the books and quotes behind these pages.
 
 ## Related skills
 

@@ -139,7 +139,7 @@ curl -fsS https://ratstack.sh/api/learnDeck \
   -H 'content-type: application/json' --data '{}'
 ```
 
-Use the CLI commands for selection and recording. They use the same local store as stdio MCP. Read [the system check](/systems/learn) for a complete round-trip.
+Use the CLI commands for selection and recording. They use the same local store as stdio MCP. Read [the system check](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/learn.svx) for a complete round-trip.
 
 Build first, then run `node apps/cli/dist/cli.js learnNext`. Add a `--context` JSON flag for concepts in play. Record with `learnRecord --event`. Use current timestamps for real learning events.
 
@@ -157,7 +157,7 @@ Use this flow only when the operator asks to leave feedback on a public card. Th
 6. Call `learnFeedbackPoll` with the returned `deviceCode`. Wait at least the returned `interval` between calls.
 7. Stop on `denied` or `expired`. On `polled-too-fast`, wait the returned interval before another poll.
 8. After `approved`, call `learnFeedback` with `token`, `cardId`, and the agreed `feedback` text.
-9. Confirm storage only after the [capability](/systems/capabilities) returns a feedback id.
+9. Confirm storage only after the [capability](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) returns a feedback id.
 
 The credential permits `learnFeedback` only. It is not a sign-in session or a credential for another tool. It expires with the device grant. The provider's device-code lifetime is thirty minutes, and its polling interval is five seconds. A new device flow is required after expiry. Do not use the stock `/auth/device/token` endpoint; it is disabled.
 

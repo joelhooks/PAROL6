@@ -10,4 +10,4 @@ Represent expected outcomes with typed variants. Propagate unexpected execution 
 
 **Held by:** `packages/core/test/join-delivery-machine.model.test.ts`; `packages/core/test/join-interest.test.ts`.
 
-Read [expected failures and defects](/lore/error-model) before choosing a recovery boundary.
+Read [expected failures and defects](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/error-model.svx) before choosing a recovery boundary.

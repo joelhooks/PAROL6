@@ -7,9 +7,8 @@ import {
   apiDocsRouter,
   changeLogRouter,
   glossaryRouter,
-  learnRouter,
+  lorePagePath,
   newsRouter,
-  peersRouter,
   promptsRouter,
 } from "./site-route.js";
 
@@ -40,13 +39,19 @@ export const readerFooter = <Message>(
               h.ul(
                 [],
                 [
-                  h.li([], [h.a([h.Href(learnRouter())], ["learn mode"])]),
+                  h.li(
+                    [],
+                    [h.a([h.Href(lorePagePath("milestones"))], ["milestones"])]
+                  ),
                   h.li([], [h.a([h.Href(glossaryRouter())], ["glossary"])]),
                   ...(includePrompts
                     ? [h.li([], [h.a([h.Href(promptsRouter())], ["prompts"])])]
                     : []),
+                  h.li(
+                    [],
+                    [h.a([h.Href(lorePagePath("skiff-target"))], ["the skiff"])]
+                  ),
                   h.li([], [h.a([h.Href(changeLogRouter())], ["change log"])]),
-                  h.li([], [h.a([h.Href(peersRouter())], ["peers"])]),
                 ]
               ),
             ]
@@ -67,7 +72,7 @@ export const readerFooter = <Message>(
                     [],
                     [
                       h.a(
-                        [h.Href("https://github.com/joelhooks/rat-stack")],
+                        [h.Href("https://github.com/joelhooks/PAROL6")],
                         ["source"]
                       ),
                     ]
@@ -81,7 +86,12 @@ export const readerFooter = <Message>(
       h.p(
         [],
         [
-          "Markdown by default. HTML when you ask for it. ",
+          "Built on ",
+          h.a(
+            [h.Href("https://github.com/joelhooks/rat-stack")],
+            ["rat-stack"]
+          ),
+          ". Markdown by default. HTML when you ask for it. ",
           h.a([h.Href(agentGuideRouter())], ["Agents start here"]),
           ".",
         ]

@@ -104,7 +104,7 @@ The production plan should create `MischiefCrashTail` and its retained `Mischief
 
 1. Verify Mischief's deployed `tailConsumers` names `MischiefCrashTail`'s physical Worker name.
 2. Obtain the crash bucket's physical name from the plan.
-3. Follow [Analytics: Read crashes without a dashboard](/systems/analytics#read-crashes-without-a-dashboard).
+3. Follow [Analytics: Read crashes without a dashboard](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/analytics.svx#read-crashes-without-a-dashboard).
 4. List one UTC day with at most 20 keys per page, using an R2 read-only S3 profile.
 5. Fetch an exact object key. Compare its event time, route path, and script version with the failed probe.
 6. Use the stack locations to investigate that version. Fix the observed cause in a separate packet.

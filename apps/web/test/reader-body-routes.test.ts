@@ -93,7 +93,9 @@ it.layer(ReaderParityFixture.layer)((test) => {
         expect(readerNewsTitle(rendered.html), path).toBe(
           readerNewsTitle(original?.html ?? "")
         );
-        expect(rendered.html).toMatch(/<a [^>]*href="\/news"[^>]*>news<\/a>/u);
+        expect(rendered.html).toMatch(
+          /<a [^>]*href="\/lore\/milestones"[^>]*>milestones<\/a>/u
+        );
         expect(after.heading, path).toBe(before.heading);
         expect(after.breadcrumb, path).toEqual(before.breadcrumb);
         expect(normalizedNodes(after.nodes), path).toEqual(

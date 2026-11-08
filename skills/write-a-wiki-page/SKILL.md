@@ -82,7 +82,7 @@ Write for a person first. Avoid hedged 'X, not Y' asides and narration about sou
 
 ## 4. Quote code from its source
 
-Follow [Code snippets quote a pinned source](/lore/code-snippets). Author Markdown fences, not `<Code>` elements.
+Follow [Code snippets quote a pinned source](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/code-snippets.svx). Author Markdown fences, not `<Code>` elements.
 
 Metadata accepts:
 

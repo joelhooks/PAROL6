@@ -10,4 +10,4 @@ Describe what happened without leaking implementation details. Do not call a cra
 
 **Held by:** `Unauthenticated`; `packages/auth/test/auth.test.ts`; review for prose.
 
-The [failure guide](/lore/error-model) shows reporting a failed operation without changing it into success.
+The [failure guide](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/error-model.svx) shows reporting a failed operation without changing it into success.

@@ -18,13 +18,13 @@ diagram: |-
 
 # Learn the stack
 
-Start with `inspectFile`, a [capability](/systems/capabilities): one named action with a contract and a server-side handler. The [contract](/systems/capabilities) defines its name, input, output, failure, and metadata. The handler implements the action.
+Start with `inspectFile`, a [capability](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx): one named action with a contract and a server-side handler. The [contract](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) defines its name, input, output, failure, and metadata. The handler implements the action.
 
-A service is a named interface for one job. A machine defines states and the events that permit movement between them. A [projection](/lore/one-capability-every-surface) builds a callable interface from capabilities.
+A service is a named interface for one job. A machine defines states and the events that permit movement between them. A [projection](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-capability-every-surface.svx) builds a callable interface from capabilities.
 
 Follow these parts, then try the hosted content tools.
 
-Read [Effect basics](/lore/effect-basics) before this trace if the computation model is new. For implementation tasks, use [services](/lore/services-capture-dependencies), [Layer composition](/lore/layers-make-dependencies-explicit), and [testing](/lore/tests-that-earn-their-place).
+Read [Effect basics](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/effect-basics.svx) before this trace if the computation model is new. For implementation tasks, use [services](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/services-capture-dependencies.svx), [Layer composition](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/layers-make-dependencies-explicit.svx), and [testing](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/tests-that-earn-their-place.svx).
 
 ## The pieces
 
@@ -33,7 +33,7 @@ Read [Effect basics](/lore/effect-basics) before this trace if the computation m
 - A Layer builds services and supplies their construction dependencies.
 - XState owns finite lifecycles. The Effect bridge runs their declared actors.
 - TypeScript 7 and Effect diagnostics check types and Effect usage.
-- Oxlint, Oxfmt, Vitest, and lefthook enforce [the fence](/lore/the-fence): checks and hooks that reject prohibited code and shortcuts.
+- Oxlint, Oxfmt, Vitest, and lefthook enforce [the fence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx): checks and hooks that reject prohibited code and shortcuts.
 - pnpm and Turborepo connect packages and cache checks.
 - Alchemy declares the cloud. Follow [learn Alchemy](/skills/learn-alchemy) for the deployment graph.
 
@@ -47,7 +47,7 @@ One Capability ──────┼─ MCP
                      └─ RPC
 ```
 
-A [projection](/lore/one-capability-every-surface) exposes the same action through another interface. RPC serves browser clients. [Code mode](/lore/one-program-can-replace-several-tool-calls) lets agents compose calls in one program.
+A [projection](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-capability-every-surface.svx) exposes the same action through another interface. RPC serves browser clients. [Code mode](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-program-can-replace-several-tool-calls.svx) lets agents compose calls in one program.
 
 All five interfaces use one handler.
 
@@ -57,7 +57,7 @@ The CLI uses `inspectFile`. The hosted site uses a separate content registry.
 
 ### 1. Define the contract
 
-The [contract](/systems/capabilities) names the action and its input, output, and failure schemas.
+The [contract](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) names the action and its input, output, and failure schemas.
 
 ```ts repo=rat-stack path=packages/core/src/contracts.ts at=b4d6b8f499e57bc76914ad70df3a0c99751ae28c lines=255-263 {255,258-263}
 
@@ -67,7 +67,7 @@ The [contract](/systems/capabilities) names the action and its input, output, an
 
 ### 2. Bind one handler
 
-`implement` binds the contract to `runInspectMachine`. The registry includes the resulting [capability](/systems/capabilities).
+`implement` binds the contract to `runInspectMachine`. The registry includes the resulting [capability](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx).
 
 ```ts repo=rat-stack path=packages/core/src/inspect-file.ts at=b4d6b8f499e57bc76914ad70df3a0c99751ae28c lines=10-22 {10-12,14-15}
 
@@ -83,7 +83,7 @@ The handler starts a machine to read the file.
 
 ```
 
-The service exposes its [Layer](/lore/layer-constructor-pattern) beside the implementation. This follows [hexagonal architecture](/lore/hexagonal-architecture): composition supplies the file-system dependency.
+The service exposes its [Layer](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/layer-constructor-pattern.svx) beside the implementation. This follows [hexagonal architecture](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx): composition supplies the file-system dependency.
 
 ```ts repo=rat-stack path=packages/core/src/file-inspector.ts at=b4d6b8f499e57bc76914ad70df3a0c99751ae28c lines=31-35 {34}
 
@@ -113,7 +113,7 @@ The command-line interface (CLI) projects capability lists for each server inter
 
 ```
 
-The RPC [projection](/lore/one-capability-every-surface) derives contracts from its supplied capabilities.
+The RPC [projection](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-capability-every-surface.svx) derives contracts from its supplied capabilities.
 
 ```ts repo=rat-stack path=packages/capability/src/to-rpc.ts at=b4d6b8f499e57bc76914ad70df3a0c99751ae28c lines=24-27 {24,27}
 
@@ -129,7 +129,7 @@ A projection takes a registry and reuses its domain handlers.
 
 ```
 
-The entry point supplies the service [Layer](/lore/layer-constructor-pattern) and Node services. It denies [approval](/systems/capabilities) by default.
+The entry point supplies the service [Layer](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/layer-constructor-pattern.svx) and Node services. It denies [approval](https://github.com/joelhooks/rat-stack/blob/main/.brain/areas/capabilities.svx) by default.
 
 ```ts repo=rat-stack path=apps/cli/src/cli.ts at=b4d6b8f499e57bc76914ad70df3a0c99751ae28c lines=22-32 {24,30}
 
@@ -149,7 +149,7 @@ The Stack deploys the cloud applications. The Node file-inspection CLI runs sepa
 
 ## Try hosted search and read
 
-Use [POST /api/execute](/llms.txt#run-code-one-program-instead-of-several-calls) for [code mode](/lore/one-program-can-replace-several-tool-calls). The [agent guide](/llms.txt) documents this search → read program:
+Use [POST /api/execute](/llms.txt#run-code-one-program-instead-of-several-calls) for [code mode](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/one-program-can-replace-several-tool-calls.svx). The [agent guide](/llms.txt) documents this search → read program:
 
 ```js
 const found = await tools.search({ query: "cartridges", limit: 1 });
@@ -169,7 +169,7 @@ curl --request POST 'https://ratstack.sh/api/execute' \
 
 ## Read before changing a piece
 
-1. Read [`AGENTS.md`](/AGENTS.md) for pins, boundaries, and [the fence](/lore/the-fence).
+1. Read [`AGENTS.md`](/AGENTS.md) for pins, boundaries, and [the fence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx).
 2. Read [VISION.md](/VISION.md) for intent.
 3. Read the package you plan to change.
 4. Before Effect or XState work, read `node_modules/effect/AGENTS.md` and the pinned sources listed in repo law.
@@ -193,6 +193,6 @@ Run the full gate:
 pnpm turbo run check test build
 ```
 
-Fix failures. Keep [the fence](/lore/the-fence) intact.
+Fix failures. Keep [the fence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx) intact.
 
 Check deployment separately from the gate.

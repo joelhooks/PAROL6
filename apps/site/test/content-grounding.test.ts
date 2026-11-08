@@ -7,27 +7,19 @@ import {
   groundingFailures,
   groundingTexts,
 } from "../scripts/content-grounding.ts";
-import { frontmatterData, htmlTokens } from "../scripts/svx-ast.ts";
-import {
-  fixtureBytes,
-  imageAssetPaths,
-  loreSources,
-} from "./generated-content.ts";
 
 const loadGrounding = Effect.fnUntraced(function* loadGrounding() {
   const fs = yield* FileSystem.FileSystem;
 
   const page = yield* fs.readFileString(
-    new URL(
-      "../../../.brain/resources/lore/infrastructure-as-effects.svx",
-      import.meta.url
-    ).pathname
+    new URL("fixtures/grounding/infrastructure-as-effects.svx", import.meta.url)
+      .pathname
   );
 
   const map = yield* fs
     .readFileString(
       new URL(
-        "../../../.brain/data/lore/infrastructure-as-effects.grounding.json",
+        "fixtures/grounding/infrastructure-as-effects.grounding.json",
         import.meta.url
       ).pathname
     )
@@ -77,32 +69,6 @@ it.layer(NodeServices.layer)((test) => {
           "alt: Invented alt: add a claim id to the grounding map",
           "label: Invented label: add a claim id to the grounding map",
         ]);
-      })
-  );
-
-  test.effect(
-    "keeps the rendered CAFE page's infrastructure prerequisite",
-    () =>
-      Effect.gen(function* checkCafePrerequisite() {
-        const fs = yield* FileSystem.FileSystem;
-
-        const cafe = yield* fs.readFileString(
-          new URL(
-            "../../../.brain/resources/lore/cafe-stack.svx",
-            import.meta.url
-          ).pathname
-        );
-
-        expect(frontmatterData(cafe).prerequisites).toContain(
-          "lore.infrastructure-as-effects"
-        );
-
-        const rendered = loreSources.find(
-          (source) => source.routePath === "/lore/cafe-stack"
-        );
-
-        expect(rendered?.documentHtml).toContain("<h1");
-        expect(rendered?.documentHtml).toContain("Cloudflare");
       })
   );
 
@@ -156,36 +122,4 @@ it("grounds split SVG captions and metadata without permitting prose fragments o
       map
     )
   ).toHaveLength(3);
-});
-
-it("serves both responsive SVGs as assets and retains the picture in generated content", () => {
-  for (const orientation of ["landscape", "portrait"]) {
-    const path = `/lore/infrastructure-as-effects/${orientation}.svg`;
-    expect(imageAssetPaths).toContain(path);
-    expect(fixtureBytes(path).toString("utf-8")).toContain("<svg");
-  }
-
-  const pageSource = loreSources.find(
-    (source) => source.routePath === "/lore/infrastructure-as-effects"
-  );
-
-  expect(pageSource).toBeDefined();
-
-  const tokens = htmlTokens(pageSource?.documentHtml ?? "");
-  expect(tokens.some((token) => token.name === "picture")).toBe(true);
-  expect(
-    tokens.find((token) => token.name === "source")?.attributes
-  ).toMatchObject({
-    height: "1290",
-    media: "(max-width: 640px)",
-    srcset: "/lore/infrastructure-as-effects/portrait.svg",
-    width: "600",
-  });
-  expect(
-    tokens.find((token) => token.name === "img")?.attributes
-  ).toMatchObject({
-    height: "720",
-    src: "/lore/infrastructure-as-effects/landscape.svg",
-    width: "1200",
-  });
 });

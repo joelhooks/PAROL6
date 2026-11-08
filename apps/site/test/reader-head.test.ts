@@ -27,7 +27,7 @@ it.prop(
     const origin = `https://pr-${number}.ratstack.sh`;
 
     const metadata = {
-      canonicalPath: "/lore/services-capture-dependencies",
+      canonicalPath: "/lore/m1-bench-it",
       description,
       discoveryLinks: [],
       jsonLd: "TechArticle",

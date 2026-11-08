@@ -17,7 +17,7 @@ diagram: |-
 
 A test proves one behaviour. Name that behaviour before you write the test. Then pick the shape below that fits it.
 
-Each shape returns a fixed, independent answer. A test that reruns the code under test cannot catch its mistakes. Read [tests that earn their place](/lore/tests-that-earn-their-place) first.
+Each shape returns a fixed, independent answer. A test that reruns the code under test cannot catch its mistakes. Read [tests that earn their place](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/tests-that-earn-their-place.svx) first.
 
 ## 1. A domain rule: a property
 
@@ -29,7 +29,7 @@ The core suite generates names and checks their length after trimming. The asser
 
 ```
 
-Read [property-based testing](/lore/property-based-testing).
+Read [property-based testing](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/property-based-testing.svx).
 
 ## 2. Anything with history: a model
 
@@ -41,7 +41,7 @@ The inspection lifecycle replays generated histories against the real actor:
 
 ```
 
-Copy `skills/add-a-lifecycle-machine/templates/lifecycle.model.test.md` for a new machine. Read [model-based testing](/lore/model-based-testing).
+Copy `skills/add-a-lifecycle-machine/templates/lifecycle.model.test.md` for a new machine. Read [model-based testing](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/model-based-testing.svx).
 
 ## 3. UI behaviour: a Foldkit Scene
 
@@ -61,7 +61,7 @@ The reader's copy button resolves the copy and then its reset wait:
 
 ```
 
-Read [UI behaviour is a scene](/lore/ui-behaviour-is-a-scene) for the Foldkit UI Toast race.
+Read [UI behaviour is a scene](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/ui-behaviour-is-a-scene.svx) for the Foldkit UI Toast race.
 
 ## 4. A seam: one example
 

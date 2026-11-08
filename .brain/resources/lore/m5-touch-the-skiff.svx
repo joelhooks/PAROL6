@@ -1,0 +1,81 @@
+---
+title: "M5. Touch the skiff"
+description: "The fifth milestone registers a Eurorack skiff in the robot's frame, then presses a button and turns a knob to a set position."
+plain: "Find the synth with three touches, then turn one knob to noon and press one button ten times out of ten."
+group: concept
+prerequisites:
+  - /lore/m4-pick-and-place
+terms:
+  - registration
+  - fiducial
+  - compliance
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/
+    title: "Python API, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Motion, the tool frame and slow approach moves, the base for our registration script."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/theory/reference-frames/
+    title: "Reference frames, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The frames that registration maps between."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/mounting/
+    title: "Mounting, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The base mounts on 30 by 30 mm profile."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/
+    title: "Custom tools, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Mounting and registering a printed knob-turning tool."
+    accessed: "2026-11-07"
+  - url: https://www.doepfer.de/a100_man/a100m_e.htm
+    title: "A-100 construction details"
+    publisher: "Doepfer Musikelektronik"
+    note: "Eurorack panel height and the HP grid of 5.08 mm."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** register a Eurorack skiff in the robot's frame, then press a button and turn a knob to a set position.
+
+**Our design.** The PAROL6 manual stops at pick-and-place. From here on the plan is ours, built on the [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/) and the [end-effector docs](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/).
+
+## Parts
+
+- The skiff. See [the skiff target](/lore/skiff-target); the choice is open.
+- A rigid shared base plate for the arm and the skiff. The robot's base mounts on 30 by 30 mm profile ([Mounting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/mounting/)).
+- A knob-turning end effector: a printed knob socket or a TPU-padded finger.
+
+## Concepts
+
+- **Coordinate frames and registration.** Touch three fiducials on the skiff panel to find its pose in the robot's frame ([Reference frames](https://docs.source-robotics.com/PAROL-docs/1.1/theory/reference-frames/)).
+- **Eurorack mechanics.** Rails, HP (5.08 mm, from [Doepfer's A-100 construction details](https://www.doepfer.de/a100_man/a100m_e.htm)), and the jack and knob geometry of each module.
+- **Why compliance matters** when a rigid arm touches something rigid.
+
+**needs_source:** the jack and knob positions of each module, measured from the real panels.
+
+## How-to
+
+- Python API motion, the tool frame and slow approach moves ([Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/)).
+- Our registration script, written as a completion task.
+
+## Practice
+
+- Caliper measurement of the panel geometry.
+- Touch-off drills.
+- Tuning the approach speed.
+
+## Done check
+
+With the skiff at a fresh pose, Joel registers it in under 5 minutes. Then the arm turns a named knob from fully counter-clockwise to noon, measured by the voltage on a CV output, and presses a button 10 times out of 10.
+
+## Terms
+
+- **registration**: finding where an object sits in the robot's frame by touching known points on it. This is our design, built on the frames in [Reference frames](https://docs.source-robotics.com/PAROL-docs/1.1/theory/reference-frames/).
+- **fiducial**: a known reference point on the skiff panel that the tool touches during registration. Our design.
+- **compliance**: give in the tool, so that a small position error does not become a large force. Our design, needed because open-loop steppers cannot feel force ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+
+## Video
+
+[The M5 video](/lore/video-m5) is planned.

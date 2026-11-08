@@ -24,13 +24,12 @@ import { readerReferences } from "./reader-references.js";
 import { readerStyles } from "./reader.stylex.js";
 import {
   agentGuideRouter,
-  allStarsRouter,
   glossaryRouter,
   homeRouter,
   isWithinSection,
   learnRouter,
+  lorePagePath,
   loreRouter,
-  newsRouter,
   promptsRouter,
   searchRouter,
   skillsRouter,
@@ -46,11 +45,10 @@ const copyStatusText = CopyStatus.match({
 });
 
 const siteSections = [
-  [skillsRouter(), "skills"],
-  [loreRouter(), "lore"],
-  [systemsRouter(), "systems"],
-  [newsRouter(), "news"],
-  [allStarsRouter(), "all stars"],
+  [lorePagePath("milestones"), "milestones"],
+  [lorePagePath("videos"), "videos"],
+  [lorePagePath("sources"), "sources"],
+  [loreRouter(), "wiki"],
   [glossaryRouter(), "glossary"],
   [searchRouter(), "search"],
 ] as const;
@@ -220,7 +218,7 @@ const siteHeader = (h: HtmlBuilder<ReaderMessage>) =>
         [
           h.a(
             [h.Class("brand"), h.Href(homeRouter())],
-            [h.strong([], ["🐀 Rat Stack"])]
+            [h.strong([], ["🦾 PAROL6 build"])]
           ),
           h.div(
             [h.Class("site-links")],

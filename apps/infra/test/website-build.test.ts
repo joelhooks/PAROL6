@@ -155,7 +155,7 @@ it.layer(NodeServices.layer)((test) => {
         expect(prerendered).toEqual(
           expect.arrayContaining([
             "/",
-            "/lore/services-capture-dependencies",
+            "/lore/m1-bench-it",
             "/news",
             "/directory",
           ])
@@ -167,10 +167,7 @@ it.layer(NodeServices.layer)((test) => {
         );
 
         const lore = yield* fs.readFileString(
-          path.join(
-            result.clientDirectory,
-            "lore/services-capture-dependencies/index.html"
-          )
+          path.join(result.clientDirectory, "lore/m1-bench-it/index.html")
         );
 
         const pages = yield* Schema.decodeEffect(
@@ -199,7 +196,7 @@ it.layer(NodeServices.layer)((test) => {
 
         const documents: readonly (readonly [string, string])[] = [
           ["/", home],
-          ["/lore/services-capture-dependencies", lore],
+          ["/lore/m1-bench-it", lore],
           [
             "/news",
             yield* fs.readFileString(
@@ -305,7 +302,7 @@ it.layer(NodeServices.layer)((test) => {
                     ).href,
                     paths: [
                       "/",
-                      "/lore/services-capture-dependencies",
+                      "/lore/m1-bench-it",
                       "/news",
                       "/directory",
                       "/rpc",

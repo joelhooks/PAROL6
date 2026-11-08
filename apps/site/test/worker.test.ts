@@ -432,12 +432,11 @@ it.effect(
         );
 
         const resource = lawResources.find(
-          (candidate) =>
-            candidate.routePath === "/resources/effect-4-reference-projects"
+          (candidate) => candidate.routePath === "/VISION.md"
         );
 
         if (resource === undefined) {
-          throw new Error("Missing Effect 4 reference resource");
+          throw new Error("Missing VISION.md resource");
         }
 
         const resourceMarkdownResponse = yield* Effect.promise(
@@ -479,40 +478,35 @@ it.effect(
         );
         expect(markdownResponse.headers.get("link")).toBe(linkHeader);
         expect(markdown).toBe(markdownDocument("https://ratstack.sh"));
-        expect(markdown).toContain("an app and its cloud as one typed program");
-        expect(markdown).toContain("## Four ideas");
-        expect(markdown.indexOf("## Connect an agent")).toBeLessThan(
-          markdown.indexOf("## Four ideas")
+        expect(markdown).toContain("public build wiki for [PAROL6]");
+        expect(markdown.indexOf("## Start here")).toBeLessThan(
+          markdown.indexOf("## For agents")
         );
         expect(markdown).toContain(
-          "Read https://ratstack.sh/llms.txt and use rat-stack as the reference\n"
+          "Read https://ratstack.sh/llms.txt and use the PAROL6 build wiki as the\n"
         );
         expect(markdown).toContain(
-          "claude mcp add --transport http rat-stack https://ratstack.sh/mcp"
+          "claude mcp add --transport http parol6 https://ratstack.sh/mcp"
         );
-        expect(markdown).toContain("│  defineContract");
-        expect(markdown).toContain("/.well-known/agent-skills/index.json");
         expect(markdown).toContain("## Source files");
         expect(markdown).toContain(
-          "[Agent rules for rat-stack (AGENTS.md)](/AGENTS.md)"
+          "[Agent rules for the PAROL6 wiki (AGENTS.md)](/AGENTS.md)"
         );
         expect(markdown).toContain(
-          "[Purpose and boundaries of rat-stack (VISION.md)](/VISION.md)"
+          "[Purpose of the PAROL6 build wiki (VISION.md)](/VISION.md)"
         );
-        expect(markdown).toContain("## Connect an agent");
         expect(html).toContain(
-          "<title>Rat Stack: an app and its cloud as one typed program</title>"
+          "<title>PAROL6 build: a robot arm, one milestone at a time</title>"
         );
-        expect(html).toContain('<h1 id="rat-stack">Rat Stack</h1>');
-        expect(html.match(/🐀/gu)).toHaveLength(1);
+        expect(html).toContain('<h1 id="parol6-build">PAROL6 build</h1>');
         expect(html.match(/<h1\b/gu)).toHaveLength(1);
-        expect(html).toContain("<strong>🐀 Rat Stack</strong>");
-        expect(skillHtml).toContain("<strong>🐀 Rat Stack</strong>");
+        expect(html).toContain("<strong>🦾 PAROL6 build</strong>");
+        expect(skillHtml).toContain("<strong>🦾 PAROL6 build</strong>");
         expect(skillHtml.match(/<h1\b/gu)).toHaveLength(1);
         expect(html).toContain("<pre><code>");
         expect(skillHtml).toContain('<pre class="shiki catppuccin-latte"');
         expect(skillHtml).not.toContain('<link rel="stylesheet"');
-        expect(html).toContain("│  defineContract");
+        expect(html).toContain("Cite the official PAROL6 manual");
         expect(html).toContain('class="copy-label">Copy prompt</span>');
         expect(markdown).not.toContain("Copy prompt");
         expect(markdown).not.toContain("<button");
@@ -535,14 +529,14 @@ it.effect(
           /<meta property="og:image" content="https:\/\/ratstack\.sh\/og\/[\w./-]+\.png\?v=[0-9a-f]+"/u
         );
         expect(html).toContain(
-          '<meta property="og:site_name" content="ratstack.sh"'
+          '<meta property="og:site_name" content="PAROL6 build"'
         );
         expect(html).toContain(
           '<meta name="twitter:card" content="summary_large_image"'
         );
-        expect(skillsHtml).toContain('<h1 id="learn-the-stack">');
+        expect(skillsHtml).toContain('<h1 id="agent-skills">');
         expect(skillsHtml).toContain(
-          "working app to teach the pieces inside it"
+          "agent playbooks this site’s code is built with"
         );
         expect(skillHtml).toContain('<nav aria-label="Breadcrumb"');
         expect(skillHtml).toContain('<h1 id="learn-the-stack">');
@@ -558,7 +552,7 @@ it.effect(
           "<code>node_modules/effect/AGENTS.md</code>"
         );
         expect(skillHtml).not.toContain(
-          'href="https://github.com/joelhooks/rat-stack/blob/main/node_modules'
+          'href="https://github.com/joelhooks/PAROL6/blob/main/node_modules'
         );
         expect(skillHtml).toContain(
           '<a href="https://effect.website">Effect</a>'
@@ -586,10 +580,10 @@ it.effect(
         );
         expect(agentsHtml).toContain('id="linked-from"');
         expect(agentsHtml).toContain(
-          '<a href="https://github.com/joelhooks/rat-stack/blob/main/AGENTS.md">Source on GitHub</a>'
+          '<a href="https://github.com/joelhooks/PAROL6/blob/main/AGENTS.md">Source on GitHub</a>'
         );
         expect(agentsHtml).toMatch(
-          /Last changed \d{4}-\d{2}-\d{2} in <a href="https:\/\/github\.com\/joelhooks\/rat-stack\/commit\/[0-9a-f]{40}">[0-9a-f]{7,}<\/a>/u
+          /Last changed \d{4}-\d{2}-\d{2} in <a href="https:\/\/github\.com\/joelhooks\/PAROL6\/commit\/[0-9a-f]{40}">[0-9a-f]{7,}<\/a>/u
         );
         expect(agentsHtml).toContain(
           '<a href="/skills/learn-rat-stack">learn-rat-stack</a>'
@@ -607,12 +601,10 @@ it.effect(
         );
         expect(resourceMarkdown).toBe(resource.text);
         expect(resourceHtml).toContain(
-          `<title>${resource.title} | rat-stack</title>`
+          `<title>${resource.title} | PAROL6 build</title>`
         );
-        expect(resourceHtml).toContain(
-          '<h1 id="effect-4-reference-projects-studied-2026-09-18">'
-        );
-        expect(resourceHtml).toMatch(/<li>Stars: 23k<\/li>/u);
+        expect(resourceHtml).toContain('<h1 id="vision">');
+        expect(resourceHtml).toContain('href="/lore/milestones"');
         expect(resourceHtml).not.toMatch(/<table\b/u);
         expect(resourceHtml).not.toContain("<script");
 
@@ -674,11 +666,11 @@ it.effect(
     withHandler((handler) =>
       Effect.gen(function* testLoreSurfaces() {
         const page = loreResources.find(
-          (resource) => resource.name === "one-capability-every-surface"
+          (resource) => resource.name === "m1-bench-it"
         );
 
         if (page === undefined) {
-          throw new Error("Missing capability lore page");
+          throw new Error("Missing M1 lore page");
         }
 
         const loreSource = loreSources.find(
@@ -688,7 +680,7 @@ it.effect(
         const [source] = loreSource?.sources ?? [];
 
         if (source === undefined) {
-          throw new Error("Capability lore page has no public source");
+          throw new Error("M1 lore page has no public source");
         }
 
         const loreIndexMarkdown = yield* responseText(
@@ -723,16 +715,18 @@ it.effect(
         expect(loreIndexMarkdown).toContain(
           `[${page.title}](${page.routePath})`
         );
-        expect(loreIndexHtml).toContain('<a href="/lore">lore</a>');
-        expect(loreIndexHtml).toContain("Rat Stack lore | rat-stack");
+        expect(loreIndexHtml).toContain('<a href="/lore">wiki</a>');
+        expect(loreIndexHtml).toContain("PAROL6 wiki | PAROL6 build");
         expect(pageMarkdown).toBe(page.text);
-        expect(pageHtml).toContain(`<title>${page.title} | rat-stack</title>`);
+        expect(pageHtml).toContain(
+          `<title>${page.title} | PAROL6 build</title>`
+        );
         expect(pageHtml).toContain('<h2 id="sources">Sources</h2><ol>');
         expect(pageHtml).toContain(`<a href="${source}">`);
         expect(pageHtml).not.toContain(`>${source}</a>`);
-        expect(pageHtml).toContain("Accessed 2026-10-01.");
+        expect(pageHtml).toContain("Accessed 2026-11-07.");
         expect(pageHtml).toContain(
-          '<li><a href="/lore/an-mcp-your-users-want">An MCP your users want</a>'
+          '<li><a href="/lore/m2-one-joint">M2. One joint end to end: the wrist and joint 6</a>'
         );
         expect(llms).toContain("## Lore");
         expect(llms).toContain(`[${page.title}](${page.routePath})`);
@@ -744,7 +738,7 @@ it.effect(
           "search-lore",
           "tools/call",
           {
-            arguments: { limit: 20, query: "one capability every surface" },
+            arguments: { limit: 20, query: "TMC5160" },
             name: "search",
           },
           "search"
@@ -1018,13 +1012,17 @@ it.effect("serves no-verify trap aliases as 403 Markdown and HTML", () =>
         "text/markdown"
       );
       expect(markdown).toContain("The rat looks disappointed.");
-      expect(markdown).toContain("/lore/the-fence");
       expect(markdown).toContain(
-        "https://github.com/joelhooks/rat-stack/blob/main/scripts/vcs-command-policy.js"
+        "https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx"
+      );
+      expect(markdown).toContain(
+        "https://github.com/joelhooks/PAROL6/blob/main/scripts/vcs-command-policy.js"
       );
       expect(htmlResponse.status).toBe(403);
       expect(htmlResponse.headers.get("content-type")).toContain("text/html");
-      expect(page).toContain('<a href="/lore/the-fence">the fence</a>');
+      expect(page).toContain(
+        '<a href="https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx" rel="nofollow">the fence</a>'
+      );
       expect(page).toContain("scripts/vcs-command-policy.js");
       expect(page).not.toContain("<script");
       expectSecurityHeaders(markdownResponse, false);
@@ -1223,7 +1221,7 @@ it.effect(
 
         expect(plain.status).toBe(200);
         expect(plain.headers.get("content-type")).toContain("text/markdown");
-        expect(markdown).toContain("[port](/lore/hexagonal-architecture) →");
+        expect(markdown).toContain("[TMC5160](/lore/m1-bench-it) →");
         expect(markdown).toContain(
           "> For agents: start with the [agent guide](https://ratstack.sh/llms.txt)."
         );
@@ -1239,7 +1237,6 @@ it.effect(
         expect(html).toContain(
           '<p class="agent-pointer visually-hidden" aria-hidden="true">'
         );
-        expect(html).toContain('<a href="/resources/peers">peers</a>');
       })
     )
 );
@@ -1576,7 +1573,7 @@ it.effect(
       Effect.gen(function* testHttpCapabilities() {
         const searched = yield* postJson(handler, "/api/search", {
           limit: 1,
-          query: "capability",
+          query: "motor",
         });
 
         const searchResult = yield* Schema.decodeUnknownEffect(SearchOutput)(
@@ -1593,11 +1590,11 @@ it.effect(
           yield* readJson(read)
         );
 
-        expect(readResult.text).toContain("capability");
+        expect(readResult.text).toContain("motor");
 
         const neighbors = yield* postJson(handler, "/api/neighbors", {
           depth: 1,
-          slug: "cartridges",
+          slug: "m1-bench-it",
         });
 
         const neighborsResult = yield* Schema.decodeUnknownEffect(
@@ -1609,7 +1606,7 @@ it.effect(
 
         const executed = yield* postJson(handler, "/api/execute", {
           code: [
-            "const found = await tools.search({ query: 'capability', limit: 1 });",
+            "const found = await tools.search({ query: 'motor', limit: 1 });",
             "return await tools.read({ id: found.matches[0].id });",
           ].join("\n"),
         });
@@ -1632,7 +1629,7 @@ it.effect("returns 429 after API_PER_IP denies a client IP", () => {
     const request = () =>
       handler(
         new Request("http://localhost/api/search", {
-          body: JSON.stringify({ limit: 1, query: "capability" }),
+          body: JSON.stringify({ limit: 1, query: "motor" }),
           headers: {
             "cf-connecting-ip": "192.0.2.10",
             "content-type": "application/json",
@@ -1672,7 +1669,7 @@ it.effect("returns 429 before a second execute worker is created", () => {
         new Request("http://localhost/api/execute", {
           body: JSON.stringify({
             code: [
-              "const found = await tools.search({ query: 'capability', limit: 1 });",
+              "const found = await tools.search({ query: 'motor', limit: 1 });",
               "return await tools.read({ id: found.matches[0].id });",
             ].join("\n"),
           }),
@@ -1707,7 +1704,7 @@ it.effect("returns an MCP tool error when EXECUTE_GLOBAL denies", () => {
     (handler) =>
       Effect.gen(function* testExecuteGlobalLimit() {
         const code = [
-          "const found = await tools.search({ query: 'capability', limit: 1 });",
+          "const found = await tools.search({ query: 'motor', limit: 1 });",
           "return await tools.read({ id: found.matches[0].id });",
         ].join("\n");
 
@@ -1922,7 +1919,7 @@ it.effect(
           handler,
           "search",
           "tools/call",
-          { arguments: { limit: 1, query: "capability" }, name: "search" },
+          { arguments: { limit: 1, query: "motor" }, name: "search" },
           "search"
         );
 
@@ -1959,7 +1956,7 @@ it.effect(
           handler,
           "neighbors",
           "tools/call",
-          { arguments: { depth: 1, slug: "cartridges" }, name: "neighbors" },
+          { arguments: { depth: 1, slug: "m1-bench-it" }, name: "neighbors" },
           "neighbors"
         );
 
@@ -1982,7 +1979,7 @@ it.effect(
           "path",
           "tools/call",
           {
-            arguments: { from: "cartridges", to: "sam-goodwin" },
+            arguments: { from: "m1-bench-it", to: "m3-whole-arm" },
             name: "path",
           },
           "path"
@@ -1996,8 +1993,8 @@ it.effect(
           pathCall.result.structuredContent
         );
 
-        expect(pathResult.nodes[0]?.slug).toBe("cartridges");
-        expect(pathResult.nodes.at(-1)?.slug).toBe("sam-goodwin");
+        expect(pathResult.nodes[0]?.slug).toBe("m1-bench-it");
+        expect(pathResult.nodes.at(-1)?.slug).toBe("m3-whole-arm");
 
         const executeResponse = yield* postMcp(
           handler,
@@ -2006,9 +2003,9 @@ it.effect(
           {
             arguments: {
               code: [
-                "const found = await tools.search({ query: 'capability', limit: 1 });",
+                "const found = await tools.search({ query: 'motor', limit: 1 });",
                 "await tools.read({ id: found.matches[0].id });",
-                "return await tools.neighbors({ slug: 'cartridges', depth: 1 });",
+                "return await tools.neighbors({ slug: 'm1-bench-it', depth: 1 });",
               ].join("\n"),
             },
             name: "execute",

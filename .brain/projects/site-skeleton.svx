@@ -1,0 +1,47 @@
+---
+title: "Site skeleton: what came from rat-stack and what is left to cut"
+type: "project"
+status: "current"
+created_at: "2026-11-08"
+privacy: "public"
+---
+
+# Site skeleton
+
+The PAROL6 build wiki runs on a copy of the rat-stack template at `ae24f6a`. The first packet swapped the public content for the PAROL6 wiki seed and kept the template machinery green. This page records what was replaced, what was left in place, and why.
+
+## Replaced
+
+- **Content.** `.brain/resources/lore/` holds only the PAROL6 wiki: the milestones index, M1 to M7, the video pages, sources and the skiff target. Every rat-stack lore, systems, project, task and resource page is gone, with their learn cards, peers data and Foldkit audit data.
+- **Home, navigation, footer and titles.** The home page text lives in `homeMarkdownSource` in `apps/site/scripts/generate-content.ts`. The navigation is in `apps/site/scripts/document-html.ts` and `apps/web/src/features/reader.ts`; the footer is in those files and `apps/web/src/features/reader-chrome.ts`.
+- **Glossary.** `glossaryDefinitions` in `apps/site/scripts/content-lib.ts` holds 23 PAROL6 terms. Each points at the page whose Terms section cites the official source.
+- **Learn deck.** `.brain/data/learn-coverage.json` orders the deck M1 to M7. Video pages opt out with `learn: false`.
+- **Public-safety guard.** `scripts/public-safety-patterns.ts` holds the patterns; `pnpm public-safety` runs first in `pnpm check`.
+
+## Template faults fixed
+
+- `.brain/data/git-snapshot.json` was pinned to rat-stack's history, so a template copy failed `pnpm check` with a stale snapshot. Regenerate it with `pnpm git-snapshot` after each content commit.
+- Lore code fences pointed at rat-stack commits that a template copy does not have. `pnpm sources:fetch` fetches them shallowly, and the snapshot step then refuses the shallow repository. Removing the rat-stack lore removed the fences.
+- Links from `skills/`, `vendor/README.md`, the agent guide and the parked tokenmaxx page to deleted lore now point at the upstream pages on GitHub.
+- "Source on GitHub", "Last changed", the change log and the debt ledger linked `joelhooks/rat-stack`. This repo's history is one squashed template commit, so every commit link was a 404. They now point at `joelhooks/PAROL6`. Pinned code excerpts still link rat-stack, because their commits exist only upstream.
+- `npm pack --json` returns an object keyed by package name on npm 12, not an array. The `ratstack` package test now accepts both shapes.
+- Lore pages leave out the `# Title` line; the build writes it from `title:`. A page with its own H1 served its raw frontmatter to agents.
+- Tests that read rat-stack Brain pages as input now read copies in `apps/site/test/fixtures/`. Tests that checked rendered rat-stack pages were retargeted to PAROL6 pages or removed.
+
+## Left in place, unlinked
+
+These rat-stack product surfaces still build and are still served by URL. The wiki does not link them.
+
+- The tokenmaxx workshop: `apps/site/content/tokenmaxx.md`, `.brain/data/tokenmaxx/`, the Workshop Worker and its routes, and the interest signup flow.
+- CAFE: `/news`, `/directory` and `/all-stars`, with `.brain/data/cafe/` and `apps/site/content/avatars/`. The CAFE decoder refuses an empty dataset, so the data stays until the cartridge goes.
+- The prompt library route, with an empty `.brain/resources/prompts/`.
+- The published agent skills at `/skills`, which are the rat-stack playbooks this repo's agents follow.
+- `/systems/motion`, the `@rat-stack/motion` system page, kept because the reader build attaches the motion demo to it.
+- Image assets for deleted lore pages: the infrastructure diagrams, the cartridges photo and the Dillon Mulroy poster. The build still emits them under `/lore/...`; nothing links them.
+- The `ratstack.sh` origin, used for canonical URLs and the build's link check.
+
+Each cut needs its own packet: about 60 files touch CAFE, 70 touch tokenmaxx and 40 touch the Workshop Worker, with tests that pin their behaviour.
+
+## Before any deploy
+
+`apps/infra/alchemy.run.ts` still declares the `RatStack` stack with the `ratstack.sh` zone, its DNS and mail records, the workshop mail route and the Workshop Worker routes. It uses the `alchemy-state-store-ratstack-state-store` state store. A deploy with the `ratstack` profile would manage the live ratstack.sh resources. The first PAROL6 deploy needs its own domain, Alchemy profile and Cloudflare account, its own stack name and state store, and those ratstack.sh resources removed from the Stack.

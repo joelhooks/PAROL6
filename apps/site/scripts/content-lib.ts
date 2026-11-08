@@ -623,507 +623,141 @@ interface GlossaryPage {
 
 const glossaryDefinitions: readonly GlossaryEntry[] = [
   {
-    routePath: "/lore/at-protocol",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "The Authenticated Transfer Protocol, a decentralized protocol for social web applications with persistent account identities and signed public data repositories.",
-    term: "AT Protocol",
+      "The stepper driver module, in the StepStick format, that the PAROL6 control board takes six of; the firmware configures it over SPI.",
+    term: "TMC5160",
   },
   {
-    routePath: "/lore/at-protocol",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "A DID (decentralized identifier) gives an AT Protocol account a persistent identity linked to keys and a hosting provider.",
-    term: "decentralized identifier",
+      "One of the 32 subdivisions of a full motor step that the drivers run at, so one motor turn is 6,400 microsteps.",
+    term: "microstep",
   },
   {
-    routePath: "/lore/at-protocol",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "A Personal Data Server that hosts account data and serves as the authoritative host for the account's repository.",
-    term: "PDS",
+      "Control without position feedback: the motors have no encoders, so the position is the count of steps commanded since homing.",
+    term: "open loop",
   },
   {
-    routePath: "/lore/at-protocol",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "An AT Protocol schema definition for records, HTTP endpoints, or event stream messages, identified by a namespaced identifier.",
-    term: "lexicon",
+      "A contact that conducts until it is pressed; the E-stop must be one, so pressing it, unplugging it or cutting its wire all stop the robot.",
+    term: "normally closed",
   },
   {
-    routePath: "/lore/shitrat",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "Joel Hooks' terminal-dwelling AI familiar, with a public site and incident log at shitrat.ai.",
-    term: "ShitRat",
+      "The 2-pin circular connector that takes 24 V DC into the robot's base; it has no fixed +24 V pin, so polarity is checked by meter.",
+    term: "GX16",
   },
   {
-    routePath: "/lore/shitratgit-bot",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "The bot author identity used for ShitRat's commits in rat-stack's Git history.",
-    term: "shitratgit[bot]",
+      "The power connector on the control board that the base's GX16 socket is wired to.",
+    term: "XT30",
   },
   {
-    routePath: "/lore/code-snippets",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "A published TypeScript code block that the content build writes out and pnpm check typechecks, with explicit reasons required for authored examples that opt out.",
-    term: "doc-fence",
+      "The two pins on a driver module that show its orientation; they must point at the red arrows in the official figure.",
+    term: "DIAG pins",
   },
   {
-    routePath: "/lore/shitrat-bestiary",
+    routePath: "/lore/m1-bench-it",
     summary:
-      "Stored Git query results and source fingerprints that the content build checks for drift before rendering pages.",
-    term: "Git snapshot",
+      "The bench firmware every board ships with: it checks the six drivers, turns every motor slowly and reports the inputs over USB.",
+    term: "test firmware",
   },
   {
-    routePath: "/lore/rat-king",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "An agent-mail system with named mailboxes, signed messages, optional encryption, and Pi, CLI, and MCP clients.",
-    term: "Rat King",
+      "The STMicroelectronics programmer that uploads firmware to the board, through the PAROL6 programming adapter or the four named header pins only.",
+    term: "ST-Link",
   },
   {
-    routePath: "/lore/effect-basics",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "A TypeScript library for describing work with typed failures and required services. A runtime executes the description.",
-    term: "Effect",
+      "A compact gearbox on the motor; PAROL6 uses the EG precision series, 20 to 1 on joints 2 and 3 and 10 to 1 on joint 6.",
+    term: "planetary gearbox",
   },
   {
-    routePath: "/lore/effect-basics",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "A service that a description of work still needs before it can run.",
-    term: "requirement",
+      "Motor turns per joint turn; joint 6's 10 to 1 gearbox turns one motor revolution into 36 degrees at the joint.",
+    term: "transmission ratio",
   },
   {
-    routePath: "/lore/effect-basics",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "An unexpected execution failure, separate from the failures that callers are expected to handle.",
-    term: "defect",
+      "The play in a drive before the output moves; the EG gearboxes have 15 to 20 arc-minutes of it.",
+    term: "backlash",
   },
   {
-    routePath: "/lore/schemas-define-the-boundary",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "A description of accepted values, their TypeScript types, and the rules for checking and converting them at runtime.",
-    term: "Schema",
+      "The print material for PAROL6's parts; it softens around 80 °C, where PLA fails near the warm motors.",
+    term: "PETG",
   },
   {
-    routePath: "/lore/services-capture-dependencies",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "A named interface for one job. Callers request it by its identifier, and startup code supplies its implementation.",
-    term: "service",
+      "An adhesive for screw threads; blue goes on every metal-to-metal screw and on all set screws.",
+    term: "threadlocker",
   },
   {
-    routePath: "/lore/services-capture-dependencies",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "The identifier used to request a service, a named interface for one job, from Effect's collection of available implementations.",
-    term: "service tag",
+      "The contactless sensor that homes joints 1, 4 and 6 by sensing a small steel screw.",
+    term: "inductive sensor",
   },
   {
-    routePath: "/lore/layers-make-dependencies-explicit",
+    routePath: "/lore/m2-one-joint",
     summary:
-      "A description of how to build service implementations and supply what their construction needs.",
-    term: "Layer",
+      "A headless screw that clamps a coupler to a motor or gearbox shaft.",
+    term: "set screw",
   },
   {
-    routePath: "/lore/layers-make-dependencies-explicit",
+    routePath: "/lore/m3-whole-arm",
     summary:
-      "Sharing a constructed service within one build context by the identity of the Layer that builds it.",
-    term: "Layer memoization",
+      "Driving each joint to its switch or sensor, then a known number of steps to the after-homing pose; needed after every power-up, collision, stall or move by hand.",
+    term: "homing",
   },
   {
-    routePath: "/lore/layers-make-dependencies-explicit",
+    routePath: "/lore/m3-whole-arm",
     summary:
-      "Reusing a previously constructed result within a stated context. Service construction shares results by Layer identity within one build context.",
-    term: "memoization",
+      "Holes in neighbouring links that line up in the after-homing pose, so a pin pushed through them proves the pose.",
+    term: "witness marks",
   },
   {
-    routePath: "/systems/capabilities",
+    routePath: "/lore/m3-whole-arm",
     summary:
-      "The shared name, input, output, failure, and metadata for an action. It contains no server-side implementation.",
-    term: "contract",
+      "Correcting each joint's homed position in the firmware until a homed robot stands exactly at its witness marks.",
+    term: "mastering",
   },
   {
-    routePath: "/systems/capabilities",
+    routePath: "/lore/m3-whole-arm",
     summary:
-      "One named action with a contract describing its accepted values and a server-side implementation that performs the work.",
-    term: "capability",
+      "Moving one joint, or the tool along one axis, for as long as a button is held or a command repeats.",
+    term: "jogging",
   },
   {
-    routePath: "/systems/capabilities",
-    summary:
-      "The server-side implementation called after input validation and any required approval.",
-    term: "handler",
-  },
-  {
-    routePath: "/lore/one-capability-every-surface",
-    summary:
-      "Code that turns a named action and its shared definition into a command, HTTP API, MCP tool, RPC interface, or code-mode interface.",
-    term: "projection",
-  },
-  {
-    routePath: "/lore/one-capability-every-surface",
-    summary:
-      "Code that exposes a named action through a particular interface without adding separate business behavior.",
-    term: "capability projection",
-  },
-  {
-    routePath: "/lore/one-schema-three-surfaces",
-    summary:
-      "A way to call a named action, such as the command line or HTTP API.",
-    term: "interface",
-  },
-  {
-    routePath: "/lore/one-schema-three-surfaces",
-    summary:
-      "In the motto “one capability, every surface”, a way to call a named action. Other prose uses “interface”.",
-    term: "surface",
-  },
-  {
-    routePath: "/lore/cartridges",
-    summary:
-      "A package for one job that includes its implementation and needed infrastructure. It must pass the project's add-and-remove test.",
-    term: "cartridge",
-  },
-  {
-    routePath: "/lore/cartridges",
-    summary:
-      "Add one package and one provision line, then remove them without breaking unrelated packages. The package owns its resources and connections.",
-    term: "cartridge test",
-  },
-  {
-    routePath: "/lore/the-fence",
-    summary:
-      "Compiler checks, lint rules, and hooks that reject prohibited code and shortcuts. They do not prove every runtime behavior.",
-    term: "fence",
-  },
-  {
-    routePath: "/skills/learn-alchemy",
-    summary:
-      "An infrastructure tool built with Effect. Its program declares cloud resources and can produce a plan before applying changes.",
-    term: "Alchemy",
-  },
-  {
-    routePath: "/skills/learn-alchemy",
-    summary:
-      "One program that declares infrastructure and returns its outputs.",
-    term: "Alchemy Stack",
-  },
-  {
-    routePath: "/lore/alchemy-domain",
-    summary:
-      "Alchemy's domain-driven design framework for Effect: commands, aggregates and events, tested in memory and hosted on Cloudflare Durable Objects.",
-    term: "Alchemy Domain",
-  },
-  {
-    routePath: "/lore/bindings",
-    summary:
-      "A declared connection that gives a Cloudflare Worker a typed runtime value or access to a resource.",
-    term: "binding",
-  },
-  {
-    routePath: "/lore/mcp-is-another-surface",
-    summary:
-      "Model Context Protocol: a protocol through which an agent client discovers and calls tools.",
-    term: "MCP",
-  },
-  {
-    routePath: "/skills/learn-rat-stack",
-    summary:
-      "Remote procedure call: a client calls a named operation implemented on the server.",
-    term: "RPC",
-  },
-  {
-    routePath: "/lore/one-program-can-replace-several-tool-calls",
-    summary:
-      "Running one program that combines calls to declared actions inside a restricted environment.",
-    term: "code mode",
-  },
-  {
-    routePath: "/systems/agent-front-door",
-    summary:
-      "Agent2Agent protocol. This site's implementation answers documentation questions through search and read.",
-    term: "A2A",
-  },
-  {
-    routePath: "/systems/agent-front-door",
-    summary:
-      "The discovery documents and callable HTTP, MCP, A2A, and code-mode endpoints hosted by this site.",
-    term: "agent interfaces",
-  },
-  {
-    routePath: "/lore/hexagonal-architecture",
-    summary:
-      "An application-owned interface named for the job the application needs.",
-    term: "port",
-  },
-  {
-    routePath: "/lore/hexagonal-architecture",
-    summary:
-      "An implementation that connects an application-owned interface to a particular external technology or provider.",
-    term: "adapter",
-  },
-  {
-    routePath: "/lore/structure-effect-by-domain",
-    summary:
-      "Startup code that chooses and supplies the application's service implementations.",
-    term: "composition root",
-  },
-  {
-    routePath: "/lore/context-and-requirements",
-    summary: "The collection of services supplied to running work in Effect.",
-    term: "context",
-  },
-  {
-    routePath: "/lore/error-model",
-    summary:
-      "A declared failure carried in an Effect description's E type parameter. Callers can handle it.",
-    term: "expected failure",
-  },
-  {
-    routePath: "/lore/lifecycles-are-machines",
-    summary:
-      "A running unit that processes events or performs work for a state machine. Declared Effect actors perform this repo's side effects.",
-    term: "actor",
-  },
-  {
-    routePath: "/lore/lifecycles-are-machines",
-    summary: "Named states and the events that permit movement between them.",
-    term: "state machine",
-  },
-  {
-    routePath: "/lore/lifecycles-are-machines",
-    summary:
-      "A definition of named states and the events that permit movement between them.",
-    term: "machine",
-  },
-  {
-    routePath: "/lore/concurrent-work-needs-an-owner",
-    summary:
-      "Independently running work in Effect. Its fork operation determines its lifetime and ownership.",
-    term: "fiber",
-  },
-  {
-    routePath: "/lore/concurrent-work-needs-an-owner",
-    summary:
-      "Independently running work owned by a cleanup scope. Closing that scope interrupts the work.",
-    term: "scoped fiber",
-  },
-  {
-    routePath: "/lore/concurrent-work-needs-an-owner",
-    summary:
-      "The number of collection items whose work can run at the same time.",
-    term: "traversal concurrency",
-  },
-  {
-    routePath: "/lore/concurrent-work-needs-an-owner",
-    summary:
-      "A consumer's demand limits how quickly its producer can progress. An unbounded queue can break that constraint.",
-    term: "backpressure",
-  },
-  {
-    routePath: "/lore/concurrent-work-needs-an-owner",
-    summary:
-      "A stream consumer requests data as it can process it, limiting the producer's progress.",
-    term: "stream backpressure",
-  },
-  {
-    routePath: "/lore/scopes-own-resources",
-    summary:
-      "An owner for registered cleanup operations. Closing it runs those operations.",
-    term: "Scope",
-  },
-  {
-    routePath: "/lore/scopes-own-resources",
-    summary:
-      "A cleanup operation registered with an owner or an acquire-use-release operation.",
-    term: "resource finalizer",
-  },
-  {
-    routePath: "/lore/configuration-is-a-dependency",
-    summary:
-      "A description of how to build a service containing validated configuration values.",
-    term: "configuration Layer",
-  },
-  {
-    routePath: "/lore/configuration-is-a-dependency",
-    summary:
-      "The source of raw configuration inputs that Effect reads and validates.",
-    term: "ConfigProvider",
-  },
-  {
-    routePath: "/lore/run-effect-at-the-boundary",
-    summary:
-      "The place where code outside Effect needs to execute a description of work.",
-    term: "runtime boundary",
-  },
-  {
-    routePath: "/lore/run-effect-at-the-boundary",
-    summary:
-      "A runtime that retains constructed services between calls until it is disposed.",
-    term: "managed runtime",
-  },
-  {
-    routePath: "/lore/http-responses-need-validation",
-    summary:
-      "Repeating an operation creates no additional change beyond its first successful application.",
-    term: "idempotency",
-  },
-  {
-    routePath: "/lore/trace-meaningful-operations",
-    summary:
-      "Understanding a running system through logs, metrics, and traces.",
-    term: "observability",
-  },
-  {
-    routePath: "/lore/trace-meaningful-operations",
-    summary:
-      "The logs, measurements, and trace data recorded about a running system.",
-    term: "telemetry",
-  },
-  {
-    routePath: "/lore/trace-meaningful-operations",
-    summary: "A record of an operation's timing and outcome.",
-    term: "trace span",
-  },
-  {
-    routePath: "/lore/trace-meaningful-operations",
-    summary: "A record of an operation's timing and outcome.",
-    term: "tracing span",
-  },
-  {
-    routePath: "/lore/trace-meaningful-operations",
-    summary:
-      "Sending recorded trace data to a collector. Sending, acceptance, and stored retrieval are separate observations.",
-    term: "trace export",
-  },
-  {
-    routePath: "/skills/add-a-store",
-    summary:
-      "The authoritative store for a fact. Derived copies can be rebuilt from it.",
-    term: "system of record",
-  },
-  {
-    routePath: "/skills/add-a-store",
-    summary:
-      "Derived data arranged for efficient reads. It does not become the authority for writes.",
-    term: "read model",
-  },
-  {
-    routePath: "/lore/code-snippets",
-    summary:
-      "A code block delimited by backticks. Its opening line can carry a language and excerpt options.",
-    term: "Markdown code fence",
-  },
-  {
-    routePath: "/lore/code-snippets",
-    summary:
-      "Options on the opening line of a Markdown code block. These options are separate from the project's enforcement checks.",
-    term: "fence metadata",
-  },
-  {
-    routePath: "/lore/code-snippets",
-    summary:
-      "The repository, commit, file, and original lines from which an excerpt comes.",
-    term: "provenance",
-  },
-  {
-    routePath: "/lore/build-time-work-stays-out-of-requests",
-    summary: "Generated output identified by a hash of its content.",
-    term: "content-addressed output",
-  },
-  {
-    routePath: "/skills/gardener",
-    summary: "An exact dependency version or source revision.",
-    term: "pin",
-  },
-  {
-    routePath: "/lore/pinned-sources-can-report-drift",
-    summary:
-      "A difference between selected pinned lines and the current source. It does not replace the pinned text.",
-    term: "source drift",
-  },
-  {
-    routePath: "/lore/engine-neutral-tokens-keep-adapters-replaceable",
-    summary:
-      "A segment of source text with a syntax role and font style, independent of Shiki's types.",
-    term: "engine-neutral token",
-  },
-  {
-    routePath: "/lore/engine-neutral-tokens-keep-adapters-replaceable",
-    summary:
-      "An interface for turning source code into per-line syntax tokens.",
-    term: "highlighter port",
-  },
-  {
-    routePath: "/lore/accumulate-independent-errors",
-    summary:
-      "Collecting independent failures so one result reports all of them before generated files are written.",
-    term: "error accumulation",
-  },
-  {
-    routePath: "/lore/there-is-no-isr-on-cloudflare",
-    summary:
-      "Incremental static regeneration: rebuilding a cached page after its revalidation interval while serving a previously generated page.",
-    term: "ISR",
-  },
-  {
-    routePath: "/lore/there-is-no-isr-on-cloudflare",
-    summary:
-      "Cloudflare's programmable cache for HTTP responses. Each location holds its own cached responses.",
-    term: "Workers Cache",
-  },
-  {
-    routePath: "/lore/tests-that-earn-their-place",
-    summary:
-      "Tests whose expected answers repeat the implementation instead of stating an independent rule.",
-    term: "tautological tests",
-  },
-  {
-    routePath: "/lore/no-comments",
-    summary:
-      "Prose comments are banned. Explained tool directives, safety assertions, and type-only JavaScript JSDoc have stated exceptions.",
-    term: "no comments",
-  },
-  {
-    routePath: "/skills/uncomplect",
-    summary: "Separate concerns that currently change together.",
-    term: "uncomplect",
-  },
-  {
-    routePath: "/skills/uncomplect",
-    summary:
-      "A thin browser route and view that reads client state and calls named client commands.",
-    term: "feature",
-  },
-  {
-    routePath: "/skills/uncomplect",
-    summary:
-      "Browser code that owns queries, named commands, and the local copy of server state.",
-    term: "client",
-  },
-  {
-    routePath: "/lore/circuit-breakers-have-state",
-    summary:
-      "A guard that fails calls to an unhealthy dependency at once, then lets a probe test recovery.",
-    term: "circuit breaker",
-  },
-  {
-    routePath: "/lore/bulkheads-isolate-capacity",
-    summary:
-      "A reserved share of capacity that one workload cannot take from another.",
-    term: "bulkhead",
-  },
-  {
-    routePath: "/lore/dead-letters-need-a-return-path",
-    summary:
-      "A durable holding place for work that exhausted its retries, with an owner who repairs and redrives it.",
-    term: "dead-letter queue",
+    routePath: "/lore/m3-whole-arm",
+    summary: "The mechanical switch that homes joints 2, 3 and 5.",
+    term: "limit switch",
   },
   {
-    routePath: "/lore/admission-controls-new-work",
+    routePath: "/lore/m4-pick-and-place",
     summary:
-      "A decision at the entry point to accept, defer, or refuse new work under current load.",
-    term: "admission control",
+      "The tool centre point: the point on the tool that the software positions, set as a transform from the flange.",
+    term: "TCP",
   },
   {
-    routePath: "/lore/retry-load-needs-a-budget",
+    routePath: "/lore/skiff-target",
     summary:
-      "A limit on the total retry attempts that one owner allows across a call path.",
-    term: "retry budget",
+      "Horizontal pitch, the Eurorack panel width unit; 1 HP is 5.08 mm.",
+    term: "HP",
   },
 ];
 
@@ -1627,7 +1261,7 @@ export const debtLedgerMarkdown = (entries: readonly DebtEntry[]) => {
     .map(([kind, count]) => `- **${kind}**: ${count}`);
 
   const rows = entries.map((entry) => {
-    const link = `https://github.com/joelhooks/rat-stack/blob/main/${entry.file}#L${entry.line}`;
+    const link = `https://github.com/joelhooks/PAROL6/blob/main/${entry.file}#L${entry.line}`;
     const reason = entry.reason ?? "no reason given";
 
     return `- **[${entry.file}:${entry.line}](${link})**\n  - Directive: ${tableCell(entry.directive)}\n  - Reason: ${tableCell(reason)}`;

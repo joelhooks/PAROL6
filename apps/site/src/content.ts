@@ -336,8 +336,8 @@ export const a2aAgentCard = (origin: string) => ({
   defaultInputModes: ["text/plain"],
   defaultOutputModes: ["text/plain"],
   description:
-    "Answers questions about rat-stack by searching and reading its public files.",
-  name: "Rat Stack",
+    "Answers questions about the PAROL6 build by searching and reading its public wiki.",
+  name: "PAROL6 build",
   skills: [
     {
       description:
@@ -364,7 +364,7 @@ export const a2aAgentCard = (origin: string) => ({
 export const ardManifest = (origin: string) => ({
   entries: [
     {
-      displayName: "Rat Stack MCP",
+      displayName: "PAROL6 build MCP",
       identifier: "urn:air:ratstack.sh:server:mcp",
       representativeQueries: [
         "how do I add a capability",
@@ -374,7 +374,7 @@ export const ardManifest = (origin: string) => ({
       url: `${origin}/.well-known/mcp.json`,
     },
     {
-      displayName: "Rat Stack A2A Agent",
+      displayName: "PAROL6 build A2A Agent",
       identifier: "urn:air:ratstack.sh:agent:a2a",
       representativeQueries: [
         "answer a question about rat-stack",
@@ -385,7 +385,7 @@ export const ardManifest = (origin: string) => ({
     },
   ],
   host: {
-    displayName: "Rat Stack",
+    displayName: "PAROL6 build",
     identifier: "did:web:ratstack.sh",
   },
   specVersion: "1.0",

@@ -1,0 +1,129 @@
+---
+title: "M1. Bench it: power, one motor, a safe stop"
+description: "The first milestone takes a bare control board and one motor to a live bench rig that powers on, turns a motor and stops when the mains switch goes off."
+plain: "Power the board on a bench, see six drivers report, turn one loose motor, read the E-stop and a switch, and stop it all at the wall."
+group: concept
+prerequisites:
+  - /lore/milestones
+terms:
+  - TMC5160
+  - microstep
+  - "open loop"
+  - "normally closed"
+  - GX16
+  - XT30
+  - "DIAG pins"
+  - "test firmware"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/01-overview/robot-system/
+    title: "Robot system, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The arm, the control board and the PC, and the 10 ms packet cycle."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "200 steps per turn, 32 microsteps, open loop without encoders."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/
+    title: "Connecting, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "GX16 power socket, polarity, the normally closed E-stop and the switch within reach."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/board/05-stepper-drivers/
+    title: "Stepper drivers, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "TMC5160 modules, DIAG pin orientation and the four ways to destroy the board."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/
+    title: "The test firmware, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Power-on driver report, the #IO, #LIMIT and #STOP commands and the danger box."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/
+    title: "Electronics and wiring, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The GX16 socket to the XT30 on the board, polarity checked twice."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/
+    title: "Firmware and first run, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The build guide's first bench check, which this milestone's done check follows."
+    accessed: "2026-11-07"
+  - url: https://youtu.be/rv8zt6-3rvo
+    title: "PAROL6 setup and calibration"
+    publisher: "Source Robotics on YouTube"
+    note: "The power-up clicks and current draw to expect, at 2:30."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** take a bare control board and one motor from the box to a live bench rig. It powers on safely, reports its drivers, turns a motor, reads the E-stop and a switch, and stops when you cut the power.
+
+## Parts
+
+- The control board with six TMC5160 drivers, the GX16 power connector and its XT30 lead, the E-stop, one limit switch, and the power button with its JST PH lead. The [bill of materials](https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/) lists each one.
+- One NEMA 17 motor, loose on the bench.
+- A 24 V DC supply of at least 5 A ([Connecting, "The power supply"](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/)).
+- A USB-B cable, a switched power strip within reach, a multimeter, and a computer with a serial terminal.
+
+## Concepts
+
+- **The robot system.** The arm, the control board and the PC each have a job. Every 10 ms the PC sends the board a packet ([Robot system](https://docs.source-robotics.com/PAROL-docs/1.1/01-overview/robot-system/); [Serial protocol](https://docs.source-robotics.com/PAROL-docs/1.1/board/10-serial-protocol/)).
+- **Steppers and drivers.** A motor has 200 full steps per turn. The drivers run at 32 microsteps, so one motor turn is 6,400 microsteps. The motors run open loop, with no encoder ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **Why the E-stop is normally closed.** Open means stop, so a cut wire or an unplugged button also stops the robot ([Connecting, "The E-stop"](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/)).
+- **Why the mains switch matters.** It is the stop that still works when the PC software has frozen ([What you need](https://docs.source-robotics.com/PAROL-docs/1.1/01-overview/what-you-need/)).
+
+## How-to
+
+Open these official pages at the step that needs them:
+
+- [Stepper drivers](https://docs.source-robotics.com/PAROL-docs/1.1/board/05-stepper-drivers/): the four ways to destroy the board, including a driver inserted backwards and a driver without its heatsink cemented on.
+- [Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/) and [Connecting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/): supply polarity. The GX16 has no fixed +24 V pin, and the board has no reverse-polarity protection.
+- [The test firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/): open a serial terminal that sends a line feed, then use `#IO`, `#LIMIT` and `#STOP`.
+
+## Safety facts that shape the task
+
+The test firmware turns every motor at 1000 steps per second from boot until the power goes off, and no command stops it. `#STOP` only ends a printout ([The test firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/), danger box).
+
+So in M1 the safe stop is the switched mains strip, and the motor sits loose on the bench. Nothing is mounted in a joint yet.
+
+## Practice
+
+- Meter the supply output and mark + and −.
+- Crimp and solder the GX16 plug.
+- Check driver orientation by the DIAG pins. Repeat this on every power-on after touching the drivers.
+- Drive the serial terminal until the commands are automatic.
+
+## Done check
+
+On camera, from cold:
+
+1. Polarity is metered and marked.
+2. The drivers are checked by their DIAG pins.
+3. Power goes on through the switched strip.
+4. The power-on report shows six `Connection is: GOOD` lines.
+5. The motor turns.
+6. `#IO` shows about 24000 mV and follows the E-stop as it is pressed and released.
+7. `#LIMIT` names the switch while it is pressed.
+8. The strip switch stops everything.
+
+This is the build guide's own first check ([Firmware and first run](https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/), section 1), with only one motor connected.
+
+**Settled: one motor is enough.** The `GOOD` or `BAD` line is an SPI check of the driver module, and the test firmware's open-load printing is commented out ([`main.cpp`, lines 868 to 936](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/e76f48d/PAROL6%20control%20board%20test%20code/src/main.cpp#L868-L936)). Swap motors only with the 24 V off.
+
+At power-up you should hear clicks and see about 1.5 A drawn at 24 V. If not, disconnect ([PAROL6 setup and calibration, from 2:30](https://youtu.be/rv8zt6-3rvo?t=150)).
+
+## Terms
+
+- **TMC5160**: the stepper driver module, in the StepStick format, that the board takes six of. The firmware configures it over SPI ([Stepper drivers](https://docs.source-robotics.com/PAROL-docs/1.1/board/05-stepper-drivers/)).
+- **microstep**: one of the 32 subdivisions of a full step the drivers run at, so one motor turn is 6,400 microsteps ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **open loop**: control with no position feedback. The motors have no encoders, so the position is the count of steps commanded since homing ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **normally closed**: a contact that conducts until it is pressed. The E-stop must be one, so pressing it, unplugging it or cutting its wire all stop the robot ([Connecting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/)).
+- **GX16**: the 2-pin circular connector that takes 24 V into the robot's base ([Connecting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/)).
+- **XT30**: the power connector on the control board that the GX16 socket is wired to ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
+- **DIAG pins**: the two pins on a driver module that show its orientation. They must point at the red arrows in the official figure ([Stepper drivers](https://docs.source-robotics.com/PAROL-docs/1.1/board/05-stepper-drivers/)).
+- **test firmware**: the bench firmware every board ships with. It checks the six drivers, turns every motor slowly and reports the inputs over USB ([The test firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/)).
+
+## Video
+
+[The M1 video](/lore/video-m1) is planned.

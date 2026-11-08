@@ -22,7 +22,7 @@ const readerFamilies = readerWebsiteRoutes
 const pathSchema = Schema.Union([
   Schema.Literals([
     "/",
-    "/lore/services-capture-dependencies",
+    "/lore/m1-bench-it",
     "/prompts",
     "/prompts/example",
     "/learn",
