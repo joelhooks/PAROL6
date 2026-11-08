@@ -1,0 +1,59 @@
+---
+title: "M7. Play it"
+description: "The capstone milestone runs a script that patches cables and moves knobs on cue to perform a short written piece."
+plain: "The robot performs a three-minute patch-change score in one take while Joel explains each move."
+group: concept
+prerequisites:
+  - /lore/m6-patch-a-cable
+terms:
+  - "patch-change score"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/
+    title: "Python API, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The program runner for the performance scripts."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/
+    title: "Homing, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Re-homing after a stall, for recovery mid-performance."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** a script patches cables, moves knobs and changes them on a schedule. It performs a short piece.
+
+**Our design.** The PAROL6 manual stops at pick-and-place, so this milestone is ours.
+
+## Parts
+
+- The [M5](/lore/m5-touch-the-skiff) and [M6](/lore/m6-patch-a-cable) rig.
+- A clock source, chosen with [the skiff](/lore/skiff-target).
+- A sequencer script on the PC.
+
+## Concepts
+
+- **Sequencing**, and timing the robot's motion against a musical clock. The arm is slow, so the score is a patch-change score.
+- **MIDI and CV control.**
+- **Handling failure mid-performance.** A stall means the arm must home again ([Homing](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/)).
+
+## How-to
+
+- Our performance scripts.
+- The [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/) program runner.
+
+## Practice
+
+- Rehearsal runs.
+- Recovery drills: home again and resume.
+
+## Done check
+
+A 3-minute performance of a written score of patch moves and knob moves on cues, recorded in one take, with Joel narrating what each move does to the sound.
+
+## Terms
+
+- **patch-change score**: a score written as cable and knob moves on cues, slow enough for the arm, instead of a score of notes. Our design.
+
+## Video
+
+[The M7 video](/lore/video-m7) is planned. It is the capstone release: the performance first, then the breakdown.

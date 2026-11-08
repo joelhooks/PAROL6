@@ -26,8 +26,8 @@ test.provider(
         "/VISION.md",
         "/sitemap.xml",
         "/log",
-        "/lore/effect-basics",
-        "/resources/peers",
+        "/lore/m1-bench-it",
+        "/lore/milestones",
       ];
 
       const responses = yield* Effect.all(

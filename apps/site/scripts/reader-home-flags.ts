@@ -30,7 +30,7 @@ export const readerHomeFlags = Effect.fn("readerHomeFlags")(
         compileReaderDocument(
           inputs.homeSource.replaceAll("__RATSTACK_ORIGIN__", origin),
           inputs.loreTermTargets,
-          { heading: "Rat Stack", route: "/" }
+          { heading: "PAROL6 build", route: "/" }
         ),
     });
 
@@ -105,7 +105,7 @@ export const readerHomeFlags = Effect.fn("readerHomeFlags")(
         showText: prompt.showText,
         text: prompt.text.replaceAll("__RATSTACK_ORIGIN__", origin),
       })),
-      heading: "Rat Stack",
+      heading: "PAROL6 build",
       newsTitle: readerNewsTitle(page.html),
       origin,
       page: {

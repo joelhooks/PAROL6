@@ -19,7 +19,12 @@ export const readerMetadataHead = (
 ): string => {
   const canonical = `${origin}${metadata.canonicalPath}`;
   const image = `${origin}${metadata.ogImagePath}`;
-  const publisher = { "@type": "Organization", name: "rat-stack", url: origin };
+
+  const publisher = {
+    "@type": "Organization",
+    name: "PAROL6 build",
+    url: origin,
+  };
 
   const data =
     metadata.jsonLd === "WebSite"
@@ -27,7 +32,7 @@ export const readerMetadataHead = (
           "@context": "https://schema.org",
           "@type": "WebSite",
           description: metadata.description,
-          name: "rat-stack",
+          name: "PAROL6 build",
           publisher,
           url: origin,
         }
@@ -50,7 +55,7 @@ export const readerMetadataHead = (
     propertyMeta("og:type", "website"),
     propertyMeta("og:title", metadata.title),
     propertyMeta("og:description", metadata.description),
-    propertyMeta("og:site_name", "ratstack.sh"),
+    propertyMeta("og:site_name", "PAROL6 build"),
     propertyMeta("og:image", image),
     propertyMeta("og:image:width", "1200"),
     propertyMeta("og:image:height", "630"),

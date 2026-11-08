@@ -10,9 +10,7 @@ import {
 } from "../src/bundled-content.generated.ts";
 import { ContentCatalog } from "../src/content-data.ts";
 import { markdownDiscoveryLinks } from "../src/content-links.ts";
-import { parseLorePage } from "./content-lib.ts";
 import { ReaderInputError } from "./reader-input-error.ts";
-import { contentDates } from "./seo-metadata.ts";
 
 const envelope = Schema.Struct({
   data: ContentCatalog,
@@ -123,7 +121,6 @@ export const prepareReaderSiteInputs = Effect.gen(
   function* prepareReaderSiteInputs() {
     const fs = yield* FileSystem.FileSystem;
     const paths = yield* Path.Path;
-    const repository = new URL("../../../", import.meta.url).pathname;
     const { directory, documents, manifest } = yield* readerAssetInputs;
 
     const catalog = yield* fs
@@ -206,32 +203,12 @@ export const prepareReaderSiteInputs = Effect.gen(
       );
     }
 
-    const sourcePath =
-      ".brain/resources/lore/services-capture-dependencies.svx";
-
-    const raw = yield* fs.readFileString(paths.join(repository, sourcePath));
-
-    const lore = yield* Effect.try({
-      catch: (cause) =>
-        new ReaderInputError({
-          cause,
-          message:
-            "Cannot decode the hand-converted lore source; repair its frontmatter or body",
-          sourcePath,
-        }),
-      try: () => ({
-        ...parseLorePage(sourcePath, raw),
-        ...contentDates(raw, sourcePath),
-      }),
-    });
-
     return {
       cafe: source.cafe,
       directory,
       generation: manifest.generation,
       homeSource: source.home,
       images: manifest.images,
-      lore,
       loreTermTargets: source.loreTermTargets,
       pages,
       prompts: source.prompts,

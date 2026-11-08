@@ -55,10 +55,10 @@ export const renderCopyPrompt = (spec: CopyPromptSpec) => {
 };
 
 const siteNavigation =
-  '<header><nav aria-label="Primary navigation" class="site-nav"><a class="brand" href="/"><strong>🐀 Rat Stack</strong></a> <div class="site-links"><ul><li><a href="/skills">skills</a></li> <li><a href="/lore">lore</a></li> <li><a href="/systems">systems</a></li> <li><a href="/news">news</a></li> <li><a href="/all-stars">all stars</a></li> <li><a href="/glossary">glossary</a></li> <li><a href="/search">search</a></li></ul> <ul><li><a href="/llms.txt">agent guide</a></li></ul></div></nav></header>';
+  '<header><nav aria-label="Primary navigation" class="site-nav"><a class="brand" href="/"><strong>🦾 PAROL6 build</strong></a> <div class="site-links"><ul><li><a href="/lore/milestones">milestones</a></li> <li><a href="/lore/videos">videos</a></li> <li><a href="/lore/sources">sources</a></li> <li><a href="/lore">wiki</a></li> <li><a href="/glossary">glossary</a></li> <li><a href="/search">search</a></li></ul> <ul><li><a href="/llms.txt">agent guide</a></li></ul></div></nav></header>';
 
 const siteFooter =
-  '<footer><hr> <div class="site-reference"><section aria-label="Explore"><h2>Explore</h2> <ul><li><a href="/learn">learn mode</a></li> <li><a href="/glossary">glossary</a></li> <li><a href="/log">change log</a></li> <li><a href="/resources/peers">peers</a></li></ul></section> <section aria-label="Reference"><h2>Reference</h2> <ul><li><a href="/llms.txt">agent guide</a></li> <li><a href="/openapi.json">API docs</a></li> <li><a href="https://github.com/joelhooks/rat-stack">source</a></li></ul></section></div> <p>Markdown by default. HTML when you ask for it. <a href="/llms.txt">Agents start here</a>.</p></footer>';
+  '<footer><hr> <div class="site-reference"><section aria-label="Explore"><h2>Explore</h2> <ul><li><a href="/lore/milestones">milestones</a></li> <li><a href="/glossary">glossary</a></li> <li><a href="/lore/skiff-target">the skiff</a></li> <li><a href="/log">change log</a></li></ul></section> <section aria-label="Reference"><h2>Reference</h2> <ul><li><a href="/llms.txt">agent guide</a></li> <li><a href="/openapi.json">API docs</a></li> <li><a href="https://github.com/joelhooks/PAROL6">source</a></li></ul></section></div> <p>Built on <a href="https://github.com/joelhooks/rat-stack">rat-stack</a>. Markdown by default. HTML when you ask for it. <a href="/llms.txt">Agents start here</a>.</p></footer>';
 
 const meta = (key: "name" | "property", name: string, content: string) =>
   `<meta ${key}="${name}" content="${escapeHtmlAttribute(content)}">`;
@@ -76,7 +76,7 @@ export const renderDocumentShell = (shell: DocumentShell) => {
     ` ${meta("property", "og:title", shell.title)}`,
     ` ${meta("property", "og:description", shell.description)}`,
     ` ${meta("property", "og:url", canonicalUrl)}`,
-    ` ${meta("property", "og:site_name", "ratstack.sh")}`,
+    ` ${meta("property", "og:site_name", "PAROL6 build")}`,
     ` ${meta("property", "og:image", shell.ogImageUrl)}`,
     ` ${meta("property", "og:image:width", "1200")}`,
     ` ${meta("property", "og:image:height", "630")}`,

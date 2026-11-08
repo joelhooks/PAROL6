@@ -7,7 +7,7 @@ export interface LogPage {
   readonly title: string;
 }
 
-const repository = "https://github.com/joelhooks/rat-stack";
+const repository = "https://github.com/joelhooks/PAROL6";
 
 export const historyArgs = [
   "log",

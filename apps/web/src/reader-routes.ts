@@ -1,6 +1,5 @@
 export const readerRoutePaths: readonly string[] = [
   "/",
-  "/lore/services-capture-dependencies",
   "/learn",
   "/news",
   "/directory",
@@ -17,11 +16,6 @@ export const readerBodyRoutePaths: readonly string[] = [
   "/log",
   "/log.md",
   "/pins.md",
-  "/resources/effect-4-reference-projects",
-  "/resources/lint-rule-limits",
-  "/resources/peers",
-  "/resources/same-version-repos",
-  "/resources/schema-projections-and-code-mode",
   "/tokenmaxx",
   "/vendor/README.md",
 ];

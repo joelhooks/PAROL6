@@ -71,7 +71,7 @@ export const contentDates = (
 };
 
 export const pageTitle = (title: string) => {
-  const branded = `${title} | rat-stack`;
+  const branded = `${title} | PAROL6 build`;
 
   return branded.length > 60 ? title : branded;
 };
@@ -93,7 +93,7 @@ export const structuredData = (input: {
 
   const publisher = {
     "@type": "Organization",
-    name: "rat-stack",
+    name: "PAROL6 build",
     url: input.origin,
   };
 
@@ -103,7 +103,7 @@ export const structuredData = (input: {
           "@context": "https://schema.org",
           "@type": "WebSite",
           description: input.description,
-          name: "rat-stack",
+          name: "PAROL6 build",
           publisher,
           url: input.origin,
         }

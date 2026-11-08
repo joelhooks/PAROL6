@@ -1,5 +1,9 @@
 # Provenance
 
+This repository started on 2026-11-08 as a copy of the [rat-stack](https://github.com/joelhooks/rat-stack) template by Joel Hooks (MIT) at `ae24f6a`. The workspace, packages, content build, reader, fence and agent skills come from it; the PAROL6 wiki content in `.brain/resources/lore/`, the public-safety guard in `scripts/public-safety*.ts`, and the rebrand are new.
+
+PAROL6 itself is by [Source Robotics](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm): hardware under CERN-OHL-S-2.0, firmware under GPL-3.0. The wiki links its manual, files, images and PDFs and does not copy them.
+
 rat-stack bans comments in code (see AGENTS.md). Credit for borrowed code lives here instead.
 
 | Code | Origin | Notes |

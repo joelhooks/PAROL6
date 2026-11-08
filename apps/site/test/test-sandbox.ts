@@ -36,7 +36,7 @@ const sandboxLayer = Layer.succeed(Sandbox, {
 
       const searched = yield* invoke("search", {
         limit: 1,
-        query: "capability",
+        query: "motor",
       }).pipe(Effect.flatMap(unwrap));
 
       const searchResult = yield* Schema.decodeUnknownEffect(SearchWire)(
@@ -56,7 +56,7 @@ const sandboxLayer = Layer.succeed(Sandbox, {
       );
 
       const result = code.includes("tools.neighbors")
-        ? yield* invoke("neighbors", { depth: 1, slug: "cartridges" }).pipe(
+        ? yield* invoke("neighbors", { depth: 1, slug: "m1-bench-it" }).pipe(
             Effect.flatMap(unwrap)
           )
         : resource;

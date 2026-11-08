@@ -1,9 +1,10 @@
 [
-  "lore.context-and-requirements",
-  "lore.services-capture-dependencies",
-  "lore.layer-constructor-pattern",
-  "lore.layers-make-dependencies-explicit",
-  "lore.dependency-injection-is-the-reason-to-choose-effect",
-  "lore.configuration-is-a-dependency",
-  "lore.tests-that-earn-their-place"
+  "lore.milestones",
+  "lore.m1-bench-it",
+  "lore.m2-one-joint",
+  "lore.m3-whole-arm",
+  "lore.m4-pick-and-place",
+  "lore.m5-touch-the-skiff",
+  "lore.m6-patch-a-cable",
+  "lore.m7-play-it"
 ]

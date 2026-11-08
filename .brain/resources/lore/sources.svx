@@ -1,0 +1,67 @@
+---
+title: "PAROL6 sources and licences"
+description: "Every build fact on this wiki comes from the official PAROL6 manual and repository, which are linked here with their licences."
+plain: "Official docs and repo first; this wiki links their images and PDFs and does not copy them."
+group: concept
+terms:
+  - "CERN-OHL-S-2.0"
+  - "GPL-3.0"
+  - "official sources"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/
+    title: "PAROL6 documentation 1.1"
+    publisher: "Source Robotics"
+    note: "The official manual: overview, safety, technical data, installation, operation, build, board and programming."
+    accessed: "2026-11-07"
+  - url: https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm
+    title: "PAROL6-Desktop-robot-arm"
+    publisher: "Source Robotics on GitHub"
+    note: "STL files, BOM, building instructions, print table, firmware and the licence statement."
+    accessed: "2026-11-07"
+  - url: https://github.com/Source-Robotics/PAROL-commander-software
+    title: "PAROL-commander-software"
+    publisher: "Source Robotics on GitHub"
+    note: "The commander desktop software for jogging, simulation and RBTscript programs."
+    accessed: "2026-11-07"
+  - url: https://github.com/Source-Robotics/PAROL-docs
+    title: "PAROL-docs"
+    publisher: "Source Robotics on GitHub"
+    note: "The source of the official manual."
+    accessed: "2026-11-07"
+  - url: https://www.doepfer.de/a100_man/a100m_e.htm
+    title: "A-100 construction details"
+    publisher: "Doepfer Musikelektronik"
+    note: "The Eurorack mechanical format: 3U panels and the HP grid."
+    accessed: "2026-11-07"
+  - url: https://www.4cid.org/
+    title: "Four-Component Instructional Design"
+    publisher: "4C/ID"
+    note: "The instructional design model behind the milestones."
+    accessed: "2026-11-07"
+---
+
+## The official sources
+
+- **[The PAROL6 manual](https://docs.source-robotics.com/PAROL-docs/1.1/)**, release 1.1, by Source Robotics. Milestones 1 to 4 follow it step by step. Its source lives in [PAROL-docs](https://github.com/Source-Robotics/PAROL-docs).
+- **[The robot repository](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm)**: STL files, the BOM, the [building instructions PDF](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/main/Building%20instructions/Parol%20building%20instructions.pdf), the [print table](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/main/Print%20table/PR_EXCEL.xlsx), and the firmware.
+- **[The commander software](https://github.com/Source-Robotics/PAROL-commander-software)**: jogging, a 3D simulator and RBTscript programs.
+
+## Licences
+
+The [repository README](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm) states the licences:
+
+- **Hardware** is under the CERN Open Hardware Licence Version 2, Strongly Reciprocal (CERN-OHL-S-2.0). That covers everything in the repository except the firmware: the STL files, the BOM, the building instructions, the print table and the robot models.
+- **Firmware** in the main software and test code folders is under GPL-3.0. The libraries in their `lib` folders keep their own licences.
+
+This wiki links official images and PDFs and does not copy them. Quotes stay short and cite their page.
+
+## Other sources
+
+- [Doepfer's A-100 construction details](https://www.doepfer.de/a100_man/a100m_e.htm) define the Eurorack format used from [M5](/lore/m5-touch-the-skiff) on.
+- [Four-component instructional design](https://www.4cid.org/) shapes how the [milestones](/lore/milestones) are built.
+
+## Terms
+
+- **CERN-OHL-S-2.0**: the strongly reciprocal CERN Open Hardware Licence, version 2, which covers PAROL6's hardware files ([repository README](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm)).
+- **GPL-3.0**: the GNU General Public License, version 3, which covers PAROL6's firmware ([repository README](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm)).
+- **official sources**: the Source Robotics manual and repositories listed on this page.

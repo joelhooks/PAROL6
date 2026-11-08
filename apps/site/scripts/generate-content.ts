@@ -136,7 +136,6 @@ import {
   renderNewsCallout,
   withNewsPointer,
 } from "./news-callout.ts";
-import { peerPins, PeerRows, renderPeers } from "./peers.ts";
 import { validatePromptSources } from "./prompt-source.ts";
 import {
   groupUnlinkedMentions,
@@ -165,7 +164,18 @@ import { writeFileAtomically } from "./write-file-atomically.ts";
 
 const originToken = "__RATSTACK_ORIGIN__";
 
-const repoUrl = "https://github.com/joelhooks/rat-stack";
+const repoUrl = "https://github.com/joelhooks/PAROL6";
+
+const isMilestoneSlug = (slug: string) => {
+  const [prefix = ""] = slug.split("-");
+  const number = prefix.slice(1);
+
+  return (
+    prefix.startsWith("m") &&
+    number !== "" &&
+    String(Math.trunc(Number(number))) === number
+  );
+};
 
 const repoPathToken =
   /^(?:\.brain|\.pi|\.cursor|\.claude|apps|packages|scripts|skills|vendor)\/[\w./-]+$|^[\w.-]+\.(?:md|ts|js|json|yml|yaml|toml|schema)$/u;
@@ -356,12 +366,7 @@ const compileName = (spec: SourceSpec) => {
 };
 
 const tagline =
-  "An Effect stack so pure (aspirational) Kit Langton will blush.";
-
-const linkedTagline = tagline.replace(
-  "(aspirational)",
-  "[(aspirational)](/debt.md)"
-);
+  "Joel builds a PAROL6 robot arm, one sourced and filmed milestone at a time.";
 
 const trapRoutePath = "/--no-verify" as const;
 
@@ -397,7 +402,7 @@ const noVerifyMarkdown = `# No verify.
 
 The rat looks disappointed. The hook still runs.
 
-Read [the fence](/lore/the-fence) and [the command policy](https://github.com/joelhooks/rat-stack/blob/main/scripts/vcs-command-policy.js).
+Read [the fence](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/the-fence.svx) and [the command policy](https://github.com/joelhooks/PAROL6/blob/main/scripts/vcs-command-policy.js).
 `;
 
 const ogImagePath = (routePath: string) =>
@@ -1077,33 +1082,6 @@ const program = Effect.gen(function* generateContent() {
       )
     );
 
-  const peerSourcePath = ".brain/resources/peers.svx";
-  const peerDataPath = ".brain/data/peers.json";
-
-  const peerInputs = yield* Effect.all({
-    core: readText("packages/core/package.json"),
-    data: readText(peerDataPath),
-    infra: readText("apps/infra/package.json"),
-    root: readText("package.json"),
-    template: readText(peerSourcePath),
-  });
-
-  const peerRows = yield* Schema.decodeEffect(Schema.fromJsonString(PeerRows))(
-    peerInputs.data
-  ).pipe(
-    Effect.mapError((cause) => buildError("peers decode", peerDataPath, cause))
-  );
-
-  const peersMarkdown = yield* Effect.try({
-    catch: (cause) => buildError("peers render", peerDataPath, cause),
-    try: () =>
-      renderPeers(
-        peerInputs.template,
-        peerRows,
-        peerPins(peerInputs.root, peerInputs.infra, peerInputs.core)
-      ),
-  });
-
   const workshop = yield* buildWorkshop(root);
 
   const cafeData = yield* Effect.all({
@@ -1225,9 +1203,6 @@ const program = Effect.gen(function* generateContent() {
     lawSpecs,
     (spec) =>
       readText(spec.sourcePath).pipe(
-        Effect.map((source) =>
-          spec.sourcePath === peerSourcePath ? peersMarkdown : source
-        ),
         Effect.map((rawText) => ({
           ...spec,
           rawText,
@@ -1574,8 +1549,8 @@ const program = Effect.gen(function* generateContent() {
 
   titles.set("/", "Home");
   titles.set("/skills", "Learn the stack");
-  titles.set("/lore", "Rat Stack lore");
-  titles.set("/systems", "Rat Stack systems");
+  titles.set("/lore", "PAROL6 wiki");
+  titles.set("/systems", "Systems");
   titles.set("/llms.txt", "Agent guide");
   titles.set("/llms-full.txt", "Full agent guide");
   titles.set(trapRoutePath, "No verify");
@@ -1902,33 +1877,44 @@ const program = Effect.gen(function* generateContent() {
     { concurrency: "unbounded" }
   );
 
+  const wikiSections = [
+    {
+      heading: "Milestones",
+      matches: (slug: string) => slug === "milestones" || isMilestoneSlug(slug),
+    },
+    {
+      heading: "Videos",
+      matches: (slug: string) => slug === "videos" || slug.startsWith("video-"),
+    },
+    { heading: "Reference", matches: () => true },
+  ] as const;
+
+  const wikiSectionOf = (slug: string) =>
+    wikiSections.find((section) => section.matches(slug))?.heading ??
+    "Reference";
+
   const loreIndexSourceMarkdown = [
-    "# Rat Stack lore",
+    "# PAROL6 wiki",
     "",
-    "Short, source-grounded notes on the ideas and decisions behind rat-stack.",
+    "Every page of the PAROL6 build wiki: the milestones, their videos, and the sources behind them.",
     "",
-    ...(["idea", "concept", "source", "person"] as const).flatMap((group) => {
-      const pages = loreTexts.filter((lore) => lore.group === group);
+    ...wikiSections.flatMap((section) => {
+      const pages = loreTexts.filter(
+        (lore) => wikiSectionOf(lore.slug) === section.heading
+      );
 
       return pages.length === 0
         ? []
-        : [
-            `## ${group[0]?.toUpperCase()}${group.slice(1)}`,
-            "",
-            entryList(pages),
-            "",
-          ];
+        : [`## ${section.heading}`, "", entryList(pages), ""];
     }),
   ].join("\n");
 
   const systemsIndexSourceMarkdown = [
-    "# Rat Stack systems",
+    "# Systems",
     "",
     "Each shipped system has a page with its behavior, standard, and checks.",
     "",
     entryList(systemTexts),
-    "",
-    "The [interest signup](/systems/interest) page separates submission, confirmation, and delivery. [Devtools](/systems/devtools) stays development-only. The [hosted agent front door](/systems/agent-front-door) records discovery, MCP versions, API, A2A, and sandbox limits; extracting it into a generic cartridge remains future work.",
     "",
   ].join("\n");
 
@@ -1947,161 +1933,58 @@ const program = Effect.gen(function* generateContent() {
       })
       .join("\n\n");
 
-  const searchCapabilitySource = yield* readText(
-    "apps/site/src/capabilities/search.ts"
-  );
+  const homeMarkdownSource = `# PAROL6 build
 
-  const searchCapabilityExcerpt = searchCapabilitySource
-    .split("\n")
-    .slice(6)
-    .join("\n")
-    .trim();
+This is Joel's public build wiki for [PAROL6](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm), an open-source six-axis desktop robot arm from Source Robotics. Joel builds it himself, from a bare control board to an arm that patches cables and turns knobs on a Eurorack skiff. It is written for Joel first, and for anyone building a PAROL6 who wants each step explained, sourced and filmed. Every build fact links to the [official manual](https://docs.source-robotics.com/PAROL-docs/1.1/), and each milestone ends in one video.
 
-  const homeMarkdownSource = `# Rat Stack
+The [milestones](${originToken}/lore/milestones) follow [four-component instructional design](https://www.4cid.org/), the model behind *Ten Steps to Complex Learning*. Each milestone is a whole task: a smaller, complete version of the final job, from the first safe power-on to a short performance. Inside a milestone, the concepts explain why, the official how-to pages are opened at the step that needs them, short drills build the hand skills, and a done check on camera proves the step.
 
-Most of this site is for you to hand to your agent and use in your own setup. A lot is generated, and some of it reads weird. I'm rewriting it as I go, so it's better to read for me and for you. Comments, feedback, and discussion are welcome: [@joelhooks on X](https://x.com/joelhooks).
+## Start here
 
-Build an app and its cloud as one typed program: TypeScript checks how the parts fit together. [Effect](https://effect.website/docs/getting-started/introduction/) is a TypeScript library for dependencies, errors, and concurrent work. [Alchemy](${originToken}/skills/learn-alchemy) declares cloud resources in TypeScript and infers their connections from the code. Our goal is the best Effect + Alchemy application we can build.
+- [The milestones](${originToken}/lore/milestones): seven stages, M1 to M7.
+- [M1. Bench it](${originToken}/lore/m1-bench-it): power, one motor turning, and a safe stop.
+- [Glossary](${originToken}/glossary): the terms M1 to M3 need, each sourced to an official page.
+- [Sources and licences](${originToken}/lore/sources): the official manual and repository.
+- [Milestone videos](${originToken}/lore/videos): one per milestone, all planned.
+- [The skiff target](${originToken}/lore/skiff-target): the synth the arm plays from M5 on.
 
-_${linkedTagline}_
+## Honesty markers
 
-The [fence](${originToken}/lore/the-fence) is our compiler checks, lint rules, and commit hooks. They reject prohibited code and shortcuts.
+**needs_source** marks a claim the official sources do not cover yet. **Our design** marks milestones 5 to 7, which go past the official manual. Both stay visible until a source or a measurement settles them.
 
-Copy rat-stack into your project and keep its source under your control. Keep the packages you need and follow the removal checklists for the rest.
+## Licences
 
-## Connect an agent
+PAROL6's hardware is under CERN-OHL-S-2.0 and its firmware under GPL-3.0, as the [repository README](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm) states. This wiki links official images and PDFs and does not copy them.
 
-Paste this into your coding agent:
+## For agents
+
+Paste this into your coding agent to read the wiki:
 
 \`\`\`text
-Read ${originToken}/llms.txt and use rat-stack as the reference
-for how we build: Effect for the hard parts, Alchemy for the
-infrastructure, and a fence that makes the easy path the right
-one. Search its rules and skills before you write code, follow
-its patterns, and tell me when my code breaks them.
+Read ${originToken}/llms.txt and use the PAROL6 build wiki as the
+reference for this build. Cite the official PAROL6 manual for every
+build fact, and flag anything marked needs_source.
 \`\`\`
 
 <CopyPrompt id="connect" />
 
-Or connect the [MCP (Model Context Protocol)](${originToken}/lore/mcp-is-another-surface) server to let your agent call the site's tools:
+The site's search and read tools are also on its [MCP (Model Context Protocol)](${originToken}/.well-known/mcp.json) server:
 
 \`\`\`sh
 # Claude Code
-claude mcp add --transport http rat-stack ${originToken}/mcp
+claude mcp add --transport http parol6 ${originToken}/mcp
 
 # Codex
-codex mcp add rat-stack --url ${originToken}/mcp
+codex mcp add parol6 --url ${originToken}/mcp
 \`\`\`
 
 <CopyPrompt id="mcp" />
 
-Cursor reads \`~/.cursor/mcp.json\`:
-
-\`\`\`json
-{ "mcpServers": { "rat-stack": { "url": "${originToken}/mcp" } } }
-\`\`\`
-
-<CopyPrompt id="cursor" />
-
-Load a skill into one session when the task needs it. Skills stay out of global and project skill folders. The [skills index](${originToken}/.well-known/agent-skills/index.json) lists every skill and its \`SKILL.md\` URL.
-
-<CopyPrompt id="skills" />
-
-Supports MCP protocol versions 2026-07-28, 2025-11-25, 2025-06-18, 2025-03-26, and 2024-11-05. Clients on protocol 2026-07-28 use no sessions. Older clients get their own session in a Cloudflare Durable Object, which stores state between requests.
-
-- [MCP connection details](${originToken}/.well-known/mcp.json)
-- [HTTP API docs](${originToken}/openapi.json)
 - [Short agent guide](${originToken}/llms.txt)
-- [Public rules, lore, systems, and skills](${originToken}/llms-full.txt)
-- [Lore wiki](${originToken}/lore)
-- [Systems](${originToken}/systems)
-- [CAFE news](${originToken}/news) and the [CAFE directory](${originToken}/directory): reviewed Cloudflare, Alchemy, Foldkit and Effect news and projects
+- [Everything on one page](${originToken}/llms-full.txt)
+- [HTTP API docs](${originToken}/openapi.json)
 
-## Four ideas
-
-- **Pieces:** A service is an interface for one job. A [Layer](${originToken}/lore/layer-constructor-pattern) describes how to build its implementation and supply its dependencies. An Alchemy Layer also carries its cloud resources. Choose the implementation when you provide the Layer.
-- **Trust.** Make the easy path the right path. The codebase and the compiler stop mistakes that rules and style guides can only ask about. Remove a cloud resource connection and the code that uses it stops compiling.
-- **Reliability.** Reduce mistakes so an agent can work longer without help.
-- **More useful features.** Build more of the jobs your product needs. Layers can carry cloud resources alongside application code. The compiler checks resource requirements; deployment checks prove that the result works.
-
-See the [vision](${originToken}/VISION.md) for the reasoning and sources.
-
-## Packages and their jobs
-
-rat-stack ships these packages and apps. The [removal checklists](${originToken}/README.md#keep-or-cut) give tested feature cuts and conditional Keep entries. Some packages share the hosted content build; they are not independent cartridges. Run the checks after each cut.
-
-- **capability**: shared data definitions and command-line, web and agent interfaces. Keep the interfaces you use.
-- **core**: shared operations and service interfaces. Keep what your app uses.
-- **database**: run logs with D1 or Hyperdrive Postgres. Cut with auth, protected feedback, and browser dev identity.
-- **auth**: identity and access through [Better Auth](${originToken}/systems/auth). Cut with database and those dependent features.
-- **devtools**: record, replay and compare operation calls. Optional development tools.
-- **events**: capture [request analytics](${originToken}/systems/analytics). Optional.
-- **lore**: query the public content graph. Keep with the hosted graph and content build.
-- **subscriber-delivery**: handle signup and email confirmation. Cut with intake-live and the live signup feature.
-- **intake-live**: validate signup applications and protect stored answers. Cut with subscriber-delivery and the live signup feature.
-- **code-snippets**: build highlighted code examples from source files. Keep with the teaching-content and source-snapshot build.
-- **check-harness**: run checks and report their results. Cut with the deployment driver.
-- **deploy**: plan, apply, check and roll back deployments. Cut with check-harness; the cloud Stack can stay.
-- **web**: shared reader models and browser UI built with Foldkit. Keep with the hosted content build.
-- **cli**: command-line interface. Optional; hosted interfaces and browser devtools can stay.
-- **mischief**: hosted site, agent interfaces and code sandbox in apps/site. Keep with the reader's shared content build and backend.
-- **infra**: Alchemy cloud resource declarations. Cut with deployment tooling after moving its Alchemy-version metadata input.
-
-A [cartridge](${originToken}/lore/cartridges) is a package for one job, including its implementation and cloud resources. Add it with one package and one line that provides the implementation. Removing it must leave unrelated packages working.
-
-The hosted agent interfaces run in Mischief; extracting them into a separate cartridge is still work to do.
-
-[Hexagonal architecture](${originToken}/lore/hexagonal-architecture) keeps service interfaces in core and provider-specific implementations outside it. A [port](${originToken}/lore/hexagonal-architecture) names a job; an [adapter](${originToken}/lore/hexagonal-architecture) connects it to a provider. [HATEOAS](${originToken}/lore/hateoas) uses response links to guide the next action. [Analytics](${originToken}/systems/analytics) is a running capture system; [interest signup](${originToken}/systems/interest) shows consent and confirmation across a delivery adapter.
-
-## One capability, several interfaces
-
-A [contract](${originToken}/systems/capabilities) defines an operation's name, input, output, and errors. A [capability](${originToken}/systems/capabilities) binds that contract to a server-side handler. A [projection](${originToken}/lore/one-capability-every-surface) exposes the capability through one interface, such as the CLI (command-line interface) or HTTP.
-
-XState models work as states and the transitions between them. Effect Schema defines and validates the data each operation accepts and returns.
-
-[RPC (remote procedure call)](${originToken}/lore/one-capability-every-surface) lets the browser call server operations. [OpenAPI](${originToken}/lore/openapi-describes-the-refusal-too) describes the HTTP API in a format that software can read. Code mode is a way to run a program that calls tools inside a sandbox, a restricted execution environment.
-
-<Diagram alt="One capability projected to the command line, HTTP with OpenAPI, MCP tools, browser RPC, and sandbox code mode">
-
-\`\`\`text
-              ┌─────────────────────────────────────┐
-              │  one contract + capability          │
-              │  Effect Schema: input · output · err│
-              │  one Effect handler                 │
-              │  XState when the work has states    │
-              └──────────────────┬──────────────────┘
-                                 │  defineContract → implement
-    ┌────────────┬────────────┬────────────┬────────────┬────────────┐
-    ▼            ▼            ▼            ▼            ▼
-  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-  │ command  │ │   HTTP   │ │   MCP    │ │   RPC    │ │ sandbox  │
-  │   line   │ │ + OpenAPI│ │  tools   │ │ browser  │ │ code mode│
-  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
-
-  checked by  TypeScript 7 · Oxlint · Vitest · lefthook
-  shipped by  pnpm · Turborepo · Alchemy → Cloudflare Worker
-\`\`\`
-</Diagram>
-
-All five projections share one contract and handler. Agents use MCP, HTTP, or code mode.
-
-## The pattern in code
-
-This is the whole search capability. Every interface calls it.
-
-\`\`\`ts
-${searchCapabilityExcerpt}
-\`\`\`
-
-The schemas define the input, output, and errors. Each projection calls the same handler through the same contract.
-
-## Learn the stack
-
-Install these short guides for your agent with the command above, or read them here.
-
-${groupedSkills(false)}
-
-XState 6 and Alchemy are pre-release. APIs move; [pins.md](${originToken}/pins.md) lists the exact versions this repo builds against.
+The site runs on [rat-stack](https://github.com/joelhooks/rat-stack): Effect, Foldkit and Alchemy, behind a fence of type checks, lint rules and commit hooks.
 
 ## Source files
 
@@ -2111,17 +1994,13 @@ ${entryList(publicSpecs, false)}
 
   const homeMarkdownAgentSource = deriveAgentMarkdown(homeMarkdownSource);
 
-  const skillIndexSourceMarkdown = `# Learn the stack
+  const skillIndexSourceMarkdown = `# Agent skills
 
-These ${skillTexts.length} skills use a working app to teach the pieces inside it.
-
-Install them:
-
-\`npx skills add joelhooks/rat-stack\`
+These ${skillTexts.length} skills are the agent playbooks this site's code is built with. They come from [rat-stack](https://github.com/joelhooks/rat-stack), the template the site runs on, and teach its stack, not the robot build.
 
 ${groupedSkills()}
 
-Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundaries and [agent next actions](/lore/hateoas) for hypermedia guidance. [Systems](/systems) shows the running behavior.
+The [PAROL6 milestones](/lore/milestones) are the build itself.
 `;
 
   const homeBody = yield* compileMarkdownBody(
@@ -2139,7 +2018,7 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
       homeBody.linkedLoreRoutes
     ),
     "/",
-    "rat-stack"
+    "PAROL6 build"
   );
 
   const noVerifyBody = yield* compileMarkdownBody(
@@ -2764,34 +2643,34 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
     description:
       "The reference for building an app and its cloud as one typed program, with Effect, Alchemy, and a fence that raises the floor.",
     path: "/",
-    title: "Rat Stack: an app and its cloud as one typed program",
+    title: "PAROL6 build: a robot arm, one milestone at a time",
   } as const;
 
   const skillIndexMetadata = {
     description:
       "Hands-on guides to Effect actions, XState lifecycles, and the seams between stack pieces.",
     path: "/skills",
-    title: "Learn the stack | rat-stack",
+    title: "Agent skills | PAROL6 build",
   } as const;
 
   const loreIndexMetadata = {
     description:
-      "Short, source-grounded notes on the ideas and decisions behind rat-stack.",
+      "The PAROL6 build wiki: the milestones, their videos and the official sources behind them.",
     path: "/lore",
-    title: "Rat Stack lore | rat-stack",
+    title: "PAROL6 wiki | PAROL6 build",
   } as const;
 
   const systemsIndexMetadata = {
     description:
       "The systems rat-stack ships, the standard each keeps, and how to check it.",
     path: "/systems",
-    title: "Rat Stack systems | rat-stack",
+    title: "Systems | PAROL6 build",
   } as const;
 
   const noVerifyMetadata = {
     description: "The rat looks disappointed. The hook still runs.",
     path: trapRoutePath,
-    title: "No verify | rat-stack",
+    title: "No verify | PAROL6 build",
   } as const;
 
   const backlinkPages = [
@@ -2799,7 +2678,7 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
       bodyHtml: homeBody.bodyHtml,
       description: tagline,
       route: "/",
-      title: "rat-stack",
+      title: "PAROL6 build",
     },
     {
       bodyHtml: noVerifyBody.bodyHtml,
@@ -2858,7 +2737,7 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
   ];
 
   const mentionPages = [
-    { prose: homeBody.unlinkedProse, route: "/", title: "rat-stack" },
+    { prose: homeBody.unlinkedProse, route: "/", title: "PAROL6 build" },
     {
       prose: noVerifyBody.unlinkedProse,
       route: trapRoutePath,
@@ -3098,7 +2977,7 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
     description:
       "An A–Z index of terms, with summaries and links to lore, systems, and skills.",
     path: "/glossary",
-    title: "Glossary | rat-stack",
+    title: "Glossary | PAROL6 build",
   } as const;
 
   const ogPages: readonly OgPage[] = [
@@ -3170,12 +3049,12 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
     {
       description: loreIndexMetadata.description,
       routePath: "/lore",
-      title: "Rat Stack lore",
+      title: "PAROL6 wiki",
     },
     {
       description: systemsIndexMetadata.description,
       routePath: "/systems",
-      title: "Rat Stack systems",
+      title: "Systems",
     },
     ...publicSpecs.map(({ description, routePath, title }) => ({
       description,
@@ -3408,7 +3287,7 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
       origin: originToken,
       path: "/",
       stylesheet,
-      title: "ERROR_CODE ERROR_TITLE | rat-stack",
+      title: "ERROR_CODE ERROR_TITLE | PAROL6 build",
     },
     "error-page.md"
   );
@@ -3888,23 +3767,15 @@ Follow [ports and adapters](/lore/hexagonal-architecture) for provider boundarie
         loreTermTargets: loreTermIndex,
         prompts: promptTexts,
         references: {
-          anchors: contentBlocksFor(
-            blockIndex,
-            "/lore/services-capture-dependencies"
-          ),
-          backlinks: backlinksFor(
-            backlinkIndex,
-            "/lore/services-capture-dependencies"
-          ),
+          anchors: contentBlocksFor(blockIndex, "/lore/m1-bench-it"),
+          backlinks: backlinksFor(backlinkIndex, "/lore/m1-bench-it"),
           inboundCounts: Object.fromEntries(
             [...backlinkIndex].map(([route, references]) => [
               route,
               references.length,
             ])
           ),
-          lastChange: lastChanges.get(
-            ".brain/resources/lore/services-capture-dependencies.svx"
-          ),
+          lastChange: lastChanges.get(".brain/resources/lore/m1-bench-it.svx"),
         },
       })
     )

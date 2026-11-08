@@ -1,0 +1,37 @@
+---
+title: "M2 video: One joint end to end"
+description: "The video for milestone 2 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m2-one-joint
+terms:
+  - "M2 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M2. One joint end to end](/lore/m2-one-joint) once it is published.
+
+## Plan
+
+**Working title:** The first joint: the wrist, from plastic to a joint I can aim.
+
+Beats:
+
+1. Why the robot is built wrist first: the wires.
+2. The print timelapse.
+3. The gearbox and coupler, in macro.
+4. The inductive sensor seeing the screw, with the `#LIMIT` printout on screen.
+5. The step math on a whiteboard.
+6. The measured 30° jog.
+
+**Shots:** A printer timelapse, a hands macro, a whiteboard or overlay for the ratio math, and a top-down shot of the protractor.
+
+**Teaches:** Gearing, step resolution, sensors, and fit and finish.
+
+## Terms
+
+- **M2 video**: the published video for milestone 2.

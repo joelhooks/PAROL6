@@ -107,28 +107,18 @@ test.provider(
 
       const samples = yield* Effect.all(
         [
-          measureRequest(
-            url,
-            "search",
-            { limit: 1, query: "cartridges" },
-            "cold"
-          ),
-          measureRequest(
-            url,
-            "search",
-            { limit: 1, query: "cartridges" },
-            "warm"
-          ),
+          measureRequest(url, "search", { limit: 1, query: "TMC5160" }, "cold"),
+          measureRequest(url, "search", { limit: 1, query: "TMC5160" }, "warm"),
           measureRequest(
             url,
             "read",
-            { id: "ratstack://lore/cartridges" },
+            { id: "ratstack://lore/m1-bench-it" },
             "cold"
           ),
           measureRequest(
             url,
             "read",
-            { id: "ratstack://lore/cartridges" },
+            { id: "ratstack://lore/m1-bench-it" },
             "warm"
           ),
         ],
@@ -162,7 +152,7 @@ test.provider(
       );
 
       const expectedLinks = yield* backlinks
-        .handler({ slug: "cartridges" })
+        .handler({ slug: "m1-bench-it" })
         .pipe(Effect.provide(nodeContentLayer));
 
       const response = yield* HttpClientRequest.post(
@@ -172,9 +162,9 @@ test.provider(
           code: [
             "const names = Object.keys(tools);",
             "const name = names.find((value) => value === 'search');",
-            "const found = await tools[name]({ query: 'cartridges', limit: 1 });",
+            "const found = await tools[name]({ query: 'TMC5160', limit: 1 });",
             "const page = await tools.read({ id: found.matches[0].id });",
-            "const links = await tools.backlinks({ slug: 'cartridges' });",
+            "const links = await tools.backlinks({ slug: 'm1-bench-it' });",
             "let refused;",
             "try { await tools.joinInterest({}); } catch (error) { refused = error._tag; }",
             "return { names, refused, title: page.title, links };",
@@ -215,7 +205,7 @@ test.provider(
             "learnRecord",
           ],
           refused: "UnknownCapability",
-          title: "Cartridges",
+          title: "M1. Bench it: power, one motor, a safe stop",
         },
         toolCalls: ["search", "read", "backlinks", "joinInterest"],
       });

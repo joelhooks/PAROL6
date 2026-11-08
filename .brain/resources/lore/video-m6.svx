@@ -1,0 +1,33 @@
+---
+title: "M6 video: Patch a cable"
+description: "The video for milestone 6 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m6-patch-a-cable
+terms:
+  - "M6 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M6. Patch a cable](/lore/m6-patch-a-cable) once it is published.
+
+## Plan
+
+**Working title:** The hardest 3.5 mm in the world.
+
+Beats:
+
+1. Why this is hard for robots.
+2. The failed attempts, kept in.
+3. The compliance fix.
+4. The first verified patch, heard.
+
+**Teaches:** Peg-in-hole insertion and checking without a force sensor.
+
+## Terms
+
+- **M6 video**: the published video for milestone 6.

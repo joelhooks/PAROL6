@@ -1,33 +1,44 @@
-# rat-stack 🐀
+# PAROL6 build wiki 🦾
 
-_An Effect stack so pure (aspirational) Kit Langton will blush._
+Joel's public build wiki for [PAROL6](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm), the open-source six-axis desktop robot arm from Source Robotics. It holds the build's milestones, explainers, video pages, sources and glossary, from the first safe power-on to an arm that plays a Eurorack skiff. `VISION.md` says why; `AGENTS.md` is the law for changing it.
 
-[![CI](https://github.com/joelhooks/rat-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/joelhooks/rat-stack/actions/workflows/ci.yml)
+The wiki pages live in `.brain/resources/lore/` as `.svx` files. The site renders them as reader pages with search, a glossary, backlinks and a content graph. Every build fact links to the [official PAROL6 manual](https://docs.source-robotics.com/PAROL-docs/1.1/). PAROL6's hardware is CERN-OHL-S-2.0 and its firmware GPL-3.0; this repository links their files and does not copy them.
 
-Build an Effect app and its cloud as one typed program. Joel's goal is the best Effect + Alchemy application we can build; `VISION.md` explains why. `AGENTS.md` sets exact pins, checks, and hooks. The public tree lets you steal ideas. It carries no product support promise.
+The site is built from the [rat-stack](https://github.com/joelhooks/rat-stack) template: Effect, XState, Foldkit and Alchemy behind a fence of type checks, lint rules and commit hooks. `PROVENANCE.md` credits it.
 
-The **pnpm + Turborepo workspace** includes a working Effect v4 CLI, tests, formatting, and type-aware linting. Vendored source mirrors cover Effect, effect-solutions, XState, and Alchemy.
-
-Define a **Contract** with Effect input, output, and failure schemas plus annotations. Bind a server-side handler, then project the capability onto every agent surface. The same `inspectFile` capability is the `stats` command, `POST /inspectFile` with an OpenAPI document, and an MCP tool over stdio.
-
-## Create a repository
-
-```sh
-gh repo create <name> --template joelhooks/rat-stack
-```
-
-Clone the new repository, then install and verify it:
+## Run it locally
 
 ```sh
 nvm use
 pnpm install
-pnpm vendor:agent-sources
-pnpm turbo run check test build
+pnpm dev
 ```
 
-Node `24.18.0` and pnpm `11.3.0` are required. The requirement is declared in `.nvmrc`, `engines`, `devEngines`, and `packageManager`.
+`pnpm dev` regenerates the content and serves the reader through portless at a named `.localhost` URL; `portless list` shows it. Node `24.18.0` and pnpm `11.3.0` are required.
 
-## Workspace layout
+## Check it
+
+```sh
+pnpm check
+pnpm test
+pnpm build
+```
+
+`pnpm check` runs the public-safety guard (`pnpm public-safety`) first. It fails on private patterns in tracked files: email addresses, street addresses, tailnet names, local home paths, private agent paths, and order or tracking numbers. The pattern list lives in `scripts/public-safety-patterns.ts`.
+
+## Add a wiki page
+
+Write `.brain/resources/lore/<slug>.svx` with `title`, a one-sentence `description`, `group`, `terms` and `sources` in its frontmatter. Each linked source needs `url`, `title`, `publisher`, `note` and `accessed`. Glossary definitions live in `glossaryDefinitions` in `apps/site/scripts/content-lib.ts`. After a commit that changes pages, run `pnpm git-snapshot` and commit `.brain/data/git-snapshot.json`.
+
+## Still from the template
+
+The rat-stack product surfaces are still in the tree: the tokenmaxx workshop and its Worker, interest signup, CAFE news, directory and all-stars with their avatars, the prompt library, the learn deck and the published agent skills. The wiki does not link them. They are scheduled for removal through the cuts below.
+
+## The stack
+
+The rest of this README is the rat-stack template documentation.
+
+### Workspace layout
 
 - **`apps/cli`**:
   - Package: `@rat-stack/cli`

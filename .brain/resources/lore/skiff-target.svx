@@ -1,0 +1,39 @@
+---
+title: "The skiff target"
+description: "The skiff is the Eurorack case the robot plays from milestone 5 on, and its choice is still open."
+plain: "Which skiff the arm plays is Joel's call; this page records the format it must fit."
+group: concept
+terms:
+  - skiff
+  - Eurorack
+  - HP
+sources:
+  - url: https://www.doepfer.de/a100_man/a100m_e.htm
+    title: "A-100 construction details"
+    publisher: "Doepfer Musikelektronik"
+    note: "3U panel height of 128.5 mm and the HP grid of 5.08 mm."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/mounting/
+    title: "Mounting, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The robot's base mounting, which the skiff must share a plate with."
+    accessed: "2026-11-07"
+---
+
+**Status: no recommendation yet. Joel picks.**
+
+From [M5](/lore/m5-touch-the-skiff) on, the arm works on a Eurorack skiff: it turns knobs, presses buttons and patches cables.
+
+## What the skiff must fit
+
+- **The Eurorack format.** Panels are 128.5 mm high, and widths are multiples of 1 HP, 5.08 mm ([Doepfer's A-100 construction details](https://www.doepfer.de/a100_man/a100m_e.htm)).
+- **The shared base plate.** The arm and the skiff sit on one rigid plate, so a registration stays valid ([Mounting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/mounting/)).
+- **Reach.** The modules the arm plays must sit inside the arm's workspace ([Kinematics](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/kinematics/)).
+
+**needs_source:** the skiff, its modules and their measured knob and jack positions.
+
+## Terms
+
+- **skiff**: a shallow, often portable Eurorack case. Here, the case the arm plays.
+- **Eurorack**: the modular synthesizer format that Doepfer's A-100 defined, with 3U panels on an HP grid ([A-100 construction details](https://www.doepfer.de/a100_man/a100m_e.htm)).
+- **HP**: horizontal pitch, the Eurorack width unit. 1 HP is 5.08 mm ([A-100 construction details](https://www.doepfer.de/a100_man/a100m_e.htm)).

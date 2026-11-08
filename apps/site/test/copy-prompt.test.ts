@@ -8,7 +8,7 @@ import {
 } from "./generated-content.js";
 
 it.each([
-  ["home", homeDocumentHtml, 4],
+  ["home", homeDocumentHtml, 2],
   ["tokenmaxx", tokenmaxxDocumentHtml, 1],
 ])(
   "%s gives every copy control a visible label and live status",

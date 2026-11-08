@@ -1,0 +1,37 @@
+---
+title: "M3 video: The whole arm moves"
+description: "The video for milestone 3 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m3-whole-arm
+terms:
+  - "M3 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M3. The whole arm moves](/lore/m3-whole-arm) once it is published.
+
+## Plan
+
+**Working title:** Six joints, one robot: the first homing.
+
+Beats:
+
+1. A fast assembly montage, one joint per chapter.
+2. Wiring the base.
+3. The test-before-you-close moment.
+4. The first homing, in real time.
+5. What homing is, as an animated explainer.
+6. The first jog of all six joints.
+
+**Shots:** Overhead and side cameras; a locked-off wide shot for the homing; the E-stop always in frame.
+
+**Teaches:** System integration, homing and kinematics.
+
+## Terms
+
+- **M3 video**: the published video for milestone 3.

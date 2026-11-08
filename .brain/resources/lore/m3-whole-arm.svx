@@ -1,0 +1,113 @@
+---
+title: "M3. The whole arm moves"
+description: "The third milestone builds the rest of the arm from the wrist down to the base, tests the wiring, then homes the arm, jogs every joint and checks the witness marks."
+plain: "Build the rest of the arm, test the wiring before closing the base, home it, and prove every joint with a pin through its witness marks."
+group: concept
+prerequisites:
+  - /lore/m2-one-joint
+terms:
+  - homing
+  - "witness marks"
+  - mastering
+  - jogging
+  - "limit switch"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf
+    title: "PAROL6 building instructions"
+    publisher: "Source Robotics"
+    note: "The wrist-to-base build order on page 7, and each assembly step."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/
+    title: "Bill of materials, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Gearboxes, motors, belts, bearings, couplers and sensors for joints 2 to 6."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/
+    title: "Electronics and wiring, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Limit switches on joints 2, 3 and 5, inductive sensors on 1, 4 and 6, and testing before closing the base."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/joint-limits/
+    title: "Joint limits, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Joint numbering, limits and directions."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/kinematics/
+    title: "Kinematics, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The DH model and the workspace."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/
+    title: "Homing, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Why homing is needed after every power-up, and the joint order."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/mastering/
+    title: "Mastering, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Witness marks and the procedure for correcting the after-homing pose."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/jogging/
+    title: "Jogging, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Joint jog in the commander and its speed slider."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Motors per joint and why open loop loses steps when overloaded."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** build the rest of the arm, wrist to base: joints 5 to 1, then the base and electronics. Wire the base, test it, close it, then home the arm, jog every joint and check the witness marks.
+
+The official order is wrist to base, because every wire passes down through the robot ([building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=7), page 7). Joint 6 is already built in [M2](/lore/m2-one-joint).
+
+## Parts
+
+Everything else in the [bill of materials](https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/):
+
+- The two EG 20:1 planetary gearboxes, for joints 2 and 3.
+- The three 40 mm motors for joints 3, 4 and 5, and the two 60 mm motors for joints 1 and 2 ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- The belts, bearings and couplers.
+- Limit switches for joints 2, 3 and 5, and inductive sensors for joints 1 and 4 ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
+- The control board, the GX16 socket, the fan and the E-stop from [M1](/lore/m1-bench-it).
+
+## Concepts
+
+- **Joint numbering, limits and directions** ([Joint limits](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/joint-limits/)).
+- **Kinematics:** the DH model, the workspace and singularities ([Kinematics](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/kinematics/); [Configurations and singularities](https://docs.source-robotics.com/PAROL-docs/1.1/theory/configurations-and-singularities/)).
+- **Homing is the only position reference** ([Homing](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/); [Homing and mastering](https://docs.source-robotics.com/PAROL-docs/1.1/theory/homing-and-mastering/)).
+- **Open loop and lost steps.** An overloaded stepper loses steps silently, and the only cure is to home again ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/), "Why open loop works here").
+
+## How-to
+
+- The [building instructions PDF](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/main/Building%20instructions/Parol%20building%20instructions.pdf) and the official playlist, joint by joint.
+- The wiring diagram and "Test before you close the base" ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
+- First power-on, direction fixes and homing ([Firmware and first run](https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/)).
+- Witness marks and mastering ([Mastering](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/mastering/)).
+
+## Practice
+
+- The M2 assembly skills at higher reps: bearings, belts, couplers and threadlocker.
+- Labelling wires to the *Wire_markings* sheet in the [print table](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/main/Print%20table/PR_EXCEL.xlsx).
+- Homing drills: pose joint 6 within one turn of its sensor, and stand at the E-stop.
+
+## Done check
+
+1. Homing finishes and the simulator matches the robot.
+2. The pin passes through every joint's witness marks ([Firmware and first run](https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/), section 5).
+3. Every joint jogs in its correct direction.
+4. Joel explains, unprompted, why the arm must home again after a stall.
+
+## Terms
+
+- **homing**: driving each joint to its limit switch or sensor, then a known number of steps to the after-homing pose. It is needed after every power-up, collision, stall or move by hand ([Homing](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/)).
+- **witness marks**: holes in neighbouring links that line up in the after-homing pose, so a pin pushed through them proves the pose ([Mastering](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/mastering/)).
+- **mastering**: correcting each joint's homed position in the firmware until a homed robot stands exactly at its witness marks ([Mastering](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/mastering/)).
+- **jogging**: moving one joint, or the tool along one axis, for as long as a button is held or a command repeats ([Jogging](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/jogging/)).
+- **limit switch**: the mechanical switch that homes joints 2, 3 and 5, wired from 24 V to a LIMIT terminal ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
+
+## Video
+
+[The M3 video](/lore/video-m3) is planned.

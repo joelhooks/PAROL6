@@ -1,0 +1,26 @@
+---
+title: "Milestone videos"
+description: "Each milestone ends in one video, and every video is planned until Joel publishes it."
+plain: "One video per milestone. Explaining a step to camera is the proof of understanding it."
+group: concept
+learn: false
+terms:
+  - "milestone video"
+sources: []
+---
+
+Each milestone ends in one video. The video is the reflection and the assessment: if Joel can explain a step to camera, he understands it.
+
+| Milestone | Video | Status |
+| --- | --- | --- |
+| [M1. Bench it](/lore/m1-bench-it) | [M1 video](/lore/video-m1) | Planned |
+| [M2. One joint end to end](/lore/m2-one-joint) | [M2 video](/lore/video-m2) | Planned |
+| [M3. The whole arm moves](/lore/m3-whole-arm) | [M3 video](/lore/video-m3) | Planned |
+| [M4. Pick and place](/lore/m4-pick-and-place) | [M4 video](/lore/video-m4) | Planned |
+| [M5. Touch the skiff](/lore/m5-touch-the-skiff) | [M5 video](/lore/video-m5) | Planned |
+| [M6. Patch a cable](/lore/m6-patch-a-cable) | [M6 video](/lore/video-m6) | Planned |
+| [M7. Play it](/lore/m7-play-it) | [M7 video](/lore/video-m7) | Planned |
+
+## Terms
+
+- **milestone video**: the one published video that closes a milestone.

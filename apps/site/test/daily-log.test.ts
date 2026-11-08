@@ -86,7 +86,7 @@ it.effect(
         "[Read me](/README.md) — new page: [Start reading]"
       );
       expect(markdown).toContain(
-        `[An idea](/resources/idea) — new page: [Add an idea](https://github.com/joelhooks/rat-stack/commit/${ideaHash})`
+        `[An idea](/resources/idea) — new page: [Add an idea](https://github.com/joelhooks/PAROL6/commit/${ideaHash})`
       );
       expect(markdown).not.toContain("Merge the idea");
       expect(markdown).not.toContain("2026-09-22");
@@ -129,7 +129,7 @@ it("links removed content to its last revision", () => {
   );
 
   expect(markdown).toContain(
-    `[old.svx](https://github.com/joelhooks/rat-stack/blob/${parent}/.brain/resources/old.svx) — edited: [Remove an old page]`
+    `[old.svx](https://github.com/joelhooks/PAROL6/blob/${parent}/.brain/resources/old.svx) — edited: [Remove an old page]`
   );
 });
 

@@ -97,7 +97,7 @@ go tool pprof -http=:0 worker-cpu.pprof
 ## 6. Act on one finding
 
 1. Name the widest function you own and the route that reaches it.
-2. Make one change. Common wins: compute a value once instead of per call, [cache a completed value](/lore/cache-completed-values), stop building objects you throw away, remove code that a flag only half disables.
+2. Make one change. Common wins: compute a value once instead of per call, [cache a completed value](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/cache-completed-values.svx), stop building objects you throw away, remove code that a flag only half disables.
 3. Deploy, send the same traffic, capture again for the same duration, and compare the same frame.
 4. Record the before and after numbers in the commit message.
 

@@ -86,7 +86,7 @@ it.layer(ReaderLoreFixture.layer)((test) => {
                   readerNewsTitle(original?.html ?? "")
                 );
                 expect(rendered.html).toMatch(
-                  /<a [^>]*href="\/news"[^>]*>news<\/a>/u
+                  /<a [^>]*href="\/lore\/milestones"[^>]*>milestones<\/a>/u
                 );
                 expect(after.heading, page.page.path).toBe(before.heading);
                 expect(after.breadcrumb, page.page.path).toEqual(

@@ -51,11 +51,9 @@ export const copyPrompts = {
     showLabel: true,
     showText: false,
     text: [
-      "Read __RATSTACK_ORIGIN__/llms.txt and use rat-stack as the reference",
-      "for how we build: Effect for the hard parts, Alchemy for the",
-      "infrastructure, and a fence that makes the easy path the right",
-      "one. Search its rules and skills before you write code, follow",
-      "its patterns, and tell me when my code breaks them.",
+      "Read __RATSTACK_ORIGIN__/llms.txt and use the PAROL6 build wiki as the",
+      "reference for this build. Cite the official PAROL6 manual for every",
+      "build fact, and flag anything marked needs_source.",
     ].join("\n"),
   },
   cursor: {
@@ -63,7 +61,7 @@ export const copyPrompts = {
     label: "Copy",
     showLabel: true,
     showText: false,
-    text: '{ "mcpServers": { "rat-stack": { "url": "__RATSTACK_ORIGIN__/mcp" } } }',
+    text: '{ "mcpServers": { "parol6": { "url": "__RATSTACK_ORIGIN__/mcp" } } }',
   },
   learn: {
     agentFence: true,
@@ -83,7 +81,7 @@ export const copyPrompts = {
     label: "Copy",
     showLabel: true,
     showText: false,
-    text: "# Claude Code\nclaude mcp add --transport http rat-stack __RATSTACK_ORIGIN__/mcp\n\n# Codex\ncodex mcp add rat-stack --url __RATSTACK_ORIGIN__/mcp",
+    text: "# Claude Code\nclaude mcp add --transport http parol6 __RATSTACK_ORIGIN__/mcp\n\n# Codex\ncodex mcp add parol6 --url __RATSTACK_ORIGIN__/mcp",
   },
   page: {
     agentFence: false,

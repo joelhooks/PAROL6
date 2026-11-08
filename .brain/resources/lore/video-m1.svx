@@ -1,0 +1,40 @@
+---
+title: "M1 video: Bench it"
+description: "The video for milestone 1 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m1-bench-it
+terms:
+  - "M1 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M1. Bench it](/lore/m1-bench-it) once it is published.
+
+## Plan
+
+**Working title:** I bought a robot arm in a bag of parts. Here's the first time it moved.
+
+Beats:
+
+1. Unpacking the parts against the official BOM.
+2. What the control board is, in an overhead macro.
+3. The four ways to destroy the board: the official graphic, then Joel's own words.
+4. Metering the supply.
+5. The first power-on, as a screen recording of the serial report.
+6. The motor turning, in macro, with a flag of tape on the shaft.
+7. The E-stop and the switch reading in `#IO` and `#LIMIT`.
+8. The kill switch.
+9. What Joel now understands, and what scared him.
+
+**Shots:** An overhead bench camera; a macro on the board and the driver DIAG pins; a screen capture of the terminal; a close-up of the multimeter.
+
+**Teaches:** Power, drivers, open-loop steppers and the safe stop.
+
+## Terms
+
+- **M1 video**: the published video for milestone 1.

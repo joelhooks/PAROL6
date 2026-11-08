@@ -20,7 +20,10 @@ it.layer(NodeServices.layer)((test) => {
         const sourcePath = ".brain/areas/analytics.svx";
 
         const text = yield* fs.readFileString(
-          path.resolve(import.meta.dirname, "../../..", sourcePath)
+          path.resolve(
+            import.meta.dirname,
+            "fixtures/bibliography/analytics.svx"
+          )
         );
 
         const { bibliography } = parseLorePage(sourcePath, text);

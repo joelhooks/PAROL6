@@ -1,0 +1,31 @@
+---
+title: "M7 video: Play it"
+description: "The video for milestone 7 is planned and not yet recorded."
+plain: "Planned. The link goes here when the video is published."
+group: concept
+learn: false
+prerequisites:
+  - /lore/m7-play-it
+terms:
+  - "M7 video"
+sources: []
+---
+
+**Status: planned.**
+
+This page links Joel's video for [M7. Play it](/lore/m7-play-it) once it is published.
+
+## Plan
+
+**Working title:** My robot plays my modular.
+
+Beats:
+
+1. The performance, first and uncut.
+2. The breakdown: what each move does to the sound.
+
+**Teaches:** Sequencing a slow machine against a musical clock.
+
+## Terms
+
+- **M7 video**: the published video for milestone 7.

@@ -6,8 +6,10 @@ import { escapeHtmlText } from "./document-html.ts";
 export const newestNewsTitle = (news: readonly CafeNewsItemValue[]) =>
   sortCafeNewsNewest(news).at(0)?.title;
 
+export const newsCalloutRoutes: readonly RegExp[] = [];
+
 export const hasNewsCallout = (routePath: string) =>
-  routePath === "/" || /^\/(?:lore|systems|skills)(?:\/|$)/u.test(routePath);
+  newsCalloutRoutes.some((pattern) => pattern.test(routePath));
 
 export const renderNewsCallout = (title: string | undefined) =>
   title === undefined

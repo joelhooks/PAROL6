@@ -31,12 +31,12 @@ Identify the source account, destination tenant, email topics, available credent
 Name the facts and their writer:
 
 - The source owns contact, consent, stop, activity, and automation facts until cutover.
-- `ReadListSnapshot` captures those facts through a job-shaped [port](/lore/hexagonal-architecture). Keep provider vocabulary inside [adapters](/lore/hexagonal-architecture).
+- `ReadListSnapshot` captures those facts through a job-shaped [port](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx). Keep provider vocabulary inside [adapters](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx).
 - The pure planner derives counts, intersections, and cohort selection.
 - Destination contact and stop services own imported state. Profile imports cannot lift stops.
 - Policy and capture receipts identify the inputs. A private manifest records exact tenant-scoped recipients and matched rule ids.
 
-Read [contracts and policy](https://github.com/joelhooks/rat-stack/blob/main/skills/onboard-a-list/references/contracts.md) when defining an [adapter](/lore/hexagonal-architecture) or import policy. Read [the count-only example](https://github.com/joelhooks/rat-stack/blob/main/skills/onboard-a-list/references/worked-example.md) when explaining overlaps.
+Read [contracts and policy](https://github.com/joelhooks/rat-stack/blob/main/skills/onboard-a-list/references/contracts.md) when defining an [adapter](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/hexagonal-architecture.svx) or import policy. Read [the count-only example](https://github.com/joelhooks/rat-stack/blob/main/skills/onboard-a-list/references/worked-example.md) when explaining overlaps.
 
 ## 1. Capture a read-only inventory
 
@@ -60,7 +60,7 @@ Before enabling destination sends, durably import and read back the complete sto
 
 ## 3. Measure each proposed rule
 
-Decode policy data with [Effect](/lore/effect-basics) [Schema](/lore/schemas-define-the-boundary). [Pin](/skills/gardener) external lists by source, revision/date, and digest. Store thresholds, domain/local-part sets, windows, and actions in that policy.
+Decode policy data with [Effect](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/effect-basics.svx) [Schema](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/schemas-define-the-boundary.svx). [Pin](/skills/gardener) external lists by source, revision/date, and digest. Store thresholds, domain/local-part sets, windows, and actions in that policy.
 
 Measure each rule against each original pool. Report independent matches, pairwise overlaps, exclusive matches, the union, and an ordered waterfall. Show newly removed and remaining counts. Never add independent counts.
 
@@ -90,7 +90,7 @@ Read [verification properties](https://github.com/joelhooks/rat-stack/blob/main/
 
 Reuse owned destination contracts. When building automation, expose census, planning, and import as typed capabilities. Project CLI, HTTP, and agent tools from those contracts.
 
-Dry-run exact identities, stop matches, ambiguous records, counts, and value-level readback. Use tenant-scoped [idempotency keys](/lore/http-responses-need-validation) and durable resume checkpoints.
+Dry-run exact identities, stop matches, ambiguous records, counts, and value-level readback. Use tenant-scoped [idempotency keys](https://github.com/joelhooks/rat-stack/blob/main/.brain/resources/lore/http-responses-need-validation.svx) and durable resume checkpoints.
 
 For an authorized import, write stops first, then profiles. Do not discard rejected stop rows or mark partial work complete.
 

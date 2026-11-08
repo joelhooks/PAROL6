@@ -1,0 +1,66 @@
+---
+title: "M6. Patch a cable"
+description: "The sixth milestone grips a 3.5 mm patch cable, inserts it into a target jack, verifies the patch electrically and pulls it back out."
+plain: "Insert a patch cable into a jack and prove it went in, nine times out of ten, without damaging anything."
+group: concept
+prerequisites:
+  - /lore/m5-touch-the-skiff
+terms:
+  - "peg-in-hole"
+  - "spiral search"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Overloaded steppers lose steps silently, so the arm cannot feel force."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/
+    title: "Custom tools, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Mounting a custom cable-holding gripper."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/
+    title: "Python API, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Scripted motion for the insertion routine."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** grip a 3.5 mm patch cable, insert it into a target jack, verify it is patched, and pull it back out.
+
+**Our design.** The PAROL6 manual stops at pick-and-place, so this milestone is ours.
+
+## Parts
+
+- A cable-holding gripper: TPU 75A fingers, or a printed plug holder on a compliant mount ([Custom tools](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/)).
+- Patch cables.
+- A cable rack or nest to pick from.
+
+## Concepts
+
+- **Peg-in-hole insertion:** chamfers, lateral compliance, and why open-loop steppers cannot feel force. An overloaded stepper loses steps silently ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **Spiral-search and wiggle strategies.**
+- **Detection without a force sensor.** Verify the patch electrically: send an LFO through the new cable and read it at the destination. Our design.
+
+## How-to
+
+- Our insertion routine, written as a completion task on the [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/).
+- The measured jack positions from [M5](/lore/m5-touch-the-skiff).
+
+## Practice
+
+- Insertion trials across jack positions.
+- Failure-mode drills: a missed jack, a cable caught on a knob.
+
+## Done check
+
+Nine of 10 inserts and 10 of 10 removals across three different jacks, each verified electrically. No damage to the jacks.
+
+## Terms
+
+- **peg-in-hole**: the robotics name for inserting one part into a close-fitting hole, here a 3.5 mm plug into a jack. Our design; the PAROL6 docs do not cover it.
+- **spiral search**: moving the plug in a widening spiral around the expected jack position until it drops in. Our design.
+
+## Video
+
+[The M6 video](/lore/video-m6) is planned.

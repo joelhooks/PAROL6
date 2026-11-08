@@ -1,0 +1,157 @@
+---
+title: "M2. One joint end to end: the wrist and joint 6"
+description: "The second milestone prints, assembles and wires the wrist, proves its homing sensor triggers, then jogs joint 6 to a commanded angle and measures the result."
+plain: "Build the wrist first, as the official manual orders, check its sensor, and prove a 30 degree jog measures 30 degrees."
+group: concept
+prerequisites:
+  - /lore/m1-bench-it
+terms:
+  - ST-Link
+  - "planetary gearbox"
+  - "transmission ratio"
+  - backlash
+  - PETG
+  - threadlocker
+  - "inductive sensor"
+  - "set screw"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf
+    title: "PAROL6 building instructions"
+    publisher: "Source Robotics"
+    note: "The wrist-to-base build order on page 7, the wrist on pages 20 to 23, and the J6 homing screw on pages 97 and 98."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/
+    title: "Drives, ratios and resolution, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The joint 6 motor and gearbox, 64,000 steps per joint turn, and EG gearbox backlash."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/
+    title: "Printing, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Why PETG, and fitting bearing seats."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/board/08-firmware/
+    title: "Firmware, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Uploading the main firmware with an ST-Link and the programming adapter, 24 V disconnected."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/
+    title: "Firmware and first run, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Jogging and fixing a joint that turns the wrong way."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/
+    title: "Electronics and wiring, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Inductive sensors on joints 1, 4 and 6 and their wiring."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/jogging/
+    title: "Jogging, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Joint jog in the commander."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/07-maintenance/couplers/
+    title: "Couplers and threadlocker, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Set screws, and blue threadlocker on every metal-to-metal screw."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/mechanical-assembly/
+    title: "Mechanical assembly, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Threadlocker on metal-to-metal screws and all set screws."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/
+    title: "Homing, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Homing is one sequence over all six joints."
+    accessed: "2026-11-07"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/
+    title: "The test firmware, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The motors turn as soon as the test firmware starts."
+    accessed: "2026-11-07"
+  - url: https://youtu.be/eCXA4BP3y8M
+    title: "PAROL6 Robot arm Wrist and Forearm assembly"
+    publisher: "Source Robotics on YouTube"
+    note: "The wrist assembly, from 0:00 to 1:59."
+    accessed: "2026-11-07"
+  - url: https://youtu.be/rv8zt6-3rvo
+    title: "PAROL6 setup and calibration"
+    publisher: "Source Robotics on YouTube"
+    note: "Firmware upload at 0:31 and the direction check at 3:21."
+    accessed: "2026-11-07"
+  - url: https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/pull/19
+    title: "PAROL6-Desktop-robot-arm pull request 19"
+    publisher: "Source Robotics on GitHub"
+    note: "The main firmware and the current PlatformIO STM32 toolchain."
+    accessed: "2026-11-07"
+---
+
+**Whole task:** print, assemble and wire the wrist, joint 6. Prove its homing sensor triggers, then jog joint 6 to a commanded angle and measure it.
+
+## Why the wrist first
+
+The official building instructions say the robot "needs to be built from wrist to the base. … Any other order will not work", because every wire passes down through the robot ([building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=7), page 7). The wrist is the first official assembly (pages 20 to 23). So M2 is also the real first step of [M3](/lore/m3-whole-arm), and nothing gets torn down afterwards.
+
+Stock firmware homes all six joints in one sequence ([Homing](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/homing/)), so a single joint cannot finish homing. M2 proves a sensor trigger plus a jogged move, and homing stays in M3.
+
+## Parts
+
+From the [building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf), pages 21 to 23 and 97 to 98:
+
+- The printed wrist part.
+- The EG 10:1 planetary gearbox, Stepper 1 (the 20 mm, 16 N·cm motor; [Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)), and Sensor 1, the joint 6 inductive sensor.
+- Bearing 1, the AXK3552 thrust bearing (page 22).
+- Screws: 3 × M4 10 mm and 4 × M3 8 mm. The gearbox's coupler uses its own set screws (page 21). An M3 14 mm screw and nut clamp the sensor if it is loose (page 22).
+- The shaft coupler on the gripper holder, and the M3 × 14 mm homing screw, which must trigger the sensor (pages 97 and 98).
+- An ST-Link and the PAROL6 programming adapter ([Firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/08-firmware/)).
+
+## Concepts
+
+- **Planetary gearbox ratio and step math.** Joint 6 has 64,000 steps per joint turn, so one step is 0.00563° ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **Backlash.** The EG series has 15 to 20 arc-minutes; the cheaper MG series has more ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **How an inductive sensor sees a steel screw head.** Joints 1, 4 and 6 home with inductive sensors triggered by small screws ([building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=23), page 23).
+- **Couplers, set screws and blue threadlocker** ([Couplers and threadlocker](https://docs.source-robotics.com/PAROL-docs/1.1/07-maintenance/couplers/)).
+- **Why PETG.** The parts around the motors reach 60 to 70 °C in long use, which PLA does not survive ([Printing](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)).
+
+## How-to
+
+- [Building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=20), pages 20 to 23 and 97 to 98.
+- The official [wrist and forearm assembly video](https://youtu.be/eCXA4BP3y8M), 0:00 to 1:59. Its on-screen note at about 0:20 says to attach the stepper shaft to the gearbox coupler on both sides.
+- Firmware upload with an ST-Link and the adapter, 24 V disconnected ([Firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/08-firmware/); [setup and calibration video, from 0:31](https://youtu.be/rv8zt6-3rvo?t=31)).
+- The direction check and fix ([Firmware and first run](https://docs.source-robotics.com/PAROL-docs/1.1/build/firmware-and-first-run/), section 4; [setup and calibration video, from 3:21](https://youtu.be/rv8zt6-3rvo?t=201)).
+- [Jogging](https://docs.source-robotics.com/PAROL-docs/1.1/05-operation/jogging/).
+
+## Practice
+
+- The print fit check: test the bearing seat, and ream it if tight ([Printing](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)).
+- Set screws and threadlocker.
+- Adjusting the sensor gap against the homing screw.
+- Extending the motor and sensor leads with heat shrink.
+
+## Done check
+
+1. Joint 6 turns smoothly by hand through the gearbox, with no clicks.
+2. The test firmware's `#LIMIT` reports the joint 6 sensor as the homing screw passes it. The motor turns freely on the test firmware, so keep fingers clear ([The test firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/09-test-firmware/)).
+3. On the main firmware, a commander or Python API jog of +30° measures 30° on a printed protractor. The API refuses planned moves while the robot is not homed, so this must be a jog.
+4. The direction matches the official figure, or gets fixed with `direction_reversed`.
+
+## Risks to settle before filming
+
+- The main firmware may not compile on the current PlatformIO STM32 toolchain. See [pull request 19](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/pull/19).
+- **needs_source:** whether the commander finds a serial port on macOS. Our untested reading of its sender is that it builds port names for Windows and Linux only. The fallback is the [Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/).
+
+## Terms
+
+- **ST-Link**: the STMicroelectronics programmer that uploads firmware to the board, through the PAROL6 programming adapter or the four named header pins only ([Firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/08-firmware/)).
+- **planetary gearbox**: a compact gearbox on the motor. PAROL6 uses the EG precision series, 20 to 1 on joints 2 and 3 and 10 to 1 on joint 6 ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **transmission ratio**: motor turns per joint turn. Joint 6's gearbox is 10 to 1, so one motor turn of 6,400 microsteps moves the joint 36° ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **backlash**: the play in a drive before the output moves. The EG gearboxes have 15 to 20 arc-minutes of it ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).
+- **PETG**: the print material for the parts. It softens around 80 °C, where PLA fails near the warm motors ([Printing](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)).
+- **threadlocker**: an adhesive for screw threads. Blue goes on every metal-to-metal screw and on all set screws ([Mechanical assembly](https://docs.source-robotics.com/PAROL-docs/1.1/build/mechanical-assembly/)).
+- **inductive sensor**: the contactless sensor that homes joints 1, 4 and 6, wired brown to 24 V, blue to GND and black to a LIMIT terminal ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
+- **set screw**: a headless screw that clamps a coupler to a shaft. The gearbox's coupler takes two ([building instructions](https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf#page=21), page 21).
+
+## Video
+
+[The M2 video](/lore/video-m2) is planned.
