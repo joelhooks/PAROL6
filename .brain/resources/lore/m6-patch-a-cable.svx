@@ -36,6 +36,8 @@ sources:
 - Patch cables.
 - A cable rack or nest to pick from.
 
+<TimelapseLinks milestone="m6-patch-a-cable" />
+
 ## Concepts
 
 - **Peg-in-hole insertion:** chamfers, lateral compliance, and why open-loop steppers cannot feel force. An overloaded stepper loses steps silently ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).

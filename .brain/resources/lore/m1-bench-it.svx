@@ -66,6 +66,8 @@ sources:
 - A 24 V DC supply of at least 5 A ([Connecting, "The power supply"](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/connecting/)).
 - A USB-B cable, a switched power strip within reach, a multimeter, and a computer with a serial terminal.
 
+<TimelapseLinks milestone="m1-bench-it" />
+
 ## Concepts
 
 - **The robot system.** The arm, the control board and the PC each have a job. Every 10 ms the PC sends the board a packet ([Robot system](https://docs.source-robotics.com/PAROL-docs/1.1/01-overview/robot-system/); [Serial protocol](https://docs.source-robotics.com/PAROL-docs/1.1/board/10-serial-protocol/)).

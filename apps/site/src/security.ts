@@ -1,17 +1,24 @@
 import * as HttpServerResponse from "effect/http/HttpServerResponse";
 
+export const muxImageOrigin = "https://image.mux.com";
+
+export const muxStreamOrigin = "https://stream.mux.com";
+
 const policy = (sources: {
   readonly base: string;
   readonly formAction: string;
+  readonly images: string;
+  readonly media?: string;
   readonly scripts: string;
   readonly styles: string;
 }) =>
-  `default-src 'none'; style-src ${sources.styles}; img-src 'self' data:; script-src ${sources.scripts}; connect-src 'self' https://cloudflareinsights.com; base-uri ${sources.base}; form-action ${sources.formAction}; frame-ancestors 'none'`;
+  `default-src 'none'; style-src ${sources.styles}; img-src ${sources.images};${sources.media === undefined ? "" : ` media-src ${sources.media};`} script-src ${sources.scripts}; connect-src 'self' https://cloudflareinsights.com; base-uri ${sources.base}; form-action ${sources.formAction}; frame-ancestors 'none'`;
 
 export const contentSecurityPolicy = (formAction: "'none'" | "'self'") =>
   policy({
     base: "'none'",
     formAction,
+    images: "'self' data:",
     scripts: "https://static.cloudflareinsights.com",
     styles: "'unsafe-inline'",
   });
@@ -19,6 +26,8 @@ export const contentSecurityPolicy = (formAction: "'none'" | "'self'") =>
 export const readerContentSecurityPolicy = policy({
   base: "'self'",
   formAction: "'none'",
+  images: `'self' data: ${muxImageOrigin}`,
+  media: muxStreamOrigin,
   scripts: "'self' https://static.cloudflareinsights.com",
   styles: "'self' 'unsafe-inline'",
 });

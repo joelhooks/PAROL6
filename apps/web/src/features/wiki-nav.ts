@@ -64,6 +64,7 @@ export const wikiSections: readonly WikiSection[] = [
         href: lore(`video-m${index}`),
         label: `M${index} video`,
       })),
+      { href: lore("timelapses"), label: "Print timelapses" },
     ],
     title: "Videos",
   },

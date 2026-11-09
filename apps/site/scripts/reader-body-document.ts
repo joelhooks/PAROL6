@@ -108,7 +108,7 @@ export const compileReaderNodes = (
           return null;
         }
 
-        if (["href", "src", "srcset"].includes(name)) {
+        if (["href", "poster", "src", "srcset"].includes(name)) {
           const urls =
             name === "srcset"
               ? value

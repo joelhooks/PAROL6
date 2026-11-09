@@ -14,6 +14,11 @@ import {
   stringifySourceMarkdown,
   visitContentNodes,
 } from "./svx-ast.ts";
+import {
+  timelapseLinksComponent,
+  timelapsesComponent,
+} from "./timelapse-components.ts";
+import { timelapses } from "./timelapses.ts";
 
 const promptForVariant = (
   prompt: CopyPromptSpec,
@@ -315,6 +320,8 @@ const coreComponents = {
           ];
     },
   },
+  TimelapseLinks: timelapseLinksComponent(timelapses),
+  Timelapses: timelapsesComponent(timelapses),
 } satisfies ComponentRegistry;
 
 export const createComponentRegistry = (

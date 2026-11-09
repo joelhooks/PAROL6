@@ -11,6 +11,8 @@ sources: []
 
 Each milestone ends in one video. The video is the reflection and the assessment: if Joel can explain a step to camera, he understands it.
 
+The [print timelapses](/lore/timelapses) are separate: each one is a print plate sped up, linked from the milestone its parts belong to.
+
 | Milestone | Video | Status |
 | --- | --- | --- |
 | [M1. Bench it](/lore/m1-bench-it) | [M1 video](/lore/video-m1) | Planned |

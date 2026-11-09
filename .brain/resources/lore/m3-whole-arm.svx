@@ -73,6 +73,8 @@ Everything else in the [bill of materials](https://docs.source-robotics.com/PARO
 - Limit switches for joints 2, 3 and 5, and inductive sensors for joints 1 and 4 ([Electronics and wiring](https://docs.source-robotics.com/PAROL-docs/1.1/build/electronics-and-wiring/)).
 - The control board, the GX16 socket, the fan and the E-stop from [M1](/lore/m1-bench-it).
 
+<TimelapseLinks milestone="m3-whole-arm" />
+
 ## Concepts
 
 - **Joint numbering, limits and directions** ([Joint limits](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/joint-limits/)).

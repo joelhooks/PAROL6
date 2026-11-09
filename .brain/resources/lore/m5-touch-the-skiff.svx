@@ -47,6 +47,8 @@ sources:
 - A rigid shared base plate for the arm and the skiff. The robot's base mounts on 30 by 30 mm profile ([Mounting](https://docs.source-robotics.com/PAROL-docs/1.1/04-installation/mounting/)).
 - A knob-turning end effector: a printed knob socket or a TPU-padded finger.
 
+<TimelapseLinks milestone="m5-touch-the-skiff" />
+
 ## Concepts
 
 - **Coordinate frames and registration.** Touch three fiducials on the skiff panel to find its pose in the robot's frame ([Reference frames](https://docs.source-robotics.com/PAROL-docs/1.1/theory/reference-frames/)).

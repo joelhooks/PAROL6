@@ -35,29 +35,43 @@ sources:
 
 The control board with six TMC5160 drivers, the GX16 power connector and its XT30 lead, the E-stop, one limit switch, one NEMA 17 motor loose on the bench, and a 24 V DC supply of at least 5 A. Full list: [M1 parts](/lore/m1-bench-it#parts).
 
+<TimelapseLinks milestone="m1-bench-it" />
+
 ## M2. One joint end to end
 
 The printed wrist part, the EG 10:1 planetary gearbox, Stepper 1, Sensor 1, the AXK3552 thrust bearing, the shaft coupler and the M3 homing screw, plus an ST-Link and the programming adapter. Full list: [M2 parts](/lore/m2-one-joint#parts).
+
+<TimelapseLinks milestone="m2-one-joint" />
 
 ## M3. The whole arm moves
 
 Everything else in the official [bill of materials](https://docs.source-robotics.com/PAROL-docs/1.1/build/bill-of-materials/): the two EG 20:1 gearboxes, the remaining motors, the belts, bearings and couplers, and the remaining limit switches and inductive sensors. Full list: [M3 parts](/lore/m3-whole-arm#parts).
 
+<TimelapseLinks milestone="m3-whole-arm" />
+
 ## M4. Pick and place
 
 One gripper, chosen at the start of the milestone from the official [end effectors](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/), or a printed gripper of our own design. Full list: [M4 parts](/lore/m4-pick-and-place#parts).
+
+<TimelapseLinks milestone="m4-pick-and-place" />
 
 ## M5. Touch the skiff
 
 **Our design.** The skiff, a rigid shared base plate, and a knob-turning end effector. Full list: [M5 parts](/lore/m5-touch-the-skiff#parts).
 
+<TimelapseLinks milestone="m5-touch-the-skiff" />
+
 ## M6. Patch a cable
 
 **Our design.** A cable-holding gripper, patch cables, and a cable rack or nest. Full list: [M6 parts](/lore/m6-patch-a-cable#parts).
 
+<TimelapseLinks milestone="m6-patch-a-cable" />
+
 ## M7. Play it
 
 **Our design.** The M5 and M6 rig, a clock source, and a sequencer script on the PC. Full list: [M7 parts](/lore/m7-play-it#parts).
+
+<TimelapseLinks milestone="m7-play-it" />
 
 ## Terms
 

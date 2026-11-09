@@ -1889,7 +1889,8 @@ const program = Effect.gen(function* generateContent() {
     },
     {
       heading: "Videos",
-      matches: (slug: string) => slug === "videos" || slug.startsWith("video-"),
+      matches: (slug: string) =>
+        slug === "videos" || slug === "timelapses" || slug.startsWith("video-"),
     },
     {
       heading: "Build reference",
@@ -2036,6 +2037,7 @@ ${milestoneStatusTable}
 - [Parts](${originToken}/lore/parts): what goes on the bench at each milestone.
 - [Concepts](${originToken}/lore/concepts): the ideas behind each milestone.
 - [Milestone videos](${originToken}/lore/videos): one per milestone.
+- [Print timelapses](${originToken}/lore/timelapses): each printed plate, sped up.
 - [The skiff target](${originToken}/lore/skiff-target): the synth the arm plays from M5 on.
 - [Sources and licences](${originToken}/lore/sources): the official manual and repository.
 - [All pages](${originToken}/lore).

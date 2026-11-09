@@ -106,6 +106,8 @@ From the [building instructions](https://docs.source-robotics.com/PAROL-docs/1.1
 - The shaft coupler on the gripper holder, and the M3 × 14 mm homing screw, which must trigger the sensor (pages 97 and 98).
 - An ST-Link and the PAROL6 programming adapter ([Firmware](https://docs.source-robotics.com/PAROL-docs/1.1/board/08-firmware/)).
 
+<TimelapseLinks milestone="m2-one-joint" />
+
 ## Concepts
 
 - **Planetary gearbox ratio and step math.** Joint 6 has 64,000 steps per joint turn, so one step is 0.00563° ([Drives, ratios and resolution](https://docs.source-robotics.com/PAROL-docs/1.1/03-technical-data/drives-and-ratios/)).

@@ -30,6 +30,8 @@ sources:
 - A clock source, chosen with [the skiff](/lore/skiff-target).
 - A sequencer script on the PC.
 
+<TimelapseLinks milestone="m7-play-it" />
+
 ## Concepts
 
 - **Sequencing**, and timing the robot's motion against a musical clock. The arm is slow, so the score is a patch-change score.

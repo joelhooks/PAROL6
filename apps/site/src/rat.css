@@ -360,6 +360,24 @@ figure img {
   width: 100%;
 }
 
+.timelapse-video {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  display: block;
+  height: auto;
+  margin-block: var(--space-small);
+  width: 100%;
+}
+
+.timelapse-pending {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  color: var(--ink-muted);
+  padding: var(--space-small);
+}
+
 figcaption {
   font-size: var(--font-size-small);
   margin-top: 0.25rem;

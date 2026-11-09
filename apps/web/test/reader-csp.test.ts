@@ -20,12 +20,18 @@ const sameOrigin = (url: string) =>
 
 const dataSchemes = new Set(["application/json", "application/ld+json"]);
 
+const allowedOrigin = (sources: readonly string[], url: string) =>
+  URL.canParse(url) &&
+  new URL(url).protocol === "https:" &&
+  sources.includes(new URL(url).origin);
+
 const allows = (name: string, url: string) => {
   const sources = sourcesFor(name);
 
   return (
     (sameOrigin(url) && sources.includes("'self'")) ||
-    (url.startsWith("data:") && sources.includes("data:"))
+    (url.startsWith("data:") && sources.includes("data:")) ||
+    allowedOrigin(sources, url)
   );
 };
 
@@ -95,9 +101,18 @@ it.layer(NodeServices.layer)((test) => {
             ).toBe(true);
           }
 
+          for (const video of document.querySelectorAll("video")) {
+            const source = video.getAttribute("src") ?? "";
+            const poster = video.getAttribute("poster") ?? "";
+
+            expect(allows("media-src", source), source).toBe(true);
+            expect(allows("img-src", poster), poster).toBe(true);
+            expect(video.querySelectorAll("source, track")).toHaveLength(0);
+          }
+
           expect(
             document.querySelectorAll(
-              "form, iframe, object, embed, base, video, audio"
+              "form, iframe, object, embed, base, audio"
             )
           ).toHaveLength(0);
 
@@ -132,6 +147,11 @@ it.layer(NodeServices.layer)((test) => {
           inlineStyles
         );
         expect(sourcesFor("form-action")).toEqual(["'none'"]);
+        expect(sourcesFor("media-src")).toEqual(
+          pages.some((document) => document.querySelector("video") !== null)
+            ? ["https://stream.mux.com"]
+            : ["'none'"]
+        );
       }),
     { timeout: 60_000 }
   );

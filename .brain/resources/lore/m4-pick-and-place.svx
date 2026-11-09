@@ -58,6 +58,8 @@ One gripper, chosen at the start of this milestone ([End effectors](https://docs
 - the [SSG-48](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/ssg-48/) or MSG electric gripper, on the CAN bus at the forearm's M8 connector;
 - a printed gripper of our own design with TPU fingers on the joint 6 coupler ([Custom tools](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/)). This one is our design.
 
+<TimelapseLinks milestone="m4-pick-and-place" />
+
 ## Concepts
 
 - **The tool frame and the TCP.** The software positions the tool centre point, so the tool must be registered with its offset from the flange ([Custom tools](https://docs.source-robotics.com/PAROL-docs/1.1/end-effectors/custom-tools/); [Reference frames](https://docs.source-robotics.com/PAROL-docs/1.1/theory/reference-frames/)).

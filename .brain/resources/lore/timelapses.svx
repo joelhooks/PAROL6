@@ -1,0 +1,27 @@
+---
+title: "Print timelapses"
+description: "Every PAROL6 print plate as a sped-up video from the printer's camera, with its parts, material, layer count, print time and milestones."
+plain: "One timelapse per print plate. Each lists the parts on the plate and the milestones they belong to."
+group: concept
+learn: false
+terms:
+  - "print plate"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/
+    title: "Printing, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Why PETG, and fitting bearing seats."
+    accessed: "2026-11-07"
+---
+
+Every printed part of the arm comes off a print plate, and each plate gets a timelapse here. Each timelapse is the X1C printer's own camera recording, sped up. An entry lists the part files on the plate, the material and settings, the layer count and the print time. It also links the milestones the parts belong to.
+
+A plate still on the printer reads **Printing, timelapse coming** until its video is up.
+
+The parts are [PETG](/lore/m2-one-joint); the official [Printing](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/) page explains why. The [milestone videos](/lore/videos) are separate: they explain each step to camera.
+
+<Timelapses />
+
+## Terms
+
+- **print plate**: the set of parts printed together in one print job.
