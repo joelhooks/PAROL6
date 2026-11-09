@@ -104,7 +104,11 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
       ],
       role: "pulleys; the 42 pulley is a belt-fit test",
     },
-    printTime: "about 2 h 54 min (estimate)",
+    playback: {
+      id: "muQU00ZF4dioGp8N5haLPaaDEKyxJDhOoMtrk8rhfZ2A",
+      posterSeconds: 60,
+    },
+    printTime: "about 3 h",
     title: "Plate 3: pulleys",
   },
 ]);
