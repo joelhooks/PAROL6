@@ -99,7 +99,6 @@ export const fetchSources = Effect.fn("fetchSources")(function* fetchSources(
             "-C",
             entry.location,
             "fetch",
-            "--depth=1",
             "--",
             entry.remote,
             request.commit,

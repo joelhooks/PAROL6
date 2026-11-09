@@ -220,7 +220,6 @@ it.layer(Layer.empty)("local Git and explicit bootstrap", (test) => {
           "-C",
           ".",
           "fetch",
-          "--depth=1",
           "--",
           "https://example.test/repo.git",
           sha,
