@@ -16,6 +16,7 @@ import {
 } from "./svx-ast.ts";
 import {
   timelapseLinksComponent,
+  timelapseReelComponent,
   timelapsesComponent,
 } from "./timelapse-components.ts";
 import { timelapses } from "./timelapses.ts";
@@ -321,6 +322,7 @@ const coreComponents = {
     },
   },
   TimelapseLinks: timelapseLinksComponent(timelapses),
+  TimelapseReel: timelapseReelComponent(timelapses),
   Timelapses: timelapsesComponent(timelapses),
 } satisfies ComponentRegistry;
 

@@ -26,6 +26,7 @@ These rules cover browser code under `apps/web/src/client/`, `features/`, `dev/c
 | `features/app.ts` | Document-browser Submodel: `/search` route transitions, update, boot, and view |
 | `features/route.ts` | Schema route union and URL parsing for `/search?q=` and `/search?id=` |
 | `features/reader*.ts` | Pure document rendering and reader controls |
+| `features/timelapse-reel.ts` | The homepage `TimelapseReel` block: newest uploaded plate as a muted looping video, then printing and earlier plates as tiles. The data comes from `apps/site/scripts/timelapses.ts`. The reader Model's `motionPreference` starts `Unknown`, so server HTML never autoplays; `client/reader/subscriptions.ts` reads `prefers-reduced-motion` only on pages with the block, and `update` adds autoplay and `PlayTimelapseReel` only for `NoPreference` |
 | `client/reader/model.ts` and `client/reader/message.ts` | Reader flags, clipboard Model, and Messages |
 | `client/reader/update.ts` | Pure reader transitions |
 | `client/reader/init.ts` and `client/reader/command.ts` | Server and browser initialization and named clipboard Commands |

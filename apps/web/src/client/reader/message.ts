@@ -7,16 +7,19 @@ import { Message as MotionDemoMessage } from "../motion/message.js";
 import { DetectedClipboardAccess } from "./model.js";
 
 export const Message = defineMessageUnion({
+  ChangedReducedMotion: { isReducedMotion: Schema.Boolean },
   ClickedCopy: { id: Schema.String },
   CompletedDetectClipboard: { access: DetectedClipboardAccess },
   CompletedOpenSiteSearch: {},
   CompletedWaitBeforeCopyReset: { id: Schema.String },
   FailedCopyReaderText: { id: Schema.String },
+  FailedPlayTimelapseReel: {},
   GotCafeMessage: { message: CafeMessage },
   GotDocsMessage: { message: DocsMessage },
   GotMotionMessage: { message: MotionDemoMessage },
   SubmittedSiteSearch: {},
   SucceededCopyReaderText: { id: Schema.String },
+  SucceededPlayTimelapseReel: {},
   UpdatedSiteSearch: { value: Schema.String },
 });
 

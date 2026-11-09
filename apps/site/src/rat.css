@@ -378,6 +378,95 @@ figure img {
   padding: var(--space-small);
 }
 
+.timelapse-reel {
+  display: grid;
+  gap: var(--space-small);
+  margin-block: var(--space-small);
+}
+
+.timelapse-reel-latest {
+  margin: 0;
+}
+
+.timelapse-reel-video {
+  aspect-ratio: 16 / 10;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  display: block;
+  height: auto;
+  object-fit: contain;
+  width: 100%;
+}
+
+.timelapse-reel-title,
+.timelapse-reel-fact {
+  margin-block: 0.25rem;
+}
+
+.timelapse-reel-fact {
+  color: var(--ink-muted);
+  font-size: var(--font-size-small);
+}
+
+.timelapse-reel-label {
+  color: var(--ink-muted);
+  display: block;
+  font-size: var(--font-size-tiny);
+  text-transform: uppercase;
+}
+
+.timelapse-reel-tiles {
+  display: grid;
+  gap: var(--space-small);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timelapse-tile {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  min-width: 0;
+  padding: var(--space-tight);
+}
+
+.timelapse-tile-link {
+  display: grid;
+  gap: 0.25rem;
+  text-decoration: none;
+}
+
+.timelapse-tile-link strong {
+  text-decoration: underline;
+}
+
+.timelapse-tile-poster {
+  aspect-ratio: 16 / 10;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.timelapse-tile-printing {
+  align-content: center;
+  color: var(--ink-muted);
+  display: grid;
+  font-size: var(--font-size-small);
+  padding: var(--space-small);
+  text-align: center;
+}
+
+.timelapse-reel-all {
+  margin-block: 0;
+}
+
 figcaption {
   font-size: var(--font-size-small);
   margin-top: 0.25rem;

@@ -2018,6 +2018,10 @@ const program = Effect.gen(function* generateContent() {
 
 Joel's public build wiki for [PAROL6](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm), an open-source six-axis desktop robot arm from Source Robotics. The build runs from a bare control board to an arm that patches cables and turns knobs on a Eurorack skiff. Every build fact links to the [official manual](https://docs.source-robotics.com/PAROL-docs/1.1/).
 
+## Print timelapses
+
+<TimelapseReel />
+
 ## Start here
 
 1. [How milestones work](${originToken}/lore/milestones): seven whole tasks, M1 to M7, each with a done check on camera and a video.

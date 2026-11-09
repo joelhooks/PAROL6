@@ -29,6 +29,36 @@ export const ReaderInlineSchema: Schema.Codec<ReaderInlineValue> =
     ])
   );
 
+export const TimelapseReelParts = Schema.Struct({
+  files: Schema.Array(Schema.String),
+  role: Schema.String,
+});
+
+export const TimelapseReelLatest = Schema.Struct({
+  href: Schema.String,
+  parts: TimelapseReelParts,
+  posterUrl: Schema.String,
+  printTime: Schema.String,
+  title: Schema.String,
+  videoUrl: Schema.String,
+});
+
+export const TimelapseReelTile = defineTaggedUnion({
+  Printed: {
+    href: Schema.String,
+    parts: TimelapseReelParts,
+    posterUrl: Schema.String,
+    printTime: Schema.String,
+    title: Schema.String,
+  },
+  Printing: {
+    href: Schema.String,
+    parts: TimelapseReelParts,
+    printTime: Schema.String,
+    title: Schema.String,
+  },
+});
+
 export const ReaderBlock = defineTaggedUnion({
   CodeFence: {
     language: Schema.String,
@@ -50,6 +80,11 @@ export const ReaderBlock = defineTaggedUnion({
     lines: Schema.String,
     path: Schema.String,
     repo: Schema.String,
+  },
+  TimelapseReel: {
+    allHref: Schema.String,
+    latest: Schema.OptionFromOptional(TimelapseReelLatest),
+    tiles: Schema.Array(TimelapseReelTile),
   },
 });
 

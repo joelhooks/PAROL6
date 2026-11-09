@@ -6,6 +6,7 @@ import type {
   ReaderInlineValue,
 } from "../client/reader-document.js";
 import { readerParagraph } from "./reader-paragraph.js";
+import type { TimelapseReelBlock } from "./timelapse-reel.js";
 
 export type SnippetReference = Extract<
   ReaderBlockValue,
@@ -19,6 +20,7 @@ export interface ReaderBlockRenderers {
   readonly codeFence: (value: string) => Html;
   readonly copyPrompt: (id: string) => Html;
   readonly snippet: (reference: SnippetReference) => Html;
+  readonly timelapseReel: (reel: TimelapseReelBlock) => Html;
 }
 
 export const renderReaderInline = <Message>(
@@ -120,4 +122,5 @@ export const renderReaderBlock = <Message>(
       ),
     PromptText: ({ value }) => h.pre([h.Class("prompt")], [value]),
     Snippet: renderers.snippet,
+    TimelapseReel: renderers.timelapseReel,
   });

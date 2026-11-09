@@ -7,8 +7,12 @@ import {
   renderSvxMarkdown,
 } from "../scripts/component-registry.ts";
 import {
+  timelapseHref,
   timelapseLinksComponent,
   timelapsePendingText,
+  timelapseReelComponent,
+  timelapseReelEarlierLimit,
+  timelapseReelLabels,
   timelapsesComponent,
   timelapsesRoute,
 } from "../scripts/timelapse-components.ts";
@@ -37,6 +41,7 @@ const entriesArbitrary = Arbitrary.schema(
 const registryFor = (entries: readonly TimelapseEntry[]) =>
   createComponentRegistry({
     TimelapseLinks: timelapseLinksComponent(entries),
+    TimelapseReel: timelapseReelComponent(entries),
     Timelapses: timelapsesComponent(entries),
   });
 
@@ -108,6 +113,45 @@ it.prop(
         count(rendered, `${timelapsesRoute}#${timelapseAnchor(entry)})`)
       ).toBe(tagged.includes(entry) ? 1 : 0);
     }
+  }
+);
+
+it.prop(
+  "the home reel tells agents the newest uploaded plate, every printing plate and the earlier plates",
+  { entries: entriesArbitrary },
+  ({ entries }) => {
+    const agent = renderSvxMarkdown(
+      "<TimelapseReel />",
+      "agent",
+      {},
+      registryFor(entries)
+    );
+
+    const uploaded = entries.filter((entry) => entry.playback !== undefined);
+    const printing = entries.filter((entry) => entry.playback === undefined);
+    const newest = uploaded.at(-1);
+
+    const shown = [
+      ...printing,
+      ...uploaded.slice(
+        Math.max(0, uploaded.length - 1 - timelapseReelEarlierLimit)
+      ),
+    ];
+
+    expect(count(agent, timelapsePendingText)).toBe(printing.length);
+    expect(count(agent, timelapseReelLabels.latest)).toBe(
+      newest === undefined ? 0 : 1
+    );
+    expect(count(agent, timelapseVideoUrl(newest?.playback?.id ?? ""))).toBe(
+      newest === undefined ? 0 : 1
+    );
+    expect(count(agent, `](${timelapsesRoute}#`)).toBe(shown.length);
+
+    for (const entry of shown) {
+      expect(count(agent, `](${timelapseHref(entry)})`)).toBe(1);
+    }
+
+    expect(agent).toContain(`[${timelapseReelLabels.all}](${timelapsesRoute})`);
   }
 );
 

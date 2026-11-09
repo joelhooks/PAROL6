@@ -71,10 +71,19 @@ export const DetectedClipboardAccess = ClipboardAccess.subset([
   "Unavailable",
 ]);
 
+export const MotionPreference = defineTaggedUnion({
+  NoPreference: {},
+  Reduce: {},
+  Unknown: {},
+});
+
+export const timelapseReelVideoId = "timelapse-reel-video";
+
 export const Model = Schema.Struct({
   ...ReaderFlags.fields,
   clipboardAccess: ClipboardAccess,
   copyStatuses: Schema.Record(Schema.String, CopyStatus),
+  motionPreference: MotionPreference,
   siteSearch: Schema.String,
 });
 
@@ -84,8 +93,12 @@ export const initialModel = (flags: ReaderPageFlags): ReaderModel => ({
   ...flags,
   clipboardAccess: ClipboardAccess.Unknown(),
   copyStatuses: {},
+  motionPreference: MotionPreference.Unknown(),
   siteSearch: "",
 });
+
+export const hasTimelapseReel = (model: Pick<ReaderModel, "blocks">) =>
+  model.blocks.some(ReaderBlock.guards.TimelapseReel);
 
 export const copyStatusOf = (
   model: Pick<ReaderModel, "copyStatuses">,

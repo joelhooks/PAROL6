@@ -1,4 +1,4 @@
-import { Data, Predicate } from "effect";
+import { Data, Option, Predicate } from "effect";
 import type { PhrasingContent, RootContent } from "mdast";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
@@ -6,6 +6,9 @@ import { unified } from "unified";
 import { linkLoreTerms } from "./content-lib.ts";
 import type { LoreHastNode, LoreTermTarget } from "./content-lib.ts";
 import { linkStackEntities } from "./content-links.ts";
+import { timelapseReel } from "./timelapse-components.ts";
+import type { TimelapseReel } from "./timelapse-components.ts";
+import { timelapses } from "./timelapses.ts";
 
 type ParsedInline = Data.TaggedEnum<{
   Code: { readonly value: string };
@@ -32,6 +35,7 @@ type HomeBlock = Data.TaggedEnum<{
   };
   List: { readonly items: readonly (readonly ParsedInline[])[] };
   Paragraph: { readonly content: readonly ParsedInline[] };
+  TimelapseReel: TimelapseReel;
 }>;
 
 const Block = Data.taggedEnum<HomeBlock>();
@@ -242,6 +246,21 @@ const weaveHomeTerms = (
   });
 };
 
+const selfClosingComponent = (value: string): Option.Option<HomeBlock> => {
+  const prompt =
+    /^<CopyPrompt id="(?<id>connect|mcp|cursor|skills|learn)" \/>$/u.exec(
+      value
+    );
+
+  if (prompt?.groups?.id !== undefined) {
+    return Option.some(Block.CopyPrompt({ id: prompt.groups.id }));
+  }
+
+  return value === "<TimelapseReel />"
+    ? Option.some(Block.TimelapseReel(timelapseReel(timelapses)))
+    : Option.none();
+};
+
 export const compileReaderDocument = (
   source: string,
   targets: readonly LoreTermTarget[],
@@ -274,13 +293,10 @@ export const compileReaderDocument = (
       continue;
     }
 
-    const prompt =
-      /^<CopyPrompt id="(?<id>connect|mcp|cursor|skills|learn)" \/>$/u.exec(
-        node.value.trim()
-      );
+    const component = selfClosingComponent(node.value.trim());
 
-    if (prompt?.groups?.id !== undefined) {
-      blocks.push(Block.CopyPrompt({ id: prompt.groups.id }));
+    if (Option.isSome(component)) {
+      blocks.push(component.value);
       continue;
     }
 

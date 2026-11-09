@@ -36,6 +36,7 @@ import {
   systemsRouter,
   tokenmaxxRouter,
 } from "./site-route.js";
+import { timelapseReelView } from "./timelapse-reel.js";
 import {
   tocEntries,
   wikiBrand,
@@ -379,6 +380,8 @@ const bodyView = (model: ReaderModel, h: HtmlBuilder<ReaderMessage>) => [
       }),
       pagePath: model.page.path,
       snippet: (reference) => readerSnippet(model, h, reference),
+      timelapseReel: (reel) =>
+        timelapseReelView(reel, model.motionPreference, h),
     })
   ),
 ];

@@ -3,12 +3,21 @@ import { Command } from "foldkit";
 import { load } from "foldkit/navigation";
 
 import { Message } from "./message.js";
-import { ClipboardAccess } from "./model.js";
+import { ClipboardAccess, timelapseReelVideoId } from "./model.js";
 
 class ClipboardFailure extends Schema.TaggedError<
   ClipboardFailure,
   { readonly brand: unique symbol }
 >()("ClipboardFailure", { cause: Schema.Unknown }) {}
+
+const playVideo = (element: Element | null) =>
+  element instanceof HTMLVideoElement
+    ? element.play()
+    : Promise.reject(
+        new Error(
+          `No video #${timelapseReelVideoId} on this page. The reel renders it from the TimelapseReel block. Fix: render the block before playing it.`
+        )
+      );
 
 export const DetectClipboard = Command.define("DetectClipboard", {
   execute: Effect.sync(() =>
@@ -44,6 +53,21 @@ export const WaitBeforeCopyReset = Command.define("WaitBeforeCopyReset", {
       Effect.as(Message.CompletedWaitBeforeCopyReset({ id }))
     ),
   messages: [Message.CompletedWaitBeforeCopyReset],
+});
+
+export const PlayTimelapseReel = Command.define("PlayTimelapseReel", {
+  execute: Effect.tryPromise(() =>
+    playVideo(document.querySelector(`#${timelapseReelVideoId}`))
+  ).pipe(
+    Effect.match({
+      onFailure: () => Message.FailedPlayTimelapseReel(),
+      onSuccess: () => Message.SucceededPlayTimelapseReel(),
+    })
+  ),
+  messages: [
+    Message.FailedPlayTimelapseReel,
+    Message.SucceededPlayTimelapseReel,
+  ],
 });
 
 export const OpenSiteSearch = Command.define("OpenSiteSearch", {

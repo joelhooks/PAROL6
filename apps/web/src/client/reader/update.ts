@@ -12,6 +12,7 @@ import * as MotionDemo from "../motion/index.js";
 import {
   CopyReaderText,
   OpenSiteSearch,
+  PlayTimelapseReel,
   WaitBeforeCopyReset,
 } from "./command.js";
 import { Message } from "./message.js";
@@ -21,6 +22,8 @@ import {
   copyStatusOf,
   CopyStatus,
   findCopyPrompt,
+  hasTimelapseReel,
+  MotionPreference,
 } from "./model.js";
 import type { ReaderModel } from "./model.js";
 
@@ -72,6 +75,20 @@ export const update = (
   Message.match<Update.Return<ReaderModel, ReaderMessage, DocumentQueries>>(
     message,
     {
+      ChangedReducedMotion: ({ isReducedMotion }) => {
+        const next = modifyFields(model, {
+          motionPreference: () =>
+            isReducedMotion
+              ? MotionPreference.Reduce()
+              : MotionPreference.NoPreference(),
+        });
+
+        return isReducedMotion ||
+          !hasTimelapseReel(model) ||
+          MotionPreference.guards.NoPreference(model.motionPreference)
+          ? { model: next }
+          : { commands: [PlayTimelapseReel()], model: next };
+      },
       ClickedCopy: ({ id }) =>
         Option.match(copyablePrompt(model, id), {
           onNone: () => ({ model }),
@@ -94,6 +111,7 @@ export const update = (
           ? withCopyStatus(model, id, CopyStatus.Failed())
           : model,
       }),
+      FailedPlayTimelapseReel: () => ({ model }),
       GotCafeMessage: ({ message: cafeMessage }) =>
         foldCafe(model, cafeMessage),
       GotDocsMessage: ({ message: docsMessage }) =>
@@ -121,6 +139,7 @@ export const update = (
               model: withCopyStatus(model, id, CopyStatus.Copied()),
             }
           : { model },
+      SucceededPlayTimelapseReel: () => ({ model }),
       UpdatedSiteSearch: ({ value }) => ({
         model: modifyFields(model, { siteSearch: () => value }),
       }),
