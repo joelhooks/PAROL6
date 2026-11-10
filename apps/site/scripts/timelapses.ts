@@ -155,6 +155,27 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 1 h 50 min",
     title: "Plate 5: upper-arm and elbow covers",
   },
+  {
+    id: "plate6-high-infill",
+    layers: 239,
+    material: "Orange PETG HF, 70% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: [
+        "UPPER_ARM/J2_shaft",
+        "SHOULDER/J1_rotation_shaft",
+        "UPPER_ARM/38_pulley_J3",
+        "ELBOW/J4_limiter",
+      ],
+      role: "the high-infill shafts, the J3 pulley and the J4 limiter",
+    },
+    playback: {
+      id: "Tb4SZH7wQ01etsfukEzN6UXleQnEgs3ifVycimTJb31c",
+      posterSeconds: 56,
+    },
+    printTime: "about 3 h 16 min",
+    title: "Plate 6: shafts, pulley and limiter",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
