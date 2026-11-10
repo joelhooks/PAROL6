@@ -111,6 +111,27 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 3 h",
     title: "Plate 3: pulleys",
   },
+  {
+    id: "plate4-elbow-upperarm",
+    layers: 323,
+    material: "Orange PETG HF, 30% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: [
+        "ELBOW/Elbow_part",
+        "UPPER_ARM/Upper_arm",
+        "ELBOW/Elbow_lid_1",
+        "UPPER_ARM/Upper_arm_wires_cover",
+      ],
+      role: "the elbow and upper arm",
+    },
+    playback: {
+      id: "PGk5YUUAN4FNbFSVbnePE7HAiC2gD01TqvvACcvueIbk",
+      posterSeconds: 63,
+    },
+    printTime: "about 9 h 45 min",
+    title: "Plate 4: elbow and upper arm",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
