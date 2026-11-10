@@ -132,6 +132,29 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 9 h 45 min",
     title: "Plate 4: elbow and upper arm",
   },
+  {
+    id: "plate5-covers",
+    layers: 83,
+    material: "Orange PETG HF, 30% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: [
+        "UPPER_ARM/Upper_arm_cover",
+        "UPPER_ARM/J2_cover",
+        "UPPER_ARM/J2_bearing_backplate",
+        "ELBOW/J4_bearing_backplate",
+        "ELBOW/Elbow_lid_2",
+        "UPPER_ARM/J3_limit_switch_cover",
+      ],
+      role: "the upper-arm and elbow covers and backplates",
+    },
+    playback: {
+      id: "ZvCRGvZz2ZErTc168d02TKlaeLkRzDI02Kbso01OM011NP00",
+      posterSeconds: 56,
+    },
+    printTime: "about 1 h 50 min",
+    title: "Plate 5: upper-arm and elbow covers",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
