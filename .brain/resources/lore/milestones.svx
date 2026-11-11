@@ -29,25 +29,34 @@ The final job is a robot that does a useful thing to a synth, safely, and that J
 | [M1. Bench it](/lore/m1-bench-it) | Power the board, turn one motor, stop it safely | Official docs |
 | [M2. One joint end to end](/lore/m2-one-joint) | Build the wrist, check its sensor, then measure a commanded move of joint 6 | Official docs |
 | [M3. The whole arm moves](/lore/m3-whole-arm) | Build the rest of the arm, wrist to base, then home, jog and check the witness marks | Official docs |
+| [LeRobot, L0 to L5 (planned)](/lore/lerobot) | Drive the arm from LeRobot, record demonstrations, train a policy. Starts the week M3 passes and runs alongside M4 and M5 | Our design, planned |
 | [M4. Pick and place](/lore/m4-pick-and-place) | Fit a gripper and measure a repeated loop | Official docs |
 | [M5. Touch the skiff](/lore/m5-touch-the-skiff) | Register the skiff, turn a knob, press a button | Our design |
 | [M6. Patch a cable](/lore/m6-patch-a-cable) | Insert a patch cable and verify it | Our design |
 | [M7. Play it](/lore/m7-play-it) | Perform a short written piece | Our design |
 
-<Diagram alt="The seven milestones as a ladder: M1 to M4 follow the official manual, M5 to M7 are our design and go past it">
+<Diagram alt="The seven milestones as a ladder: M1 to M4 follow the official manual, M5 to M7 are our design and go past it. Beside them, the planned LeRobot stage runs from L0 to L5, with L1 beside M3 and L5 beside M6">
 
 ```text
   M7  Play it               ┐
-  M6  Patch a cable         │ our design
-  M5  Touch the skiff       ┘
-  ─────────────────────────────────────
-  M4  Pick and place        ┐
-  M3  The whole arm moves   │ official manual
-  M2  One joint end to end  │
+  M6  Patch a cable         │ our design       L5 ┐
+  M5  Touch the skiff       ┘                  L4 │
+  ─────────────────────────────────────        L3 │ LeRobot,
+  M4  Pick and place        ┐                  L2 │ planned
+  M3  The whole arm moves   │ official manual  L1 │
+  M2  One joint end to end  │                  L0 ┘
   M1  Bench it              ┘
 ```
 
 </Diagram>
+
+## Planned after M3: LeRobot
+
+[LeRobot: teaching PAROL6 by showing it](/lore/lerobot) is a planned stage with its own milestones, L0 to L5. It is not built yet.
+
+- **L1** is the week M3 passes: LeRobot connects to the arm through the official controller and jogs it slowly.
+- **L3** runs beside M4. A learned pick-and-place is measured against M4's scripted loop.
+- **L5** meets M5 and M6: a policy presses a skiff button or turns a knob.
 
 ## How each milestone is built
 
@@ -65,7 +74,7 @@ The structure comes from [four-component instructional design](https://www.4cid.
 
 ## Honesty markers
 
-**needs_source** marks a claim the official sources do not cover yet. **Our design** marks milestones 5 to 7, which go past the PAROL6 manual. Both stay visible until a source or a measurement settles them.
+**needs_source** marks a claim the official sources do not cover yet. **Our design** marks milestones 5 to 7, which go past the PAROL6 manual. **Planned** marks the LeRobot stage, which has no build or test yet. All three stay visible until a source or a measurement settles them.
 
 ## Terms
 

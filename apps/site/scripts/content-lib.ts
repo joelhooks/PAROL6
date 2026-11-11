@@ -754,6 +754,42 @@ const glossaryDefinitions: readonly GlossaryEntry[] = [
     term: "TCP",
   },
   {
+    routePath: "/lore/lerobot",
+    summary:
+      "Hugging Face's open-source Python library for robot learning, licensed Apache-2.0; the planned stage after M3 drives PAROL6 with it.",
+    term: "LeRobot",
+  },
+  {
+    routePath: "/lore/lerobot",
+    summary:
+      "Training a robot to do a task from recorded demonstrations of that task.",
+    term: "imitation learning",
+  },
+  {
+    routePath: "/lore/lerobot",
+    summary:
+      "Driving a robot live from another device, such as a leader arm, a phone or a gamepad.",
+    term: "teleoperation",
+  },
+  {
+    routePath: "/lore/lerobot",
+    summary:
+      "The arm a person moves during teleoperation; the robot, the follower, copies it.",
+    term: "leader arm",
+  },
+  {
+    routePath: "/lore/lerobot",
+    summary:
+      "One recorded demonstration, start to end, with joint angles and camera video, in a LeRobot dataset.",
+    term: "episode",
+  },
+  {
+    routePath: "/lore/lerobot",
+    summary:
+      "A LeRobot policy: a ResNet-18 image backbone and a transformer that predict chunks of actions from cameras and joints.",
+    term: "ACT",
+  },
+  {
     routePath: "/lore/skiff-target",
     summary:
       "Horizontal pitch, the Eurorack panel width unit; 1 HP is 5.08 mm.",

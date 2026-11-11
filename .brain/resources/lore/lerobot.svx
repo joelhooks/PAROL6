@@ -1,0 +1,314 @@
+---
+title: "LeRobot: teaching PAROL6 by showing it (planned)"
+description: "A planned stage after M3: connect Hugging Face's LeRobot to PAROL6 through the official controller, then record demonstrations and train policies, from L0 to L5."
+plain: "A plan, not a build: after the whole arm moves, drive it from LeRobot, record what a person shows it, and train it to repeat the task."
+group: concept
+prerequisites:
+  - /lore/m3-whole-arm
+terms:
+  - LeRobot
+  - "leader arm"
+  - episode
+  - ACT
+  - SmolVLA
+  - teleoperation
+  - "imitation learning"
+  - parol6-server
+sources:
+  - url: https://github.com/huggingface/lerobot/tree/e581c1d5701f846788662079d4ac08835c96def9
+    title: "huggingface/lerobot at e581c1d, package 0.7.1"
+    publisher: "Hugging Face"
+    note: "The Robot interface, the plugin prefixes, the shipped motor buses, cameras, datasets and policies."
+    accessed: "2026-11-11"
+  - url: https://github.com/huggingface/lerobot/blob/e581c1d5701f846788662079d4ac08835c96def9/LICENSE
+    title: "LeRobot licence"
+    publisher: "Hugging Face"
+    note: "Apache-2.0."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/integrate_hardware
+    title: "Bring your own hardware, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "Which motor buses ship, the advice to write your own communication wrapper, and plugin packaging."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/il_robots
+    title: "Imitation learning on real-world robots, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "Recording, replay, training, and the advice to record at least 50 episodes."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/hardware_guide
+    title: "Hardware guide, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "Training memory and indicative wall-clock times for ACT, SmolVLA and pi0, and the advice not to train on a CPU."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/cameras
+    title: "Cameras, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "Camera classes, 640×480 at 30 fps, and fixed cameras."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/phone_teleop
+    title: "Phone teleoperation, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "A phone as a leader, its dead-man button, and the URDF it needs."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/smolvla
+    title: "SmolVLA, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "Fine-tuning smolvla_base, and why 25 episodes were not enough."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/docs/lerobot/remote_inference
+    title: "Remote inference, LeRobot docs"
+    publisher: "Hugging Face"
+    note: "A GPU policy server feeding a robot computer that has no GPU."
+    accessed: "2026-11-11"
+  - url: https://github.com/PCrnjak/PAROL6-python-API/tree/604d1ec8b4c71be119e75f1506d4cc388322230c
+    title: "PAROL6 Python API v0.9.1"
+    publisher: "Source Robotics"
+    note: "parol6-server: the E-stop latch, the homing guard, joint limits, the 100 Hz loop, the 0.25 s brake on a quiet stream, and the GPL-3.0 licence."
+    accessed: "2026-11-11"
+  - url: https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/e2169c163244d647739cc34fc5da15c24b042a61/PAROL6%20control%20board%20main%20software/src/main.cpp
+    title: "PAROL6 control board firmware, main.cpp at e2169c1"
+    publisher: "Source Robotics"
+    note: "The board repeats the last command, checks no joint limits and only reports the E-stop."
+    accessed: "2026-11-11"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/02-safety/emergency-stop/
+    title: "Emergency stop, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The E-stop is a software stop; a pulled USB cable leaves it without effect; the mains switch is the hard stop."
+    accessed: "2026-11-11"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/
+    title: "Python API, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "parol6-server owns the serial port and serves a client."
+    accessed: "2026-11-11"
+  - url: https://github.com/RoboCrafty/my_robot/tree/996d4917279cf9f143fffac66d030cd47078eee7
+    title: "RoboCrafty/my_robot at 996d491"
+    publisher: "RoboCrafty"
+    note: "A LeRobot plugin for a PAROL6 on a replacement controller. The repository has no licence file."
+    accessed: "2026-11-11"
+  - url: https://huggingface.co/RoboCrafty
+    title: "RoboCrafty on Hugging Face"
+    publisher: "RoboCrafty"
+    note: "PAROL6 datasets and ACT, SmolVLA, pi0 and pi0.5 models."
+    accessed: "2026-11-11"
+  - url: https://github.com/Source-Robotics/RAFT-teleoperation-arm/tree/6fe5a811422d44248013b5ed774aa74d76f3d545
+    title: "RAFT teleoperation arm at 6fe5a81"
+    publisher: "Source Robotics"
+    note: "A force-feedback leader for PAR6 and PAROL6, tested in simulation and not yet on the real robot."
+    accessed: "2026-11-11"
+  - url: https://github.com/charlie8612/lerobot_robot_piper/tree/d9785e6256aacd9fe0128a622909e046e66aea33
+    title: "charlie8612/lerobot_robot_piper at d9785e6"
+    publisher: "charlie8612"
+    note: "The failure modes of a naive driver: a lunge on connect and a drop on disconnect."
+    accessed: "2026-11-11"
+  - url: https://www.logitech.com/en-us/shop/p/c920s-pro-hd-webcam
+    title: "Logitech C920s PRO HD webcam"
+    publisher: "Logitech"
+    note: "US$69.99 on 2026-11-11."
+    accessed: "2026-11-11"
+  - url: https://www.amazon.nl/-/en/InnoMaker-Raspberry-Supports-Windows-Android/dp/B0CNCSFQC1
+    title: "innomaker U20CAM-1080P 32×32 mm UVC camera"
+    publisher: "Amazon.nl"
+    note: "€18.59 on 2026-11-11, from a search extract."
+    accessed: "2026-11-11"
+  - url: https://www.walmart.com/ip/SMALLRIG-Magic-Arm-Clamp-Kit-Camera-Mount-Articulating-Friction-Arm-w-Super-Clamp-w-1-4-20-Screw-Thread-hole-Camera-Light-Monitor-Webcam-Action-Camer/7297800815
+    title: "SmallRig Magic Arm clamp kit 4454"
+    publisher: "Walmart"
+    note: "US$35.90 on 2026-11-11, from a search extract."
+    accessed: "2026-11-11"
+---
+
+**Planned.** Nothing on this page is built, installed, bought or run yet. Every test below is a plan, to be filmed when it happens.
+
+**Whole task:** after the whole arm moves, drive PAROL6 from a robot-learning library. Then record what a person shows it, and train it to repeat the task.
+
+## What LeRobot is
+
+**LeRobot** is Hugging Face's open-source Python library for robot learning ([huggingface.co/lerobot](https://huggingface.co/lerobot)). Its licence is [Apache-2.0](https://github.com/huggingface/lerobot/blob/e581c1d5701f846788662079d4ac08835c96def9/LICENSE). This page reads version 0.7.1, at commit [e581c1d](https://github.com/huggingface/lerobot/tree/e581c1d5701f846788662079d4ac08835c96def9).
+
+It gives the whole loop of **imitation learning**: a robot learns a task from recorded demonstrations.
+
+- **Teleoperation:** a person drives the robot live from another device. A **leader arm** is an arm the person moves; the robot follows it. A phone or a gamepad also works.
+- **Recording:** `lerobot-record` saves each demonstration. An **episode** is one recorded demonstration, with joint angles and camera video, in LeRobot's dataset format ([dataset docs](https://huggingface.co/docs/lerobot/lerobot-dataset-v3)).
+- **Training:** `lerobot-train` fits a policy to the episodes. A policy is a model that turns camera frames and joint angles into the next actions. 31 policy packages ship.
+- **Running:** `lerobot-rollout` runs a trained policy on the robot.
+
+Two policies matter first:
+
+- **ACT** is a policy with a ResNet-18 image backbone and a transformer over the camera features and joints. It predicts chunks of actions ([ACT docs](https://huggingface.co/docs/lerobot/act)).
+- **SmolVLA** is a 450M vision-language-action model, fine-tuned from `smolvla_base`. It takes a text prompt with the cameras and joints ([SmolVLA docs](https://huggingface.co/docs/lerobot/smolvla)).
+
+## Why PAROL6 needs its own driver
+
+LeRobot's motor buses are for smart servos: Feetech and Dynamixel on a serial bus, and Damiao and Robstride on CAN. PAROL6 has step/dir stepper motors behind its own control board. At this commit, no step/dir stepper arm ships with LeRobot.
+
+For that case, the docs say to write your own communication wrapper ([Bring your own hardware](https://huggingface.co/docs/lerobot/integrate_hardware)). The driver is a `Robot` class ([`robot.py`](https://github.com/huggingface/lerobot/blob/e581c1d5701f846788662079d4ac08835c96def9/src/lerobot/robots/robot.py)) in its own pip package.
+
+- LeRobot imports any installed package whose name starts with `lerobot_robot_` when a command starts ([`import_utils.py`](https://github.com/huggingface/lerobot/blob/e581c1d5701f846788662079d4ac08835c96def9/src/lerobot/utils/import_utils.py)).
+- So our package, `lerobot_robot_parol6`, needs no fork of LeRobot. The commands then accept `--robot.type=parol6`.
+
+## Why the driver talks to `parol6-server`
+
+Our plan is a driver that is a client of the official **parol6-server**. The server is part of the [PAROL6 Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/). It owns the USB serial port and sends the board one packet every 10 ms.
+
+The board itself is simple. Per its [firmware](https://github.com/Source-Robotics/PAROL6-Desktop-robot-arm/blob/e2169c163244d647739cc34fc5da15c24b042a61/PAROL6%20control%20board%20main%20software/src/main.cpp):
+
+- it repeats the last command it received, with no timeout of its own;
+- it checks no joint limits;
+- it only reads and reports the E-stop.
+
+The [server](https://github.com/PCrnjak/PAROL6-python-API/tree/604d1ec8b4c71be119e75f1506d4cc388322230c) already holds the safety logic:
+
+- the E-stop latch, which disables the board and refuses motion until `reset()`;
+- the guard that refuses streamed and planned moves until [homing](/lore/m3-whole-arm) is done;
+- the joint limits;
+- the 100 Hz loop to the board;
+- a brake to a hold when a client stream goes quiet for 0.25 s.
+
+A driver on the serial port would have to rebuild all of that. Only one program can own the port, so LeRobot and the commander cannot both connect.
+
+The server also runs as a simulator behind the same API. So the driver can be written and tested before the arm moves.
+
+<Diagram alt="The planned chain: a leader drives LeRobot, LeRobot calls our driver, the driver calls parol6-server, and the server drives the board. The E-stop reports to the server; the mains switch cuts the board's power.">
+
+```text
+  leader: phone, gamepad or SO-101 arm
+     │
+  LeRobot: record, train, run
+     │
+  lerobot_robot_parol6, our driver:
+  clip, cap each step, check homing
+     │  UDP
+  parol6-server, official:
+  E-stop latch, limits, 100 Hz, brake
+     │  USB serial
+  control board ◀── E-stop
+     │
+  power supply ◀─── mains switch
+```
+
+</Diagram>
+
+**What to notice:** the E-stop works only while the server runs. The mains switch works always.
+
+## The milestones, L0 to L5
+
+Each L milestone is a whole task with its own test, in the same shape as [the M milestones](/lore/milestones). All the tests are our design.
+
+### L0 (optional, before the arm moves): the driver in simulation
+
+- **Whole task:** write `lerobot_robot_parol6` and drive the official simulator through it.
+- **Depends on:** none of M1 to M7. It needs Python 3.12; on a Mac, macOS 15.
+- **Test**, with `parol6-server` in simulator mode:
+  1. `connect()` succeeds. The observation lists the six joints, the gripper and the cameras.
+  2. A 30 Hz loop of `send_action` moves joint 6 by +10°. The observation lands within 0.5°.
+  3. A target past a joint limit comes back clipped in the returned action.
+  4. Kill the client mid-stream. The server's status shows the stream braked to a hold.
+  5. With `expect_simulator=true`, the driver refuses a server that reports real hardware.
+
+### L1 (the week M3 passes): connect, read, jog safely, stop
+
+- **Whole task:** LeRobot connects to the real arm through `parol6-server`, reads all six joints and makes small, slow, limited moves. Every stop path works.
+- **Depends on:** [M3](/lore/m3-whole-arm), for homing, [jogging](/lore/m3-whole-arm) every joint the right way, and the [witness marks](/lore/m3-whole-arm). Also the mains-switch habit from [M1](/lore/m1-bench-it).
+- **Parts:** none new. One webcam is optional.
+- **Test**, on camera, with a hand on the E-stop and the mains switch in reach:
+  1. Connect to a homed arm. The observation matches the commander's angles to 0.1°.
+  2. Connect to an unhomed arm. The driver refuses to move it and says why. It homes only when a person confirms.
+  3. The arm does not lunge on connect and does not drop on disconnect.
+  4. Jog each joint +5° at 10% speed, one joint at a time. Each lands on its witness marks.
+  5. Out-of-range targets are clipped. A 30° jump command is capped to the step limit.
+  6. Press the E-stop mid-move. Motion stops and `send_action` raises an error. After release, nothing moves until a person calls `reset()`.
+  7. Kill the LeRobot process mid-move. The server brakes to a hold within about 0.25 s, plus the deceleration.
+  8. Joel explains, unprompted, why a pulled USB cable is not covered by any of this, and reaches for the mains switch.
+
+### L2: teleoperation and a first dataset
+
+- **Whole task:** drive the arm from a leader, record 10 episodes of a simple reach-and-touch task with two fixed cameras, and replay one.
+- **Depends on:** L1. Also [M4](/lore/m4-pick-and-place) if the gripper is in the action; otherwise the gripper is held.
+- **Parts:** two cameras, a mount and one leader. See the cost section.
+- **Test:**
+  1. `lerobot-teleoperate` runs with the chosen leader at 30 Hz for 2 minutes, with no brake events.
+  2. `lerobot-record` writes a dataset of 10 episodes. The visualizer shows both cameras in sync with the joint plots.
+  3. `lerobot-replay` of episode 0 reaches the same touch point within 2 mm, by feeler or dial gauge, the M4 method.
+
+### L3: the first learned policy (ACT), against M4's script
+
+- **Whole task:** record 50 demonstrations of M4's pick-and-place, train ACT on them, then run it.
+- **Depends on:** L2 and [M4](/lore/m4-pick-and-place), for the gripper and the nests.
+- **Compute:** a CUDA GPU with 8 GB or more for about an hour, or an Apple silicon Mac overnight.
+- **Test:** 20 trials from a fresh object pose each time, with an operator at the E-stop. Record the success count beside M4's scripted 20-cycle result. Joel explains one failure from the camera view.
+
+L3 overlaps M4. A learned pick-and-place is the same whole task as M4's scripted one, so M4's loop becomes the baseline.
+
+### L4: language and a VLA (SmolVLA), compared with ACT
+
+- **Whole task:** fine-tune `smolvla_base` on the L3 data plus one new task with a text prompt. Run both tasks by prompt.
+- **Depends on:** L3.
+- **Compute:** a CUDA GPU with 16 GB or more, or Hugging Face Jobs in the cloud. [Remote inference](https://huggingface.co/docs/lerobot/remote_inference) runs the model on a GPU computer if the arm's own computer is too slow.
+- **Test:** 10 trials per task. Report the success rate and the inference latency beside ACT's. Write down which one we keep and why.
+
+### L5: a learned synth move
+
+- **Whole task:** from demonstrations, press a named skiff button or turn a knob to noon. [M5](/lore/m5-touch-the-skiff)'s registration is the setup.
+- **Depends on:** M5. Also [M6](/lore/m6-patch-a-cable), if a policy is to try a patch.
+- **Test:** the policy passes the M5 done check. That is 10 of 10 button presses, or a knob turned to noon as read on a CV output. A scripted fallback stays one key away.
+
+## What it costs
+
+Prices were checked on 2026-11-11. Nothing is bought. Prices from a search extract can be stale, so check them again before buying.
+
+- **L0 and L1:** no new parts. The arm from M3, a computer and free software are enough. One webcam is optional, to prove the camera path.
+- **L2:** about $125 with a phone as the leader. The phone costs nothing if you have one ([phone teleoperation](https://huggingface.co/docs/lerobot/phone_teleop)), but it needs the PAROL6 URDF and an inverse-kinematics step.
+  - Overhead camera: a [Logitech C920s](https://www.logitech.com/en-us/shop/p/c920s-pro-hd-webcam), US$69.99.
+  - Wrist camera: an [innomaker U20CAM-1080P](https://www.amazon.nl/-/en/InnoMaker-Raspberry-Supports-Windows-Android/dp/B0CNCSFQC1), €18.59. A wrist mount for joint 6 is ours to design and print.
+  - Camera mount: a [SmallRig Magic Arm clamp kit 4454](https://www.walmart.com/ip/SMALLRIG-Magic-Arm-Clamp-Kit-Camera-Mount-Articulating-Friction-Arm-w-Super-Clamp-w-1-4-20-Screw-Thread-hole-Camera-Light-Monitor-Webcam-Action-Camer/7297800815), US$35.90. A printed mount also works.
+  - With an SO-101 leader arm built from its official bill of materials instead of the phone, L2 is roughly $250. That leader has no match for PAROL6's joint 4, so joint 4 is held.
+- **L3 and up:** GPU time. The [hardware guide](https://huggingface.co/docs/lerobot/hardware_guide) calls its numbers indicative, ±50%.
+  - ACT trains in about 2 to 6 GB. The guide gives 30 to 60 minutes on a 24 GB GPU, or 6 to 14 hours on an Apple silicon Mac.
+  - SmolVLA trains in about 10 to 16 GB, so it needs a CUDA GPU with 16 GB or more.
+  - pi0 and pi0.5 need about 24 to 40 GB, so 40 GB or more.
+  - The guide's advice for a CPU alone is not to train.
+  - Hugging Face Jobs bills cloud GPUs by the second. Its prices are not yet checked.
+  - Memory and speed when the policy runs are not yet measured. We measure them at L3.
+
+The docs recommend at least 50 episodes ([imitation learning docs](https://huggingface.co/docs/lerobot/il_robots)). The SmolVLA guide says 25 episodes were not enough.
+
+## Prior art
+
+In a search on 2026-11-11, we found nobody public running LeRobot on the stock PAROL6 board through `parol6-server`. So L1 is new work, with examples to learn from.
+
+- **RoboCrafty's PAROL6 plugin.** [RoboCrafty/my_robot](https://github.com/RoboCrafty/my_robot/tree/996d4917279cf9f143fffac66d030cd47078eee7) runs LeRobot on a PAROL6 with a replacement controller: an ESP32 with TMC2209 drivers, and a Raspberry Pi.
+  - Its plugin is also a network client of its own controller, the same shape as our plan.
+  - Its [datasets and models](https://huggingface.co/RoboCrafty) are on Hugging Face. [parol6_stack_real_4](https://huggingface.co/datasets/RoboCrafty/parol6_stack_real_4) holds 100 episodes and 79,957 frames at 30 fps, from two cameras.
+  - About 23 model repositories hold ACT, SmolVLA, pi0 and pi0.5 policies. The model cards make no success-rate claims.
+  - The repository has no licence file, so its code is not reusable as it is.
+  - It proves the arm's shape works with LeRobot. It does not prove the stock board at 100 Hz behaves the same.
+- **Source Robotics' RAFT leader (in progress).** [RAFT](https://github.com/Source-Robotics/RAFT-teleoperation-arm/tree/6fe5a811422d44248013b5ed774aa74d76f3d545) is the maker's own force-feedback leader arm, designed for PAR6 and PAROL6.
+  - Its geometry is PAROL6's kinematics at about 0.55×.
+  - At v1.0.0, its control of PAR6 is tested in simulation and not yet on the real robot.
+  - We watch it for L3 and later, and do not build on it for L1.
+- **A draft plugin.** [Mateo-lab/PAROL6-x-LEROBOT](https://github.com/Mateo-lab/PAROL6-x-LEROBOT) is marked as in development. By our reading, it does not match current LeRobot or the official API. We use it only for its MuJoCo and gamepad ideas.
+
+## Safety
+
+A learned policy can send any target. So the driver and the person at the bench keep it slow and small.
+
+- **Slow, capped moves.** The driver clips every target to the joint limits and caps the step from the last target. L1 jogs at 10% speed.
+- **A person at the E-stop**, for every run of a policy and every test above.
+- **The E-stop is a software stop.** [The board reports it](https://docs.source-robotics.com/PAROL-docs/1.1/02-safety/emergency-stop/); `parol6-server` stops the motion. The driver then raises an error, so recording or a rollout stops. It never calls `reset()` itself; a person does.
+- **A frozen LeRobot process** is caught by the server's brake after 0.25 s of silence.
+- **Never cut motor power on disconnect.** The arm falls when the motors lose power, so the driver leaves the server holding the pose.
+- **No lunge on connect, no drop on disconnect.** These are the failure modes of a naive driver, named by [another LeRobot plugin](https://github.com/charlie8612/lerobot_robot_piper/tree/d9785e6256aacd9fe0128a622909e046e66aea33). L1 tests both.
+- **The mains switch.** A crashed computer, a frozen server or a pulled USB cable leaves the E-stop without effect. Then the board keeps executing the last packet it received. The hard stop is a switch on the mains side of the power supply, within reach; the arm falls when you use it.
+
+PAROL6 runs [open loop](/lore/m1-bench-it). The position it reports is a step count, so a stalled joint still reports where it was told to go. A policy learns from where the arm thinks it is. After any stall, home the arm again.
+
+## Terms
+
+- **LeRobot**: Hugging Face's open-source library for robot learning: teleoperation, recording, datasets, training and running policies ([LeRobot](https://github.com/huggingface/lerobot/tree/e581c1d5701f846788662079d4ac08835c96def9)).
+- **imitation learning**: training a robot from recorded demonstrations of a task ([imitation learning docs](https://huggingface.co/docs/lerobot/il_robots)).
+- **teleoperation**: a person drives the robot live from another device.
+- **leader arm**: the arm a person moves during teleoperation; the robot follows it.
+- **episode**: one recorded demonstration, from start to end, in a LeRobot dataset ([dataset docs](https://huggingface.co/docs/lerobot/lerobot-dataset-v3)).
+- **ACT**: a LeRobot policy with an image backbone and a transformer that predicts chunks of actions ([ACT docs](https://huggingface.co/docs/lerobot/act)).
+- **SmolVLA**: a small vision-language-action model that takes a text prompt with the cameras and joints ([SmolVLA docs](https://huggingface.co/docs/lerobot/smolvla)).
+- **parol6-server**: the official PAROL6 controller program that owns the serial port and holds the safety logic ([Python API](https://docs.source-robotics.com/PAROL-docs/1.1/programming/02-python-api/)).

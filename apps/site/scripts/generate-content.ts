@@ -1885,7 +1885,8 @@ const program = Effect.gen(function* generateContent() {
   const wikiSections = [
     {
       heading: "Milestones",
-      matches: (slug: string) => slug === "milestones" || isMilestoneSlug(slug),
+      matches: (slug: string) =>
+        slug === "milestones" || slug === "lerobot" || isMilestoneSlug(slug),
     },
     {
       heading: "Videos",

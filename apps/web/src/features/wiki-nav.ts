@@ -31,6 +31,7 @@ export const wikiSections: readonly WikiSection[] = [
       { href: lore("m1-bench-it"), label: "M1. Bench it" },
       { href: lore("m2-one-joint"), label: "M2. One joint" },
       { href: lore("m3-whole-arm"), label: "M3. The whole arm" },
+      { href: lore("lerobot"), label: "LeRobot (planned)" },
       { href: lore("m4-pick-and-place"), label: "M4. Pick and place" },
       { href: lore("m5-touch-the-skiff"), label: "M5. Touch the skiff" },
       { href: lore("m6-patch-a-cable"), label: "M6. Patch a cable" },
