@@ -72,6 +72,10 @@ Every milestone page has the same parts:
 
 The structure comes from [four-component instructional design](https://www.4cid.org/). The official build step is the worked example. Our variation of it is the completion task. The done check is the conventional task, with no help.
 
+## What to read at each milestone
+
+The [learning map](/lore/learning-map) lists the free resources we would open at each milestone, one line each. They come from a public six-month robotics roadmap, which [our review](/lore/roadmap-review) checks against this build.
+
 ## Honesty markers
 
 **needs_source** marks a claim the official sources do not cover yet. **Our design** marks milestones 5 to 7, which go past the PAROL6 manual. **Planned** marks the LeRobot stage, which has no build or test yet. All three stay visible until a source or a measurement settles them.

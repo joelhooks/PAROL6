@@ -45,7 +45,7 @@ it.effect("serves a framed 404 and next actions in both representations", () =>
           const response = yield* Effect.promise(
             handler.bind(
               undefined,
-              new Request("https://parol6.build/nope-xyz", {
+              new Request("https://parol6.build/nope-qzvw", {
                 headers: { accept },
               }),
               undefined
@@ -54,7 +54,7 @@ it.effect("serves a framed 404 and next actions in both representations", () =>
 
           const body = yield* Effect.promise(response.text.bind(response));
           expect(response.status).toBe(404);
-          expect(body).toContain("/nope-xyz");
+          expect(body).toContain("/nope-qzvw");
           expect(body).not.toContain("<ol></ol>");
 
           for (const path of [

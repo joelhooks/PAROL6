@@ -1,0 +1,257 @@
+---
+title: "We checked a 6-month robotics roadmap against a real build"
+description: "A fact-check of Ronin's six-month robotics roadmap: what holds, what is wrong or out of date, what it leaves out, and the parts a PAROL6 build keeps."
+plain: "A popular robotics roadmap, read in full and checked link by link: good for a beginner, half useful for this build, and nearly silent on safety."
+group: concept
+prerequisites:
+  - /lore/milestones
+terms:
+  - "roadmap review"
+  - "bus servo"
+  - SO-101
+sources:
+  - url: https://x.com/deronin_/status/2095180126359105955
+    title: "How to become a Robotics Engineer in 6 months (RESOURCES)"
+    publisher: "Ronin (@DeRonin_) on X"
+    note: "The article under review, published 2026-09-02 and read in full."
+    accessed: "2026-11-13"
+  - url: https://us.store.bambulab.com/products/p1s
+    title: "Bambu Lab P1S, US store"
+    publisher: "Bambu Lab"
+    note: "US$349 and US$399 for the printer; US$479 and US$549 with the AMS."
+    accessed: "2026-11-13"
+  - url: https://store.creality.com/products/k1c-3d-printer
+    title: "Creality K1C"
+    publisher: "Creality"
+    note: "US$499."
+    accessed: "2026-11-13"
+  - url: https://www.waveshare.com/ugv-rover-ros2-kit.htm
+    title: "UGV Rover ROS 2 kit"
+    publisher: "Waveshare"
+    note: "US$739.99 to US$931.99; the page returns 403 to automated link checks."
+    accessed: "2026-11-13"
+  - url: https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md
+    title: "SO-ARM100 README at a758567"
+    publisher: "TheRobotStudio on GitHub"
+    note: "The default SO-101 follower uses the 7.4 V STS3215; the 12 V version is an optional upgrade; the bill of materials totals."
+    accessed: "2026-11-13"
+  - url: https://www.seeedstudio.com/SO-ARM101-Low-Cost-AI-Arm-Kit-Pro-p-6427.html
+    title: "SO-ARM101 Pro kit"
+    publisher: "Seeed Studio"
+    note: "US$249.90, with a 12 V follower and a 7.4 V leader, and a 12-bit magnetic encoder in each servo."
+    accessed: "2026-11-13"
+  - url: https://github.com/bulletphysics/bullet3/issues/4827
+    title: "bullet3 issue 4827"
+    publisher: "bulletphysics on GitHub"
+    note: "An issue filed 2026-11-08, so the PyBullet issue tracker is open."
+    accessed: "2026-11-13"
+  - url: https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm
+    title: "Software developers, QA analysts and testers, Occupational Outlook Handbook"
+    publisher: "US Bureau of Labor Statistics"
+    note: "129,200 openings a year projected for 2024 to 2034; the page returns 403 to automated link checks."
+    accessed: "2026-11-13"
+  - url: https://www.hiwonder.com/products/mentorpi-m1
+    title: "MentorPi M1"
+    publisher: "Hiwonder"
+    note: "The US$299.99 variant has no Raspberry Pi 5; with one, it starts at US$429.99."
+    accessed: "2026-11-13"
+  - url: https://www.therobotreport.com/software-becoming-biggest-bottleneck-physical-ai-innovation-finds-qnx/
+    title: "Software becoming biggest bottleneck for physical AI innovation, finds QNX"
+    publisher: "The Robot Report"
+    note: "A QNX-commissioned OnePoll survey of 1,000 developers; 66% of respondents reported certification delays."
+    accessed: "2026-11-13"
+  - url: https://docs.ros.org/en/jazzy/Releases.html
+    title: "ROS 2 distributions"
+    publisher: "Open Robotics"
+    note: "Lyrical Luth, Kilted Kaiju, Jazzy and Humble release and end-of-life dates."
+    accessed: "2026-11-13"
+  - url: https://github.com/ros-infrastructure/rep/blob/11ca24a/rep-2000.rst
+    title: "REP 2000 at 11ca24a"
+    publisher: "ros-infrastructure on GitHub"
+    note: "ROS 2 target platforms; gives November 2026 for Kilted's end of life."
+    accessed: "2026-11-13"
+  - url: https://discourse.openrobotics.org/t/ros-noetic-end-of-life-may-31-2025/43160
+    title: "ROS Noetic end of life, May 31 2025"
+    publisher: "Open Robotics Discourse"
+    note: "The end of ROS 1."
+    accessed: "2026-11-13"
+  - url: https://docs.isaacsim.omniverse.nvidia.com/6.0.0/installation/requirements.html
+    title: "Isaac Sim 6.0.0 requirements"
+    publisher: "NVIDIA"
+    note: "An RTX 4080 with 16 GB as the minimum; A100 and H100 unsupported."
+    accessed: "2026-11-13"
+  - url: https://www.onetonline.org/link/localwages/17-2199.08
+    title: "Robotics engineers, local wages"
+    publisher: "O*NET OnLine"
+    note: "The US$122,930 figure, which is the Engineers, All Other wage series."
+    accessed: "2026-11-13"
+  - url: https://news.crunchbase.com/venture/physical-ai-funding-startups-robotics-aerospace-h1-2026/
+    title: "Physical AI funding, H1 2026"
+    publisher: "Crunchbase News"
+    note: "US$47.4B across 521 deals, about a third of it one Waymo round."
+    accessed: "2026-11-13"
+  - url: https://github.com/huggingface/lerobot
+    title: "LeRobot"
+    publisher: "Hugging Face on GitHub"
+    note: "Over 26,000 stars, as the article says."
+    accessed: "2026-11-13"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/
+    title: "PAROL6 documentation 1.1"
+    publisher: "Source Robotics"
+    note: "Open-loop steppers, the controller board, homing and the ROS 2 path."
+    accessed: "2026-11-13"
+---
+
+[Ronin](https://x.com/DeRonin_) published ["How to become a Robotics Engineer in 6 months (RESOURCES)"](https://x.com/deronin_/status/2095180126359105955) on X on 2026-09-02. We read all of it: about 11,200 words, 115 resources and 27 practice tasks. Then we opened every link, checked 34 prices against vendor pages and checked the main technical and market claims.
+
+All checks are dated 2026-11-13 UTC. Prices move, so check them again before you buy.
+
+## Verdict
+
+**7 out of 10 as a map for a beginner. 4 out of 10 for this build as written, and about 6 once cut down.**
+
+- **Good:** the software and ROS 2 facts check out. Most resource picks are the standard free best: Lynch, Corke, Tedrake, Douglas and [LeRobot](/lore/lerobot). The best practice tasks measure something and film it.
+- **Weak:** several vendor prices have moved, and four prices or specs were wrong when published. Bench and robot safety is close to absent. Some market numbers are misstated, and several have no source.
+- **For PAROL6:** the article builds on the SO-101's servo bus. PAROL6 runs [open loop](/lore/m1-bench-it) steppers through its own controller. So we keep about 16 resources and 7 task ideas.
+
+The resources we keep, sorted by milestone, are on the [learning map](/lore/learning-map).
+
+## Section scores
+
+| Section | Score | Why |
+| --- | --- | --- |
+| Intro and career | 6 | A hype opening, but the portfolio advice is the best in the piece; some market numbers are misstated |
+| Electronics, bench, soldering | 7 | Good free picks and honest budgets; nothing on motor-supply safety or a stop path |
+| Python, terminal, Git | 6 | Standard picks, nothing specific to robots |
+| Arduino and ESP32 | 7 | Real builder notes; nothing on STM32 or flashing someone else's firmware |
+| Motors and drivers | 6 | A clear motor taxonomy; steppers get one link and no driver tuning |
+| Sensors and first robots | 8 | The best-taught section: a complementary filter, a drift demo, P against PD on film |
+| CAD and printing | 7 | Accurate CAD licences and a good tolerance loop; the printer prices are the most out of date |
+| Actuators and the SO-101 | 6 | Backlash framed well; the servo spec is half right; kit prices have moved |
+| ROS 2 and simulation | 8 | The most carefully researched section; one wrong PyBullet claim |
+| SLAM and navigation | 7 | Solid for rovers, and beside the point for an arm bolted to a bench |
+| Control theory | 7 | The right sources, but it assumes a loop to close |
+| Kinematics | 7 | The right books and a strong forward-kinematics task; nothing on calibrating the model |
+| Perception | 7 | Camera calibration first; no hand-eye calibration |
+| Manipulation and MoveIt | 6 | Tedrake is the right pick; nothing on contact or compliance |
+| LeRobot and VLAs | 7 | The best task for us; the VLA facts check out; thin on data quality and rollout safety |
+| Reinforcement learning | 5 | A quadruped task, and no sim-to-real |
+
+## What's wrong
+
+Each finding links its evidence. All were checked on 2026-11-13 UTC.
+
+1. **Bambu Lab P1S.** The article says $799. [Bambu's US store](https://us.store.bambulab.com/products/p1s) lists $349 and $399 for the printer, and $479 and $549 with the AMS.
+2. **Creality K1C.** The article says $369. [Creality's store](https://store.creality.com/products/k1c-3d-printer) lists $499.
+3. **Waveshare UGV Rover ROS 2 kit.** The article says $534.99. [Waveshare](https://www.waveshare.com/ugv-rover-ros2-kit.htm) listed $739.99 to $931.99. That page returns 403 to automated link checks, a bot wall.
+4. **The SO-101's servo.** The article names the 12 V STS3215, rated 30 kg·cm, as the SO-101's servo. The [SO-ARM100 README](https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md) says otherwise:
+   - the default follower uses the 7.4 V STS3215, rated 16.5 kg·cm at 6 V;
+   - the 12 V version is an optional upgrade that needs a 12 V supply;
+   - the leader is always 7.4 V;
+   - [Seeed's Pro kit](https://www.seeedstudio.com/SO-ARM101-Low-Cost-AI-Arm-Kit-Pro-p-6427.html) does ship a 12 V follower.
+5. **PyBullet.** The article says PyBullet closed its issue tracker. Its last release, 3.25 in April 2022, is right. But issues are open on `bulletphysics/bullet3`, and [issue 4827](https://github.com/bulletphysics/bullet3/issues/4827) was filed on 2026-11-08.
+6. **Software developer openings.** The article gives 106,100 a year. The [BLS Occupational Outlook Handbook](https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm) projects 129,200 a year for developers, QA analysts and testers, 2024 to 2034. The BLS page returns 403 to automated link checks.
+7. **MentorPi.** The article says "from $299.99" on a Raspberry Pi 5. The $299.99 variant has no Pi 5; with one, the [MentorPi](https://www.hiwonder.com/products/mentorpi-m1) starts at $429.99.
+8. **Certification delays.** The article says 66% of robotics projects report delays caused by certification. The source is a [QNX-commissioned OnePoll survey](https://www.therobotreport.com/software-becoming-biggest-bottleneck-physical-ai-innovation-finds-qnx/) of 1,000 developers. In it, 66% of respondents reported certification delays.
+
+## What's out of date
+
+- **SO-101 kits.** Seeed's Pro kit is $249.90, down from $277.99, and its printed frame $29.90, down from $30.99. Robonine is $329, down from $349, and the link lands on a different kit with a camera. OpenELAB's three kits are $410, $500 and $570, up from $325.99, $419.99 and $489.99, and now include a camera.
+- **Adafruit stock.** The ESP32-S3-DevKitC-1 is listed as discontinued. The classic ESP32 board and the 9205B+ meter are out of stock. Their prices still match.
+- **Genesis.** The article calls v1.0 fresh. v1.0.0 shipped on 2026-05-27, and v1.4.3 by 2026-09-30.
+- **Kilted Kaiju's end of life.** The article says 31 December 2026. [docs.ros.org](https://docs.ros.org/en/jazzy/Releases.html) says December 2026, and [REP 2000](https://github.com/ros-infrastructure/rep/blob/11ca24a/rep-2000.rst) says November 2026.
+- **Crunchbase's $47.4B.** The figure for 521 deals in the first half of 2026 is right ([Crunchbase News](https://news.crunchbase.com/venture/physical-ai-funding-startups-robotics-aerospace-h1-2026/)). About a third of it is one Waymo round of $16B, and it measures physical AI funding. Robotics hiring is a different number.
+
+## What checks out
+
+- **ROS 2.** Lyrical Luth released on 2026-05-22, with end of life in May 2031, on Ubuntu 26.04. Jazzy ends in May 2029 and Humble in May 2027 ([ROS 2 distributions](https://docs.ros.org/en/jazzy/Releases.html)).
+- **ROS 1.** [Noetic's end of life](https://discourse.openrobotics.org/t/ros-noetic-end-of-life-may-31-2025/43160) was 2025-05-31, which backs the article's warning about starting on ROS 1.
+- **Gazebo.** Classic's end of life was January 2025, and all four distro pairings check out.
+- **Isaac Sim 6.0.0.** The [minimum](https://docs.isaacsim.omniverse.nvidia.com/6.0.0/installation/requirements.html) is an RTX 4080 with 16 GB, and A100 and H100 cards are unsupported.
+- **The SO-101 bill of materials.** $229.88 for the pair and $121.94 for a follower ([README](https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md)), printed in PLA+ at 15% infill.
+- **Robot-learning libraries.** LeRobot has over 26,000 stars ([GitHub](https://github.com/huggingface/lerobot)). The openpi, OpenVLA and GR00T N1.7 facts hold, and so does diffusion policy's 46.9% across 12 tasks.
+- **CAD.** FreeCAD 1.1 shipped in March 2026. Fusion Personal runs on a 3-year term. SOLIDWORKS for Makers is $48 a year.
+- **Market.** [O*NET's $122,930](https://www.onetonline.org/link/localwages/17-2199.08) is right, but it is the "Engineers, All Other" wage series. The 1 to 2% growth holds, and so does A3's 2.0% rise in units for the first half of 2026. So does IFR's 9% drop in US installations for 2024.
+- **Prices.** 19 linked prices and 8 unlinked ones match their vendors.
+
+## What we couldn't check
+
+- **No source in the article, and not checked by us:** the job-posting shares, the salary bands and the freelance rates. Also the robot's share of a cell's cost, the named funding rounds, and the claim that product of exponentials is now the industry norm.
+- **Couldn't load:** the Fab Lab count, because the directory page shows no count, and the Glassdoor question counts, behind a bot wall.
+- **Bot-walled prices:** RobotShop, Udemy, The Construct and Best Buy blocked our checker, so their prices are not checked.
+- **Not done:** we spot-read about 15 of the 102 working links for content. The rest have a link status only. We watched none of the linked videos.
+
+## What's missing: safety
+
+The article has no E-stop and no power-off within reach. "Safety" appears four times: once in a soldering-guide blurb, and otherwise as functional safety, a career specialism and an integration cost. "E-stop" appears zero times. LiPo charging gets one line.
+
+Also missing, across the whole article:
+
+- **Power:** current limits, fuses and supply polarity.
+- **Calibrating the kinematic model** against the real arm.
+- **Hand-eye calibration**, from the camera to the robot's frame.
+- **Data quality for [imitation learning](/lore/lerobot):** an [episode](/lore/lerobot) protocol, resets and held-out evaluation.
+- **Sim-to-real**, the hard part for any physical robot.
+
+On PAROL6, these come from the official manual and our own milestones. [M1](/lore/m1-bench-it) makes the stop path the task. The [LeRobot plan](/lore/lerobot) proves every stop path before a policy moves the arm.
+
+## PAROL6 against the SO-101
+
+The article assumes an **SO-101**, a low-cost open-source arm built from Feetech **bus servos**. A bus servo is a smart servo on a shared serial bus, and it reports its own position.
+
+| Aspect | SO-101, the article's arm | PAROL6, our arm |
+| --- | --- | --- |
+| Joints | Feetech STS3215 bus servos, each with a 12-bit magnetic encoder | NEMA 17 steppers on TMC5160 drivers, open loop, no encoders |
+| Knowing where it is | Reads absolute position from each servo | Counts steps after homing; homing is the only position reference |
+| Calibration | `lerobot calibrate` matches the leader's and follower's ranges | Home on the inductive sensors and limit switches, then check the witness marks |
+| Controller | A USB bus-servo board that LeRobot drives directly | Its own STM32 board running Source Robotics firmware, 10 ms packets, behind `parol6-server` |
+| LeRobot support | Built in | A planned plugin of our own, a client of `parol6-server` |
+| Failure mode | Each servo reports its own position, so a slipped joint shows in the reading | A stall loses steps silently; home again before trusting the position |
+| Power and stops | 5 V or 12 V supplies | A 24 V supply; the server latches the E-stop and brakes a silent stream |
+| Teleoperation leader | The pair is the design | Needs a leader: a phone first, an SO-101 leader later |
+
+Three things follow:
+
+- The article's control-theory month doesn't apply to a stock PAROL6. It has no encoder and no loop to close.
+- Its calibration step becomes our [homing](/lore/m3-whole-arm) step.
+- Its "the servo tells you" safety becomes our server-side stop paths.
+
+## How it reads
+
+We can't tell how the article was written. This is about how it reads.
+
+- **Like filler:** the opening pitch and the sign-off. Nearly every resource is called the best or the only one, and most practice tasks end on the same portfolio note. "The best" appears 14 times, "the only" 8, "honest" 8 and "genuinely" 7.
+- **Like someone who has built the thing:** a four-line complementary filter with its constant, and MicroPython's garbage-collection pauses breaking a balance loop. Also the L298N's voltage drop, and a list of URDF failures, including missing inertia sinking a robot through the floor.
+- **More builder notes:** QoS mismatches as the usual cause of silent ROS 2 topics, and a smeared map blamed on odometry. Also, accepting that the first printed reducer will be bad.
+
+The best line in it is the closing advice to write down what broke. We borrow that for every milestone video.
+
+## What we borrow
+
+The trimmed path keeps PAROL6's milestone order and adds resources only where a milestone needs them. The [learning map](/lore/learning-map) lists them.
+
+1. **Before the arm moves:** Hugging Face's robotics course, the LeRobot repository's `Robot` class, and the official PAROL6 model in MuJoCo. None needs hardware.
+2. **M1:** a stepper explainer, plus multimeter and soldering guides at the metering and [GX16](/lore/m1-bench-it) steps. The rest of the article's first two months is skipped.
+3. **M2:** print a tolerance gauge, skim CNC Kitchen on inserts and infill, and measure joint 6's [backlash](/lore/m2-one-joint).
+4. **M3:** DH parameters and Jacobians from QUT Robot Academy, then Modern Robotics. Then compute forward kinematics by hand for one PAROL6 pose and check it in the Robotics Toolbox and the commander.
+5. **L1:** the LeRobot docs for the `Robot` interface. The stop-path tests come from our own driver plan, because the article has nothing for this step.
+6. **L2 and L3:** the article's last practice task becomes L3's done check. Record, train [ACT](/lore/lerobot), measure, re-record the failures and measure again, against M4's 20 scripted cycles.
+7. **M4 to M6:** Articulated Robotics on coordinate transforms for the tool frame and the skiff, and Tedrake's manipulation notes for cable insertion.
+
+**Skipped outright:** Arduino and ESP32, DC motors, sensors, CAD courses, printer shopping, SLAM, control theory, reinforcement learning and the career sections. ROS 2 is skipped unless we take the official Humble path.
+
+Seven task ideas carry over into the milestones:
+
+- a "what broke" beat in every milestone video;
+- a before-and-after film of the same motion;
+- a measured retrain loop as L3's done check;
+- the tolerance-gauge drill in M2;
+- forward kinematics by hand, checked in the Robotics Toolbox, in M3;
+- a deliberately failed pick in M4;
+- twenty minutes of being questioned on your own code.
+
+## Terms
+
+- **roadmap review**: this page's reading of one public learning roadmap against a real build, with dated evidence for each claim.
+- **SO-101**: a low-cost open-source arm from TheRobotStudio, built from serial bus servos and sold as a leader and follower pair ([SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md)).
+- **bus servo**: a smart servo on a shared serial bus that reports its own position, so each joint can say where it is.

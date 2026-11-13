@@ -53,6 +53,8 @@ export const wikiSections: readonly WikiSection[] = [
     href: lore("concepts"),
     links: [
       { href: lore("concepts"), label: "Concepts by milestone" },
+      { href: lore("learning-map"), label: "Learning map" },
+      { href: lore("roadmap-review"), label: "Roadmap review" },
       { href: "/glossary", label: "Glossary" },
     ],
     title: "Concepts and glossary",

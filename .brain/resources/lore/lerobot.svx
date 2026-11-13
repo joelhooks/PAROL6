@@ -302,6 +302,16 @@ A learned policy can send any target. So the driver and the person at the bench 
 
 PAROL6 runs [open loop](/lore/m1-bench-it). The position it reports is a step count, so a stalled joint still reports where it was told to go. A policy learns from where the arm thinks it is. After any stall, home the arm again.
 
+## Further reading
+
+Picked from a [six-month robotics roadmap](https://x.com/deronin_/status/2095180126359105955) by [@DeRonin_](https://x.com/DeRonin_) and checked on 2026-11-13 UTC. The [learning map](/lore/learning-map) sorts the rest by milestone.
+
+- [Hugging Face Robotics Course](https://huggingface.co/learn/robotics-course/unit0/1): the record, train and run loop with no hardware, for L0.
+- [LeRobot repository](https://github.com/huggingface/lerobot): the `Robot` base class our driver implements, for L0 and L1.
+- [LeRobot documentation](https://huggingface.co/docs/lerobot/index): the procedure for every L stage.
+- [SO-101 setup guide](https://huggingface.co/docs/lerobot/so101): needed only with an SO-101 leader; otherwise a worked example of the commands our driver mirrors.
+- [smolvla_base](https://huggingface.co/lerobot/smolvla_base): the base model L4 fine-tunes.
+
 ## Terms
 
 - **LeRobot**: Hugging Face's open-source library for robot learning: teleoperation, recording, datasets, training and running policies ([LeRobot](https://github.com/huggingface/lerobot/tree/e581c1d5701f846788662079d4ac08835c96def9)).

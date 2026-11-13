@@ -1,0 +1,244 @@
+---
+title: "Learning map: robotics resources by milestone"
+description: "The free robotics resources we would open at each PAROL6 milestone, picked from Ronin's six-month roadmap and checked link by link."
+plain: "For each milestone, two to five things worth reading or doing, one line each, and a plain note where nothing fits."
+group: concept
+prerequisites:
+  - /lore/milestones
+  - /lore/roadmap-review
+terms:
+  - "learning map"
+  - "task idea"
+sources:
+  - url: https://x.com/deronin_/status/2095180126359105955
+    title: "How to become a Robotics Engineer in 6 months (RESOURCES)"
+    publisher: "Ronin (@DeRonin_) on X"
+    note: "The roadmap every resource on this page comes from."
+    accessed: "2026-11-13"
+  - url: https://dronebotworkshop.com/stepper-motors-with-arduino/
+    title: "Stepper Motors with Arduino"
+    publisher: "DroneBot Workshop"
+    note: "Stepper types, drivers and microstepping."
+    accessed: "2026-11-13"
+  - url: https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter
+    title: "How to Use a Multimeter"
+    publisher: "SparkFun"
+    note: "Using a multimeter."
+    accessed: "2026-11-13"
+  - url: https://learn.adafruit.com/adafruit-guide-excellent-soldering
+    title: "Adafruit Guide to Excellent Soldering"
+    publisher: "Adafruit"
+    note: "Soldering technique."
+    accessed: "2026-11-13"
+  - url: https://www.falstad.com/circuit/
+    title: "Falstad Circuit Simulator"
+    publisher: "Paul Falstad"
+    note: "A free circuit simulator."
+    accessed: "2026-11-13"
+  - url: https://www.printables.com/model/57067-clearance-and-tolerance-3d-printer-gauge
+    title: "Clearance and Tolerance 3D Printer Gauge"
+    publisher: "Printables"
+    note: "A printable clearance gauge; the page returns 403 to automated link checks."
+    accessed: "2026-11-13"
+  - url: https://www.youtube.com/@CNCKitchen
+    title: "CNC Kitchen"
+    publisher: "YouTube"
+    note: "Infill, walls and brass inserts."
+    accessed: "2026-11-13"
+  - url: https://github.com/OrcaSlicer/OrcaSlicer/wiki/Calibration
+    title: "OrcaSlicer calibration wiki"
+    publisher: "OrcaSlicer on GitHub"
+    note: "Printer calibration, in order."
+    accessed: "2026-11-13"
+  - url: https://www.instructables.com/OpenCycloid-3D-printed-Open-Source-Robotic-Actuato/
+    title: "OpenCycloid printed actuator"
+    publisher: "Instructables"
+    note: "A printed reducer whose backlash test transfers to joint 6."
+    accessed: "2026-11-13"
+  - url: https://robotacademy.net.au/
+    title: "QUT Robot Academy"
+    publisher: "Peter Corke, Queensland University of Technology"
+    note: "Short lessons on DH parameters and Jacobians."
+    accessed: "2026-11-13"
+  - url: https://hades.mech.northwestern.edu/index.php/Modern_Robotics
+    title: "Modern Robotics"
+    publisher: "Kevin Lynch, Northwestern University"
+    note: "A free preprint of the book: transforms, Jacobians and singularities, in product-of-exponentials form."
+    accessed: "2026-11-13"
+  - url: https://github.com/petercorke/robotics-toolbox-python
+    title: "Robotics Toolbox for Python"
+    publisher: "Peter Corke on GitHub"
+    note: "MIT-licensed kinematics in Python."
+    accessed: "2026-11-13"
+  - url: https://mujoco.readthedocs.io/en/stable/overview.html
+    title: "MuJoCo overview"
+    publisher: "MuJoCo"
+    note: "An open-source physics simulator; Source Robotics ships PAROL6 models for it."
+    accessed: "2026-11-13"
+  - url: https://huggingface.co/learn/robotics-course/unit0/1
+    title: "Hugging Face Robotics Course"
+    publisher: "Hugging Face"
+    note: "Robot learning with no hardware."
+    accessed: "2026-11-13"
+  - url: https://github.com/huggingface/lerobot
+    title: "LeRobot repository"
+    publisher: "Hugging Face on GitHub"
+    note: "The Robot base class a PAROL6 driver implements."
+    accessed: "2026-11-13"
+  - url: https://huggingface.co/docs/lerobot/index
+    title: "LeRobot documentation"
+    publisher: "Hugging Face"
+    note: "The how-to for every L stage."
+    accessed: "2026-11-13"
+  - url: https://github.com/TheRobotStudio/SO-ARM100
+    title: "SO-ARM100 and SO-101"
+    publisher: "TheRobotStudio on GitHub"
+    note: "The open-source arm that can serve as a leader."
+    accessed: "2026-11-13"
+  - url: https://huggingface.co/lerobot/smolvla_base
+    title: "smolvla_base"
+    publisher: "Hugging Face"
+    note: "The SmolVLA base model."
+    accessed: "2026-11-13"
+  - url: https://rail.eecs.berkeley.edu/deeprlcourse/
+    title: "CS 285, Deep Reinforcement Learning"
+    publisher: "Sergey Levine, UC Berkeley"
+    note: "Lectures, including imitation learning."
+    accessed: "2026-11-13"
+  - url: https://articulatedrobotics.xyz/category/coordinate-transforms-for-robotics/
+    title: "Coordinate Transforms for Robotics"
+    publisher: "Articulated Robotics"
+    note: "Frames and transforms, with or without ROS."
+    accessed: "2026-11-13"
+  - url: https://manipulation.csail.mit.edu/
+    title: "Robotic Manipulation"
+    publisher: "Russ Tedrake, MIT"
+    note: "Free course notes on grasping and contact."
+    accessed: "2026-11-13"
+  - url: https://www.hubs.com/knowledge-base/design-for-3d-printing/
+    title: "Design for 3D printing"
+    publisher: "Protolabs Network"
+    note: "Tolerances, snap-fits and print orientation."
+    accessed: "2026-11-13"
+  - url: https://moveit.picknik.ai/main/doc/tutorials/pick_and_place_with_moveit_task_constructor/pick_and_place_with_moveit_task_constructor.html
+    title: "Pick and Place with MoveIt Task Constructor"
+    publisher: "PickNik"
+    note: "A pick broken into stages."
+    accessed: "2026-11-13"
+  - url: https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html
+    title: "Camera calibration tutorial"
+    publisher: "OpenCV"
+    note: "Camera calibration in Python; the page returns 403 to automated link checks."
+    accessed: "2026-11-13"
+  - url: https://jlc3dp.com/
+    title: "JLC3DP"
+    publisher: "JLC3DP"
+    note: "A print service for nylon and MJF parts, from US$1.00 a part."
+    accessed: "2026-11-13"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/02-safety/emergency-stop/
+    title: "Emergency stop, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The official E-stop facts that M1 uses in place of the roadmap."
+    accessed: "2026-11-13"
+---
+
+Every resource here comes from ["How to become a Robotics Engineer in 6 months (RESOURCES)"](https://x.com/deronin_/status/2095180126359105955), by [Ronin (@DeRonin_)](https://x.com/DeRonin_). We checked each one and sorted it by [PAROL6 milestone](/lore/milestones). The verdict on the roadmap as a whole is in [our review](/lore/roadmap-review).
+
+**How we picked.** The roadmap lists 115 resources. We would use 16 of them, and the rest only if a named condition holds or not at all.
+
+This map lists the 16, plus a few conditional picks that fill a gap a milestone has. Each conditional pick says when to open it.
+
+**Tags.** Each resource is tagged with the job it does on a milestone page:
+
+- **concept:** the mental model, read before or beside the task.
+- **how-to:** opened at the step that needs it.
+- **practice:** a short drill.
+- **task idea:** a practice task from the roadmap, retargeted at PAROL6.
+
+All links were checked on 2026-11-13 UTC and worked, except the two marked as behind a bot wall. Those returned 403 to our checker, so we could not confirm them, and they are not confirmed dead either. Paid courses in the roadmap are left out.
+
+## M1: Bench it
+
+[M1](/lore/m1-bench-it) powers the board, turns one motor and stops it safely.
+
+- [DroneBot Workshop: Stepper Motors with Arduino](https://dronebotworkshop.com/stepper-motors-with-arduino/), **concept**. The one page in the roadmap's motor month that matches our hardware: steppers and their drivers.
+- [SparkFun: How to Use a Multimeter](https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter), **how-to**. Open it at the polarity-metering step; continuity also checks crimps.
+- [Adafruit Guide to Excellent Soldering](https://learn.adafruit.com/adafruit-guide-excellent-soldering), **how-to** and **practice**. For soldering the [GX16](/lore/m1-bench-it) plug.
+- If you want to check the E-stop loop first: [Falstad Circuit Simulator](https://www.falstad.com/circuit/), **concept**. Two minutes on the E-stop's normally-closed loop, or a divider, before metering the 24 V supply.
+
+**Where the roadmap has nothing:** it has no E-stop, no supply-polarity warning, and nothing on a [test firmware](/lore/m1-bench-it) that spins motors from boot. M1's safety facts come from the [official E-stop page](https://docs.source-robotics.com/PAROL-docs/1.1/02-safety/emergency-stop/) and the [M1 page](/lore/m1-bench-it).
+
+## M2: One joint end to end
+
+[M2](/lore/m2-one-joint) builds the wrist and measures a commanded move of joint 6.
+
+- [Clearance and Tolerance 3D Printer Gauge](https://www.printables.com/model/57067-clearance-and-tolerance-3d-printer-gauge), **practice**. Learn your printer's real clearance before printing the bearing seat. Behind a bot wall: not checked.
+- [CNC Kitchen](https://www.youtube.com/@CNCKitchen), **concept**. Why the print table's infill and walls matter, and how brass inserts hold; the E-stop box uses M3 inserts.
+- [Adafruit Guide to Excellent Soldering](https://learn.adafruit.com/adafruit-guide-excellent-soldering), **practice**. Again, for extending motor and sensor leads with heat shrink.
+- If the bearing seat or gearbox fit comes out tight or loose: [OrcaSlicer calibration wiki](https://github.com/OrcaSlicer/OrcaSlicer/wiki/Calibration), **how-to**. The official guide says to ream a tight seat.
+- [OpenCycloid printed actuator](https://www.instructables.com/OpenCycloid-3D-printed-Open-Source-Robotic-Actuato/), **task idea**. Skip building the reducer and measure the [backlash](/lore/m2-one-joint) of joint 6's gearbox instead.
+
+## M3: The whole arm moves
+
+[M3](/lore/m3-whole-arm) builds the rest of the arm, then homes and jogs it.
+
+- [QUT Robot Academy](https://robotacademy.net.au/), **concept**. Short lessons on DH parameters and Jacobians, which match how the PAROL6 docs describe the arm.
+- [Modern Robotics](https://hades.mech.northwestern.edu/index.php/Modern_Robotics), by Kevin Lynch, **concept**. Transforms, Jacobians and singularities. It uses product of exponentials and the PAROL6 docs use DH, so it needs a bridge. Our path reads QUT first.
+- [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python), **practice** and **task idea**. Load PAROL6's DH table, compute forward kinematics for one pose, and check it against the commander.
+- [MuJoCo](https://mujoco.readthedocs.io/en/stable/overview.html) with the official PAROL6 model, **concept** and **how-to**. A viewer session is a cheap first look at the arm, and an L0 option too.
+
+## LeRobot, L0 to L4
+
+The [LeRobot plan](/lore/lerobot) holds every L stage, its test and its safety rules. This section lists only what to read.
+
+- [Hugging Face Robotics Course](https://huggingface.co/learn/robotics-course/unit0/1), **concept**, L0. Learn the record, train and run loop while M1 to M3 are still on the bench. It needs no hardware.
+- [LeRobot repository](https://github.com/huggingface/lerobot), **how-to**, L0 and L1. The `Robot` base class our planned driver implements.
+- [LeRobot documentation](https://huggingface.co/docs/lerobot/index), **how-to**, L1 to L3. The procedure for every L stage.
+- [SO-ARM100 and SO-101](https://github.com/TheRobotStudio/SO-ARM100), L2. The SO-101 is the later [leader arm](/lore/lerobot) option, after a phone.
+- [smolvla_base](https://huggingface.co/lerobot/smolvla_base), **how-to**, L4. The SmolVLA base model the plan fine-tunes.
+- For background on the policies at L3: [CS 285](https://rail.eecs.berkeley.edu/deeprlcourse/), **concept**. Only its imitation-learning lectures.
+
+**Where the roadmap has nothing:** L1 reads all six joints, makes small capped jogs and proves every stop path. That test comes from our own driver plan.
+
+**The best task in the roadmap:** its last practice task records demonstrations, trains, measures, re-records the failures and measures again. It becomes L3's done check, scored against M4's 20 scripted cycles.
+
+## M4: Pick and place
+
+[M4](/lore/m4-pick-and-place) fits a gripper and measures a repeated loop.
+
+- [Articulated Robotics: Coordinate Transforms for Robotics](https://articulatedrobotics.xyz/category/coordinate-transforms-for-robotics/), **concept**. Frames and transforms are the core of the tool frame and the [TCP](/lore/m4-pick-and-place), with or without ROS.
+- [Robotic Manipulation](https://manipulation.csail.mit.edu/), by Russ Tedrake, **concept**. Its grasping chapters, for the gripper.
+- For printed nests and fingers: [Protolabs Network: Design for 3D printing](https://www.hubs.com/knowledge-base/design-for-3d-printing/), **concept**. Tolerances, snap-fits and print orientation.
+- [Pick and Place with MoveIt Task Constructor](https://moveit.picknik.ai/main/doc/tutorials/pick_and_place_with_moveit_task_constructor/pick_and_place_with_moveit_task_constructor.html), **concept**. Splitting a pick into stages helps even without MoveIt.
+
+The roadmap's ROS 2 and MoveIt resources matter only if we take the official ROS 2 path. That path is tested on Ubuntu 22.04 with ROS 2 Humble only.
+
+**Task ideas:** TPU fingers tested on three objects, and a pick blocked on purpose to watch it fail.
+
+## M5: Touch the skiff
+
+[M5](/lore/m5-touch-the-skiff) registers the skiff, turns a knob and presses a button.
+
+- [Articulated Robotics: Coordinate Transforms for Robotics](https://articulatedrobotics.xyz/category/coordinate-transforms-for-robotics/), **concept**. Frames and transforms are the core of registering the skiff.
+- [Modern Robotics](https://hades.mech.northwestern.edu/index.php/Modern_Robotics), **concept**. Transforms, for M5's frames.
+- [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python), **practice**. The M3 forward-kinematics drill, reused for M5's frames.
+- If registration uses a camera: [OpenCV camera calibration](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html), **how-to**. Behind a bot wall: not checked.
+
+## M6: Patch a cable
+
+[M6](/lore/m6-patch-a-cable) inserts a patch cable and checks it went in.
+
+- [Robotic Manipulation](https://manipulation.csail.mit.edu/), by Russ Tedrake, **concept**. Its contact chapters are the deepest free reading for cable insertion.
+- For printed parts: [Protolabs Network: Design for 3D printing](https://www.hubs.com/knowledge-base/design-for-3d-printing/), **concept**. The same guide as M4.
+- If a nylon part beats [PETG](/lore/m2-one-joint) or TPU: [JLC3DP](https://jlc3dp.com/), **practice**. MJF parts from $1.00 each, for a gear or a compliant mount.
+
+**Where the roadmap has nothing:** compliance, or force-free insertion on open-loop steppers.
+
+## M7: Play it
+
+The roadmap has nothing for [M7](/lore/m7-play-it). It covers no music, timing or sequencing.
+
+## Terms
+
+- **learning map**: this page, the resources we would open at each milestone, picked from one public roadmap and checked.
+- **task idea**: a practice task from the roadmap, retargeted at a PAROL6 milestone.

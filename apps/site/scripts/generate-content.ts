@@ -1896,7 +1896,11 @@ const program = Effect.gen(function* generateContent() {
     {
       heading: "Build reference",
       matches: (slug: string) =>
-        slug === "build-steps" || slug === "parts" || slug === "concepts",
+        slug === "build-steps" ||
+        slug === "parts" ||
+        slug === "concepts" ||
+        slug === "learning-map" ||
+        slug === "roadmap-review",
     },
     { heading: "Reference", matches: () => true },
   ] as const;
