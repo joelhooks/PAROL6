@@ -214,6 +214,27 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 3 h 40 min",
     title: "Plate 8: shoulder parts",
   },
+  {
+    id: "plate9a-electronics",
+    layers: 299,
+    material: "Orange PETG HF, 50% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: [
+        "BASE/Electronics_case_v1_1",
+        "BASE/fan_cover",
+        "BASE/J1_bottom_lid",
+        "SHOULDER/J2_stopper_block",
+      ],
+      role: "the electronics case, its fan cover, the J1 bottom lid and the J2 stopper block",
+    },
+    playback: {
+      id: "kMG4OW1xvuGLmv3afYg8Urv702LPsLthAVHY5g9y00J4U",
+      posterSeconds: 58,
+    },
+    printTime: "about 4 h 26 min",
+    title: "Plate 9a: electronics case",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
