@@ -192,6 +192,28 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 6 h 13 min",
     title: "Plate 7: the J1 turret",
   },
+  {
+    id: "plate8-shoulder",
+    layers: 100,
+    material: "Orange PETG HF, 80% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: [
+        "SHOULDER/J1_turret_motor_holder",
+        "SHOULDER/J1_backplate",
+        "SHOULDER/J1_belt_cover_rework",
+        "SHOULDER/J1_wires_cover_rework",
+        "SHOULDER/J2_limit_switch_cover",
+      ],
+      role: "the shoulder's motor holder, backplate, covers and J2 limit-switch cover",
+    },
+    playback: {
+      id: "p00c8k4gsSjS1bkHknye5iWM5VIlLCNg400OeLMBkTOZA",
+      posterSeconds: 58,
+    },
+    printTime: "about 3 h 40 min",
+    title: "Plate 8: shoulder parts",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
