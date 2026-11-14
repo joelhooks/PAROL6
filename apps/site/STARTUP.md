@@ -1,6 +1,6 @@
-# Mischief startup budget
+# Worker startup size
 
-Run the portable size gate from the repository root:
+Run the portable size report from the repository root:
 
 ```sh
 pnpm --filter @rat-stack/site typecheck
@@ -8,13 +8,19 @@ pnpm --filter @rat-stack/site typecheck
 
 It generates content, typechecks, and builds production Workers with Alchemy's `WorkerBundle`. It does not import the Stack, plan infrastructure, upload a Worker, or require cloud credentials.
 
-The hard, shrink-only ceilings cover the **static startup set**: **1,114,000 bytes for Mischief** and **1,516,000 bytes for LearnFeedbackAuth**, and **870,000 bytes for Workshop**. Lower a ceiling when code shrinks. Never raise it to accept growth. LearnFeedbackAuth's ceiling is the one recorded exception; see [Temporary raise: Alchemy beta.85 and Effect 4.1](#temporary-raise-alchemy-beta85-and-effect-41). Both `pnpm check` and `pnpm turbo run check test build` reach this gate.
+For each Worker, `scripts/startup-report.ts` logs entry bytes, the **static startup set**, total JavaScript upload, and the change since the last local run. Size never fails the build. Uploads past half of Cloudflare's 64 MiB uncompressed Worker limit warn. Global scope must finish evaluating within 1 second. Both `pnpm check` and `pnpm turbo run check test build` run this report.
 
 The harness starts at the upload's entry module and follows only static imports in Rolldown's `analysis.json`. It sums actual uploaded JavaScript bytes, including the entry, once per module. Shared chunks and cycles count once. Dynamic imports and their exclusively reachable dependencies do not count. Missing static graph or upload evidence fails with `StartupGraphInvalid`; inspect the graph and rebuild.
 
-Entry bytes and total JavaScript bytes remain logged measurements. Total JavaScript above **2,500,000 bytes** emits a warning, never a size failure. Page sources, search records, and graph data are static assets outside the JavaScript upload. Their growth does not block this gate. Fixed document shells remain startup code when statically imported. Do not inline growing content data into startup code.
+The behaviour checks still fail the build: no auth code in Mischief (`PublicAuthBundleLeak`), no build-only modules (`StartupBuildDependency`), and no Workshop imports in Mischief. Missing graph or upload evidence still fails. The request seam test proves learning code loads only on a learning request.
 
-`dist/startup/metrics.json`, `dist/startup-auth/metrics.json`, and `dist/startup-workshop/metrics.json` record entry bytes, startup bytes, the counted filenames, total JavaScript bytes, and ceilings. Metrics are written before the size verdict, including failed measurements.
+Page sources, search records, and graph data are static assets outside the JavaScript upload. Fixed document shells remain startup code when statically imported. Do not inline growing content data into startup code.
+
+`dist/startup/metrics.json`, `dist/startup-auth/metrics.json`, `dist/startup-workshop/metrics.json`, and `dist/startup-turbo-cache/metrics.json` record entry bytes, startup bytes, counted filenames, and total JavaScript bytes. The next run reads them to report the change.
+
+## Why there are no size ceilings
+
+PAROL6 ports rat-stack [#267](https://github.com/joelhooks/rat-stack/pull/267): report size instead of blocking dependency updates on shrink-only byte ceilings. The existing CPU measurements below do not justify treating small size increases as startup failures. All ceiling columns and the temporary raise below describe historical measurements, not current policy.
 
 ## Isolated Workshop Worker
 
@@ -32,7 +38,7 @@ Measurements on the same fully built workspace:
 | LearnFeedbackAuth | 1,515,481 | 1,515,481 | 1,515,481 | 1,515,481 | 1,516,000 |
 | Workshop | — | — | — | 862,284 | 870,000 |
 
-Workshop's initial ceiling is its measured static startup rounded up to the next 10,000 bytes. It only shrinks. The other ceilings are unchanged. Early standalone measurements made before all workspace dependencies were built are not valid baselines.
+Workshop's historical ceiling rounded its measured static startup up to the next 10,000 bytes. Early standalone measurements made before all workspace dependencies were built are not valid baselines.
 
 ## Page count no longer sets bundle size
 
@@ -62,7 +68,7 @@ The bump to Alchemy `2.0.0-beta.85` and Effect `4.1.2` grew both Workers' static
 
 Mischief loads its MCP surface (`src/mcp-surface.ts`, `effect/ai/McpServer`, and the toolkit projections) with a dynamic import on the first `/mcp` request, and the legacy MCP Durable Object loads its runtime the same way. That leaves Mischief below main and lowers its ceiling. LearnFeedbackAuth has no MCP surface, so its ceiling rose by 60,000 bytes. This is the one exception to the shrink-only rule, authorised by the Switchboard ruling of 2026-11-02.
 
-Re-tighten LearnFeedbackAuth to the old ceiling of 1,456,000 bytes when Alchemy ships the WorkerBridge fix, or on 2026-11-16, whichever comes first. `scripts/startup-budget.ts` holds the expiry and warns once it passes. Upstream issue: _link pending_.
+The old instruction to restore the 1,456,000-byte ceiling by 2026-11-16 is retired with the ceilings. `scripts/startup-report.ts` no longer carries an expiry or a size verdict.
 
 Startup CPU from `wrangler check startup` 4.94.0, median of three runs per bundle on one host:
 
@@ -107,7 +113,7 @@ Against main `fd4ed2a`, with XState still pinned to `6.0.0-alpha.70`:
 | Mischief | 1,248,053 | 1,238,260 | 9,793 | 1,250,000 | 1,247,000 | 8,740 |
 | LearnFeedbackAuth | 1,599,083 | 1,446,046 | 153,037 | 1,600,000 | 1,456,000 | 9,954 |
 
-The ceilings were chosen from the initial trimmed startup sizes plus 10,000 bytes, rounded down to the nearest 1,000. Typed feedback chunk failures then added 283 bytes to Mischief and 20 bytes to LearnFeedbackAuth. The ceilings stay unchanged rather than rising to recover that margin. The startup-set calculation is unchanged.
+The ceilings were chosen from the initial trimmed startup sizes plus 10,000 bytes, rounded down to the nearest 1,000. Typed feedback chunk failures then added 283 bytes to Mischief and 20 bytes to LearnFeedbackAuth. The ceilings then stayed unchanged rather than rising to recover that margin. The startup-set calculation is unchanged.
 
 `Learner.layer` supplies the same API without importing its implementation until a method runs. Learner and feedback-machine chunk-load rejections become `LearnError`. The poll contract declares that failure at HTTP 422 alongside its existing HTTP 401 authentication refusal. The public graph reaches `learner-service` and `feedback-machine` only through dynamic imports. Narrow author imports remove both modules entirely from the private auth graph. Narrow cafe and prompt imports also keep the unused file-inspection service and machine out of the public graph.
 
@@ -127,4 +133,4 @@ Main also gained identity validation and observability changes during this slice
 
 There is deliberately no portable millisecond gate. Wrangler's alpha profiler samples a dynamically imported Worker during a local request. Elapsed time includes inspector and idle time; sampled non-idle time is not Cloudflare's startup CPU accounting. CPUs, runner load, V8 versions, and sampling vary. Use profiles on the same host for comparisons, and calibrate runners against an empty-worker control before making milliseconds a CI threshold.
 
-The startup ceilings guard code growth. Total JavaScript is an alarm only. Neither measurement is Cloudflare's compressed-upload limit or proof that a deployment will start successfully. Live startup and parity remain deployment checks.
+The size report does not prove that a deployment will start successfully. Live startup and parity remain deployment checks.
