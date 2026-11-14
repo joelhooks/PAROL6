@@ -176,6 +176,22 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 3 h 16 min",
     title: "Plate 6: shafts, pulley and limiter",
   },
+  {
+    id: "plate7-turret",
+    layers: 375,
+    material: "Orange PETG HF, 45% infill, tree supports",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: ["SHOULDER/J1_turret_rework_blocker"],
+      role: "the J1 turret, the biggest part of the arm",
+    },
+    playback: {
+      id: "3t01cq8aC5zxNoAOH7xi00Sk5K1tLzKG7fwisZyiyqt6I",
+      posterSeconds: 74,
+    },
+    printTime: "about 6 h 13 min",
+    title: "Plate 7: the J1 turret",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
