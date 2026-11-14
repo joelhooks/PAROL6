@@ -1,0 +1,99 @@
+---
+title: "Print QC: when a printed part passes"
+description: "What makes a printed PAROL6 part fail, what is only cosmetic, and how to check each part, with the official docs' rules and our own judgement marked."
+plain: "Check the surfaces that touch bearings, shafts, screws, belts and other parts. Ignore the looks. Reprint only what can't be fixed."
+group: concept
+learn: false
+terms:
+  - "bearing seat"
+  - "mating face"
+sources:
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/
+    title: "Printing the parts, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "The only official rule on tolerances: ream a tight bearing seat, shim a loose one, test-fit the tapered bearings first. Screws go straight into the plastic."
+    accessed: "2026-11-13"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/build/mechanical-assembly/
+    title: "Mechanical assembly, PAROL6 docs 1.1"
+    publisher: "Source Robotics"
+    note: "Bearings seated square; limit switches pressed before the joint reaches its stop; J1's blockers fitted."
+    accessed: "2026-11-13"
+  - url: https://docs.source-robotics.com/PAROL-docs/1.1/assets/pdf/PAROL6_building_instructions.pdf
+    title: "PAROL6 building instructions"
+    publisher: "Source Robotics"
+    note: "What each shoulder part holds: pages 60, 65, 66, 68, 70, 72, 77 and 82."
+    accessed: "2026-11-13"
+---
+
+**The short version, for standing at the printer.** Check only the surfaces that touch something. That means bearing seats, shaft bores, screw holes, belt paths and faces that bolt flat to another part. Looks don't matter.
+
+**Reprint a part if a load-carrying wall is cracked or split between layers. Reprint it if a bearing seat or mating face can't be made to fit with the docs' fixes. Otherwise, use it.**
+
+## What the official docs say
+
+- **Tolerances:** bearing seats and shafts are designed for a well-calibrated printer. A seat that is too tight is reamed; one that is too loose is shimmed with tape or a drop of epoxy. Test the fit of the tapered bearings in their seats before assembling a joint ([Printing the parts](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)).
+- **Screws:** four M3 brass inserts are melted in; everything else screws directly into the plastic ([Printing the parts](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)). So every screw hole has to bite.
+- **Bearings seated square:** a crooked tapered bearing makes the joint stiff one way and loose the other ([Mechanical assembly](https://docs.source-robotics.com/PAROL-docs/1.1/build/mechanical-assembly/)).
+- **Pulleys:** check the first printed pulley against a belt before printing the rest ([Printing the parts](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)).
+
+**The docs give no numbers:** no hole tolerance, no flatness limit, no rule on cosmetic defects. Everything below marked **ours** is our own judgement.
+
+## How to check, with what
+
+- **Bearing seat:** the real test is the docs' test-fit with the bearing itself. It should press in square by hand or with light, even pressure, and not rock. Calipers across the seat in two directions show an oval: **ours**, a difference over about 0.2 mm is worth a closer look.
+- **Screw holes:** run the actual screw in. It should cut its thread and hold. A hole a blob has closed can be cleared with a drill of the hole's size. A hole that spins the screw freely needs a longer screw, epoxy, or a reprint (**ours**).
+- **Mating faces:** lay the face on a flat table. **Ours:** if it rocks, or a sheet of paper slides under a corner, look for warp. A slight rock from a brim or support scar is fixed with a deburring tool or a file.
+- **Belt paths and covers:** the belt and the wires have to pass without rubbing. Test-fit the cover over the belt before closing it up (**ours**).
+- **Layers:** flex the part gently by hand along its tallest walls. A good part doesn't creak or open at a layer line (**ours**).
+
+## Cosmetic and fine
+
+**All ours.** None of these change how a part works:
+
+- colour changes between spools, or a different colour on one part;
+- support scars on faces that don't touch anything (clean them with a deburring tool if they catch);
+- light stringing (pick it off or flash it with a heat gun);
+- visible layer lines, and the seam line on curved walls;
+- a slightly rough underside where tree supports touched.
+
+## Part by part
+
+### J1 turret (plate 7)
+
+**What it holds** (building instructions): J2's motor and gearbox (p.60) and J2's two NSK HR32907J tapered bearings (p.70). It also carries the J1 motor (p.66) and the J1 stopper rails (p.72). It bolts onto `J1_rotation_shaft` with 6 × M4 16 (p.65).
+
+**Check:**
+
+- the J2 bearing seats, with a bearing test-fit;
+- the six M4 holes into the rotation shaft;
+- the motor and gearbox mounting holes;
+- the face that sits on the rotation shaft, for flatness.
+
+**The pause line at layer 247.** Plate 7b paused for about a minute at layer 247 when the filament ran out, then carried on with the same PETG HF.
+- **Where it is:** 49.4 mm above the bed face, about two-thirds of the way up. At that height the layer crosses the tall block's two side walls and the small post. It doesn't cut through a bore.
+- **Does it carry load:** yes (**ours**). The tall block is the structure that carries J2, so treat that layer as structural.
+- **How to check:** look and feel around the part at 49.4 mm for a line, a step or a gap. Run a fingernail across it. Squeeze the two side walls gently toward each other and listen for a creak.
+- **Verdict (ours):** a faint line with no gap is cosmetic. The nozzle and bed stayed hot through the pause. A gap you can see light through, or one that opens when you squeeze, means reprint.
+
+### Plate 8: the small shoulder parts
+
+- **J1 turret motor holder:** holds J2's 60 mm stepper and 20:1 gearbox (p.60). The gearbox's centring face and screw holes matter most. The shaft coupler has to line up, so the motor must sit square.
+- **J1 backplate:** 6 × M4 16 (p.82), and all the wires except the J1 sensor's pass through it. Check the six holes and that the wire opening is clear of stringing and supports.
+- **J1 belt cover and J1 wires cover:** M2 × 10 screws (p.77). The J1 wires run through the belt cover. Check the screw holes and that the belt runs free under the cover. The rest is cosmetic.
+- **J2 limit-switch cover:** the switch has to be pressed by the moving part before the joint reaches its stop ([Mechanical assembly](https://docs.source-robotics.com/PAROL-docs/1.1/build/mechanical-assembly/)). Check that the switch sits where the drawing puts it and its screw holes hold.
+- **J2 stopper block** (moved to the next plate; p.68): the stop face takes the knock if the joint overruns. Check that face for cracks and the screw holes for grip.
+
+### Every other part
+
+Use the same three questions:
+
+1. **What does it touch?** Find its page in the building instructions.
+2. **Does that surface fit?** Test-fit the bearing, screw, belt or neighbouring part.
+3. **Can the docs' fixes make it fit?** Ream tight seats, shim loose ones.
+
+**Pulleys only:** test the first one against a belt, per the docs.
+
+## Terms
+
+- **bearing seat**: the printed bore a bearing presses into. The docs say to test-fit it, ream it if tight and shim it if loose ([Printing the parts](https://docs.source-robotics.com/PAROL-docs/1.1/build/printing/)).
+- **mating face**: a flat face that bolts against another part or a motor. If it isn't flat, the part it holds sits crooked (**ours**).

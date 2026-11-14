@@ -31,6 +31,8 @@ sources:
 
 **Stub.** This page gathers the Parts section of each milestone so the whole bench is on one page. The milestone pages hold the full lists and their citations; open them before buying or printing anything.
 
+**Printed parts:** [Print QC](/lore/print-qc) says what makes a printed part fail, what is only cosmetic, and how to check each one.
+
 ## M1. Bench it
 
 The control board with six TMC5160 drivers, the GX16 power connector and its XT30 lead, the E-stop, one limit switch, one NEMA 17 motor loose on the bench, and a 24 V DC supply of at least 5 A. Full list: [M1 parts](/lore/m1-bench-it#parts).
