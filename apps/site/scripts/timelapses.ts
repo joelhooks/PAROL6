@@ -236,6 +236,22 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     title: "Plate 9a: electronics case",
   },
   {
+    id: "plate9b-base",
+    layers: 352,
+    material: "Orange PETG HF, 50% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: ["BASE/main_base_blocker"],
+      role: "the main base, the last printed arm part",
+    },
+    playback: {
+      id: "GHdFn1P848FUL1J1sP5LIg5uVOrhAEghWtkg025cUZ1Y",
+      posterSeconds: 57,
+    },
+    printTime: "about 7 h 33 min",
+    title: "Plate 9b: main base",
+  },
+  {
     id: "plate9c-lid",
     layers: 52,
     material: "Orange PETG HF, 50% infill",
