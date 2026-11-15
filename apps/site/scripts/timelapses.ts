@@ -235,6 +235,22 @@ export const timelapses: readonly TimelapseEntry[] = Schema.decodeUnknownSync(
     printTime: "about 4 h 26 min",
     title: "Plate 9a: electronics case",
   },
+  {
+    id: "plate9c-lid",
+    layers: 52,
+    material: "Orange PETG HF, 50% infill",
+    milestones: ["m3-whole-arm"],
+    parts: {
+      files: ["BASE/lid_electronics"],
+      role: "the lid for the electronics case",
+    },
+    playback: {
+      id: "MkDCG0078ZIDo9E4n6MUKYFrt4eNobpHNCe7orTAjRT8",
+      posterSeconds: 55,
+    },
+    printTime: "about 1 h 6 min",
+    title: "Plate 9c: electronics lid",
+  },
 ]);
 
 export const timelapseAnchor = (timelapse: TimelapseEntry) =>
